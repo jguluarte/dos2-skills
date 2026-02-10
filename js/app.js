@@ -604,11 +604,10 @@ function initializeFilterBar() {
 /**
  * Load skills data and initialize app
  */
-async function initialize() {
+function initialize() {
   try {
-    // Load skills data from JSON file
-    const response = await fetch('data/skills.json');
-    const allSkills = await response.json();
+    // Use skills data from global variable
+    const allSkills = SKILLS_DATA;
 
     // Transform data structure to match what we need
     skillsData = {

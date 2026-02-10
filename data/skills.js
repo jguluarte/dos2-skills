@@ -1,4 +1,4 @@
-[
+const SKILLS_DATA = [
   {
     "name": "Bleed Fire",
     "requirements": {
@@ -831,4 +831,4 @@
       "effect": "Create a massive storm of blood over all targets. Deal physical damage and create blood surfaces."
     }
   }
-]
+];
