@@ -606,9 +606,6 @@ function initializeFilterBar() {
  */
 function initialize() {
   try {
-    // Use skills data from global variable
-    const allSkills = SKILLS_DATA;
-
     // Transform data structure to match what we need
     skillsData = {
       Summoning: [],
@@ -619,7 +616,7 @@ function initialize() {
     };
 
     // Group skills by primary element
-    allSkills.forEach(skill => {
+    SKILLS_DATA.forEach(skill => {
       const trees = Object.keys(skill.requirements);
 
       // Summoning skills go in summoning category
