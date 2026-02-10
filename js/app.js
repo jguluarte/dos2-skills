@@ -584,7 +584,14 @@ function initializeFilterBar() {
     closeFilters();
   });
 
-  // Overlay click closes filter
+  // Overlay touch/click closes filter
+  // Use touchstart on mobile to prevent scrolling underneath
+  filterOverlay.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    closeFilters();
+  }, { passive: false });
+
+  // Still handle click for desktop/mouse users
   filterOverlay.addEventListener('click', () => {
     closeFilters();
   });
