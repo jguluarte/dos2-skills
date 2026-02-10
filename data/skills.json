@@ -5,18 +5,13 @@
       "Pyrokinetic": 1,
       "Polymorph": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Bleed+Fire",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Occult Flamewielder",
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
-      "effect": "Enemies will bleed fire when hit. Also creates a small fire area beneath each target and ignites surfaces in the area.",
-      "special_terms": []
+      "effect": "Enemies will bleed fire when hit. Also creates a small fire area beneath each target and ignites surfaces in the area."
     }
   },
   {
@@ -25,18 +20,13 @@
       "Pyrokinetic": 1,
       "Necromancer": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Corpse+Explosion",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Occult Flamewielder",
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "4",
-      "effect": "Explode the target corpse, dealing physical damage in the area",
-      "special_terms": []
+      "effect": "Explode the target corpse, dealing physical damage in the area"
     }
   },
   {
@@ -45,18 +35,13 @@
       "Pyrokinetic": 1,
       "Scoundrel": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Sabotage",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 526,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "1",
-      "effect": "If target character is carrying grenades or arrows, a random one explodes in their inventory.",
-      "special_terms": []
+      "effect": "If target character is carrying grenades or arrows, a random one explodes in their inventory."
     }
   },
   {
@@ -65,18 +50,13 @@
       "Pyrokinetic": 1,
       "Warfare": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Sparking+Swings",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "Self",
-      "description": "Divinity Original Sin 2 Builds:Summoner of Sparks",
       "sp_cost": 0,
+      "range": "Self",
       "cooldown": "5",
-      "effect": "Receive Sparkstriker status. This causes your melee attacks to create a spark projectile that bounces off the initial target to hit the closest enemy.",
-      "special_terms": []
+      "effect": "Receive Sparkstriker status. This causes your melee attacks to create a spark projectile that bounces off the initial target to hit the closest enemy."
     }
   },
   {
@@ -85,18 +65,13 @@
       "Pyrokinetic": 2,
       "Necromancer": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Corpse+Explosion",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "PB AoE",
-      "description": "Divinity Original Sin 2 Builds:Occult Flamewielder",
-      "sp_cost": 0,
       "cooldown": "2",
-      "effect": "Explode all corpses around you, dealing physical damage in the area",
-      "special_terms": []
+      "effect": "Explode all corpses around you, dealing physical damage in the area"
     }
   },
   {
@@ -105,15 +80,11 @@
       "Pyrokinetic": 2,
       "Warfare": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 51,
+      "sp_cost": 1,
       "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Summoner of Sparks",
-      "sp_cost": 0,
       "cooldown": "5",
       "effect": "Target character and surrounding allies receive Sparkmasterstatus that adds a chance of fiery sparks to melee attacks.",
       "special_terms": [
@@ -127,18 +98,13 @@
       "Pyrokinetic": 2,
       "Scoundrel": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage",
-    "found_on_page": "Pyrokinetic",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": 1,
+      "sp_cost": 1,
       "range": "13m",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Explode two random grenades or arrows in the inventories of any enemy in a target circle.",
-      "special_terms": []
+      "effect": "Explode two random grenades or arrows in the inventories of any enemy in a target circle."
     }
   },
   {
@@ -147,15 +113,11 @@
       "Geomancer": 1,
       "Necromancer": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Touch",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "2m",
-      "description": null,
       "sp_cost": 0,
+      "range": "2m",
       "cooldown": "5",
       "effect": "Destroy [110% Int]Physical Armouron target character, and set Acid status.",
       "special_terms": [
@@ -169,18 +131,13 @@
       "Geomancer": 1,
       "Warfare": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Oily+Carapace",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "PB AoE",
-      "description": "Divinity Original Sin 2 Builds:Juggernaut",
       "sp_cost": 0,
+      "range": "PB AoE",
       "cooldown": "3",
-      "effect": "Consume oil surfaces around you and convert them to Physical Armour. Removes Slowed.",
-      "special_terms": []
+      "effect": "Consume oil surfaces around you and convert them to Physical Armour. Removes Slowed."
     }
   },
   {
@@ -189,15 +146,11 @@
       "Geomancer": 1,
       "Polymorph": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Turn+to+Oil",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "4",
       "effect": "Turn water and blood surfaces into oil. Remove Stun and Shocked from characters.",
       "special_terms": [
@@ -212,18 +165,13 @@
       "Geomancer": 1,
       "Scoundrel": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Venom+Coating",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "Self",
-      "description": "Divinity Original Sin 2 Builds:Venomous Sentry",
       "sp_cost": 0,
+      "range": "Self",
       "cooldown": "5",
-      "effect": "Coat your weapon with poison, adding[X] Poison Damageto your weapon skills and attacks.",
-      "special_terms": []
+      "effect": "Coat your weapon with poison, adding[X] Poison Damageto your weapon skills and attacks."
     }
   },
   {
@@ -232,18 +180,13 @@
       "Geomancer": 2,
       "Necromancer": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "7m",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "3",
-      "effect": "Destroy [100% Int] Physical Armour on targets in a cone, and set Acid and Atrophy.",
-      "special_terms": []
+      "effect": "Destroy [100% Int] Physical Armour on targets in a cone, and set Acid and Atrophy."
     }
   },
   {
@@ -252,18 +195,13 @@
       "Geomancer": 2,
       "Warfare": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Oily+Carapace",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
-      "range": "Self",
-      "description": null,
       "sp_cost": 0,
+      "range": "Self",
       "cooldown": "5",
-      "effect": "Each ally consumes oil surfaces around them, converting the oil surfaces to Physical Armour.",
-      "special_terms": []
+      "effect": "Each ally consumes oil surfaces around them, converting the oil surfaces to Physical Armour."
     }
   },
   {
@@ -272,18 +210,13 @@
       "Geomancer": 2,
       "Scoundrel": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "Self",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Allies in range receive Venom Coating, which adds[X] Poison Damageto weapon skills and attacks.",
-      "special_terms": []
+      "effect": "Allies in range receive Venom Coating, which adds[X] Poison Damageto weapon skills and attacks."
     }
   },
   {
@@ -292,18 +225,13 @@
       "Hydrosophist": 1,
       "Polymorph": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Healing+Tears",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "PB AoE",
-      "description": null,
       "sp_cost": 0,
+      "range": "PB AoE",
       "cooldown": "5",
-      "effect": "Three healing tears circle around you. Everytime an ally walks into melee range near you, a healing tear bathes them.",
-      "special_terms": []
+      "effect": "Three healing tears circle around you. Everytime an ally walks into melee range near you, a healing tear bathes them."
     }
   },
   {
@@ -312,18 +240,13 @@
       "Hydrosophist": 1,
       "Scoundrel": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "2m",
-      "description": "Divinity Original Sin 2 Builds:Eternal Warrior (Death Knight Perfected)",
       "sp_cost": 0,
+      "range": "2m",
       "cooldown": "5",
-      "effect": "Set Vampiric Hunger on target character, adding 50% Life Steal for 2 turns. Life Steal heals you in proportion to the damage you deal to Vitality.",
-      "special_terms": []
+      "effect": "Set Vampiric Hunger on target character, adding 50% Life Steal for 2 turns. Life Steal heals you in proportion to the damage you deal to Vitality."
     }
   },
   {
@@ -332,15 +255,11 @@
       "Hydrosophist": 1,
       "Warfare": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Cleanse+Wounds",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
-      "range": "2m",
-      "description": "Divinity Original Sin 2 Builds:Frost Paladin",
       "sp_cost": 0,
+      "range": "2m",
       "cooldown": "5",
       "effect": "Heal target and create a water puddle beneath them. Remove Burning, Diseased, Decaying Touch, Poisoned, Bleeding, Suffocation and Acid.",
       "special_terms": [
@@ -360,15 +279,11 @@
       "Hydrosophist": 2,
       "Warfare": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "PB AoE",
-      "description": "Divinity Original Sin 2 Builds:Tidalist",
-      "sp_cost": 0,
       "cooldown": "5",
       "effect": "Heal yourself and allies around you. Create a water puddle beneath every target. Remove Necrofire, Burning, Diseased, Decaying Touch, Poisoned, Bleeding, Suffocation and Acid.",
       "special_terms": [
@@ -389,18 +304,13 @@
       "Hydrosophist": 2,
       "Scoundrel": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger+Aura",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "PB AoE",
-      "description": "Divinity Original Sin 2 Builds:Glacial Guardian",
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Set Vampiric Hunger Aura on every ally around you, adding 50% Life Steal for 2 turns. Life Steal heals you in proportion to the damage you deal to Vitality.",
-      "special_terms": []
+      "effect": "Set Vampiric Hunger Aura on every ally around you, adding 50% Life Steal for 2 turns. Life Steal heals you in proportion to the damage you deal to Vitality."
     }
   },
   {
@@ -409,18 +319,13 @@
       "Aerotheurge": 1,
       "Warfare": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Breathing+Bubble",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "PB AoE",
-      "description": null,
       "sp_cost": 0,
+      "range": "PB AoE",
       "cooldown": "5",
-      "effect": "Creates a bubble of clean air around your head, allowing you to ignore effects of cloud surfaces. Immune to suffocation and Silence.",
-      "special_terms": []
+      "effect": "Creates a bubble of clean air around your head, allowing you to ignore effects of cloud surfaces. Immune to suffocation and Silence."
     }
   },
   {
@@ -429,18 +334,13 @@
       "Aerotheurge": 1,
       "Necromancer": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Touch",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 10,
-      "range": "2m",
-      "description": "Divinity Original Sin 2 Builds:Radiant Battlemage",
       "sp_cost": 0,
+      "range": "2m",
       "cooldown": "5",
-      "effect": "Deal 80% Air Damage. Set Suffocation and Silence on target",
-      "special_terms": []
+      "effect": "Deal 80% Air Damage. Set Suffocation and Silence on target"
     }
   },
   {
@@ -449,15 +349,11 @@
       "Aerotheurge": 1,
       "Polymorph": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Vaporize",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "4",
       "effect": "Remove Petrified and Frozen from target character. Vaporise ground surfaces into clouds. Does not work on Oil, Ice or Lava surfaces",
       "special_terms": [
@@ -472,18 +368,13 @@
       "Aerotheurge": 1,
       "Scoundrel": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Smoke+Cover",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "PB AoE",
-      "description": null,
       "sp_cost": 0,
+      "range": "PB AoE",
       "cooldown": "5",
-      "effect": "Create a smoke cloud around you, hiding from sight.",
-      "special_terms": []
+      "effect": "Create a smoke cloud around you, hiding from sight."
     }
   },
   {
@@ -492,18 +383,13 @@
       "Aerotheurge": 2,
       "Necromancer": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "Self",
-      "description": "Divinity Original Sin 2 Builds:Radiant Battlemage",
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Deal 80% Air Damageto enemies in the area. Caster receives an aura that sets Silence and Suffocating on enemies",
-      "special_terms": []
+      "effect": "Deal 80% Air Damageto enemies in the area. Caster receives an aura that sets Silence and Suffocating on enemies"
     }
   },
   {
@@ -512,18 +398,13 @@
       "Aerotheurge": 2,
       "Warfare": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Breathing+Bubbles",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "PB AoE",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Set Breathing Bubbles on allies around you, allowing them to ignore effects of cloud surfaces and making them immune to suffocation and Silence.",
-      "special_terms": []
+      "effect": "Set Breathing Bubbles on allies around you, allowing them to ignore effects of cloud surfaces and making them immune to suffocation and Silence."
     }
   },
   {
@@ -532,18 +413,13 @@
       "Aerotheurge": 2,
       "Scoundrel": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Blessed+Smoke+Cloud",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 1,
-      "range": "13m. Area of Effect:4m radius. Ground-targettable.",
-      "description": null,
       "sp_cost": 2,
+      "range": "13m. Area of Effect:4m radius. Ground-targettable.",
       "cooldown": "5",
-      "effect": "Conjure a cloud of thick blessed smoke that makes characters invisible.",
-      "special_terms": []
+      "effect": "Conjure a cloud of thick blessed smoke that makes characters invisible."
     }
   },
   {
@@ -552,18 +428,13 @@
       "Polymorph": 2,
       "Pyrokinetic": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin",
-    "found_on_page": "Polymorph",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "Self",
-      "description": "Divinity Original Sin 2 Builds:Battlemage",
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "You get immunity to fire, but lowered resistance to water. You bleed fire.",
-      "special_terms": []
+      "effect": "You get immunity to fire, but lowered resistance to water. You bleed fire."
     }
   },
   {
@@ -572,18 +443,13 @@
       "Polymorph": 2,
       "Hydrosophist": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin",
-    "found_on_page": "Polymorph",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "Self",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "You get immunity to water, but lowered resistance to fire. You bleed ice.",
-      "special_terms": []
+      "effect": "You get immunity to water, but lowered resistance to fire. You bleed ice."
     }
   },
   {
@@ -592,18 +458,13 @@
       "Polymorph": 2,
       "Geomancer": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin",
-    "found_on_page": "Polymorph",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
+      "sp_cost": 1,
       "range": "Self",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "You get immunity to poison and earth, but lowered resistance to air. You bleed poison.",
-      "special_terms": []
+      "effect": "You get immunity to poison and earth, but lowered resistance to air. You bleed poison."
     }
   },
   {
@@ -612,18 +473,13 @@
       "Polymorph": 2,
       "Aerotheurge": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin",
-    "found_on_page": "Polymorph",
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 1,
+      "sp_cost": 1,
       "range": "Self",
-      "description": null,
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Bleed electrified water. You get immunity to electricity, but lowered resistance to poison and earth damage.",
-      "special_terms": []
+      "effect": "Bleed electrified water. You get immunity to electricity, but lowered resistance to poison and earth damage."
     }
   },
   {
@@ -633,13 +489,10 @@
       "Aerotheurge": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Electric+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to electricity, unlocking Electric Discharge.",
       "special_terms": [
@@ -654,13 +507,10 @@
       "Pyrokinetic": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Fire+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to\u00a0fire, unlocking Fireball.",
       "special_terms": [
@@ -675,13 +525,10 @@
       "Geomancer": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Poison+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to poison, unlocking Poison Dart.",
       "special_terms": [
@@ -696,13 +543,10 @@
       "Hydrosophist": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Water+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": null,
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to water, unlocking Restoration.",
       "special_terms": [
@@ -717,12 +561,11 @@
       "Necromancer": 1
     },
     "wiki_url": null,
-    "has_wiki_page": false,
     "ability_details": {
       "ap_cost": 1,
       "sp_cost": 0,
-      "cooldown": "3",
       "range": "13m",
+      "cooldown": "3",
       "effect": "Change Incarnate's element to blood, unlocking Mosquito Swarm.",
       "special_terms": [
         "Mosquito Swarm."
@@ -736,12 +579,11 @@
       "Geomancer": 2
     },
     "wiki_url": null,
-    "has_wiki_page": false,
     "ability_details": {
       "ap_cost": 1,
       "sp_cost": 0,
-      "cooldown": "3",
       "range": "13m",
+      "cooldown": "3",
       "effect": "Change Incarnate's element to oil, unlocking Fossil Strike.",
       "special_terms": [
         "Fossil Strike"
@@ -755,13 +597,10 @@
       "Geomancer": 2
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Acid+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "13m",
-      "description": null,
       "sp_cost": 2,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to acid, unlocking Poison Dart and Acid Spores.",
       "special_terms": [
@@ -777,13 +616,10 @@
       "Aerotheurge": 2
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Electric+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "13m",
-      "description": null,
       "sp_cost": 2,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to cursed electricity, unlocking Electric Discharge and Closed Circuit.",
       "special_terms": [
@@ -799,13 +635,10 @@
       "Hydrosophist": 2
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Ice+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "13m",
-      "description": null,
       "sp_cost": 2,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to blessed ice, unlocking Restoration and Steam Lance.",
       "special_terms": [
@@ -821,13 +654,10 @@
       "Pyrokinetic": 2
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Necrofire+Infusion",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": 2,
-      "range": "13m",
-      "description": null,
       "sp_cost": 2,
+      "range": "13m",
       "cooldown": "3",
       "effect": "Change Incarnate's element to necrofire, unlocking Fireball and Epidemic of Fire.",
       "special_terms": [
@@ -843,16 +673,12 @@
       "Geomancer": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Throw+Dust",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 2,
-      "source_cost": null,
-      "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Tectonic Sage",
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
-      "effect": "Throw dust at a character, blinding them and dealing 75% Earth Damage. Clears surfaces and clouds in the area.",
-      "special_terms": []
+      "effect": "Throw dust at a character, blinding them and dealing 75% Earth Damage. Clears surfaces and clouds in the area."
     }
   },
   {
@@ -862,16 +688,12 @@
       "Pyrokinetic": 1
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Throw+Explosive+Trap",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 1,
-      "source_cost": null,
-      "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Blazing Deepstalker",
       "sp_cost": 0,
+      "range": "13m",
       "cooldown": "3",
-      "effect": "Throw an explosive trap at target locations. Trap takes a turn to activate. When active, trap will explode when a character approaches it.",
-      "special_terms": []
+      "effect": "Throw an explosive trap at target locations. Trap takes a turn to activate. When active, trap will explode when a character approaches it."
     }
   },
   {
@@ -881,16 +703,12 @@
       "Pyrokinetic": 2
     },
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps",
-    "has_wiki_page": true,
     "ability_details": {
       "ap_cost": 3,
-      "source_cost": 4,
+      "sp_cost": 1,
       "range": "13m",
-      "description": "Divinity Original Sin 2 Builds:Blazing Deepstalker",
-      "sp_cost": 0,
       "cooldown": "5",
-      "effect": "Throw 4 explosive traps at target locations. Each trap takes a turn to activate. When active, trap will explode when a character approaches it.",
-      "special_terms": []
+      "effect": "Throw 4 explosive traps at target locations. Each trap takes a turn to activate. When active, trap will explode when a character approaches it."
     }
   },
   {
@@ -899,16 +717,13 @@
       "Summoning": 2,
       "Necromancer": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Blood+Infusion",
-    "found_on_page": "Summoning",
     "ability_details": {
-      "ap_cost": 2,
-      "sp_cost": 0,
+      "ap_cost": 1,
+      "sp_cost": 2,
       "range": "13m",
-      "cooldown": "4",
-      "effect": "Change Incarnate's element to cursed blood, unlocking Blood Sucker and Bone Cage.",
-      "special_terms": []
+      "cooldown": "1",
+      "effect": "Change Incarnate's element to cursed blood, unlocking Blood Sucker and Bone Cage."
     }
   },
   {
@@ -917,16 +732,13 @@
       "Geomancer": 2,
       "Huntsman": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Dust+Blast",
-    "found_on_page": "Geomancer",
     "ability_details": {
       "ap_cost": 3,
       "sp_cost": 1,
       "range": "13m",
       "cooldown": "0",
-      "effect": "Throws dust at all enemies in range, blinding them and dealing 100% Earth Damage.",
-      "special_terms": []
+      "effect": "Throws dust at all enemies in range, blinding them and dealing 100% Earth Damage."
     }
   },
   {
@@ -935,16 +747,13 @@
       "Huntsman": 1,
       "Hydrosophist": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Cryotherapy",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 1,
       "sp_cost": 1,
       "range": "Self",
       "cooldown": "3",
-      "effect": "Consume Frozen surfaces around you and convert them to Magic Armour. Removes Burning and Necrofire.",
-      "special_terms": []
+      "effect": "Consume Frozen surfaces around you and convert them to Magic Armour. Removes Burning and Necrofire."
     }
   },
   {
@@ -953,16 +762,13 @@
       "Huntsman": 2,
       "Hydrosophist": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cryotherapy",
-    "found_on_page": "Hydrosophist",
     "ability_details": {
       "ap_cost": 2,
       "sp_cost": 2,
       "range": "All allies",
       "cooldown": "5",
-      "effect": "Each ally consumes Frozen surfaces around them, converting the frozen surfaces to Magic Armour.",
-      "special_terms": []
+      "effect": "Each ally consumes Frozen surfaces around them, converting the frozen surfaces to Magic Armour."
     }
   },
   {
@@ -971,16 +777,13 @@
       "Huntsman": 1,
       "Aerotheurge": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 1,
-      "sp_cost": 1,
+      "sp_cost": 0,
       "range": "13m",
       "cooldown": "5",
-      "effect": "Cause target character to teleport in a random direction each time they are attacked. Increases Air Resistance by 40%.",
-      "special_terms": []
+      "effect": "Cause target character to teleport in a random direction each time they are attacked. Increases Air Resistance by 40%."
     }
   },
   {
@@ -989,16 +792,13 @@
       "Huntsman": 2,
       "Aerotheurge": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura",
-    "found_on_page": "Aerotheurge",
     "ability_details": {
       "ap_cost": 2,
-      "sp_cost": 2,
+      "sp_cost": 0,
       "range": "Self",
       "cooldown": "5",
-      "effect": "Your dodging chance and those of allies around you is increased by 90% and your Movement Speed is increased by 1m.",
-      "special_terms": []
+      "effect": "Your dodging chance and those of allies around you is increased by 90% and your Movement Speed is increased by 1m."
     }
   },
   {
@@ -1007,16 +807,13 @@
       "Necromancer": 1,
       "Hydrosophist": 1
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood",
-    "found_on_page": "Necromancer",
     "ability_details": {
       "ap_cost": 2,
-      "sp_cost": 1,
+      "sp_cost": 0,
       "range": "13m",
       "cooldown": "4",
-      "effect": "Create a blood surface beneath every target in range.",
-      "special_terms": []
+      "effect": "Create a blood surface beneath every target in range."
     }
   },
   {
@@ -1025,16 +822,13 @@
       "Necromancer": 2,
       "Hydrosophist": 2
     },
-    "has_wiki_page": true,
     "wiki_url": "https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm",
-    "found_on_page": "Necromancer",
     "ability_details": {
-      "ap_cost": 3,
+      "ap_cost": 4,
       "sp_cost": 3,
       "range": "13m",
       "cooldown": "6",
-      "effect": "Create a massive storm of blood over all targets. Deal physical damage and create blood surfaces.",
-      "special_terms": []
+      "effect": "Create a massive storm of blood over all targets. Deal physical damage and create blood surfaces."
     }
   }
 ]
