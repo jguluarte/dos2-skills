@@ -385,7 +385,7 @@ function createSkillCard(skill, category) {
   const secondaryColor = secondaryTree ? ALL_TREE_COLORS[secondaryTree] : primaryColor;
 
   // Skill name
-  const nameHTML = skill.has_wiki_page && skill.wiki_url
+  const nameHTML = skill.wiki_url
     ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener"
          style="color: ${secondaryColor}; text-decoration-color: ${primaryColor};">
          ${skill.name}
@@ -604,11 +604,8 @@ function initializeFilterBar() {
 /**
  * Load skills data and initialize app
  */
-async function initialize() {
+function initialize() {
   try {
-    // Load skills data from global variable (set by skills.js)
-    const allSkills = SKILLS_DATA;
-
     // Transform data structure to match what we need
     skillsData = {
       Summoning: [],
@@ -619,7 +616,7 @@ async function initialize() {
     };
 
     // Group skills by primary element
-    allSkills.forEach(skill => {
+    SKILLS_DATA.forEach(skill => {
       const trees = Object.keys(skill.requirements);
 
       // Summoning skills go in summoning category
