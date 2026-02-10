@@ -1,0 +1,409 @@
+/* ===========================
+   DOS2 Cross-Skills Styles
+   =========================== */
+
+/* Base Reset & Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #fff;
+  padding-bottom: 20px;
+}
+
+/* ===========================
+   Filter Bar
+   =========================== */
+
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 35, 75, 0.97);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-header:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-icon {
+  font-size: 1.2em;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.active-filters-summary {
+  font-size: 0.7em;
+  color: #aaa;
+  font-style: italic;
+  flex: 1;
+  min-width: 0;
+}
+
+.active-filters-summary.hidden {
+  display: none;
+}
+
+.filter-header-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.clear-btn,
+.close-btn {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75em;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.close-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 16px;
+  display: none;
+}
+
+.clear-btn:hover,
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.clear-btn:active,
+.close-btn:active {
+  transform: scale(0.95);
+}
+
+.clear-btn.hidden {
+  display: none;
+}
+
+/* Filter Content */
+.filter-content {
+  display: none;
+  background: rgba(25, 45, 90, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 15px;
+}
+
+.filter-content.expanded {
+  display: block;
+}
+
+.filter-content.expanded ~ .filter-header .close-btn {
+  display: flex;
+}
+
+.filter-groups {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-label {
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+.filter-label-hint {
+  font-size: 0.75em;
+  font-weight: 400;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+/* Filter Buttons */
+.skill-tree-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tree-filter-btn {
+  padding: 6px 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tree-filter-btn.active {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.tree-filter-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.tree-filter-btn:not(.disabled):active {
+  transform: scale(0.95);
+}
+
+/* ===========================
+   Content Container
+   =========================== */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+  padding-top: 20px;
+}
+
+/* ===========================
+   Element Sections
+   =========================== */
+
+.element-section {
+  margin-bottom: 20px;
+}
+
+.element-section.hidden {
+  display: none;
+}
+
+.element-header {
+  font-size: 1.2em;
+  font-weight: 700;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.element-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* ===========================
+   Skill Cards
+   =========================== */
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-left: 4px solid;
+}
+
+.skill-card.hidden {
+  display: none;
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: nowrap;
+}
+
+.skill-name {
+  font-size: 1.05em;
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-name a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.skill-name a:hover {
+  opacity: 0.8;
+}
+
+/* Skill Costs */
+.skill-cost {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ap-icon {
+  width: 8px;
+  height: 8px;
+  background: #2ecc71;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.source-icon {
+  width: 8px;
+  height: 8px;
+  background: #3498db;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* Skill Details */
+.skill-effect {
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  color: rgba(173, 216, 230, 0.95);
+}
+
+.skill-effect.missing {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.special-term {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.skill-requirements {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.req-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 600;
+  font-family: 'Courier New', 'Consolas', monospace;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.skill-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85em;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ===========================
+   No Results Message
+   =========================== */
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1em;
+  opacity: 0.7;
+}
+
+.no-results.hidden {
+  display: none;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+/* Desktop */
+@media (min-width: 769px) {
+  .close-btn {
+    display: none !important;
+  }
+
+  .filter-content {
+    display: block;
+    border-top: none;
+    padding: 12px 15px;
+    background: transparent;
+  }
+
+  .filter-header {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .filter-header .clear-btn {
+    pointer-events: auto;
+  }
+
+  .active-filters-summary {
+    display: none !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .filter-content.expanded ~ .filter-header .close-btn {
+    display: flex;
+  }
+
+  .filter-groups {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+
+  .tree-filter-btn {
+    padding: 8px 14px;
+    font-size: 0.85em;
+  }
+}

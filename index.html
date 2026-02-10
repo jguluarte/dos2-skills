@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=dos2-cross-skills-standalone.html">
-<title>DOS2 Cross-Skills</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>DOS2 Cross-Skills Lookup</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<p>Redirecting to DOS2 Cross-Skills...</p>
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-header" id="filter-header">
+      <div class="filter-icon">⚙</div>
+      <div class="active-filters-summary" id="summary">Showing all skills, tap to filter</div>
+      <div class="filter-header-buttons">
+        <button class="clear-btn hidden" id="clear-btn">Reset</button>
+        <button class="close-btn" id="close-btn">✕</button>
+      </div>
+    </div>
+
+    <div class="filter-content" id="filter-content">
+      <div class="filter-groups">
+        <!-- Primary Filter -->
+        <div class="filter-group">
+          <div class="filter-label">
+            Primary skill
+            <span class="filter-label-hint">(select one)</span>
+          </div>
+          <div class="skill-tree-filters" id="primary-filters"></div>
+        </div>
+
+        <!-- Secondary Filter -->
+        <div class="filter-group">
+          <div class="filter-label">Secondary skill</div>
+          <div class="skill-tree-filters" id="secondary-filters"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Container -->
+  <div class="container">
+    <div id="skills-container"></div>
+    <div id="no-results" class="no-results hidden">
+      No skills found matching your filters.
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
