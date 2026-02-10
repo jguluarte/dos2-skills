@@ -86,7 +86,7 @@
       "sp_cost": 1,
       "range": "13m",
       "cooldown": "5",
-      "effect": "Target character and surrounding allies receive Sparkmasterstatus that adds a chance of fiery sparks to melee attacks.",
+      "effect": "Target character and surrounding allies receive Sparkmaster status that adds a chance of fiery sparks to melee attacks.",
       "special_terms": [
         "Sparkmaster"
       ]
@@ -119,7 +119,7 @@
       "sp_cost": 0,
       "range": "2m",
       "cooldown": "5",
-      "effect": "Destroy [110% Int]Physical Armouron target character, and set Acid status.",
+      "effect": "Destroy [110% Int] Physical Armour on target character, and set Acid status.",
       "special_terms": [
         "Physical Armour"
       ]
@@ -171,7 +171,7 @@
       "sp_cost": 0,
       "range": "Self",
       "cooldown": "5",
-      "effect": "Coat your weapon with poison, adding[X] Poison Damageto your weapon skills and attacks."
+      "effect": "Coat your weapon with poison, adding[ X] Poison Damage to your weapon skills and attacks."
     }
   },
   {
@@ -389,7 +389,7 @@
       "sp_cost": 1,
       "range": "Self",
       "cooldown": "5",
-      "effect": "Deal 80% Air Damageto enemies in the area. Caster receives an aura that sets Silence and Suffocating on enemies"
+      "effect": "Deal 80% Air Damage to enemies in the area. Caster receives an aura that sets Silence and Suffocating on enemies"
     }
   },
   {
@@ -512,7 +512,7 @@
       "sp_cost": 0,
       "range": "13m",
       "cooldown": "1",
-      "effect": "Change Incarnate's element to\u00a0fire, unlocking Fireball.",
+      "effect": "Change Incarnate's element to fire, unlocking Fireball.",
       "special_terms": [
         "Fireball"
       ]
