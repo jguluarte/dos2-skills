@@ -326,6 +326,23 @@ function renderSkills() {
     const skills = skillsData[category];
     if (!skills || skills.length === 0) return;
 
+    // Sort skills by their secondary tree for easier scanning
+    const sortedSkills = [...skills].sort((a, b) => {
+      const treesA = Object.keys(a.requirements);
+      const treesB = Object.keys(b.requirements);
+      const secondaryA = getSecondaryTree(treesA, category) || '';
+      const secondaryB = getSecondaryTree(treesB, category) || '';
+
+      // First sort by secondary tree
+      const treeCompare = secondaryA.localeCompare(secondaryB);
+      if (treeCompare !== 0) return treeCompare;
+
+      // If same secondary tree, skills WITHOUT source cost come first
+      const spA = a.ability_details?.sp_cost || 0;
+      const spB = b.ability_details?.sp_cost || 0;
+      return spA - spB;
+    });
+
     const section = document.createElement('div');
     section.className = 'element-section';
     section.dataset.category = category;
@@ -341,7 +358,7 @@ function renderSkills() {
     section.appendChild(header);
 
     // Skill cards
-    skills.forEach(skill => {
+    sortedSkills.forEach(skill => {
       const card = createSkillCard(skill, category);
       section.appendChild(card);
     });
@@ -401,8 +418,14 @@ function createSkillCard(skill, category) {
     </div>`;
   }
 
-  // Requirements badges
+  // Requirements badges - partner skill first, then primary category
   const reqBadges = Object.entries(skill.requirements)
+    .sort(([treeA], [treeB]) => {
+      // Put secondary tree first, primary category second
+      if (treeA === category) return 1;
+      if (treeB === category) return -1;
+      return 0;
+    })
     .map(([tree, level]) => {
       const color = ALL_TREE_COLORS[tree] || '#666';
       return `<span class="req-badge" style="color: ${color}aa;">${tree} ${level}</span>`;
