@@ -385,7 +385,7 @@ function createSkillCard(skill, category) {
   const secondaryColor = secondaryTree ? ALL_TREE_COLORS[secondaryTree] : primaryColor;
 
   // Skill name
-  const nameHTML = skill.has_wiki_page && skill.wiki_url
+  const nameHTML = skill.wiki_url
     ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener"
          style="color: ${secondaryColor}; text-decoration-color: ${primaryColor};">
          ${skill.name}
