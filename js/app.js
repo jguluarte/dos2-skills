@@ -566,9 +566,8 @@ function initializeScrollBehavior() {
  */
 async function initialize() {
   try {
-    // Load skills data
-    const response = await fetch('data/skills.json');
-    const allSkills = await response.json();
+    // Load skills data from global variable (set by skills.js)
+    const allSkills = SKILLS_DATA;
 
     // Transform data structure to match what we need
     skillsData = {
