@@ -493,7 +493,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to electricity, unlocking Electric Discharge.",
       "special_terms": [
         "Electric Discharge"
@@ -511,7 +511,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to\u00a0fire, unlocking Fireball.",
       "special_terms": [
         "Fireball"
@@ -529,7 +529,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to poison, unlocking Poison Dart.",
       "special_terms": [
         "Poison Dart"
@@ -547,7 +547,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to water, unlocking Restoration.",
       "special_terms": [
         "Restoration"
@@ -565,7 +565,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to blood, unlocking Mosquito Swarm.",
       "special_terms": [
         "Mosquito Swarm."
@@ -583,7 +583,7 @@
       "ap_cost": 1,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to oil, unlocking Fossil Strike.",
       "special_terms": [
         "Fossil Strike"
@@ -601,7 +601,7 @@
       "ap_cost": 1,
       "sp_cost": 2,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to acid, unlocking Poison Dart and Acid Spores.",
       "special_terms": [
         "Poison Dart",
@@ -620,7 +620,7 @@
       "ap_cost": 1,
       "sp_cost": 2,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to cursed electricity, unlocking Electric Discharge and Closed Circuit.",
       "special_terms": [
         "Electric Discharge",
@@ -639,7 +639,7 @@
       "ap_cost": 1,
       "sp_cost": 2,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to blessed ice, unlocking Restoration and Steam Lance.",
       "special_terms": [
         "Restoration",
@@ -658,7 +658,7 @@
       "ap_cost": 1,
       "sp_cost": 2,
       "range": "13m",
-      "cooldown": "3",
+      "cooldown": "1",
       "effect": "Change Incarnate's element to necrofire, unlocking Fireball and Epidemic of Fire.",
       "special_terms": [
         "Fireball",
@@ -737,7 +737,7 @@
       "ap_cost": 3,
       "sp_cost": 1,
       "range": "13m",
-      "cooldown": "0",
+      "cooldown": "3",
       "effect": "Throws dust at all enemies in range, blinding them and dealing 100% Earth Damage."
     }
   },
@@ -812,7 +812,7 @@
       "ap_cost": 2,
       "sp_cost": 0,
       "range": "13m",
-      "cooldown": "4",
+      "cooldown": "5",
       "effect": "Create a blood surface beneath every target in range."
     }
   },
@@ -827,7 +827,7 @@
       "ap_cost": 4,
       "sp_cost": 3,
       "range": "13m",
-      "cooldown": "6",
+      "cooldown": "5",
       "effect": "Create a massive storm of blood over all targets. Deal physical damage and create blood surfaces."
     }
   }
