@@ -28,25 +28,66 @@ const ALL_TREE_COLORS = {
   Polymorph: '#f39c12'
 };
 
+// Tree name constants
+const SUMMONING = 'Summoning';
+const PYROKINETIC = 'Pyrokinetic';
+const AEROTHEURGE = 'Aerotheurge';
+const GEOMANCER = 'Geomancer';
+const HYDROSOPHIST = 'Hydrosophist';
+const WARFARE = 'Warfare';
+const HUNTSMAN = 'Huntsman';
+const SCOUNDREL = 'Scoundrel';
+const POLYMORPH = 'Polymorph';
+const NECROMANCER = 'Necromancer';
+
 const ALL_TREES = [
-  'Pyrokinetic',
-  'Aerotheurge',
-  'Geomancer',
-  'Hydrosophist',
-  'Summoning',
-  'Warfare',
-  'Huntsman',
-  'Scoundrel',
-  'Polymorph',
-  'Necromancer'
+  PYROKINETIC,
+  AEROTHEURGE,
+  GEOMANCER,
+  HYDROSOPHIST,
+  SUMMONING,
+  WARFARE,
+  HUNTSMAN,
+  SCOUNDREL,
+  POLYMORPH,
+  NECROMANCER
 ];
 
 const ELEMENTAL_TREES = [
-  'Pyrokinetic',
-  'Aerotheurge',
-  'Geomancer',
-  'Hydrosophist'
+  PYROKINETIC,
+  AEROTHEURGE,
+  GEOMANCER,
+  HYDROSOPHIST
 ];
+
+const NON_ELEMENTAL_TREES = [
+  WARFARE,
+  HUNTSMAN,
+  SCOUNDREL,
+  POLYMORPH,
+  NECROMANCER
+];
+
+const PRIMARY_FILTER_TREES = ALL_TREES;
+
+// Build lookup table: when primary is X, which secondary options are valid?
+const VALID_SECONDARY_BY_PRIMARY = {};
+
+// No primary selected: all non-Summoning trees are valid
+VALID_SECONDARY_BY_PRIMARY[null] = ALL_TREES.filter(tree => tree !== SUMMONING);
+
+// Summoning pairs with elemental + necromancer
+VALID_SECONDARY_BY_PRIMARY[SUMMONING] = [...ELEMENTAL_TREES, NECROMANCER];
+
+// Elemental trees pair with non-elemental
+ELEMENTAL_TREES.forEach(tree => {
+  VALID_SECONDARY_BY_PRIMARY[tree] = NON_ELEMENTAL_TREES;
+});
+
+// Non-elemental trees pair with elemental
+NON_ELEMENTAL_TREES.forEach(tree => {
+  VALID_SECONDARY_BY_PRIMARY[tree] = ELEMENTAL_TREES;
+});
 
 // ===========================
 // State Management
@@ -64,18 +105,7 @@ let secondaryFilters = new Set();
  * Get valid secondary filter options based on current primary filter
  */
 function getValidSecondaryOptions(primary) {
-  if (!primary) return ALL_TREES;
-
-  if (primary === 'Summoning') {
-    // Summoning can pair with elemental + necromancer
-    return [...ELEMENTAL_TREES, 'Necromancer'];
-  } else if (ELEMENTAL_TREES.includes(primary)) {
-    // Elemental can pair with non-elemental
-    return ALL_TREES.filter(tree => !ELEMENTAL_TREES.includes(tree));
-  } else {
-    // Non-elemental can pair with elemental
-    return ELEMENTAL_TREES;
-  }
+  return VALID_SECONDARY_BY_PRIMARY[primary] || [];
 }
 
 /**
@@ -188,8 +218,8 @@ function togglePrimaryFilter(tree) {
     );
   }
 
-  updateFilterButtons();
-  updateSecondaryOptions();
+  updatePrimaryFilterButtons();
+  renderSecondaryFilters();
   applyFilters();
   saveFiltersToURL();
   updateFilterSummary();
@@ -199,44 +229,46 @@ function togglePrimaryFilter(tree) {
  * Toggle secondary (OR) filter
  */
 function toggleSecondaryFilter(tree) {
-  const validOptions = getValidSecondaryOptions(primaryFilter);
-  if (!validOptions.includes(tree)) return;
-
   if (secondaryFilters.has(tree)) {
     secondaryFilters.delete(tree);
   } else {
     secondaryFilters.add(tree);
   }
 
-  updateFilterButtons();
+  renderSecondaryFilters();
   applyFilters();
   saveFiltersToURL();
   updateFilterSummary();
 }
 
 /**
- * Update filter button active states
+ * Render secondary filter buttons based on current primary selection
  */
-function updateFilterButtons() {
-  // Primary filters
-  document.querySelectorAll('#primary-filters .tree-filter-btn').forEach(btn => {
-    btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
-  });
+function renderSecondaryFilters() {
+  const container = document.getElementById('secondary-filters');
+  container.innerHTML = '';
 
-  // Secondary filters
-  document.querySelectorAll('#secondary-filters .tree-filter-btn').forEach(btn => {
-    btn.classList.toggle('active', secondaryFilters.has(btn.dataset.tree));
+  const validOptions = getValidSecondaryOptions(primaryFilter);
+
+  validOptions.forEach(tree => {
+    const btn = document.createElement('button');
+    btn.className = 'tree-filter-btn';
+    if (secondaryFilters.has(tree)) {
+      btn.classList.add('active');
+    }
+    btn.textContent = tree;
+    btn.dataset.tree = tree;
+    btn.onclick = () => toggleSecondaryFilter(tree);
+    container.appendChild(btn);
   });
 }
 
 /**
- * Update which secondary filter options are enabled
+ * Update primary filter button active states
  */
-function updateSecondaryOptions() {
-  const validOptions = getValidSecondaryOptions(primaryFilter);
-
-  document.querySelectorAll('#secondary-filters .tree-filter-btn').forEach(btn => {
-    btn.classList.toggle('disabled', !validOptions.includes(btn.dataset.tree));
+function updatePrimaryFilterButtons() {
+  document.querySelectorAll('#primary-filters .tree-filter-btn').forEach(btn => {
+    btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
   });
 }
 
@@ -246,8 +278,8 @@ function updateSecondaryOptions() {
 function clearFilters() {
   primaryFilter = null;
   secondaryFilters.clear();
-  updateFilterButtons();
-  updateSecondaryOptions();
+  updatePrimaryFilterButtons();
+  renderSecondaryFilters();
   applyFilters();
   saveFiltersToURL();
   updateFilterSummary();
@@ -465,28 +497,18 @@ function applyFilters() {
 }
 
 /**
- * Initialize filter buttons
+ * Initialize primary filter buttons (only needs to run once)
  */
-function initializeFilters() {
-  const primaryContainer = document.getElementById('primary-filters');
-  const secondaryContainer = document.getElementById('secondary-filters');
+function initializePrimaryFilters() {
+  const container = document.getElementById('primary-filters');
 
-  ALL_TREES.forEach(tree => {
-    // Primary filter button
-    const primaryBtn = document.createElement('button');
-    primaryBtn.className = 'tree-filter-btn';
-    primaryBtn.textContent = tree;
-    primaryBtn.dataset.tree = tree;
-    primaryBtn.onclick = () => togglePrimaryFilter(tree);
-    primaryContainer.appendChild(primaryBtn);
-
-    // Secondary filter button
-    const secondaryBtn = document.createElement('button');
-    secondaryBtn.className = 'tree-filter-btn';
-    secondaryBtn.textContent = tree;
-    secondaryBtn.dataset.tree = tree;
-    secondaryBtn.onclick = () => toggleSecondaryFilter(tree);
-    secondaryContainer.appendChild(secondaryBtn);
+  PRIMARY_FILTER_TREES.forEach(tree => {
+    const btn = document.createElement('button');
+    btn.className = 'tree-filter-btn';
+    btn.textContent = tree;
+    btn.dataset.tree = tree;
+    btn.onclick = () => togglePrimaryFilter(tree);
+    container.appendChild(btn);
   });
 }
 
@@ -500,23 +522,48 @@ function initializeFilters() {
 function initializeFilterBar() {
   const filterHeader = document.getElementById('filter-header');
   const filterContent = document.getElementById('filter-content');
+  const filterOverlay = document.getElementById('filter-overlay');
   const clearBtn = document.getElementById('clear-btn');
   const closeBtn = document.getElementById('close-btn');
 
-  // Toggle filters on mobile
+  function closeFilters() {
+    filterContent.classList.remove('expanded');
+    filterOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
+  function openFilters() {
+    filterContent.classList.add('expanded');
+    filterOverlay.classList.add('visible');
+
+    // Prevent layout shift by compensating for scrollbar width
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Toggle filters (CSS controls mobile vs desktop behavior)
   filterHeader.addEventListener('click', (e) => {
     if (e.target === clearBtn || clearBtn.contains(e.target)) return;
     if (e.target === closeBtn || closeBtn.contains(e.target)) return;
 
-    if (window.innerWidth <= 768) {
-      filterContent.classList.toggle('expanded');
+    if (filterContent.classList.contains('expanded')) {
+      closeFilters();
+    } else {
+      openFilters();
     }
   });
 
   // Close button
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    filterContent.classList.remove('expanded');
+    closeFilters();
+  });
+
+  // Overlay click closes filter
+  filterOverlay.addEventListener('click', () => {
+    closeFilters();
   });
 
   // Clear button
@@ -526,36 +573,6 @@ function initializeFilterBar() {
   });
 }
 
-/**
- * Set up auto-hide on scroll (mobile only)
- */
-function initializeScrollBehavior() {
-  let lastScroll = 0;
-  let lastManualOpen = 0;
-  const filterHeader = document.getElementById('filter-header');
-  const filterContent = document.getElementById('filter-content');
-
-  // Track manual opens
-  filterHeader.addEventListener('click', () => {
-    if (filterContent.classList.contains('expanded')) {
-      lastManualOpen = Date.now();
-    }
-  });
-
-  // Auto-hide on scroll down
-  window.addEventListener('scroll', () => {
-    if (window.innerWidth > 768) return;
-
-    const currentScroll = window.pageYOffset;
-    const timeSinceOpen = Date.now() - lastManualOpen;
-
-    if (currentScroll > lastScroll && currentScroll > 50 && timeSinceOpen > 3000) {
-      filterContent.classList.remove('expanded');
-    }
-
-    lastScroll = currentScroll;
-  });
-}
 
 // ===========================
 // Initialization
@@ -596,15 +613,14 @@ async function initialize() {
     });
 
     // Initialize UI
-    initializeFilters();
+    initializePrimaryFilters();
     initializeFilterBar();
-    initializeScrollBehavior();
     renderSkills();
 
     // Load saved filters
     loadFiltersFromURL();
-    updateFilterButtons();
-    updateSecondaryOptions();
+    updatePrimaryFilterButtons();
+    renderSecondaryFilters();
     applyFilters();
     updateFilterSummary();
 
