@@ -1,0 +1,17 @@
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup Files
+*.bak
+*.tmp
+
+# Old standalone version (keeping for reference but not tracking changes)
+dos2-cross-skills-standalone.html
