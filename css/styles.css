@@ -2,6 +2,27 @@
    DOS2 Cross-Skills Styles
    =========================== */
 
+/* ===========================
+   Color Variables
+   =========================== */
+
+:root {
+  /* Element/damage colors */
+  --color-fire: #ff6600;
+  --color-air: #99ccff;
+  --color-earth: #a0785a;
+  --color-water: #02679d;
+  --color-poison: #99cc00;
+
+  /* Skill tree colors (where different from element) */
+  --color-summoning: #be4bdb;
+  --color-necromancer: #a61e4d;
+  --color-warfare: #be590d;
+  --color-huntsman: #82c91e;
+  --color-scoundrel: #868e96;
+  --color-polymorph: #ffd43b;
+}
+
 /* Base Reset & Layout */
 * {
   box-sizing: border-box;
@@ -379,6 +400,22 @@ body {
 .no-results.hidden {
   display: none;
 }
+
+/* ===========================
+   Custom HTML Tags (styled via CSS)
+   =========================== */
+
+/* Base tag styles */
+status  { text-decoration: underline dotted; }
+ability { text-decoration: underline dotted; font-weight: 600; }
+
+/* Element colors - apply to tag names, classes, and type attributes */
+fire,   .fire,   [type="fire"]   { color: var(--color-fire);   font-weight: 600; }
+air,    .air,    [type="air"]    { color: var(--color-air);    font-weight: 600; }
+earth,  .earth,  [type="earth"]  { color: var(--color-earth);  font-weight: 600; }
+water,  .water,  [type="water"]  { color: var(--color-water);  font-weight: 600; }
+poison, .poison, [type="poison"] { color: var(--color-poison); font-weight: 600; }
+        .necro,  [type="necro"]  { color: var(--color-necromancer); font-weight: 600; }
 
 /* ===========================
    Responsive Design
