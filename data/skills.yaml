@@ -60,7 +60,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Corpse+Explosion
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: PB AoE
     cooldown: 2
     effect: Explode all corpses around you, dealing physical damage in the area
@@ -72,12 +72,14 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: 13m
     cooldown: 5
     effect: >
-      Target character and surrounding allies receive Sparkmaster status
+      Target character and surrounding allies receive Sparkmasterstatus
       that adds a chance of fiery sparks to melee attacks.
+    special_terms:
+      - Sparkmaster
 
 - name: Mass Sabotage
   requirements:
@@ -86,7 +88,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage
   ability_details:
     ap_cost: 2
-    sp_cost: 1
+    sp_cost: 0
     range: 13m
     cooldown: 5
     effect: >
@@ -104,8 +106,10 @@
     range: 2m
     cooldown: 5
     effect: >
-      Destroy [110% Int] Physical Armour on target character, and set Acid
+      Destroy [110% Int]Physical Armouron target character, and set Acid
       status.
+    special_terms:
+      - Physical Armour
 
 - name: Oily Carapace
   requirements:
@@ -134,6 +138,9 @@
     effect: >
       Turn water and blood surfaces into oil. Remove Stun and Shocked from
       characters.
+    special_terms:
+      - Stun
+      - Shocked
 
 - name: Venom Coating
   requirements:
@@ -146,7 +153,7 @@
     range: Self
     cooldown: 5
     effect: >
-      Coat your weapon with poison, adding [X] Poison Damage to your weapon
+      Coat your weapon with poison, adding[X] Poison Damageto your weapon
       skills and attacks.
 
 - name: Corrosive Spray
@@ -156,7 +163,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray
   ability_details:
     ap_cost: 2
-    sp_cost: 1
+    sp_cost: 0
     range: 7m
     cooldown: 3
     effect: >
@@ -184,12 +191,12 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
-      Allies in range receive Venom Coating, which adds [X] Poison Damage
-      to weapon skills and attacks.
+      Allies in range receive Venom Coating, which adds[X] Poison Damageto
+      weapon skills and attacks.
 
 - name: Healing Tears
   requirements:
@@ -202,7 +209,7 @@
     range: PB AoE
     cooldown: 5
     effect: >
-      Three healing tears circle around you. Every time an ally walks into
+      Three healing tears circle around you. Everytime an ally walks into
       melee range near you, a healing tear bathes them.
 
 - name: Vampiric Hunger
@@ -233,6 +240,14 @@
     effect: >
       Heal target and create a water puddle beneath them. Remove Burning,
       Diseased, Decaying Touch, Poisoned, Bleeding, Suffocation and Acid.
+    special_terms:
+      - Burning
+      - Diseased
+      - Decaying Touch
+      - Poisoned
+      - Bleeding
+      - Suffocation
+      - Acid
 
 - name: Mass Cleanse Wounds
   requirements:
@@ -241,13 +256,22 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: PB AoE
     cooldown: 5
     effect: >
       Heal yourself and allies around you. Create a water puddle beneath
       every target. Remove Necrofire, Burning, Diseased, Decaying Touch,
       Poisoned, Bleeding, Suffocation and Acid.
+    special_terms:
+      - Necrofire
+      - Burning
+      - Diseased
+      - Decaying Touch
+      - Poisoned
+      - Bleeding
+      - Suffocation
+      - Acid
 
 - name: Vampiric Hunger Aura
   requirements:
@@ -256,7 +280,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger+Aura
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: PB AoE
     cooldown: 5
     effect: >
@@ -303,6 +327,9 @@
     effect: >
       Remove Petrified and Frozen from target character. Vaporise ground
       surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
+    special_terms:
+      - Petrified
+      - Frozen
 
 - name: Smoke Cover
   requirements:
@@ -323,11 +350,11 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
-      Deal 80% Air Damage to enemies in the area. Caster receives an aura
+      Deal 80% Air Damageto enemies in the area. Caster receives an aura
       that sets Silence and Suffocating on enemies
 
 - name: Mass Breathing Bubbles
@@ -337,7 +364,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Breathing+Bubbles
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: PB AoE
     cooldown: 5
     effect: >
@@ -366,7 +393,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
@@ -380,7 +407,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
@@ -394,7 +421,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
@@ -408,7 +435,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: Self
     cooldown: 5
     effect: >
@@ -424,10 +451,12 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: >
       Change Incarnate's element to electricity, unlocking Electric
       Discharge.
+    special_terms:
+      - Electric Discharge
 
 - name: Fire Infusion
   requirements:
@@ -438,8 +467,10 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
-    effect: Change Incarnate's element to fire, unlocking Fireball.
+    cooldown: 3
+    effect: Change Incarnate's element to fire, unlocking Fireball.
+    special_terms:
+      - Fireball
 
 - name: Poison Infusion
   requirements:
@@ -450,8 +481,10 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: Change Incarnate's element to poison, unlocking Poison Dart.
+    special_terms:
+      - Poison Dart
 
 - name: Water Infusion
   requirements:
@@ -462,8 +495,10 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: Change Incarnate's element to water, unlocking Restoration.
+    special_terms:
+      - Restoration
 
 - name: Blood Infusion
   requirements:
@@ -473,8 +508,10 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: Change Incarnate's element to blood, unlocking Mosquito Swarm.
+    special_terms:
+      - Mosquito Swarm.
 
 - name: Oil Infusion
   requirements:
@@ -484,8 +521,10 @@
     ap_cost: 1
     sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: Change Incarnate's element to oil, unlocking Fossil Strike.
+    special_terms:
+      - Fossil Strike
 
 - name: Acid Infusion
   requirements:
@@ -496,10 +535,13 @@
     ap_cost: 1
     sp_cost: 2
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: >
       Change Incarnate's element to acid, unlocking Poison Dart and Acid
       Spores.
+    special_terms:
+      - Poison Dart
+      - Acid Spores
 
 - name: Cursed Electric Infusion
   requirements:
@@ -510,10 +552,13 @@
     ap_cost: 1
     sp_cost: 2
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: >
       Change Incarnate's element to cursed electricity, unlocking Electric
       Discharge and Closed Circuit.
+    special_terms:
+      - Electric Discharge
+      - Closed Circuit
 
 - name: Ice Infusion
   requirements:
@@ -524,10 +569,13 @@
     ap_cost: 1
     sp_cost: 2
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: >
       Change Incarnate's element to blessed ice, unlocking Restoration and
       Steam Lance.
+    special_terms:
+      - Restoration
+      - Steam Lance
 
 - name: Necrofire Infusion
   requirements:
@@ -538,10 +586,13 @@
     ap_cost: 1
     sp_cost: 2
     range: 13m
-    cooldown: 1
+    cooldown: 3
     effect: >
       Change Incarnate's element to necrofire, unlocking Fireball and
       Epidemic of Fire.
+    special_terms:
+      - Fireball
+      - Epidemic of Fire
 
 - name: Throw Dust
   requirements:
@@ -579,7 +630,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps
   ability_details:
     ap_cost: 3
-    sp_cost: 1
+    sp_cost: 0
     range: 13m
     cooldown: 5
     effect: >
@@ -593,10 +644,10 @@
     Necromancer: 2
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Blood+Infusion
   ability_details:
-    ap_cost: 1
-    sp_cost: 2
+    ap_cost: 2
+    sp_cost: 0
     range: 13m
-    cooldown: 1
+    cooldown: 4
     effect: >
       Change Incarnate's element to cursed blood, unlocking Blood Sucker
       and Bone Cage.
@@ -610,7 +661,7 @@
     ap_cost: 3
     sp_cost: 1
     range: 13m
-    cooldown: 3
+    cooldown: 0
     effect: >
       Throws dust at all enemies in range, blinding them and dealing 100%
       Earth Damage.
@@ -650,7 +701,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: 13m
     cooldown: 5
     effect: >
@@ -664,7 +715,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 2
     range: Self
     cooldown: 5
     effect: >
@@ -678,9 +729,9 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 1
     range: 13m
-    cooldown: 5
+    cooldown: 4
     effect: Create a blood surface beneath every target in range.
 
 - name: Blood Storm
@@ -689,10 +740,10 @@
     Hydrosophist: 2
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ability_details:
-    ap_cost: 4
+    ap_cost: 3
     sp_cost: 3
     range: 13m
-    cooldown: 5
+    cooldown: 6
     effect: >
       Create a massive storm of blood over all targets. Deal physical
-      damage and create blood surfaces. asdf
+      damage and create blood surfaces.
