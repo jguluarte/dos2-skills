@@ -4,29 +4,38 @@
  */
 
 // ===========================
-// Color Schemes
+// Color Schemes (read from CSS custom properties)
 // ===========================
 
-const ELEMENT_COLORS = {
-  Pyrokinetic: '#e74c3c',
-  Aerotheurge: '#3498db',
-  Geomancer: '#27ae60',
-  Hydrosophist: '#16a085',
-  Summoning: '#9b59b6'
+function getCSSColor(varName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+}
+
+// Map tree display names to CSS variable names
+const TREE_CSS_VARS = {
+  Pyrokinetic: '--color-fire',
+  Aerotheurge: '--color-air',
+  Geomancer: '--color-earth',
+  Hydrosophist: '--color-water',
+  Summoning: '--color-summoning',
+  Necromancer: '--color-necromancer',
+  Warfare: '--color-warfare',
+  Huntsman: '--color-huntsman',
+  Scoundrel: '--color-scoundrel',
+  Polymorph: '--color-polymorph'
 };
 
-const ALL_TREE_COLORS = {
-  Pyrokinetic: '#e74c3c',
-  Aerotheurge: '#3498db',
-  Geomancer: '#27ae60',
-  Hydrosophist: '#16a085',
-  Summoning: '#9b59b6',
-  Necromancer: '#a64d79',
-  Warfare: '#c0392b',
-  Huntsman: '#558b2f',
-  Scoundrel: '#6c757d',
-  Polymorph: '#f39c12'
-};
+function loadTreeColors() {
+  const colors = {};
+  Object.entries(TREE_CSS_VARS).forEach(([name, cssVar]) => {
+    colors[name] = getCSSColor(cssVar);
+  });
+  return colors;
+}
+
+// Initialized after DOM ready (see initialize())
+let ELEMENT_COLORS = {};
+let ALL_TREE_COLORS = {};
 
 // Tree name constants
 const SUMMONING = 'Summoning';
@@ -613,6 +622,16 @@ function initializeFilterBar() {
  */
 async function initialize() {
   try {
+    // Load colors from CSS custom properties
+    ALL_TREE_COLORS = loadTreeColors();
+    ELEMENT_COLORS = {
+      Pyrokinetic: ALL_TREE_COLORS.Pyrokinetic,
+      Aerotheurge: ALL_TREE_COLORS.Aerotheurge,
+      Geomancer: ALL_TREE_COLORS.Geomancer,
+      Hydrosophist: ALL_TREE_COLORS.Hydrosophist,
+      Summoning: ALL_TREE_COLORS.Summoning
+    };
+
     // Fetch and parse YAML data
     const response = await fetch('data/skills.yaml');
     const yamlText = await response.text();
