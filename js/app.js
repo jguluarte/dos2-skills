@@ -611,8 +611,13 @@ function initializeFilterBar() {
 /**
  * Load skills data and initialize app
  */
-function initialize() {
+async function initialize() {
   try {
+    // Fetch and parse YAML data
+    const response = await fetch('data/skills.yaml');
+    const yamlText = await response.text();
+    const SKILLS_DATA = jsyaml.load(yamlText);
+
     // Transform data structure to match what we need
     skillsData = {
       Summoning: [],
