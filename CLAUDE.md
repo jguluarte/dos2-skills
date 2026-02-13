@@ -25,9 +25,29 @@ Press `Ctrl+C` to stop the server.
 
 ## Deployment
 
-- Push to `main` branch
-- GitHub Pages auto-deploys
-- Live at: https://jguluarte.github.io/dos2-skills
+### Manual Deployment
+
+```bash
+make deploy   # Builds + commits + pushes to main
+```
+
+This will:
+1. Run `build.sh` to add CSS cache-busting hash
+2. Commit the updated `index.html`
+3. Push to `main` branch
+4. GitHub Pages auto-deploys
+
+### Manual Build (without deploy)
+
+```bash
+make build    # Just updates CSS hash in index.html
+```
+
+**Live site:** https://jguluarte.github.io/dos2-skills
+
+### Cache Busting
+
+The build script adds a hash to the CSS file URL (e.g., `styles.css?v=58a6b505`). The hash is based on the CSS file's SHA256, so it only changes when the CSS content changes. This prevents browser caching issues on mobile.
 
 ## Agent Workflow Notes
 

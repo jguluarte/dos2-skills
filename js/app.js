@@ -558,35 +558,14 @@ function initializeFilterBar() {
   const clearBtn = document.getElementById('clear-btn');
   const closeBtn = document.getElementById('close-btn');
 
-  let scrollPosition = 0;
-
   function closeFilters() {
     filterContent.classList.remove('expanded');
     filterOverlay.classList.remove('visible');
-
-    // Restore scroll on mobile
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    document.body.style.paddingRight = '';
-    window.scrollTo(0, scrollPosition);
   }
 
   function openFilters() {
     filterContent.classList.add('expanded');
     filterOverlay.classList.add('visible');
-
-    // Save current scroll position
-    scrollPosition = window.scrollY;
-
-    // Prevent scroll on mobile (position: fixed)
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollPosition}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
   }
 
   // Toggle filters (CSS controls mobile vs desktop behavior)
