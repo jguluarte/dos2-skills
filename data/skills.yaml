@@ -49,7 +49,7 @@
     range: Self
     cooldown: 5
     effect: >
-      Receive Sparkstriker status. This causes your melee attacks to create
+      Receive <status>Sparkstriker</status> status. This causes your melee attacks to create
       a spark projectile that bounces off the initial target to hit the
       closest enemy.
 
@@ -76,10 +76,8 @@
     range: 13m
     cooldown: 5
     effect: >
-      Target character and surrounding allies receive Sparkmasterstatus
+      Target character and surrounding allies receive <status>Sparkmaster</status> status
       that adds a chance of fiery sparks to melee attacks.
-    special_terms:
-      - Sparkmaster
 
 - name: Mass Sabotage
   requirements:
@@ -106,10 +104,8 @@
     range: 2m
     cooldown: 5
     effect: >
-      Destroy [110% Int]Physical Armouron target character, and set Acid
+      Destroy [110% Int] Physical Armour on target character, and set <status>Acid</status>
       status.
-    special_terms:
-      - Physical Armour
 
 - name: Oily Carapace
   requirements:
@@ -123,7 +119,7 @@
     cooldown: 3
     effect: >
       Consume oil surfaces around you and convert them to Physical Armour.
-      Removes Slowed.
+      Removes <status>Slowed</status>.
 
 - name: Turn to Oil
   requirements:
@@ -136,11 +132,8 @@
     range: 13m
     cooldown: 4
     effect: >
-      Turn water and blood surfaces into oil. Remove Stun and Shocked from
+      Turn water and blood surfaces into oil. Remove <status>Stun</status> and <status>Shocked</status> from
       characters.
-    special_terms:
-      - Stun
-      - Shocked
 
 - name: Venom Coating
   requirements:
@@ -153,7 +146,7 @@
     range: Self
     cooldown: 5
     effect: >
-      Coat your weapon with poison, adding[X] Poison Damageto your weapon
+      Coat your weapon with poison, adding <poison>[X] Poison Damage</poison> to your weapon
       skills and attacks.
 
 - name: Corrosive Spray
@@ -167,8 +160,8 @@
     range: 7m
     cooldown: 3
     effect: >
-      Destroy [100% Int] Physical Armour on targets in a cone, and set Acid
-      and Atrophy.
+      Destroy [100% Int] Physical Armour on targets in a cone, and set <status>Acid</status>
+      and <status>Atrophy</status>.
 
 - name: Mass Oily Carapace
   requirements:
@@ -195,7 +188,7 @@
     range: Self
     cooldown: 5
     effect: >
-      Allies in range receive Venom Coating, which adds[X] Poison Damageto
+      Allies in range receive Venom Coating, which adds <poison>[X] Poison Damage</poison> to
       weapon skills and attacks.
 
 - name: Healing Tears
@@ -238,16 +231,8 @@
     range: 2m
     cooldown: 5
     effect: >
-      Heal target and create a water puddle beneath them. Remove Burning,
-      Diseased, Decaying Touch, Poisoned, Bleeding, Suffocation and Acid.
-    special_terms:
-      - Burning
-      - Diseased
-      - Decaying Touch
-      - Poisoned
-      - Bleeding
-      - Suffocation
-      - Acid
+      Heal target and create a water puddle beneath them. Remove <status>Burning</status>,
+      <status>Diseased</status>, <status>Decaying Touch</status>, <status>Poisoned</status>, <status>Bleeding</status>, <status>Suffocation</status> and <status>Acid</status>.
 
 - name: Mass Cleanse Wounds
   requirements:
@@ -261,17 +246,8 @@
     cooldown: 5
     effect: >
       Heal yourself and allies around you. Create a water puddle beneath
-      every target. Remove Necrofire, Burning, Diseased, Decaying Touch,
-      Poisoned, Bleeding, Suffocation and Acid.
-    special_terms:
-      - Necrofire
-      - Burning
-      - Diseased
-      - Decaying Touch
-      - Poisoned
-      - Bleeding
-      - Suffocation
-      - Acid
+      every target. Remove <status>Necrofire</status>, <status>Burning</status>, <status>Diseased</status>, <status>Decaying Touch</status>,
+      <status>Poisoned</status>, <status>Bleeding</status>, <status>Suffocation</status> and <status>Acid</status>.
 
 - name: Vampiric Hunger Aura
   requirements:
@@ -300,7 +276,7 @@
     cooldown: 5
     effect: >
       Creates a bubble of clean air around your head, allowing you to
-      ignore effects of cloud surfaces. Immune to suffocation and Silence.
+      ignore effects of cloud surfaces. Immune to <status>Suffocation</status> and <status>Silence</status>.
 
 - name: Vacuum Touch
   requirements:
@@ -312,7 +288,7 @@
     sp_cost: 0
     range: 2m
     cooldown: 5
-    effect: Deal 80% Air Damage. Set Suffocation and Silence on target
+    effect: Deal <air>80% Air Damage</air>. Set <status>Suffocation</status> and <status>Silence</status> on target
 
 - name: Vaporize
   requirements:
@@ -325,11 +301,8 @@
     range: 13m
     cooldown: 4
     effect: >
-      Remove Petrified and Frozen from target character. Vaporise ground
+      Remove <status>Petrified</status> and <status>Frozen</status> from target character. Vaporise ground
       surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
-    special_terms:
-      - Petrified
-      - Frozen
 
 - name: Smoke Cover
   requirements:
@@ -354,8 +327,8 @@
     range: Self
     cooldown: 5
     effect: >
-      Deal 80% Air Damageto enemies in the area. Caster receives an aura
-      that sets Silence and Suffocating on enemies
+      Deal <air>80% Air Damage</air> to enemies in the area. Caster receives an aura
+      that sets <status>Silence</status> and <status>Suffocating</status> on enemies
 
 - name: Mass Breathing Bubbles
   requirements:
@@ -369,8 +342,8 @@
     cooldown: 5
     effect: >
       Set Breathing Bubbles on allies around you, allowing them to ignore
-      effects of cloud surfaces and making them immune to suffocation and
-      Silence.
+      effects of cloud surfaces and making them immune to <status>Suffocation</status> and
+      <status>Silence</status>.
 
 - name: Blessed Smoke Cloud
   requirements:
@@ -453,10 +426,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to electricity, unlocking Electric
-      Discharge.
-    special_terms:
-      - Electric Discharge
+      Change Incarnate's element to electricity, unlocking <aerotheurge>Electric
+      Discharge</aerotheurge>.
 
 - name: Fire Infusion
   requirements:
@@ -468,9 +439,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to fire, unlocking Fireball.
-    special_terms:
-      - Fireball
+    effect: Change Incarnate's element to fire, unlocking <pyro>Fireball</pyro>.
 
 - name: Poison Infusion
   requirements:
@@ -482,9 +451,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to poison, unlocking Poison Dart.
-    special_terms:
-      - Poison Dart
+    effect: Change Incarnate's element to poison, unlocking <poison>Poison Dart</poison>.
 
 - name: Water Infusion
   requirements:
@@ -496,9 +463,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to water, unlocking Restoration.
-    special_terms:
-      - Restoration
+    effect: Change Incarnate's element to water, unlocking <hydro>Restoration</hydro>.
 
 - name: Blood Infusion
   requirements:
@@ -509,9 +474,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to blood, unlocking Mosquito Swarm.
-    special_terms:
-      - Mosquito Swarm.
+    effect: Change Incarnate's element to blood, unlocking <necro>Mosquito Swarm</necro>.
 
 - name: Oil Infusion
   requirements:
@@ -522,9 +485,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to oil, unlocking Fossil Strike.
-    special_terms:
-      - Fossil Strike
+    effect: Change Incarnate's element to oil, unlocking <geo>Fossil Strike</geo>.
 
 - name: Acid Infusion
   requirements:
@@ -537,11 +498,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to acid, unlocking Poison Dart and Acid
-      Spores.
-    special_terms:
-      - Poison Dart
-      - Acid Spores
+      Change Incarnate's element to acid, unlocking <poison>Poison Dart</poison> and <poison>Acid
+      Spores</poison>.
 
 - name: Cursed Electric Infusion
   requirements:
@@ -554,11 +512,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to cursed electricity, unlocking Electric
-      Discharge and Closed Circuit.
-    special_terms:
-      - Electric Discharge
-      - Closed Circuit
+      Change Incarnate's element to cursed electricity, unlocking <aerotheurge>Electric
+      Discharge</aerotheurge> and <aerotheurge>Closed Circuit</aerotheurge>.
 
 - name: Ice Infusion
   requirements:
@@ -571,11 +526,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to blessed ice, unlocking Restoration and
-      Steam Lance.
-    special_terms:
-      - Restoration
-      - Steam Lance
+      Change Incarnate's element to blessed ice, unlocking <hydro>Restoration</hydro> and
+      <hydro>Steam Lance</hydro>.
 
 - name: Necrofire Infusion
   requirements:
@@ -588,11 +540,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to necrofire, unlocking Fireball and
-      Epidemic of Fire.
-    special_terms:
-      - Fireball
-      - Epidemic of Fire
+      Change Incarnate's element to necrofire, unlocking <pyro>Fireball</pyro> and
+      <pyro>Epidemic of Fire</pyro>.
 
 - name: Throw Dust
   requirements:
@@ -605,8 +554,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Throw dust at a character, blinding them and dealing 75% Earth
-      Damage. Clears surfaces and clouds in the area.
+      Throw dust at a character, blinding them and dealing <earth>75% Earth
+      Damage</earth>. Clears surfaces and clouds in the area.
 
 - name: Throw Explosive Trap
   requirements:
@@ -649,8 +598,8 @@
     range: 13m
     cooldown: 4
     effect: >
-      Change Incarnate's element to cursed blood, unlocking Blood Sucker
-      and Bone Cage.
+      Change Incarnate's element to cursed blood, unlocking <necro>Mosquito Swarm</necro>
+      and <necro>Grasp of the Starved</necro>.
 
 - name: Dust Blast
   requirements:
@@ -663,8 +612,8 @@
     range: 13m
     cooldown: 0
     effect: >
-      Throws dust at all enemies in range, blinding them and dealing 100%
-      Earth Damage.
+      Throws dust at all enemies in range, blinding them and dealing <earth>100%
+      Earth Damage</earth>.
 
 - name: Cryotherapy
   requirements:
@@ -678,7 +627,7 @@
     cooldown: 3
     effect: >
       Consume Frozen surfaces around you and convert them to Magic Armour.
-      Removes Burning and Necrofire.
+      Removes <status>Burning</status> and <status>Necrofire</status>.
 
 - name: Mass Cryotherapy
   requirements:
