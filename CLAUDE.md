@@ -6,27 +6,16 @@
 
 ### Starting the Dev Server
 
-Before testing locally, always start the server:
+Use the Makefile commands:
 
 ```bash
-python3 -m http.server 8000
+make start   # Start dev server (takes over terminal)
+make kill    # Kill any hanging processes on port 8000
 ```
 
 Then visit: `http://localhost:8000`
 
-### Stopping the Server
-
-When done:
-- Press `Ctrl+C` in the terminal, OR
-- Run task: **Terminal → Run Task → Stop Dev Server**, OR
-- Close VSCode (terminals auto-close)
-
-The server will also auto-cleanup on exit.
-
-### VSCode Shortcuts
-
-- **Start**: `Cmd+Shift+B` (Mac) / `Ctrl+Shift+B` (Windows/Linux)
-- **Stop**: Terminal → Run Task → Stop Dev Server
+Press `Ctrl+C` to stop the server.
 
 ## Data Editing
 
@@ -39,3 +28,10 @@ The server will also auto-cleanup on exit.
 - Push to `main` branch
 - GitHub Pages auto-deploys
 - Live at: https://jguluarte.github.io/dos2-skills
+
+## Agent Workflow Notes
+
+- **User prefers to review diffs manually in shell** - don't show long diffs unless asked
+- VSCode plugin doesn't allow agents to act without inputs (requires manual approval)
+- Current workaround: Using Claude.ai web interface for more autonomous workflow
+- Branch context may not update correctly in conversation UI
