@@ -260,10 +260,6 @@ skill-tree {
   margin-bottom: 20px;
 }
 
-skill-tree.hidden {
-  display: none;
-}
-
 tree-header {
   display: flex;
   align-items: center;
@@ -274,6 +270,8 @@ tree-header {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   margin-bottom: 10px;
+  border-left: 4px solid;
+  color: inherit;
 }
 
 element-icon {
@@ -281,47 +279,24 @@ element-icon {
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  background-color: currentColor;
 }
 
-/* Tree-specific colors for headers and icons */
-skill-tree[type="pyrokinetic"] tree-header {
-  border-left: 4px solid var(--color-fire);
+/* Tree-specific colors */
+skill-tree[type="pyrokinetic"] {
   color: var(--color-fire);
 }
-skill-tree[type="pyrokinetic"] element-icon {
-  background-color: var(--color-fire);
-}
-
-skill-tree[type="aerotheurge"] tree-header {
-  border-left: 4px solid var(--color-air);
+skill-tree[type="aerotheurge"] {
   color: var(--color-air);
 }
-skill-tree[type="aerotheurge"] element-icon {
-  background-color: var(--color-air);
-}
-
-skill-tree[type="geomancer"] tree-header {
-  border-left: 4px solid var(--color-earth);
+skill-tree[type="geomancer"] {
   color: var(--color-earth);
 }
-skill-tree[type="geomancer"] element-icon {
-  background-color: var(--color-earth);
-}
-
-skill-tree[type="hydrosophist"] tree-header {
-  border-left: 4px solid var(--color-water);
+skill-tree[type="hydrosophist"] {
   color: var(--color-water);
 }
-skill-tree[type="hydrosophist"] element-icon {
-  background-color: var(--color-water);
-}
-
-skill-tree[type="summoning"] tree-header {
-  border-left: 4px solid var(--color-summoning);
+skill-tree[type="summoning"] {
   color: var(--color-summoning);
-}
-skill-tree[type="summoning"] element-icon {
-  background-color: var(--color-summoning);
 }
 
 /* ===========================
@@ -334,28 +309,7 @@ skill-card {
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 10px;
-  border-left: 4px solid;
-}
-
-skill-card.hidden {
-  display: none;
-}
-
-/* Border colors by parent tree */
-skill-tree[type="pyrokinetic"] skill-card {
-  border-left-color: var(--color-fire);
-}
-skill-tree[type="aerotheurge"] skill-card {
-  border-left-color: var(--color-air);
-}
-skill-tree[type="geomancer"] skill-card {
-  border-left-color: var(--color-earth);
-}
-skill-tree[type="hydrosophist"] skill-card {
-  border-left-color: var(--color-water);
-}
-skill-tree[type="summoning"] skill-card {
-  border-left-color: var(--color-summoning);
+  border-left: 4px solid currentColor;
 }
 
 skill-header {
@@ -603,6 +557,9 @@ skill-stats {
   opacity: 0.7;
 }
 
+/* Hidden elements */
+skill-tree.hidden,
+skill-card.hidden,
 .no-results.hidden {
   display: none;
 }
