@@ -527,15 +527,8 @@ function applyFilters() {
 
   noResultsEl.classList.toggle('hidden', totalVisible > 0);
 
-  // Scroll to top only if current scroll position is past the visible content
-  // This prevents weird states when content disappears beneath you
-  const currentScrollY = window.scrollY;
-  const documentHeight = document.documentElement.scrollHeight;
-  const windowHeight = window.innerHeight;
-
-  if (currentScrollY + windowHeight > documentHeight) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // Always scroll to top when filters change (standard pattern)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /**
