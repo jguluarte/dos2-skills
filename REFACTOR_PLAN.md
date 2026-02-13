@@ -1,110 +1,115 @@
-# CSS/JS/YAML Refactor Plan
+# DOS2 Skills - Development Status & Next Steps
 
-## Current State (Completed in this session)
+## ✅ Completed This Session
 
-### ✅ CSS Color System Refactor
-- Added CSS custom properties for all colors in `:root`
+### Semantic HTML Tag System
+- **NEW**: Replaced verbose `<ability type="fire">` with clean semantic tags
+  - Ability tags: `<pyro>`, `<aerotheurge>`, `<geo>`, `<hydro>`, `<necro>`
+  - Damage type tags: `<fire>`, `<air>`, `<earth>`, `<water>`, `<poison>`
+  - Status tags: `<status>` (simple, no type attributes)
+- Removed all `special_terms` sections from YAML (redundant with semantic tags)
+- Removed all `type` attributes from `<status>` tags
+- Fixed ability vs status distinction (Venom Coating, Breathing Bubbles)
+
+### CSS Color System & Layered Styling
+- Added CSS custom properties in `:root` for all colors
 - Element colors: fire, air, earth, water, poison
-- Skill tree colors: all 10 trees (pyrokinetic, aerotheurge, geomancer, hydrosophist, summoning, necromancer, warfare, huntsman, scoundrel, polymorph)
-- Skill trees that share element colors use `var(--color-element)` references
-- Consolidated selectors work with tags, classes, AND type attributes
-- Removed 89 lines of duplicated CSS
+- Skill tree colors: all 10 trees with `var()` references for DRY
+- **Layered CSS approach** for separation of concerns:
+  - Layer 1: Colors (damage types + abilities + skill trees)
+  - Layer 2: Underline dotted (statuses + abilities)
+  - Layer 3: Bold 600 (abilities only)
+  - Layer 4: Italics (statuses only)
+- Formatted for 80-char line length readability
 
-### ✅ Typography Variable
-- Added `--bold: 600` variable (needs to be added - currently still using hardcoded 600)
+### Dark Mode Theme
+- Dark background gradient: `#0a0e1a` to `#1a1f35`
+- Reduced opacity on UI elements (cards, headers, filter bar)
+- Cohesive dark theme throughout
 
-### ✅ YAML Ability Type Markup
-- Fixed missing type attributes on dual-element summoning abilities
-- Changed `.necro` to `.necromancer` for consistency
-- All infusion abilities now properly typed:
-  - Oil → earth
-  - Water → water
-  - Blood → necromancer
-  - Ice (both abilities) → water
-  - Necrofire (both abilities) → fire
-  - Cursed Blood → necromancer (both abilities)
-- Fixed Cursed Blood Infusion ability names
+### Mobile Fixes
+- Fixed scroll prevention on iOS/mobile using `position: fixed`
+- Properly save/restore scroll position when filter opens/closes
+- Overlay tap now works to close filters
 
-### ✅ Dev Tooling
-- Created Makefile with `make start` (foreground server) and `make kill` (cleanup port)
+### Developer Experience
+- **Makefile**: `make start` (foreground server), `make kill` (cleanup port)
+- Clean worktree management
+- Updated colors to match game UI better:
+  - Air: `#66d9ff` (electric cyan)
+  - Water: `#1e90ff` (dodger blue)
+  - Warfare: `#be590d` (distinct from pyro/necro)
 
-## Next Phase: Move Styling Logic from JS to CSS
+## 📋 Next Phase: Move Styling Logic from JS to CSS
 
-### Current Problems
-The JS is doing too much styling work that could be declarative CSS:
+### Current State
+The JS still does styling work that should be declarative CSS:
 
-1. **Colors being read from CSS then applied via JS**
+1. **Colors Applied via JS**
    - `loadTreeColors()` reads CSS variables
-   - JS then applies these colors to DOM elements dynamically
-   - **Solution**: Use data attributes + CSS selectors instead
+   - JS applies these to DOM elements dynamically
+   - **Goal**: Use `data-tree` attributes + CSS selectors
 
 2. **Card Border Colors**
-   - Likely set via JS based on skill tree
-   - **Solution**: Add `data-tree="pyrokinetic"` to cards, style with CSS
+   - Set via JS based on skill tree
+   - **Goal**: `.skill-card[data-tree="pyrokinetic"] { border-left-color: var(--color-pyrokinetic); }`
 
 3. **Element Icons**
-   - Colors/styling probably set via JS
-   - **Solution**: Use CSS with `[data-tree]` or class selectors
+   - Colors/styling set via JS
+   - **Goal**: CSS with `[data-tree]` selectors
 
 4. **Filter Button States**
-   - Active/disabled states might be JS-driven
-   - **Solution**: CSS classes + `:disabled` pseudo-class
+   - May have JS-driven styling
+   - **Goal**: Pure CSS with `:disabled`, `.active` classes
 
-### Proposed Refactor Strategy
+### Strategy for Next Agent
 
-#### Phase 1: Audit Current JS Styling
-- [ ] Identify all places in `js/app.js` where:
-  - Colors are being applied
-  - Classes are being toggled for styling (not state)
-  - Inline styles are being set
-  - DOM manipulation is done for visual purposes
+#### Step 1: Audit JS Styling
+Search `js/app.js` for:
+- `.style.color =`
+- `.style.backgroundColor =`
+- `.style.borderColor =`
+- Dynamic class toggling for visual purposes only
 
-#### Phase 2: Add Data Attributes to HTML
-- [ ] Add `data-tree="treename"` to skill cards
-- [ ] Add `data-element="element"` where applicable
-- [ ] Add `data-type="type"` to abilities/status effects (or use existing type attributes)
+#### Step 2: Add Data Attributes
+- Add `data-tree="pyrokinetic"` to skill cards during render
+- Add `data-element="fire"` to element headers
+- Use these for CSS targeting instead of JS manipulation
 
-#### Phase 3: Create CSS Selectors
-Replace JS-driven styling with CSS like:
+#### Step 3: CSS Selectors Replace JS
 ```css
-.skill-card[data-tree="pyrokinetic"] {
-  border-left-color: var(--color-pyrokinetic);
-}
+/* Card borders by tree */
+.skill-card[data-tree="pyrokinetic"] { border-left-color: var(--color-fire); }
+.skill-card[data-tree="aerotheurge"] { border-left-color: var(--color-air); }
 
-.element-icon[data-tree="aerotheurge"] {
-  background-color: var(--color-aerotheurge);
-}
+/* Element icons */
+.element-icon[data-element="fire"] { background-color: var(--color-fire); }
 ```
 
-#### Phase 4: Simplify JS
-- [ ] Remove `loadTreeColors()` and `ALL_TREE_COLORS` mapping
-- [ ] Remove direct color manipulation
-- [ ] Keep only behavioral JS (filtering, interactions, data loading)
-
-#### Phase 5: Enhance with HTML5 Semantic Elements
-Consider using semantic HTML5 elements with custom styling:
-- `<article>` for skill cards
-- `<data>` for stats/values with value attributes
-- `<mark>` for highlighted terms
-- Custom elements if needed
+#### Step 4: Simplify JS
+- Remove `loadTreeColors()` and `ALL_TREE_COLORS` mapping
+- Remove direct style manipulation
+- Keep only behavioral JS (filtering, data loading, interactions)
 
 ### Benefits
-- Single source of truth for all styling (CSS)
-- Easier to theme/modify colors
-- Better separation of concerns
-- Potentially smaller JS bundle
-- CSS can be cached separately
+- ✅ Single source of truth for styling (CSS)
+- ✅ Easier to theme/modify
+- ✅ Better separation of concerns
+- ✅ Smaller JS bundle
+- ✅ Better caching
 
-### TODO for Next Agent
-1. Add `--bold` variable to CSS and replace all hardcoded `600`
-2. Complete the audit of JS styling logic
-3. Plan data attribute schema
-4. Implement CSS-based styling
-5. Remove redundant JS code
+## 🐛 Known Issues
+None! Mobile scroll fix was the last one.
 
-## Files Modified This Session
-- `css/styles.css` - Color variables, consolidated selectors
-- `js/app.js` - Color loading from CSS
-- `data/skills.yaml` - Ability type attributes
-- `Makefile` - Dev server commands
+## 📁 Files Modified
+- `css/styles.css` - Color system, layered styling, dark mode, formatting
+- `js/app.js` - Mobile scroll fix, color loading (to be simplified next)
+- `data/skills.yaml` - Semantic tags, removed special_terms, status cleanup
+- `Makefile` - Dev commands
 - `TODO.md` - Workflow notes
+- `REFACTOR_PLAN.md` - This file
+
+## 🔄 Branch Status
+- **Current**: `claude/romantic-bhaskara`
+- **Merged from**: `claude/charming-rubin` (dark mode + status tags)
+- **Ready for**: Merge to main or continue with JS-to-CSS migration
