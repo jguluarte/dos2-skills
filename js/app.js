@@ -40,40 +40,8 @@
  */
 
 // ===========================
-// Color Schemes (read from CSS custom properties)
-// ===========================
-
-function getCSSColor(varName) {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-}
-
-// Map tree display names to CSS variable names
-const TREE_CSS_VARS = {
-  Pyrokinetic: '--color-fire',
-  Aerotheurge: '--color-air',
-  Geomancer: '--color-earth',
-  Hydrosophist: '--color-water',
-  Summoning: '--color-summoning',
-  Necromancer: '--color-necromancer',
-  Warfare: '--color-warfare',
-  Huntsman: '--color-huntsman',
-  Scoundrel: '--color-scoundrel',
-  Polymorph: '--color-polymorph'
-};
-
-function loadTreeColors() {
-  const colors = {};
-  Object.entries(TREE_CSS_VARS).forEach(([name, cssVar]) => {
-    colors[name] = getCSSColor(cssVar);
-  });
-  return colors;
-}
-
-// Initialized after DOM ready (see initialize())
-let ELEMENT_COLORS = {};
-let ALL_TREE_COLORS = {};
-
 // Tree name constants
+// ===========================
 const SUMMONING = 'Summoning';
 const PYROKINETIC = 'Pyrokinetic';
 const AEROTHEURGE = 'Aerotheurge';
@@ -388,17 +356,14 @@ function renderSkills() {
       return spA - spB;
     });
 
-    const section = document.createElement('div');
-    section.className = 'element-section';
-    section.dataset.category = category;
+    const section = document.createElement('skill-tree');
+    section.setAttribute('type', category.toLowerCase());
 
     // Category header
-    const header = document.createElement('div');
-    header.className = 'element-header';
-    header.dataset.tree = category.toLowerCase();
+    const header = document.createElement('tree-header');
     header.innerHTML = `
-      <span class="element-icon" data-tree="${category.toLowerCase()}"></span>
-      <span data-tree="${category.toLowerCase()}">${category.toUpperCase()}</span>
+      <element-icon></element-icon>
+      ${category.toUpperCase()}
     `;
     section.appendChild(header);
 
@@ -416,13 +381,11 @@ function renderSkills() {
  * Create a skill card element
  */
 function createSkillCard(skill, category) {
-  const card = document.createElement('div');
-  card.className = 'skill-card';
-  card.dataset.skillName = skill.name.toLowerCase();
+  const card = document.createElement('skill-card');
+  card.dataset.name = skill.name.toLowerCase();
 
   const trees = Object.keys(skill.requirements);
   card.dataset.trees = trees.join(',');
-  card.dataset.tree = category.toLowerCase();
 
   // Get secondary tree for data attributes
   const secondaryTree = getSecondaryTree(trees, category);
@@ -439,30 +402,32 @@ function createSkillCard(skill, category) {
          ${skill.name}
        </span>`;
 
+  const nameElement = `<skill-name>${nameHTML}</skill-name>`;
+
   // Cost icons
   let costHTML = '';
   if (skill.ability_details) {
     const icons = [];
     const sp = Math.min(skill.ability_details.sp_cost || 0, 3);
     if (sp > 0) {
-      icons.push(`<span title="${sp} Source">${'<span class="source-icon"></span>'.repeat(sp)}</span>`);
+      icons.push(`<span title="${sp} Source">${'<source-icon></source-icon>'.repeat(sp)}</span>`);
     }
     const ap = Math.min(skill.ability_details.ap_cost || 0, 4);
     if (ap > 0) {
-      icons.push(`<span title="${ap} AP">${'<span class="ap-icon"></span>'.repeat(ap)}</span>`);
+      icons.push(`<span title="${ap} AP">${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
     }
     if (icons.length > 0) {
-      costHTML = `<div class="skill-cost">${icons.join('')}</div>`;
+      costHTML = `<skill-cost>${icons.join('')}</skill-cost>`;
     }
   }
 
   // Effect description
   let effectHTML = '';
   if (skill.ability_details?.effect) {
-    const effectClass = skill.ability_details.missing ? 'skill-effect missing' : 'skill-effect';
-    effectHTML = `<div class="${effectClass}">
+    const missingAttr = skill.ability_details.missing ? ' data-missing="true"' : '';
+    effectHTML = `<skill-effect${missingAttr}>
       ${highlightSpecialTerms(skill.ability_details.effect, skill.ability_details.special_terms || [])}
-    </div>`;
+    </skill-effect>`;
   }
 
   // Requirements badges - partner skill first, then primary category
@@ -474,9 +439,11 @@ function createSkillCard(skill, category) {
       return 0;
     })
     .map(([tree, level]) => {
-      return `<span class="req-badge" data-tree="${tree.toLowerCase()}">${tree} ${level}</span>`;
+      return `<req-badge data-tree="${tree.toLowerCase()}">${tree} ${level}</req-badge>`;
     })
     .join('');
+
+  const requirementsHTML = reqBadges ? `<skill-requirements>${reqBadges}</skill-requirements>` : '';
 
   // Stats (range/cooldown)
   let statsHTML = '';
@@ -487,21 +454,21 @@ function createSkillCard(skill, category) {
       const rangeHTML = hasRange ? `Range: ${skill.ability_details.range}` : '';
       const cooldownHTML = hasCooldown ? `Cooldown: ${skill.ability_details.cooldown}` : '';
       statsHTML = `
-        <div class="skill-stats">
+        <skill-stats>
           <div>${rangeHTML}</div>
           <div>${cooldownHTML}</div>
-        </div>
+        </skill-stats>
       `;
     }
   }
 
   card.innerHTML = `
-    <div class="skill-header">
-      <div class="skill-name">${nameHTML}</div>
+    <skill-header>
+      ${nameElement}
       ${costHTML}
-    </div>
+    </skill-header>
     ${effectHTML}
-    <div class="skill-requirements">${reqBadges}</div>
+    ${requirementsHTML}
     ${statsHTML}
   `;
 
@@ -512,12 +479,12 @@ function createSkillCard(skill, category) {
  * Apply current filters to skill cards
  */
 function applyFilters() {
-  const sections = document.querySelectorAll('.element-section');
+  const sections = document.querySelectorAll('skill-tree');
   const noResultsEl = document.getElementById('no-results');
   let totalVisible = 0;
 
   sections.forEach(section => {
-    const cards = section.querySelectorAll('.skill-card');
+    const cards = section.querySelectorAll('skill-card');
     let visibleInSection = 0;
 
     cards.forEach(card => {
@@ -655,16 +622,6 @@ function initializeFilterBar() {
  */
 async function initialize() {
   try {
-    // Load colors from CSS custom properties
-    ALL_TREE_COLORS = loadTreeColors();
-    ELEMENT_COLORS = {
-      Pyrokinetic: ALL_TREE_COLORS.Pyrokinetic,
-      Aerotheurge: ALL_TREE_COLORS.Aerotheurge,
-      Geomancer: ALL_TREE_COLORS.Geomancer,
-      Hydrosophist: ALL_TREE_COLORS.Hydrosophist,
-      Summoning: ALL_TREE_COLORS.Summoning
-    };
-
     // Fetch and parse YAML data
     const response = await fetch('data/skills.yaml');
     const yamlText = await response.text();
@@ -680,6 +637,8 @@ async function initialize() {
     };
 
     // Group skills by primary element
+    const elementTrees = ['Pyrokinetic', 'Aerotheurge', 'Geomancer', 'Hydrosophist'];
+
     SKILLS_DATA.forEach(skill => {
       const trees = Object.keys(skill.requirements);
 
@@ -689,7 +648,7 @@ async function initialize() {
       }
       // Otherwise, find which element tree it belongs to
       else {
-        const elementTree = trees.find(t => ELEMENT_COLORS[t]);
+        const elementTree = trees.find(t => elementTrees.includes(t));
         if (elementTree) {
           skillsData[elementTree].push(skill);
         }
