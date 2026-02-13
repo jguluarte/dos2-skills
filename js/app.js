@@ -1,6 +1,42 @@
 /**
  * DOS2 Cross-Skills Lookup Tool
  * Interactive skill filter and display for Divinity Original Sin 2 cross-class abilities
+ *
+ * Custom Element Structure:
+ * ------------------------
+ * <skill-tree type="pyrokinetic">
+ *   <tree-header>
+ *     <element-icon></element-icon>
+ *     PYROKINETIC
+ *   </tree-header>
+ *   <skill-card data-trees="pyrokinetic,warfare" data-name="sparking-swings">
+ *     <skill-header>
+ *       <skill-name>
+ *         <a href="..." data-primary-tree="pyrokinetic" data-secondary-tree="warfare">
+ *           Sparking Swings
+ *         </a>
+ *       </skill-name>
+ *       <skill-cost>
+ *         <ap-icon></ap-icon><ap-icon></ap-icon>
+ *       </skill-cost>
+ *     </skill-header>
+ *     <skill-effect>Deals fire damage...</skill-effect>
+ *     <skill-requirements>
+ *       <req-badge data-tree="warfare">Warfare 1</req-badge>
+ *       <req-badge data-tree="pyrokinetic">Pyrokinetic 1</req-badge>
+ *     </skill-requirements>
+ *     <skill-stats>
+ *       <div>Range: 2m</div>
+ *       <div>Cooldown: 3</div>
+ *     </skill-stats>
+ *   </skill-card>
+ * </skill-tree>
+ *
+ * Styling Approach:
+ * - All colors defined in CSS via custom properties (--color-fire, etc)
+ * - Element styling via attribute selectors: skill-card[data-trees*="pyrokinetic"]
+ * - No inline styles or JS color manipulation
+ * - JS handles only data and interaction logic
  */
 
 // ===========================
@@ -359,10 +395,10 @@ function renderSkills() {
     // Category header
     const header = document.createElement('div');
     header.className = 'element-header';
-    header.style.borderLeft = `4px solid ${ELEMENT_COLORS[category]}`;
+    header.dataset.tree = category.toLowerCase();
     header.innerHTML = `
-      <span class="element-icon" style="background-color: ${ELEMENT_COLORS[category]}"></span>
-      <span style="color: ${ELEMENT_COLORS[category]}">${category.toUpperCase()}</span>
+      <span class="element-icon" data-tree="${category.toLowerCase()}"></span>
+      <span data-tree="${category.toLowerCase()}">${category.toUpperCase()}</span>
     `;
     section.appendChild(header);
 
@@ -386,20 +422,22 @@ function createSkillCard(skill, category) {
 
   const trees = Object.keys(skill.requirements);
   card.dataset.trees = trees.join(',');
-  card.style.borderLeftColor = ELEMENT_COLORS[category];
+  card.dataset.tree = category.toLowerCase();
 
-  // Color scheme: secondary tree for name, primary category for underline
-  const primaryColor = ELEMENT_COLORS[category];
+  // Get secondary tree for data attributes
   const secondaryTree = getSecondaryTree(trees, category);
-  const secondaryColor = secondaryTree ? ALL_TREE_COLORS[secondaryTree] : primaryColor;
 
   // Skill name
   const nameHTML = skill.wiki_url
     ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener"
-         style="color: ${secondaryColor}; text-decoration-color: ${primaryColor};">
+         data-primary-tree="${category.toLowerCase()}"
+         data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">
          ${skill.name}
        </a>`
-    : `<span style="color: ${secondaryColor};">${skill.name}</span>`;
+    : `<span data-primary-tree="${category.toLowerCase()}"
+         data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">
+         ${skill.name}
+       </span>`;
 
   // Cost icons
   let costHTML = '';
@@ -436,8 +474,7 @@ function createSkillCard(skill, category) {
       return 0;
     })
     .map(([tree, level]) => {
-      const color = ALL_TREE_COLORS[tree] || '#666';
-      return `<span class="req-badge" style="color: ${color}aa;">${tree} ${level}</span>`;
+      return `<span class="req-badge" data-tree="${tree.toLowerCase()}">${tree} ${level}</span>`;
     })
     .join('');
 
