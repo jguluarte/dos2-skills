@@ -49,9 +49,9 @@
     range: Self
     cooldown: 5
     effect: >
-      Receive <status>Sparkstriker</status> status. This causes your melee attacks to create
-      a spark projectile that bounces off the initial target to hit the
-      closest enemy.
+      Receive <status>Sparkstriker</status> status. This causes your melee
+      attacks to create a spark projectile that bounces off the initial target
+      to hit the closest enemy.
 
 - name: Mass Corpse Explosion
   requirements:
@@ -76,8 +76,8 @@
     range: 13m
     cooldown: 5
     effect: >
-      Target character and surrounding allies receive <status>Sparkmaster</status> status
-      that adds a chance of fiery sparks to melee attacks.
+      Target character and surrounding allies receive <status>Sparkmaster</status>
+      status that adds a chance of fiery sparks to melee attacks.
 
 - name: Mass Sabotage
   requirements:
@@ -104,8 +104,8 @@
     range: 2m
     cooldown: 5
     effect: >
-      Destroy [110% Int] Physical Armour on target character, and set <status>Acid</status>
-      status.
+      Destroy [110% Int] Physical Armour on target character, and set
+      <status>Acid</status> status.
 
 - name: Oily Carapace
   requirements:
@@ -132,8 +132,8 @@
     range: 13m
     cooldown: 4
     effect: >
-      Turn water and blood surfaces into oil. Remove <status>Stun</status> and <status>Shocked</status> from
-      characters.
+      Turn water and blood surfaces into oil. Remove <status>Stun</status> and
+      <status>Shocked</status> from characters.
 
 - name: Venom Coating
   requirements:
@@ -146,8 +146,8 @@
     range: Self
     cooldown: 5
     effect: >
-      Coat your weapon with poison, adding <poison>[X] Poison Damage</poison> to your weapon
-      skills and attacks.
+      Coat your weapon with poison, adding <poison>[X] Poison Damage</poison> to
+      your weapon skills and attacks.
 
 - name: Corrosive Spray
   requirements:
@@ -160,8 +160,8 @@
     range: 7m
     cooldown: 3
     effect: >
-      Destroy [100% Int] Physical Armour on targets in a cone, and set <status>Acid</status>
-      and <status>Atrophy</status>.
+      Destroy [100% Int] Physical Armour on targets in a cone, and set
+      <status>Acid</status> and <status>Atrophy</status>.
 
 - name: Mass Oily Carapace
   requirements:
@@ -174,8 +174,8 @@
     range: Self
     cooldown: 5
     effect: >
-      Each ally consumes oil surfaces around them, converting the oil
-      surfaces to Physical Armour.
+      Each ally consumes oil surfaces around them, converting the oil surfaces
+      to Physical Armour.
 
 - name: Venomous Aura
   requirements:
@@ -188,8 +188,8 @@
     range: Self
     cooldown: 5
     effect: >
-      Allies in range receive Venom Coating, which adds <poison>[X] Poison Damage</poison> to
-      weapon skills and attacks.
+      Allies in range receive Venom Coating, which adds <poison>[X] Poison
+      Damage</poison> to weapon skills and attacks.
 
 - name: Healing Tears
   requirements:
@@ -202,8 +202,8 @@
     range: PB AoE
     cooldown: 5
     effect: >
-      Three healing tears circle around you. Everytime an ally walks into
-      melee range near you, a healing tear bathes them.
+      Three healing tears circle around you. Everytime an ally walks into melee
+      range near you, a healing tear bathes them.
 
 - name: Vampiric Hunger
   requirements:
@@ -231,8 +231,10 @@
     range: 2m
     cooldown: 5
     effect: >
-      Heal target and create a water puddle beneath them. Remove <status>Burning</status>,
-      <status>Diseased</status>, <status>Decaying Touch</status>, <status>Poisoned</status>, <status>Bleeding</status>, <status>Suffocation</status> and <status>Acid</status>.
+      Heal target and create a water puddle beneath them. Remove
+      <status>Burning</status>, <status>Diseased</status>, <status>Decaying
+      Touch</status>, <status>Poisoned</status>, <status>Bleeding</status>,
+      <status>Suffocation</status>, and <status>Acid</status>.
 
 - name: Mass Cleanse Wounds
   requirements:
@@ -245,9 +247,11 @@
     range: PB AoE
     cooldown: 5
     effect: >
-      Heal yourself and allies around you. Create a water puddle beneath
-      every target. Remove <status>Necrofire</status>, <status>Burning</status>, <status>Diseased</status>, <status>Decaying Touch</status>,
-      <status>Poisoned</status>, <status>Bleeding</status>, <status>Suffocation</status> and <status>Acid</status>.
+      Heal yourself and allies around you. Create a water puddle beneath every
+      target. Remove <status>Necrofire</status>, <status>Burning</status>,
+      <status>Diseased</status>, <status>Decaying Touch</status>,
+      <status>Poisoned</status>, <status>Bleeding</status>,
+      <status>Suffocation</status>, and <status>Acid</status>.
 
 - name: Vampiric Hunger Aura
   requirements:
@@ -260,9 +264,9 @@
     range: PB AoE
     cooldown: 5
     effect: >
-      Set Vampiric Hunger Aura on every ally around you, adding 50% Life
-      Steal for 2 turns. Life Steal heals you in proportion to the damage
-      you deal to Vitality.
+      Set Vampiric Hunger Aura on every ally around you, adding 50% Life Steal
+      for 2 turns. Life Steal heals you in proportion to the damage you deal to
+      Vitality.
 
 - name: Breathing Bubble
   requirements:
@@ -275,8 +279,9 @@
     range: PB AoE
     cooldown: 5
     effect: >
-      Creates a bubble of clean air around your head, allowing you to
-      ignore effects of cloud surfaces. Immune to <status>Suffocation</status> and <status>Silence</status>.
+      Creates a bubble of clean air around your head, allowing you to ignore
+      effects of cloud surfaces. Immune to <status>Suffocation</status> and
+      <status>Silence</status>.
 
 - name: Vacuum Touch
   requirements:
@@ -288,7 +293,9 @@
     sp_cost: 0
     range: 2m
     cooldown: 5
-    effect: Deal <air>80% Air Damage</air>. Set <status>Suffocation</status> and <status>Silence</status> on target
+    effect: >
+      Deal <air>80% Air Damage</air>. Set <status>Suffocation</status> and
+      <status>Silence</status> on target
 
 - name: Vaporize
   requirements:
@@ -301,8 +308,9 @@
     range: 13m
     cooldown: 4
     effect: >
-      Remove <status>Petrified</status> and <status>Frozen</status> from target character. Vaporise ground
-      surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
+      Remove <status>Petrified</status> and <status>Frozen</status> from target
+      character. Vaporise ground surfaces into clouds. Does not work on Oil,
+      Ice, or Lava surfaces
 
 - name: Smoke Cover
   requirements:
@@ -327,8 +335,9 @@
     range: Self
     cooldown: 5
     effect: >
-      Deal <air>80% Air Damage</air> to enemies in the area. Caster receives an aura
-      that sets <status>Silence</status> and <status>Suffocating</status> on enemies
+      Deal <air>80% Air Damage</air> to enemies in the area. Caster receives an
+      aura that sets <status>Silence</status> and <status>Suffocating</status>
+      on enemies
 
 - name: Mass Breathing Bubbles
   requirements:
@@ -342,8 +351,8 @@
     cooldown: 5
     effect: >
       Set Breathing Bubbles on allies around you, allowing them to ignore
-      effects of cloud surfaces and making them immune to <status>Suffocation</status> and
-      <status>Silence</status>.
+      effects of cloud surfaces and making them immune to
+      <status>Suffocation</status> and <status>Silence</status>.
 
 - name: Blessed Smoke Cloud
   requirements:
@@ -356,8 +365,7 @@
     range: 13m. Area of Effect:4m radius. Ground-targettable.
     cooldown: 5
     effect: >
-      Conjure a cloud of thick blessed smoke that makes characters
-      invisible.
+      Conjure a cloud of thick blessed smoke that makes characters invisible.
 
 - name: Flaming Skin
   requirements:
@@ -370,8 +378,7 @@
     range: Self
     cooldown: 5
     effect: >
-      You get immunity to fire, but lowered resistance to water. You bleed
-      fire.
+      You get immunity to fire, but lowered resistance to water. You bleed fire.
 
 - name: Icy Skin
   requirements:
@@ -384,8 +391,7 @@
     range: Self
     cooldown: 5
     effect: >
-      You get immunity to water, but lowered resistance to fire. You bleed
-      ice.
+      You get immunity to water, but lowered resistance to fire. You bleed ice.
 
 - name: Poisonous Skin
   requirements:
@@ -398,8 +404,8 @@
     range: Self
     cooldown: 5
     effect: >
-      You get immunity to poison and earth, but lowered resistance to air.
-      You bleed poison.
+      You get immunity to poison and earth, but lowered resistance to air. You
+      bleed poison.
 
 - name: Jellyfish Skin
   requirements:
@@ -439,7 +445,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to fire, unlocking <pyro>Fireball</pyro>.
+    effect: Change Incarnate's element to fire, unlocking <pyro>Fireball</pyro>.
 
 - name: Poison Infusion
   requirements:
@@ -498,8 +504,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to acid, unlocking <poison>Poison Dart</poison> and <poison>Acid
-      Spores</poison>.
+      Change Incarnate's element to acid, unlocking <poison>Poison Dart</poison>
+      and <poison>Acid Spores</poison>.
 
 - name: Cursed Electric Infusion
   requirements:
@@ -512,8 +518,9 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to cursed electricity, unlocking <aerotheurge>Electric
-      Discharge</aerotheurge> and <aerotheurge>Closed Circuit</aerotheurge>.
+      Change Incarnate's element to cursed electricity, unlocking
+      <aerotheurge>Electric Discharge</aerotheurge> and
+      <aerotheurge>Closed Circuit</aerotheurge>.
 
 - name: Ice Infusion
   requirements:
@@ -526,8 +533,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to blessed ice, unlocking <hydro>Restoration</hydro> and
-      <hydro>Steam Lance</hydro>.
+      Change Incarnate's element to blessed ice, unlocking
+      <hydro>Restoration</hydro> and <hydro>Steam Lance</hydro>.
 
 - name: Necrofire Infusion
   requirements:
@@ -540,8 +547,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to necrofire, unlocking <pyro>Fireball</pyro> and
-      <pyro>Epidemic of Fire</pyro>.
+      Change Incarnate's element to necrofire, unlocking <pyro>Fireball</pyro>
+      and <pyro>Epidemic of Fire</pyro>.
 
 - name: Throw Dust
   requirements:
@@ -569,8 +576,7 @@
     cooldown: 3
     effect: >
       Throw an explosive trap at target locations. Trap takes a turn to
-      activate. When active, trap will explode when a character approaches
-      it.
+      activate. When active, trap will explode when a character approaches it.
 
 - name: Deploy Mass Traps
   requirements:
@@ -583,9 +589,8 @@
     range: 13m
     cooldown: 5
     effect: >
-      Throw 4 explosive traps at target locations. Each trap takes a turn
-      to activate. When active, trap will explode when a character
-      approaches it.
+      Throw 4 explosive traps at target locations. Each trap takes a turn to
+      activate. When active, trap will explode when a character approaches it.
 
 - name: Cursed Blood Infusion
   requirements:
@@ -598,8 +603,8 @@
     range: 13m
     cooldown: 4
     effect: >
-      Change Incarnate's element to cursed blood, unlocking <necro>Mosquito Swarm</necro>
-      and <necro>Grasp of the Starved</necro>.
+      Change Incarnate's element to cursed blood, unlocking <necro>Mosquito
+      Swarm</necro> and <necro>Grasp of the Starved</necro>.
 
 - name: Dust Blast
   requirements:
@@ -654,8 +659,8 @@
     range: 13m
     cooldown: 5
     effect: >
-      Cause target character to teleport in a random direction each time
-      they are attacked. Increases Air Resistance by 40%.
+      Cause target character to teleport in a random direction each time they
+      are attacked. Increases Air Resistance by 40%.
 
 - name: Evasive Aura
   requirements:
@@ -668,8 +673,8 @@
     range: Self
     cooldown: 5
     effect: >
-      Your dodging chance and those of allies around you is increased by
-      90% and your Movement Speed is increased by 1m.
+      Your dodging chance and those of allies around you is increased by 90% and
+      your Movement Speed is increased by 1m.
 
 - name: Raining Blood
   requirements:
@@ -694,5 +699,5 @@
     range: 13m
     cooldown: 6
     effect: >
-      Create a massive storm of blood over all targets. Deal physical
-      damage and create blood surfaces.
+      Create a massive storm of blood over all targets. Deal physical damage and
+      create blood surfaces.
