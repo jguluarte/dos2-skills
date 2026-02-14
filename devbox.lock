@@ -1,0 +1,73 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "dart-sass@latest": {
+      "last_modified": "2026-02-04T01:49:30Z",
+      "resolved": "github:NixOS/nixpkgs/aa290c9891fa4ebe88f8889e59633d20cc06a5f2#dart-sass",
+      "source": "devbox-search",
+      "version": "1.97.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8r19h7m5w4646wwfhw616y9hmgxbmxmn-dart-sass-1.97.3",
+              "default": true
+            },
+            {
+              "name": "pubcache",
+              "path": "/nix/store/23qgicclcpjnnsmf5si5wgb6nha131l2-dart-sass-1.97.3-pubcache"
+            }
+          ],
+          "store_path": "/nix/store/8r19h7m5w4646wwfhw616y9hmgxbmxmn-dart-sass-1.97.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9pg20510i6jnqsa5j2q7gv0qjakzsag2-dart-sass-1.97.3",
+              "default": true
+            },
+            {
+              "name": "pubcache",
+              "path": "/nix/store/b2b9qgn111xj6041anah3jyjxy07ijmw-dart-sass-1.97.3-pubcache"
+            }
+          ],
+          "store_path": "/nix/store/9pg20510i6jnqsa5j2q7gv0qjakzsag2-dart-sass-1.97.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/xg547rrlbjq0limvx4f7ndjwqif85323-dart-sass-1.97.3",
+              "default": true
+            },
+            {
+              "name": "pubcache",
+              "path": "/nix/store/xc6azs7h5igr2iql8fpipz0z9r1jpmpi-dart-sass-1.97.3-pubcache"
+            }
+          ],
+          "store_path": "/nix/store/xg547rrlbjq0limvx4f7ndjwqif85323-dart-sass-1.97.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ij89simb27gnyf17x91c0r2132laqxsp-dart-sass-1.97.3",
+              "default": true
+            },
+            {
+              "name": "pubcache",
+              "path": "/nix/store/jxhxn882bmr4a3k57yavjl7210wnh8yx-dart-sass-1.97.3-pubcache"
+            }
+          ],
+          "store_path": "/nix/store/ij89simb27gnyf17x91c0r2132laqxsp-dart-sass-1.97.3"
+        }
+      }
+    },
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-02-11T21:01:36Z",
+      "resolved": "github:NixOS/nixpkgs/2343bbb58f99267223bc2aac4fc9ea301a155a16?lastModified=1770843696&narHash=sha256-LovWTGDwXhkfCOmbgLVA10bvsi%2FP8eDDpRudgk68HA8%3D"
+    }
+  }
+}
