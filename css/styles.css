@@ -37,6 +37,7 @@
 html {
   height: 100%;
   min-height: 100vh;
+  background-color: #0a0e1a;
   background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%);
   background-attachment: fixed;
 }
