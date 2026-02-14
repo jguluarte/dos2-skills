@@ -4,6 +4,8 @@
 
 This project uses **devbox** for sandboxed tooling (no npm/node_modules!). All tools are managed via Nix packages.
 
+**⚠️ Important:** Use regular git branches, not worktrees. Devbox doesn't play well with worktrees.
+
 ### First-Time Setup
 
 ```bash
@@ -17,6 +19,9 @@ cd dos2-skills
 
 The `.envrc` file automatically activates the devbox shell, which provides:
 - `sass` (Dart Sass standalone) for SCSS compilation
+- `python3` for dev server
+- `pre-commit` for git hooks
+- `prettier` and `stylelint` for linting
 
 ## Local Development Workflow
 
@@ -27,32 +32,32 @@ The `.envrc` file automatically activates the devbox shell, which provides:
 Use the Makefile commands:
 
 ```bash
-make start   # Start dev server (takes over terminal)
+make start   # Start SCSS watch + dev server (both in one terminal)
 make kill    # Kill any hanging processes on port 8000
 ```
 
 Then visit: `http://localhost:8000`
 
-Press `Ctrl+C` to stop the server.
+Press `Ctrl+C` to stop both watch and server.
 
 ### CSS Development
 
 Styles are written in **SCSS** (`css/styles.scss`) and compiled to CSS.
 
-**Watch mode (auto-compile on save):**
-```bash
-make watch   # Watches css/styles.scss and auto-compiles on changes
-```
+**Development workflow:**
+- `make start` automatically watches SCSS + starts dev server
+- Edit `css/styles.scss` and see changes on save
+- No separate watch command needed
 
-**Manual compilation:**
+**Manual build:**
 ```bash
 make build   # Compiles SCSS → CSS + updates cache-busting hash
 ```
 
 The build process:
-1. Compiles `css/styles.scss` → `css/styles.css` (compressed, no source maps)
+1. Compiles `css/styles.scss` → `css/styles.css` (compressed)
 2. Calculates SHA256 hash of compiled CSS
-3. Updates `index.html` with versioned CSS URL (e.g., `styles.css?v=3fe493c0`)
+3. Updates `index.html` with versioned CSS URL (e.g., `styles.css?v=c19c24a9`)
 
 ## Data Editing
 
@@ -64,28 +69,14 @@ The build process:
 
 ### Automatic Deployment (Recommended)
 
-A **git pre-push hook** automatically builds CSS when pushing to `main`:
+A **pre-commit framework hook** automatically builds CSS when pushing to `main`:
 
 ```bash
 git push origin main
-# Hook runs automatically:
-# 1. Compiles SCSS → CSS
-# 2. Updates cache-busting hash
-# 3. If index.html changed, push is blocked with instructions to commit it
+# Hook runs automatically via .pre-commit-config.yaml
 ```
 
-If the build modifies `index.html`, you'll see:
-```
-⚠️  Build modified index.html (CSS hash updated)
-   Please review and commit the changes before pushing again.
-```
-
-Then just commit and push again:
-```bash
-git add index.html
-git commit -m "Update CSS cache-busting hash"
-git push
-```
+Hooks are installed automatically on `direnv` load (idempotent).
 
 ### Manual Deployment
 
@@ -106,9 +97,19 @@ This will:
 
 The build script adds a hash to the CSS file URL (e.g., `styles.css?v=3fe493c0`). The hash is based on the compiled CSS file's SHA256, so it only changes when the CSS content actually changes. This prevents browser caching issues on mobile Safari.
 
+## Git Utilities
+
+### Git Walk
+View commits chronologically with full details:
+```bash
+git walk
+```
+
+Shows one commit at a time with visual separators.
+
 ## Agent Workflow Notes
 
 - **User prefers to review diffs manually in shell** - don't show long diffs unless asked
+- **Use branches, not worktrees** - Devbox doesn't work well with worktrees
 - VSCode plugin doesn't allow agents to act without inputs (requires manual approval)
 - Current workaround: Using Claude.ai web interface for more autonomous workflow
-- Branch context may not update correctly in conversation UI
