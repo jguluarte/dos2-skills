@@ -319,13 +319,13 @@ skill-name {
   min-width: 0;
 
   > * {
-    text-decoration-thickness: 2px;
     color: var(--secondary-color, var(--primary-color));
-    text-decoration-color: var(--primary-color);
   }
 
   a {
     text-decoration: underline solid;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--primary-color);
 
     &:hover {
       opacity: 0.8;
@@ -334,6 +334,8 @@ skill-name {
 
   span {
     text-decoration: underline dotted;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--primary-color);
   }
 }
 
