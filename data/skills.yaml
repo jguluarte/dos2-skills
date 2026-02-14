@@ -362,7 +362,7 @@
   ability_details:
     ap_cost: 1
     sp_cost: 2
-    range: 13m. Area of Effect:4m radius. Ground-targettable.
+    range: 13m
     cooldown: 5
     effect: >
       Conjure a cloud of thick blessed smoke that makes characters invisible.
