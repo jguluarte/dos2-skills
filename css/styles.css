@@ -250,6 +250,7 @@ body {
   margin: 0 auto;
   padding: 10px;
   padding-top: 20px;
+  min-height: calc(100vh - 60px);
 }
 
 /* ===========================
