@@ -1,16 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
   "packages": [
-    "dart-sass@latest"
+    "dart-sass@latest",
+    "python312@latest"
   ],
   "shell": {
     "init_hook": [
       "echo 'DevBox environment loaded'",
-      "echo 'Dart Sass: $(sass --version)'"
+      "echo 'Dart Sass: $(sass --version)'",
+      "echo 'Python: $(python3 --version)'"
     ],
     "scripts": {
       "build-css": "sass styles.scss styles.css --style=compressed --no-source-map",
       "watch-css": "sass styles.scss styles.css --watch --style=expanded"
     }
-  },
+  }
 }
