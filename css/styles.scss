@@ -318,15 +318,15 @@ skill-name {
   flex: 1;
   min-width: 0;
 
-  a {
+  > * {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     color: var(--secondary-color, var(--primary-color));
     text-decoration-color: var(--primary-color);
+  }
 
-    &:hover {
-      opacity: 0.8;
-    }
+  a:hover {
+    opacity: 0.8;
   }
 }
 
