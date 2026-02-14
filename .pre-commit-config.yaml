@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: build-css
+        name: Build CSS from SCSS
+        entry: ./build.sh
+        language: system
+        files: ^css/styles\.scss$
+        pass_filenames: false
+        stages: [pre-push]
