@@ -319,14 +319,21 @@ skill-name {
   min-width: 0;
 
   > * {
-    text-decoration: underline;
     text-decoration-thickness: 2px;
     color: var(--secondary-color, var(--primary-color));
     text-decoration-color: var(--primary-color);
   }
 
-  a:hover {
-    opacity: 0.8;
+  a {
+    text-decoration: underline solid;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  span {
+    text-decoration: underline dotted;
   }
 }
 
