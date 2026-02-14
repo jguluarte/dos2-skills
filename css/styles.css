@@ -282,21 +282,26 @@ element-icon {
   background-color: currentColor;
 }
 
-/* Tree-specific colors */
+/* Tree-specific colors - set as CSS variable for children to reference */
 skill-tree[type="pyrokinetic"] {
-  color: var(--color-fire);
+  --primary-color: var(--color-pyrokinetic);
+  color: var(--primary-color);
 }
 skill-tree[type="aerotheurge"] {
-  color: var(--color-air);
+  --primary-color: var(--color-aerotheurge);
+  color: var(--primary-color);
 }
 skill-tree[type="geomancer"] {
-  color: var(--color-earth);
+  --primary-color: var(--color-geomancer);
+  color: var(--primary-color);
 }
 skill-tree[type="hydrosophist"] {
-  color: var(--color-water);
+  --primary-color: var(--color-hydrosophist);
+  color: var(--primary-color);
 }
 skill-tree[type="summoning"] {
-  color: var(--color-summoning);
+  --primary-color: var(--color-summoning);
+  color: var(--primary-color);
 }
 
 /* ===========================
@@ -337,130 +342,21 @@ skill-name a:hover {
   opacity: 0.8;
 }
 
-/* Skill name colors based on primary/secondary trees */
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="pyrokinetic"] {
-  color: var(--color-fire);
-  text-decoration-color: var(--color-fire);
-}
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="warfare"] {
-  color: var(--color-warfare);
-  text-decoration-color: var(--color-fire);
-}
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="huntsman"] {
-  color: var(--color-huntsman);
-  text-decoration-color: var(--color-fire);
-}
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="scoundrel"] {
-  color: var(--color-scoundrel);
-  text-decoration-color: var(--color-fire);
-}
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="polymorph"] {
-  color: var(--color-polymorph);
-  text-decoration-color: var(--color-fire);
-}
-skill-name a[data-primary-tree="pyrokinetic"][data-secondary-tree="necromancer"] {
-  color: var(--color-necromancer);
-  text-decoration-color: var(--color-fire);
-}
+/* Skill name colors: primary from parent, secondary from attribute */
+skill-name[data-secondary-tree="pyrokinetic"]   { --secondary-color: var(--color-pyrokinetic); }
+skill-name[data-secondary-tree="aerotheurge"]   { --secondary-color: var(--color-aerotheurge); }
+skill-name[data-secondary-tree="geomancer"]     { --secondary-color: var(--color-geomancer); }
+skill-name[data-secondary-tree="hydrosophist"]  { --secondary-color: var(--color-hydrosophist); }
+skill-name[data-secondary-tree="summoning"]     { --secondary-color: var(--color-summoning); }
+skill-name[data-secondary-tree="necromancer"]   { --secondary-color: var(--color-necromancer); }
+skill-name[data-secondary-tree="warfare"]       { --secondary-color: var(--color-warfare); }
+skill-name[data-secondary-tree="huntsman"]      { --secondary-color: var(--color-huntsman); }
+skill-name[data-secondary-tree="scoundrel"]     { --secondary-color: var(--color-scoundrel); }
+skill-name[data-secondary-tree="polymorph"]     { --secondary-color: var(--color-polymorph); }
 
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="aerotheurge"] {
-  color: var(--color-air);
-  text-decoration-color: var(--color-air);
-}
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="warfare"] {
-  color: var(--color-warfare);
-  text-decoration-color: var(--color-air);
-}
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="huntsman"] {
-  color: var(--color-huntsman);
-  text-decoration-color: var(--color-air);
-}
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="scoundrel"] {
-  color: var(--color-scoundrel);
-  text-decoration-color: var(--color-air);
-}
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="polymorph"] {
-  color: var(--color-polymorph);
-  text-decoration-color: var(--color-air);
-}
-skill-name a[data-primary-tree="aerotheurge"][data-secondary-tree="necromancer"] {
-  color: var(--color-necromancer);
-  text-decoration-color: var(--color-air);
-}
-
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="geomancer"] {
-  color: var(--color-earth);
-  text-decoration-color: var(--color-earth);
-}
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="warfare"] {
-  color: var(--color-warfare);
-  text-decoration-color: var(--color-earth);
-}
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="huntsman"] {
-  color: var(--color-huntsman);
-  text-decoration-color: var(--color-earth);
-}
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="scoundrel"] {
-  color: var(--color-scoundrel);
-  text-decoration-color: var(--color-earth);
-}
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="polymorph"] {
-  color: var(--color-polymorph);
-  text-decoration-color: var(--color-earth);
-}
-skill-name a[data-primary-tree="geomancer"][data-secondary-tree="necromancer"] {
-  color: var(--color-necromancer);
-  text-decoration-color: var(--color-earth);
-}
-
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="hydrosophist"] {
-  color: var(--color-water);
-  text-decoration-color: var(--color-water);
-}
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="warfare"] {
-  color: var(--color-warfare);
-  text-decoration-color: var(--color-water);
-}
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="huntsman"] {
-  color: var(--color-huntsman);
-  text-decoration-color: var(--color-water);
-}
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="scoundrel"] {
-  color: var(--color-scoundrel);
-  text-decoration-color: var(--color-water);
-}
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="polymorph"] {
-  color: var(--color-polymorph);
-  text-decoration-color: var(--color-water);
-}
-skill-name a[data-primary-tree="hydrosophist"][data-secondary-tree="necromancer"] {
-  color: var(--color-necromancer);
-  text-decoration-color: var(--color-water);
-}
-
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="summoning"] {
-  color: var(--color-summoning);
-  text-decoration-color: var(--color-summoning);
-}
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="pyrokinetic"] {
-  color: var(--color-fire);
-  text-decoration-color: var(--color-summoning);
-}
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="aerotheurge"] {
-  color: var(--color-air);
-  text-decoration-color: var(--color-summoning);
-}
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="geomancer"] {
-  color: var(--color-earth);
-  text-decoration-color: var(--color-summoning);
-}
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="hydrosophist"] {
-  color: var(--color-water);
-  text-decoration-color: var(--color-summoning);
-}
-skill-name a[data-primary-tree="summoning"][data-secondary-tree="necromancer"] {
-  color: var(--color-necromancer);
-  text-decoration-color: var(--color-summoning);
+skill-name a {
+  color: var(--secondary-color, var(--primary-color));
+  text-decoration-color: var(--primary-color);
 }
 
 /* Skill Costs */
