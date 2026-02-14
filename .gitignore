@@ -12,3 +12,4 @@ Thumbs.db
 # Backup Files
 *.bak
 *.tmp
+*.map
