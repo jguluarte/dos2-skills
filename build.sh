@@ -1,7 +1,14 @@
 #!/bin/bash
-# Build script: Add cache-busting hash to CSS
+# Build script: Compile SCSS and add cache-busting hash to CSS
 
 set -e
+
+# Ensure devbox environment is loaded
+eval "$(devbox shellenv)"
+
+# Compile SCSS to CSS
+echo "Compiling SCSS..."
+sass css/styles.scss css/styles.css --style=compressed --no-source-map
 
 # Calculate SHA256 of CSS file (first 8 chars)
 CSS_HASH=$(shasum -a 256 css/styles.css | cut -c1-8)
