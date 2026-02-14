@@ -3,7 +3,9 @@
   "packages": [
     "dart-sass@latest",
     "python312@latest",
-    "pre-commit@latest"
+    "pre-commit@latest",
+    "nodePackages.prettier@latest",
+    "nodePackages.stylelint@latest"
   ],
   "shell": {
     "init_hook": [
