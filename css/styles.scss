@@ -66,10 +66,7 @@ body {
 
 .filter-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgb(0, 0, 0);
   opacity: 0;
   pointer-events: none;
@@ -128,8 +125,7 @@ body {
   align-items: center;
 }
 
-.clear-btn,
-.close-btn {
+%filter-btn {
   padding: 4px 10px;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -142,26 +138,24 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+
+  &:hover { background: rgba(255, 255, 255, 0.25); }
+  &:active { transform: scale(0.95); }
+}
+
+.clear-btn {
+  @extend %filter-btn;
   white-space: nowrap;
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.25);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
+  &.hidden { display: none; }
 }
 
 .close-btn {
+  @extend %filter-btn;
   width: 28px;
   height: 28px;
   padding: 0;
   font-size: 16px;
-  display: none;
-}
-
-.clear-btn.hidden {
   display: none;
 }
 
@@ -179,10 +173,6 @@ body {
 
   &.expanded {
     display: block;
-
-    & ~ .filter-header .close-btn {
-      display: flex;
-    }
   }
 }
 
@@ -555,8 +545,10 @@ status {
 
 // Mobile
 @media (max-width: 768px) {
-  .filter-content.expanded ~ .filter-header .close-btn {
-    display: flex;
+  .filter-content.expanded {
+    & ~ .filter-header .close-btn {
+      display: flex;
+    }
   }
 
   .filter-groups {
