@@ -533,7 +533,7 @@ function initializeFilterBar() {
 
   function openFilters() {
     filterContent.classList.add('expanded');
-    // filterOverlay.classList.add('visible');
+    filterOverlay.classList.add('visible');
   }
 
   // Toggle filters (CSS controls mobile vs desktop behavior)
