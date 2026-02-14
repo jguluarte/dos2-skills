@@ -1,22 +1,18 @@
 # Future Development
 
-## Testing
-- [ ] Add unit tests for filter logic
-- [ ] Add integration tests for skill rendering
-- [ ] Add test runner (Jest, Vitest, or native browser tests)
-- [ ] Consider E2E tests for critical user flows
+## Environment Setup
+- [ ] Set up devbox + direnv for reproducible development environment
+- [ ] Add linting tools (eslint, stylelint, yamllint)
+- [ ] Configure pre-commit hooks
 
 ## Refactoring: JavaScript Architecture
-- [ ] Replace string-based HTML generation with DOM object construction
-- [ ] Break up monolithic app.js into focused modules
-  - Separate concerns: data, rendering, filtering, UI interactions
-- [ ] Create proper abstraction layers for skill card components
-  - `createSkillName()`, `createSkillCost()`, etc. should return DOM elements
-  - Parent functions compose DOM objects, not strings
-- [ ] Consider class-based architecture for skill rendering
+- [ ] Refactor `createSkillCard()` and related functions to use DOM construction instead of string concatenation
+- [ ] Extract pure rendering functions (data in, DOM elements out)
+- [ ] Improve separation of concerns (data, rendering, filtering, UI)
 - [ ] Reduce function complexity and improve testability
 
-## Linting/Formatting
-- [ ] Add CSS/YAML linter (yamllint, stylelint)
-- [ ] Add line length checks (80 chars max)
-- [ ] Consider adding pre-commit hooks
+## Testing
+- [ ] Add test runner and basic test infrastructure
+- [ ] Add unit tests for filter logic
+- [ ] Add integration tests for skill rendering
+- [ ] Consider E2E tests for critical user flows
