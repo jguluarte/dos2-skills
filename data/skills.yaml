@@ -457,7 +457,7 @@
     sp_cost: 0
     range: 13m
     cooldown: 3
-    effect: Change Incarnate's element to poison, unlocking <poison>Poison Dart</poison>.
+    effect: Change Incarnate's element to poison, unlocking <geo-poison>Poison Dart</geo-poison>.
 
 - name: Water Infusion
   requirements:
@@ -504,8 +504,8 @@
     range: 13m
     cooldown: 3
     effect: >
-      Change Incarnate's element to acid, unlocking <poison>Poison Dart</poison>
-      and <poison>Acid Spores</poison>.
+      Change Incarnate's element to acid, unlocking <geo-poison>Poison Dart</geo-poison>
+      and <geo-poison>Acid Spores</geo-poison>.
 
 - name: Cursed Electric Infusion
   requirements:
