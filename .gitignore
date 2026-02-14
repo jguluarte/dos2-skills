@@ -13,3 +13,5 @@ Thumbs.db
 *.bak
 *.tmp
 *.map
+.claude/worktrees/
+*.map
