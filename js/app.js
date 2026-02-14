@@ -359,17 +359,12 @@ function createSkillCard(skill, category) {
 
   // Skill name
   const nameHTML = skill.wiki_url
-    ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener"
-         data-primary-tree="${category.toLowerCase()}"
-         data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">
+    ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener">
          ${skill.name}
        </a>`
-    : `<span data-primary-tree="${category.toLowerCase()}"
-         data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">
-         ${skill.name}
-       </span>`;
+    : `<span>${skill.name}</span>`;
 
-  const nameElement = `<skill-name>${nameHTML}</skill-name>`;
+  const nameElement = `<skill-name data-primary-tree="${category.toLowerCase()}" data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">${nameHTML}</skill-name>`;
 
   // Cost icons
   let costHTML = '';
