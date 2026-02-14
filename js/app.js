@@ -530,7 +530,6 @@ function initializeFilterBar() {
   const filterContent = document.getElementById('filter-content');
   const filterOverlay = document.getElementById('filter-overlay');
   const clearBtn = document.getElementById('clear-btn');
-  const closeBtn = document.getElementById('close-btn');
 
   function closeFilters() {
     filterContent.classList.remove('expanded');
@@ -545,19 +544,12 @@ function initializeFilterBar() {
   // Toggle filters (CSS controls mobile vs desktop behavior)
   filterHeader.addEventListener('click', (e) => {
     if (e.target === clearBtn || clearBtn.contains(e.target)) return;
-    if (e.target === closeBtn || closeBtn.contains(e.target)) return;
 
     if (filterContent.classList.contains('expanded')) {
       closeFilters();
     } else {
       openFilters();
     }
-  });
-
-  // Close button
-  closeBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    closeFilters();
   });
 
   // Overlay touch/click closes filter

@@ -125,7 +125,7 @@ body {
   align-items: center;
 }
 
-%filter-btn {
+.clear-btn {
   padding: 4px 10px;
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -138,25 +138,11 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  white-space: nowrap;
 
   &:hover { background: rgba(255, 255, 255, 0.25); }
   &:active { transform: scale(0.95); }
-}
-
-.clear-btn {
-  @extend %filter-btn;
-  white-space: nowrap;
-
   &.hidden { display: none; }
-}
-
-.close-btn {
-  @extend %filter-btn;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  font-size: 16px;
-  display: none;
 }
 
 // Filter Content
@@ -512,10 +498,6 @@ status {
     display: none;
   }
 
-  .close-btn {
-    display: none !important;
-  }
-
   .filter-content {
     display: block !important;
     position: static;
@@ -545,12 +527,6 @@ status {
 
 // Mobile
 @media (max-width: 768px) {
-  .filter-content.expanded {
-    & ~ .filter-header .close-btn {
-      display: flex;
-    }
-  }
-
   .filter-groups {
     flex-direction: column;
     gap: 15px;
