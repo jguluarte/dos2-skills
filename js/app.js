@@ -2,41 +2,8 @@
  * DOS2 Cross-Skills Lookup Tool
  * Interactive skill filter and display for Divinity Original Sin 2 cross-class abilities
  *
- * Custom Element Structure:
- * ------------------------
- * <skill-tree type="pyrokinetic">
- *   <tree-header>
- *     <element-icon></element-icon>
- *     PYROKINETIC
- *   </tree-header>
- *   <skill-card data-trees="pyrokinetic,warfare" data-name="sparking-swings">
- *     <skill-header>
- *       <skill-name>
- *         <a href="..." data-primary-tree="pyrokinetic" data-secondary-tree="warfare">
- *           Sparking Swings
- *         </a>
- *       </skill-name>
- *       <skill-cost>
- *         <ap-icon></ap-icon><ap-icon></ap-icon>
- *       </skill-cost>
- *     </skill-header>
- *     <skill-effect>Deals fire damage...</skill-effect>
- *     <skill-requirements>
- *       <req-badge data-tree="warfare">Warfare 1</req-badge>
- *       <req-badge data-tree="pyrokinetic">Pyrokinetic 1</req-badge>
- *     </skill-requirements>
- *     <skill-stats>
- *       <div>Range: 2m</div>
- *       <div>Cooldown: 3</div>
- *     </skill-stats>
- *   </skill-card>
- * </skill-tree>
- *
- * Styling Approach:
- * - All colors defined in CSS via custom properties (--color-fire, etc)
- * - Element styling via attribute selectors: skill-card[data-trees*="pyrokinetic"]
- * - No inline styles or JS color manipulation
- * - JS handles only data and interaction logic
+ * Uses custom HTML elements (skill-tree, skill-card, etc.) with CSS-driven styling.
+ * All colors and presentation handled via CSS custom properties and attribute selectors.
  */
 
 // ===========================
