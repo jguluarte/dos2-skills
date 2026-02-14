@@ -60,7 +60,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Corpse+Explosion
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: PB AoE
     cooldown: 2
     effect: Explode all corpses around you, dealing physical damage in the area
@@ -72,7 +72,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: 13m
     cooldown: 5
     effect: >
@@ -86,7 +86,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 1
     range: 13m
     cooldown: 5
     effect: >
@@ -156,7 +156,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 1
     range: 7m
     cooldown: 3
     effect: >
@@ -184,7 +184,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -243,7 +243,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: PB AoE
     cooldown: 5
     effect: >
@@ -260,7 +260,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger+Aura
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: PB AoE
     cooldown: 5
     effect: >
@@ -331,7 +331,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -346,7 +346,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Breathing+Bubbles
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: PB AoE
     cooldown: 5
     effect: >
@@ -374,7 +374,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -387,7 +387,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -400,7 +400,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -414,7 +414,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
   ability_details:
     ap_cost: 1
-    sp_cost: 0
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -585,7 +585,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps
   ability_details:
     ap_cost: 3
-    sp_cost: 0
+    sp_cost: 1
     range: 13m
     cooldown: 5
     effect: >
@@ -598,8 +598,8 @@
     Necromancer: 2
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Blood+Infusion
   ability_details:
-    ap_cost: 2
-    sp_cost: 0
+    ap_cost: 1
+    sp_cost: 2
     range: 13m
     cooldown: 4
     effect: >
@@ -655,7 +655,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp
   ability_details:
     ap_cost: 1
-    sp_cost: 1
+    sp_cost: 0
     range: 13m
     cooldown: 5
     effect: >
@@ -669,7 +669,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura
   ability_details:
     ap_cost: 2
-    sp_cost: 2
+    sp_cost: 1
     range: Self
     cooldown: 5
     effect: >
@@ -683,7 +683,7 @@
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ability_details:
     ap_cost: 2
-    sp_cost: 1
+    sp_cost: 0
     range: 13m
     cooldown: 4
     effect: Create a blood surface beneath every target in range.
@@ -694,7 +694,7 @@
     Hydrosophist: 2
   wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ability_details:
-    ap_cost: 3
+    ap_cost: 4
     sp_cost: 3
     range: 13m
     cooldown: 6
