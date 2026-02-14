@@ -33,26 +33,6 @@ $text-primary: #e9ecef;
 $text-secondary: #aaa;
 $bg-overlay: rgba(15, 20, 35, 0.95);
 
-:root {
-  // Export to CSS custom properties for runtime use
-  --color-fire: #{$color-fire};
-  --color-air: #{$color-air};
-  --color-earth: #{$color-earth};
-  --color-water: #{$color-water};
-  --color-poison: #{$color-poison};
-
-  --color-pyrokinetic: var(--color-fire);
-  --color-aerotheurge: var(--color-air);
-  --color-geomancer: var(--color-earth);
-  --color-hydrosophist: var(--color-water);
-  --color-summoning: #{$color-summoning};
-  --color-necromancer: #{$color-necromancer};
-  --color-warfare: #{$color-warfare};
-  --color-huntsman: #{$color-huntsman};
-  --color-scoundrel: #{$color-scoundrel};
-  --color-polymorph: #{$color-polymorph};
-}
-
 // ===========================
 // Base Reset & Layout
 // ===========================
@@ -316,11 +296,11 @@ element-icon {
   background-color: currentColor;
 }
 
-// Tree-specific colors - set as CSS variable for children to reference
+// Tree-specific colors
 @mixin tree-color($type, $color) {
   skill-tree[type="#{$type}"] {
-    --primary-color: var(--color-#{$type});
-    color: var(--primary-color);
+    --primary-color: #{$color};
+    color: $color;
   }
 }
 
@@ -377,7 +357,7 @@ skill-name {
 // Skill name secondary tree colors
 @mixin secondary-tree-color($tree, $color) {
   skill-name[data-secondary-tree="#{$tree}"] {
-    --secondary-color: var(--color-#{$tree});
+    --secondary-color: #{$color};
   }
 }
 
