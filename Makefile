@@ -1,6 +1,10 @@
 .PHONY: start kill build watch deploy
 
 start:
+	@echo "Starting SCSS watch and dev server..."
+	@trap 'kill 0' EXIT; \
+	eval "$$(devbox shellenv)" && \
+	sass css/styles.scss:css/styles.css --watch --style=expanded & \
 	python3 -m http.server 8000
 
 kill:
