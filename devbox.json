@@ -4,6 +4,7 @@
     "dart-sass@latest",
     "python312@latest",
     "pre-commit@latest",
+    "nodejs@latest",
     "nodePackages.prettier@latest",
     "nodePackages.stylelint@latest"
   ],

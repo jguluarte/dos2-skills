@@ -12,7 +12,12 @@
 - [ ] Reduce function complexity and improve testability
 
 ## Testing
-- [ ] Add test runner and basic test infrastructure
-- [ ] Add unit tests for filter logic
-- [ ] Add integration tests for skill rendering
+- [x] Add test runner and basic test infrastructure (Node.js built-in, zero deps)
+- [x] Add unit tests for filter logic
+- [x] Add data validation tests for skills.yaml
 - [ ] Consider E2E tests for critical user flows
+
+## CSS / Visual Verification
+- [ ] Add CSS color verification tests (ensure tree colors don't drift during refactoring)
+- [ ] Clean up coupling between JS rendering (data attributes) and CSS selectors — make the contract explicit
+- [ ] Consider screenshot/snapshot tests for visual regression (e.g. Playwright or similar)
