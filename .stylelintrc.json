@@ -1,20 +1,7 @@
 {
-  "extends": "stylelint-config-standard-scss",
-  "rules": {
-    "selector-type-no-unknown": [true, {
-      "ignoreTypes": [
-        "skill-tree", "tree-header", "element-icon",
-        "skill-card", "skill-header", "skill-name", "skill-cost",
-        "skill-effect", "skill-requirements", "req-badge", "skill-stats",
-        "ap-icon", "source-icon",
-        "fire", "pyro", "pyrokinetic",
-        "air", "aerotheurge",
-        "earth", "geo", "geomancer", "geo-poison",
-        "water", "hydro", "hydrosophist",
-        "poison", "necro", "necromancer",
-        "status"
-      ]
-    }],
-    "no-descending-specificity": null
-  }
+    "extends": "stylelint-config-standard-scss",
+    "rules": {
+        "selector-type-no-unknown": null,
+        "no-descending-specificity": null
+    }
 }

@@ -6,8 +6,8 @@
  */
 
 import {
-  SUMMONING, ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES,
-  NECROMANCER,
+    SUMMONING, ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES,
+    NECROMANCER,
 } from './constants.js';
 
 // ===========================
@@ -27,7 +27,7 @@ export const PRIMARY_FILTER_TREES = ALL_TREES;
  * Get valid secondary filter options for a given primary.
  */
 export function getValidSecondaryOptions(primary) {
-  return VALID_SECONDARY_BY_PRIMARY[primary] || [];
+    return VALID_SECONDARY_BY_PRIMARY[primary] || [];
 }
 
 // ===========================
@@ -42,28 +42,28 @@ export function getValidSecondaryOptions(primary) {
  * @returns {boolean}
  */
 export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
-  if (!primaryFilter && secondaryFilters.size === 0) return true;
+    if (!primaryFilter && secondaryFilters.size === 0) return true;
 
-  const hasSummoning = skillTrees.includes(SUMMONING);
+    const hasSummoning = skillTrees.includes(SUMMONING);
 
-  let matchesPrimary = true;
-  if (primaryFilter) {
-    matchesPrimary = skillTrees.includes(primaryFilter);
-  }
+    let matchesPrimary = true;
+    if (primaryFilter) {
+        matchesPrimary = skillTrees.includes(primaryFilter);
+    }
 
-  let matchesSecondary = true;
-  if (secondaryFilters.size > 0) {
-    matchesSecondary = [...secondaryFilters].some(t => skillTrees.includes(t));
-  }
+    let matchesSecondary = true;
+    if (secondaryFilters.size > 0) {
+        matchesSecondary = [...secondaryFilters].some(t => skillTrees.includes(t));
+    }
 
-  if (hasSummoning) {
-    const summoningExplicit = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
-    const hasAnyFilter = primaryFilter || secondaryFilters.size > 0;
-    return (!hasAnyFilter || summoningExplicit) && matchesPrimary && matchesSecondary;
-  }
+    if (hasSummoning) {
+        const summoningExplicit = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
+        const hasAnyFilter = primaryFilter || secondaryFilters.size > 0;
+        return (!hasAnyFilter || summoningExplicit) && matchesPrimary && matchesSecondary;
+    }
 
-  const summoningInFilters = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
-  return !summoningInFilters && matchesPrimary && matchesSecondary;
+    const summoningInFilters = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
+    return !summoningInFilters && matchesPrimary && matchesSecondary;
 }
 
 /**
@@ -71,8 +71,8 @@ export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
  * no longer valid for the new primary.
  */
 export function cleanSecondaryFilters(primaryFilter, secondaryFilters) {
-  const valid = getValidSecondaryOptions(primaryFilter);
-  return new Set([...secondaryFilters].filter(t => valid.includes(t)));
+    const valid = getValidSecondaryOptions(primaryFilter);
+    return new Set([...secondaryFilters].filter(t => valid.includes(t)));
 }
 
 // ===========================
@@ -85,26 +85,26 @@ export function cleanSecondaryFilters(primaryFilter, secondaryFilters) {
  * @returns {{ primaryFilter: string|null, secondaryFilters: Set<string> }}
  */
 export function parseFiltersFromURL(searchString) {
-  const params = new URLSearchParams(searchString);
-  let primaryFilter = null;
-  let secondaryFilters = new Set();
+    const params = new URLSearchParams(searchString);
+    let primaryFilter = null;
+    let secondaryFilters = new Set();
 
-  const andFilter = params.get('and');
-  if (andFilter && ALL_TREES.includes(andFilter)) {
-    primaryFilter = andFilter;
-  }
+    const andFilter = params.get('and');
+    if (andFilter && ALL_TREES.includes(andFilter)) {
+        primaryFilter = andFilter;
+    }
 
-  const orFilter = params.get('or');
-  if (orFilter) {
-    orFilter.split(',').forEach(tree => {
-      if (ALL_TREES.includes(tree)) secondaryFilters.add(tree);
-    });
-  }
+    const orFilter = params.get('or');
+    if (orFilter) {
+        orFilter.split(',').forEach(tree => {
+            if (ALL_TREES.includes(tree)) secondaryFilters.add(tree);
+        });
+    }
 
-  // Validate secondaries against primary
-  secondaryFilters = cleanSecondaryFilters(primaryFilter, secondaryFilters);
+    // Validate secondaries against primary
+    secondaryFilters = cleanSecondaryFilters(primaryFilter, secondaryFilters);
 
-  return { primaryFilter, secondaryFilters };
+    return { primaryFilter, secondaryFilters };
 }
 
 /**
@@ -112,12 +112,12 @@ export function parseFiltersFromURL(searchString) {
  * @returns {string} e.g. "?and=Pyrokinetic&or=Warfare" or ""
  */
 export function buildFilterQueryString(primaryFilter, secondaryFilters) {
-  const params = new URLSearchParams();
-  if (primaryFilter) params.set('and', primaryFilter);
-  if (secondaryFilters.size > 0) {
-    params.set('or', Array.from(secondaryFilters).sort().join(','));
-  }
-  return params.toString() ? `?${params}` : '';
+    const params = new URLSearchParams();
+    if (primaryFilter) params.set('and', primaryFilter);
+    if (secondaryFilters.size > 0) {
+        params.set('or', Array.from(secondaryFilters).sort().join(','));
+    }
+    return params.toString() ? `?${params}` : '';
 }
 
 // ===========================
@@ -128,29 +128,29 @@ export function buildFilterQueryString(primaryFilter, secondaryFilters) {
  * Build the filter summary string (pure — no DOM).
  */
 export function buildSummaryText(primaryFilter, secondaryFilters) {
-  if (!primaryFilter && secondaryFilters.size === 0) {
-    return 'Showing all skills';
-  }
+    if (!primaryFilter && secondaryFilters.size === 0) {
+        return 'Showing all skills';
+    }
 
-  if (primaryFilter && secondaryFilters.size === 0) {
-    return `Showing all ${primaryFilter} skills`;
-  }
+    if (primaryFilter && secondaryFilters.size === 0) {
+        return `Showing all ${primaryFilter} skills`;
+    }
 
-  const trees = Array.from(secondaryFilters);
+    const trees = Array.from(secondaryFilters);
 
-  if (!primaryFilter) {
-    if (trees.length === 1) return `Showing all ${trees[0]} skills`;
+    if (!primaryFilter) {
+        if (trees.length === 1) return `Showing all ${trees[0]} skills`;
+        const joined = trees.join(', ');
+        const lastComma = joined.lastIndexOf(', ');
+        return `Showing skills with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
+    }
+
+    if (trees.length === 1) {
+        return `Showing all ${primaryFilter} skills, with ${trees[0]}`;
+    }
     const joined = trees.join(', ');
     const lastComma = joined.lastIndexOf(', ');
-    return `Showing skills with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
-  }
-
-  if (trees.length === 1) {
-    return `Showing all ${primaryFilter} skills, with ${trees[0]}`;
-  }
-  const joined = trees.join(', ');
-  const lastComma = joined.lastIndexOf(', ');
-  return `Showing all ${primaryFilter} skills, with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
+    return `Showing all ${primaryFilter} skills, with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
 }
 
 // ===========================
@@ -161,27 +161,27 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
  * Get the secondary tree for a skill (the one that's not the category).
  */
 export function getSecondaryTree(skillTrees, primaryCategory) {
-  return skillTrees.find(tree => tree !== primaryCategory) || null;
+    return skillTrees.find(tree => tree !== primaryCategory) || null;
 }
 
 /**
  * Group flat skills array by primary element, matching the app's display categories.
  */
 export function groupSkillsByElement(skills) {
-  const grouped = {
-    [SUMMONING]: [],
-  };
-  ELEMENTAL_TREES.forEach(t => { grouped[t] = []; });
+    const grouped = {
+        [SUMMONING]: [],
+    };
+    ELEMENTAL_TREES.forEach(t => { grouped[t] = []; });
 
-  skills.forEach(skill => {
-    const trees = Object.keys(skill.requirements);
-    if (trees.includes(SUMMONING)) {
-      grouped[SUMMONING].push(skill);
-    } else {
-      const elementTree = trees.find(t => ELEMENTAL_TREES.includes(t));
-      if (elementTree) grouped[elementTree].push(skill);
-    }
-  });
+    skills.forEach(skill => {
+        const trees = Object.keys(skill.requirements);
+        if (trees.includes(SUMMONING)) {
+            grouped[SUMMONING].push(skill);
+        } else {
+            const elementTree = trees.find(t => ELEMENTAL_TREES.includes(t));
+            if (elementTree) grouped[elementTree].push(skill);
+        }
+    });
 
-  return grouped;
+    return grouped;
 }

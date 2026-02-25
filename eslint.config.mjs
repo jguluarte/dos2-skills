@@ -1,27 +1,43 @@
 import js from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
 
 export default [
-  js.configs.recommended,
-  {
-    files: ["js/**/*.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      globals: {
-        ...globals.browser,
-        jsyaml: "readonly",
-      },
+    js.configs.recommended,
+    {
+        plugins: {
+            "@stylistic": stylistic,
+        },
+        rules: {
+            "@stylistic/indent": ["error", 4],
+            "@stylistic/max-len": ["error", {
+                code: 80,
+                ignoreTemplateLiterals: true,
+                ignoreStrings: true,
+                ignoreComments: true,
+                ignoreUrls: true,
+            }],
+        },
     },
-  },
-  {
-    files: ["test/**/*.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "commonjs",
-      globals: {
-        ...globals.node,
-      },
+    {
+        files: ["js/**/*.js"],
+        languageOptions: {
+            ecmaVersion: "latest",
+            sourceType: "module",
+            globals: {
+                ...globals.browser,
+                jsyaml: "readonly",
+            },
+        },
     },
-  },
+    {
+        files: ["test/**/*.js"],
+        languageOptions: {
+            ecmaVersion: "latest",
+            sourceType: "commonjs",
+            globals: {
+                ...globals.node,
+            },
+        },
+    },
 ];
