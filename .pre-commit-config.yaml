@@ -7,4 +7,4 @@ repos:
         language: system
         files: ^css/styles\.scss$
         pass_filenames: false
-        stages: [pre-push]
+        stages: [pre-commit]

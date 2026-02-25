@@ -1,9 +1,8 @@
-.PHONY: start kill build watch deploy
+.PHONY: start kill build watch deploy test lint lint-yaml lint-css lint-js
 
 start:
 	@echo "Starting SCSS watch and dev server..."
 	@trap 'kill 0' EXIT; \
-	eval "$$(devbox shellenv)" && \
 	sass css/styles.scss:css/styles.css --watch --style=expanded & \
 	python3 -m http.server 8000
 
@@ -17,7 +16,23 @@ build:
 # Watch SCSS for changes and auto-compile (for development)
 watch:
 	@echo "Watching css/styles.scss for changes..."
-	@eval "$$(devbox shellenv)" && sass css/styles.scss:css/styles.css --watch --style=expanded
+	sass css/styles.scss:css/styles.css --watch --style=expanded
+
+# Run tests (uses Node.js built-in test runner, no npm needed)
+test:
+	node --test test/*.test.js
+
+# Linting
+lint: lint-yaml lint-css lint-js
+
+lint-yaml:
+	yamllint data/
+
+lint-css:
+	npx stylelint css/styles.scss
+
+lint-js:
+	npx eslint js/ test/
 
 # Deploy to GitHub Pages (pre-push hook auto-builds on main)
 deploy: build
