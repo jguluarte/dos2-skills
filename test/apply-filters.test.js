@@ -1,9 +1,9 @@
 /**
  * Tests for the shouldSkillShow() filter matching function.
  *
- * The one interesting rule: Summoning is a walled garden.
- *   - Pick any non-Summoning filter → Summoning skills are excluded
- *   - Pick Summoning → non-Summoning skills are excluded
+ * Summoning skills are kept separate from all other skills:
+ *   - Pick any non-Summoning filter → Summoning skills are hidden
+ *   - Pick Summoning → non-Summoning skills are hidden
  * Everything else is standard include/exclude.
  *
  * All tests here use require() directly — no DOM mocking needed.
@@ -45,7 +45,7 @@ describe('no filters active', () => {
     });
 });
 
-// ── the summoning wall ───────────────────────────────────
+// ── summoning separation ─────────────────────────────────
 
 describe('summoning exclusion rule', () => {
     const skills = [

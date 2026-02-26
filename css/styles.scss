@@ -49,7 +49,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background-color: $bg-primary;
+  background-color: transparent;
   color: $text-primary;
   padding-bottom: env(safe-area-inset-bottom, 20px);
 }

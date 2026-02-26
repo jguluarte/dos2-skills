@@ -1,13 +1,3 @@
-/**
- * DOS2 Cross-Skills Lookup Tool
- * Interactive skill filter and display for Divinity Original Sin 2 cross-class abilities
- *
- * Uses custom HTML elements (skill-tree, skill-card, etc.) with CSS-driven styling.
- * All colors and presentation handled via CSS custom properties and attribute selectors.
- *
- * Pure logic lives in filter-logic.js; this file handles DOM wiring.
- */
-
 import { SUMMONING, ELEMENTAL_TREES } from './constants.js';
 import {
     PRIMARY_FILTER_TREES,
@@ -40,9 +30,9 @@ function loadFiltersFromURL() {
 }
 
 function saveFiltersToURL() {
+    // `buildFilterQueryString` returns a composable string
     const qs = buildFilterQueryString(primaryFilter, secondaryFilters);
-    const url = qs ? `${window.location.pathname}${qs}` : window.location.pathname;
-    window.history.replaceState({}, '', url);
+    window.history.replaceState({}, '', `${window.location.pathname}${qs}`);
 }
 
 function updateFilterSummary() {
@@ -68,7 +58,8 @@ function togglePrimaryFilter(tree) {
     primaryFilter = primaryFilter === tree ? null : tree;
 
     if (primaryFilter !== oldPrimary) {
-        secondaryFilters = cleanSecondaryFilters(primaryFilter, secondaryFilters);
+        secondaryFilters =
+            cleanSecondaryFilters(primaryFilter, secondaryFilters);
     }
 
     updatePrimaryFilterButtons();
@@ -111,9 +102,10 @@ function renderSecondaryFilters() {
 }
 
 function updatePrimaryFilterButtons() {
-    document.querySelectorAll('#primary-filters .tree-filter-btn').forEach(btn => {
-        btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
-    });
+    document.querySelectorAll('#primary-filters .tree-filter-btn')
+        .forEach(btn => {
+            btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
+        });
 }
 
 function clearFilters() {
@@ -188,19 +180,28 @@ function createSkillCard(skill, category) {
        </a>`
         : `<span>${skill.name}</span>`;
 
-    const nameElement = `<skill-name data-primary-tree="${category.toLowerCase()}" data-secondary-tree="${secondaryTree ? secondaryTree.toLowerCase() : category.toLowerCase()}">${nameHTML}</skill-name>`;
+    const nameElement = `
+        <skill-name data-primary-tree="${category.toLowerCase()}"
+                    data-secondary-tree="${secondaryTree.toLowerCase()}"
+        >${nameHTML}</skill-name>`;
 
     let costHTML = '';
     if (skill.ability_details) {
         const icons = [];
+
+        // Add source blips
         const sp = Math.min(skill.ability_details.sp_cost || 0, 3);
         if (sp > 0) {
-            icons.push(`<span title="${sp} Source">${'<source-icon></source-icon>'.repeat(sp)}</span>`);
+            icons.push(
+                `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
         }
+
+        // Add ability blips
         const ap = Math.min(skill.ability_details.ap_cost || 0, 4);
         if (ap > 0) {
-            icons.push(`<span title="${ap} AP">${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
+            icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
         }
+
         if (icons.length > 0) {
             costHTML = `<skill-cost>${icons.join('')}</skill-cost>`;
         }
@@ -208,9 +209,10 @@ function createSkillCard(skill, category) {
 
     let effectHTML = '';
     if (skill.ability_details?.effect) {
-        effectHTML = `<skill-effect>
-      ${skill.ability_details.effect}
-    </skill-effect>`;
+        effectHTML = `
+        <skill-effect>
+            ${skill.ability_details.effect}
+        </skill-effect>`;
     }
 
     const reqBadges = Object.entries(skill.requirements)
@@ -220,37 +222,44 @@ function createSkillCard(skill, category) {
             return 0;
         })
         .map(([tree, level]) => {
-            return `<req-badge data-tree="${tree.toLowerCase()}">${tree} ${level}</req-badge>`;
+            return `
+                <req-badge data-tree="${tree.toLowerCase()}">
+                    ${tree} ${level}
+                </req-badge>`;
         })
         .join('');
 
-    const requirementsHTML = reqBadges ? `<skill-requirements>${reqBadges}</skill-requirements>` : '';
+    const requirementsHTML = reqBadges ?
+        `<skill-requirements>${reqBadges}</skill-requirements>` : '';
 
     let statsHTML = '';
     if (skill.ability_details) {
         const hasRange = skill.ability_details.range;
         const hasCooldown = skill.ability_details.cooldown;
         if (hasRange || hasCooldown) {
-            const rangeHTML = hasRange ? `Range: ${skill.ability_details.range}` : '';
-            const cooldownHTML = hasCooldown ? `Cooldown: ${skill.ability_details.cooldown}` : '';
+            const rangeHTML = hasRange ?
+                `Range: ${skill.ability_details.range}` : '';
+            const cooldownHTML = hasCooldown ?
+                `Cooldown: ${skill.ability_details.cooldown}` : '';
+
             statsHTML = `
-        <skill-stats>
-          <div>${rangeHTML}</div>
-          <div>${cooldownHTML}</div>
-        </skill-stats>
-      `;
+                <skill-stats>
+                    <div>${rangeHTML}</div>
+                    <div>${cooldownHTML}</div>
+                </skill-stats>
+            `;
         }
     }
 
     card.innerHTML = `
-    <skill-header>
-      ${nameElement}
-      ${costHTML}
-    </skill-header>
-    ${effectHTML}
-    ${requirementsHTML}
-    ${statsHTML}
-  `;
+        <skill-header>
+            ${nameElement}
+            ${costHTML}
+        </skill-header>
+        ${effectHTML}
+        ${requirementsHTML}
+        ${statsHTML}
+    `;
 
     return card;
 }
@@ -266,7 +275,8 @@ function applyFilters() {
 
         cards.forEach(card => {
             const trees = card.dataset.trees.split(',');
-            const visible = shouldSkillShow(trees, primaryFilter, secondaryFilters);
+            const visible = shouldSkillShow(
+                trees, primaryFilter, secondaryFilters);
             card.classList.toggle('hidden', !visible);
             if (visible) visibleInSection++;
         });
@@ -361,8 +371,11 @@ async function initialize() {
 
     } catch (error) {
         console.error('Failed to load skills data:', error);
-        document.getElementById('skills-container').innerHTML =
-            '<div style="text-align: center; padding: 40px; color: #f88;">Error loading skills data. Please refresh the page.</div>';
+        document.getElementById('skills-container').innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #f88;">
+                Error loading skills data. Please refresh the page.
+            </div>
+        `;
     }
 }
 

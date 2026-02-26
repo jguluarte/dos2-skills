@@ -12,10 +12,6 @@ export default [
             "@stylistic/indent": ["error", 4],
             "@stylistic/max-len": ["error", {
                 code: 80,
-                ignoreTemplateLiterals: true,
-                ignoreStrings: true,
-                ignoreComments: true,
-                ignoreUrls: true,
             }],
         },
     },

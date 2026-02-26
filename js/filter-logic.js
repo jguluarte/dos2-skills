@@ -1,13 +1,5 @@
-/**
- * Pure filter logic — no DOM, no side effects.
- *
- * Every function here takes data in and returns a result. This module can
- * be require()'d directly in tests without any DOM mocking or vm tricks.
- */
-
 import {
-    SUMMONING, ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES,
-    NECROMANCER,
+    SUMMONING, ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES, NECROMANCER,
 } from './constants.js';
 
 // ===========================
@@ -18,8 +10,14 @@ const VALID_SECONDARY_BY_PRIMARY = {};
 
 VALID_SECONDARY_BY_PRIMARY[null] = ALL_TREES.filter(t => t !== SUMMONING);
 VALID_SECONDARY_BY_PRIMARY[SUMMONING] = [...ELEMENTAL_TREES, NECROMANCER];
-ELEMENTAL_TREES.forEach(t => { VALID_SECONDARY_BY_PRIMARY[t] = NON_ELEMENTAL_TREES; });
-NON_ELEMENTAL_TREES.forEach(t => { VALID_SECONDARY_BY_PRIMARY[t] = ELEMENTAL_TREES; });
+
+ELEMENTAL_TREES.forEach(
+    t => { VALID_SECONDARY_BY_PRIMARY[t] = NON_ELEMENTAL_TREES }
+);
+
+NON_ELEMENTAL_TREES.forEach(
+    t => { VALID_SECONDARY_BY_PRIMARY[t] = ELEMENTAL_TREES }
+);
 
 export const PRIMARY_FILTER_TREES = ALL_TREES;
 
@@ -34,36 +32,25 @@ export function getValidSecondaryOptions(primary) {
 // Filter matching
 // ===========================
 
-/**
- * Determine whether a skill should be visible given current filters.
- * @param {string[]} skillTrees - tree names the skill belongs to
- * @param {string|null} primaryFilter - current primary filter (or null)
- * @param {Set<string>} secondaryFilters - current secondary filters
- * @returns {boolean}
- */
 export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
+    // If we don't have any filters....SHOW IT :D
     if (!primaryFilter && secondaryFilters.size === 0) return true;
 
-    const hasSummoning = skillTrees.includes(SUMMONING);
-
-    let matchesPrimary = true;
-    if (primaryFilter) {
-        matchesPrimary = skillTrees.includes(primaryFilter);
+    // Summoning skills are kept separate: they only appear
+    // when summoning is explicitly selected, and non-summoning
+    // skills are hidden when summoning is selected.
+    const wantsSummoning = primaryFilter === SUMMONING;
+    const isSummoning = skillTrees.includes(SUMMONING);
+    if (wantsSummoning !== isSummoning) {
+        return false;
     }
 
-    let matchesSecondary = true;
-    if (secondaryFilters.size > 0) {
-        matchesSecondary = [...secondaryFilters].some(t => skillTrees.includes(t));
-    }
+    const primary = !primaryFilter || skillTrees.includes(primaryFilter);
 
-    if (hasSummoning) {
-        const summoningExplicit = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
-        const hasAnyFilter = primaryFilter || secondaryFilters.size > 0;
-        return (!hasAnyFilter || summoningExplicit) && matchesPrimary && matchesSecondary;
-    }
+    const secondary = secondaryFilters.size === 0
+        || skillTrees.some(t => secondaryFilters.has(t));
 
-    const summoningInFilters = primaryFilter === SUMMONING || secondaryFilters.has(SUMMONING);
-    return !summoningInFilters && matchesPrimary && matchesSecondary;
+    return primary && secondary;
 }
 
 /**
@@ -132,25 +119,30 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
         return 'Showing all skills';
     }
 
+    const primaryStr = `Showing all ${primaryFilter} skills`;
     if (primaryFilter && secondaryFilters.size === 0) {
-        return `Showing all ${primaryFilter} skills`;
+        return primaryStr;
     }
 
     const trees = Array.from(secondaryFilters);
 
     if (!primaryFilter) {
         if (trees.length === 1) return `Showing all ${trees[0]} skills`;
+
         const joined = trees.join(', ');
         const lastComma = joined.lastIndexOf(', ');
-        return `Showing skills with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
+        const before = joined.substring(0, lastComma);
+        const after = joined.substring(lastComma + 2);
+        return `Showing skills with ${before} or ${after}`;
     }
 
-    if (trees.length === 1) {
-        return `Showing all ${primaryFilter} skills, with ${trees[0]}`;
-    }
+    if (trees.length === 1) return `${primaryStr}, with ${trees[0]}`;
+
     const joined = trees.join(', ');
     const lastComma = joined.lastIndexOf(', ');
-    return `Showing all ${primaryFilter} skills, with ${joined.substring(0, lastComma)} or ${joined.substring(lastComma + 2)}`;
+    const before = joined.substring(0, lastComma);
+    const after = joined.substring(lastComma + 2);
+    return `${primaryStr}, with ${before} or ${after}`;
 }
 
 // ===========================
@@ -164,9 +156,6 @@ export function getSecondaryTree(skillTrees, primaryCategory) {
     return skillTrees.find(tree => tree !== primaryCategory) || null;
 }
 
-/**
- * Group flat skills array by primary element, matching the app's display categories.
- */
 export function groupSkillsByElement(skills) {
     const grouped = {
         [SUMMONING]: [],
