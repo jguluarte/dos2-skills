@@ -21,3 +21,4 @@
 - [ ] Add CSS color verification tests (ensure tree colors don't drift during refactoring)
 - [ ] Clean up coupling between JS rendering (data attributes) and CSS selectors — make the contract explicit
 - [ ] Consider screenshot/snapshot tests for visual regression (e.g. Playwright or similar)
+- [ ] Add more space between SP/AP icons
