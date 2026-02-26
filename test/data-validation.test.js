@@ -5,8 +5,7 @@
  * invalid requirement combos, etc. Run these after editing skills.yaml
  * to make sure nothing is broken.
  */
-const { describe, it, before } = require('node:test');
-const assert = require('node:assert/strict');
+const { test, describe, it, before, assert } = require('./test.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -23,7 +22,7 @@ before(() => {
 
 // ── basic structure ──────────────────────────────────────
 
-describe('skills.yaml - structure', () => {
+test('skills.yaml - structure', () => {
     it('is a non-empty array', () => {
         assert.ok(Array.isArray(skills), 'YAML root should be an array');
         assert.ok(skills.length > 0, 'Should have at least one skill');
@@ -52,7 +51,7 @@ describe('skills.yaml - structure', () => {
 
 // ── requirements validation ──────────────────────────────
 
-describe('skills.yaml - requirements', () => {
+test('skills.yaml - requirements', () => {
     it('every requirement tree name is a valid tree', () => {
         for (const skill of skills) {
             for (const tree of Object.keys(skill.requirements)) {
@@ -90,7 +89,7 @@ describe('skills.yaml - requirements', () => {
 
 // ── pairing rules (game rules validation) ────────────────
 
-describe('skills.yaml - pairing rules', () => {
+test('skills.yaml - pairing rules', () => {
     it('no skill pairs two elemental trees', () => {
         for (const skill of skills) {
             const trees = Object.keys(skill.requirements);
@@ -126,7 +125,7 @@ describe('skills.yaml - pairing rules', () => {
 
 // ── ability_details validation ───────────────────────────
 
-describe('skills.yaml - ability_details', () => {
+test('skills.yaml - ability_details', () => {
     it('ap_cost is a non-negative integer when present', () => {
         for (const skill of skills) {
             if (skill.ability_details?.ap_cost !== undefined) {

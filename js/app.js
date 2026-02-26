@@ -277,7 +277,9 @@ function applyFilters() {
             const trees = card.dataset.trees.split(',');
             const visible = shouldSkillShow(
                 trees, primaryFilter, secondaryFilters);
+
             card.classList.toggle('hidden', !visible);
+
             if (visible) visibleInSection++;
         });
 

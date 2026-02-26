@@ -8,8 +8,7 @@
  *
  * All tests here use require() directly — no DOM mocking needed.
  */
-const { describe, it } = require('node:test');
-const assert = require('node:assert/strict');
+const { test, describe, it, assert } = require('./test.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST,
@@ -25,7 +24,7 @@ const {
 
 // ── tree constants ───────────────────────────────────────
 
-describe('tree constants', () => {
+test('tree constants', () => {
     it('ELEMENTAL_TREES', () => {
         assert.deepEqual(ELEMENTAL_TREES,
             [PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST]);
@@ -38,15 +37,15 @@ describe('tree constants', () => {
 
     it('ALL_TREES', () => {
         assert.deepEqual(ALL_TREES, [
-            PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, SUMMONING,
-            WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER,
+            PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
+            HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER, SUMMONING,
         ]);
     });
 });
 
 // ── pairing rules (getValidSecondaryOptions) ─────────────
 
-describe('valid secondary options', () => {
+test('valid secondary options', () => {
     it('Summoning pairs with elementals + Necromancer', () => {
         assert.deepEqual(getValidSecondaryOptions(SUMMONING),
             [...ELEMENTAL_TREES, NECROMANCER]);
@@ -76,7 +75,7 @@ describe('valid secondary options', () => {
 
 // ── skill grouping ───────────────────────────────────────
 
-describe('skill grouping', () => {
+test('skill grouping', () => {
     const skills = [
         { name: 'Summon+Pyro',     requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 } },
         { name: 'Pyro+Necro',      requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
@@ -110,7 +109,7 @@ describe('skill grouping', () => {
 
 // ── summary text ─────────────────────────────────────────
 
-describe('summary text', () => {
+test('summary text', () => {
     it('no filters: "Showing all skills"', () => {
         assert.equal(buildSummaryText(null, new Set()), 'Showing all skills');
     });
@@ -132,4 +131,3 @@ describe('summary text', () => {
             `Showing skills with ${WARFARE} or ${NECROMANCER}`);
     });
 });
-

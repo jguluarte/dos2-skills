@@ -8,118 +8,121 @@
  *
  * All tests here use require() directly — no DOM mocking needed.
  */
-const { describe, it } = require('node:test');
-const assert = require('node:assert/strict');
+const { test, describe, it, assert } = require('./test.js');
 
 const {
-    SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST,
-    NECROMANCER, WARFARE,
+    SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
 } = require('../js/constants.js');
 const { shouldSkillShow } = require('../js/filter-logic.js');
+const mock = require('./mock.js');
 
 // ── helpers ──────────────────────────────────────────────
 
-/** Get visible skill names by running shouldSkillShow on each skill. */
 function getVisibleSkills(skills, primary, secondary = []) {
     const secondarySet = new Set(secondary);
     return skills
-        .filter(skill => {
-            const trees = Object.keys(skill.requirements);
+        .filter(s => {
+            const trees = Object.keys(s.requirements);
             return shouldSkillShow(trees, primary, secondarySet);
         })
-        .map(s => s.name.toLowerCase())
+        .map(s => s.name)
         .sort();
 }
 
-// ── no filters ───────────────────────────────────────────
+// ── filter matching ─────────────────────────────────────
 
-describe('no filters active', () => {
-    const skills = [
-        { name: 'Pyro+Necro',  requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
-        { name: 'Summon+Pyro', requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 } },
-    ];
-    const allNames = skills.map(s => s.name.toLowerCase()).sort();
+test('filters behave as expected', () => {
+    const pyroNecro = mock.skill('Pyro+Necro', [PYROKINETIC, NECROMANCER]);
+    const aeroNecro = mock.skill('Aero+Necro', [AEROTHEURGE, NECROMANCER]);
+    const pyroWar = mock.skill('Pyro+Warfare', [PYROKINETIC, WARFARE]);
+    const hydroWar = mock.skill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
+    const sumPyro = mock.skill('Summon+Pyro', [SUMMONING, PYROKINETIC]);
+    const sumNecro = mock.skill('Summon+Necro', [SUMMONING, NECROMANCER]);
 
-    it('shows every skill', () => {
+    const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
+
+    const allNames = skills.map(s => s.name).sort();
+    const summonNames = [sumNecro, sumPyro].map(s => s.name).sort();
+
+    it('An absence of a filter renders all skills', () => {
         assert.deepEqual(getVisibleSkills(skills, null), allNames);
     });
-});
 
-// ── summoning separation ─────────────────────────────────
+    it('Invalid combination results in an empty list', () => {
+        // This combination doesn't exist in `skills`
+        const found = getVisibleSkills(skills, SUMMONING, [WARFARE]);
+        assert.equal(found.length, 0);
+    });
 
-describe('summoning exclusion rule', () => {
-    const skills = [
-        { name: 'Pyro+Necro',   requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
-        { name: 'Aero+Necro',   requirements: { [AEROTHEURGE]: 1, [NECROMANCER]: 1 } },
-        { name: 'Pyro+Warfare', requirements: { [PYROKINETIC]: 1, [WARFARE]: 1 } },
-        { name: 'Summon+Pyro',  requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 } },
-        { name: 'Summon+Necro', requirements: { [SUMMONING]: 1, [NECROMANCER]: 1 } },
-    ];
-    const summoningNames = ['summon+necro', 'summon+pyro'];
+    describe(`${SUMMONING} skills behave differently...`, () => {
+        const nonSummonFilters = [
+            PYROKINETIC, AEROTHEURGE, NECROMANCER, WARFARE,
+        ];
 
-    const nonSummoningFilters = [PYROKINETIC, AEROTHEURGE, NECROMANCER, WARFARE];
+        // What is common expected behavior for these trees?
+        for (const tree of nonSummonFilters) {
+            describe(`${tree} as the primary filter...`, () => {
+                const found = getVisibleSkills(skills, tree);
 
-    for (const filter of nonSummoningFilters) {
-        it(`${filter} primary hides summoning skills (even matching ones)`, () => {
-            const visible = getVisibleSkills(skills, filter);
-            assert.ok(visible.length > 0, `${filter} should show at least one skill`);
+                it(`finds skills`, () => {
+                    assert.ok(found.length > 0);
+                });
 
-            for (const name of summoningNames) {
-                assert.ok(!visible.includes(name), `${name} should be hidden under ${filter}`);
+                it(`does not include summoning skills`, () => {
+                    assert.ok( summonNames.every(n => !found.includes(n)) );
+                });
+            })
+        }
+
+        describe('Summoning as the primary filter...', () => {
+
+            it('all summoning skills can be found', () => {
+                const found = getVisibleSkills(skills, SUMMONING);
+                assert.deepEqual(found, summonNames);
+            });
+
+            for (const skill of [sumNecro, sumPyro]) {
+                const prereqs = Object.keys(skill.requirements);
+                const tree = prereqs.find(t => t !== SUMMONING);
+                const found = getVisibleSkills(skills, SUMMONING, [tree]);
+
+                it(`can find ${skill.name} filtering by ${tree}`, () => {
+                    assert.equal(found.length, 1);
+                    assert.equal(found[0], skill.name);
+                });
             }
+
         });
-    }
-
-    it('Summoning primary shows only summoning skills', () => {
-        assert.deepEqual(getVisibleSkills(skills, SUMMONING), summoningNames);
-    });
-});
-
-// ── basic filter matching ────────────────────────────────
-
-describe('standard filter matching', () => {
-    const skills = [
-        { name: 'Pyro+Necro',    requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
-        { name: 'Pyro+Warfare',  requirements: { [PYROKINETIC]: 1, [WARFARE]: 1 } },
-        { name: 'Aero+Necro',    requirements: { [AEROTHEURGE]: 1, [NECROMANCER]: 1 } },
-        { name: 'Hydro+Warfare', requirements: { [HYDROSOPHIST]: 1, [WARFARE]: 1 } },
-        { name: 'Summon+Pyro',   requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 } },
-    ];
-
-    it('primary filter shows only skills with that tree', () => {
-        assert.deepEqual(getVisibleSkills(skills, PYROKINETIC),
-            ['pyro+necro', 'pyro+warfare']);
     });
 
-    it('secondary filters use OR logic', () => {
-        assert.deepEqual(getVisibleSkills(skills, null, [NECROMANCER, WARFARE]),
-            ['aero+necro', 'hydro+warfare', 'pyro+necro', 'pyro+warfare']);
+    describe(`Primary filter --> ${NECROMANCER}`, () => {
+        it('finds two skills', () => {
+            const found = getVisibleSkills(skills, NECROMANCER);
+            assert.equal(found.length, 2);
+        });
+
+        for (const skill of [pyroNecro, aeroNecro]) {
+            const prereqs = Object.keys(skill.requirements);
+            const tree = prereqs.find(t => t !== NECROMANCER);
+            const found = getVisibleSkills(skills, NECROMANCER, [tree]);
+
+            it(`can find ${skill.name} filtering by ${tree}`, () => {
+                assert.equal(found.length, 1);
+                assert.equal(found[0], skill.name);
+            });
+        }
     });
 
-    it('primary + secondary requires both', () => {
-        assert.deepEqual(getVisibleSkills(skills, PYROKINETIC, [NECROMANCER]),
-            ['pyro+necro']);
-    });
+    describe('secondary filters only', () => {
+        it('finds four skills', () => {
+            const expected = [pyroNecro, aeroNecro, pyroWar, hydroWar];
+            const names = expected.map(s => s.name).sort();
 
-    it('impossible combo shows nothing', () => {
-        assert.deepEqual(getVisibleSkills(skills, SUMMONING, [WARFARE]), []);
-    });
-});
+            assert.deepEqual(
+                getVisibleSkills(skills, null, [NECROMANCER, WARFARE]),
+                names
+            );
+        });
 
-// ── toggle round-trip ────────────────────────────────────
-
-describe('toggle round-trip', () => {
-    const skills = [
-        { name: 'Pyro+Necro',   requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
-        { name: 'Aero+Warfare', requirements: { [AEROTHEURGE]: 1, [WARFARE]: 1 } },
-    ];
-    const allNames = skills.map(s => s.name.toLowerCase()).sort();
-
-    it('filtering then clearing restores all skills', () => {
-        const filtered = getVisibleSkills(skills, PYROKINETIC);
-        assert.ok(filtered.length < allNames.length);
-
-        const restored = getVisibleSkills(skills, null);
-        assert.deepEqual(restored, allNames);
     });
 });
