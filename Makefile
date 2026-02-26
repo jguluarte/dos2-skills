@@ -7,7 +7,8 @@ start:
 	python3 -m http.server 8000
 
 kill:
-	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || echo "No processes found on port 8000"
+	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
+		echo "No processes found on port 8000"
 
 # Compile SCSS to CSS and update cache-busting hash
 build:
