@@ -1,4 +1,4 @@
-.PHONY: start kill build watch deploy test lint lint-yaml lint-css lint-js
+.PHONY: start kill build watch deploy test test-verbose lint lint-yaml lint-css lint-js
 
 start:
 	@echo "Starting SCSS watch and dev server..."
@@ -21,6 +21,9 @@ watch:
 
 # Run tests (uses Node.js built-in test runner, no npm needed)
 test:
+	node --test --test-reporter=dot test/*.test.js
+
+test-verbose:
 	node --test test/*.test.js
 
 # Linting

@@ -4,7 +4,7 @@
  *
  * All tests here use require() directly — no DOM mocking needed.
  */
-const { test, describe, it, assert } = require('./test.js');
+const { test, it, assert } = require('./test.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER,
