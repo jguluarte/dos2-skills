@@ -1,20 +1,12 @@
-/**
- * Tests for the shouldSkillShow() filter matching function.
- *
- * Summoning skills are kept separate from all other skills:
- *   - Pick any non-Summoning filter → Summoning skills are hidden
- *   - Pick Summoning → non-Summoning skills are hidden
- * Everything else is standard include/exclude.
- *
- * All tests here use require() directly — no DOM mocking needed.
- */
 const { test, describe, it, assert } = require('./test.js');
+const mock = require('./mock.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
 } = require('../js/constants.js');
+
 const { shouldSkillShow } = require('../js/filter-logic.js');
-const mock = require('./mock.js');
+
 
 // ── helpers ──────────────────────────────────────────────
 

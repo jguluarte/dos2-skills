@@ -1,10 +1,3 @@
-/**
- * Tests that validate the actual skills.yaml data file.
- *
- * These catch data entry errors: typos in tree names, missing fields,
- * invalid requirement combos, etc. Run these after editing skills.yaml
- * to make sure nothing is broken.
- */
 const { test, describe, it, before, assert } = require('./test.js');
 const fs = require('fs');
 const path = require('path');

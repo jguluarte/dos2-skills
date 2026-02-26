@@ -1,19 +1,10 @@
-/**
- * Consistency tests — lock down known-good values.
- *
- * These exist so that automated changes (AI or otherwise) don't silently
- * drift constants, pairing rules, or text formatting. They check exact
- * values, not counts. If a test here breaks, either the change was
- * intentional (update the test) or something drifted that shouldn't have.
- *
- * All tests here use require() directly — no DOM mocking needed.
- */
-const { test, describe, it, assert } = require('./test.js');
+const { test, it, assert } = require('./test.js');
+const mock = require('./mock.js');
 
 const {
-    SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST,
-    WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER,
-    ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES,
+    SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
+    HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER, ELEMENTAL_TREES,
+    NON_ELEMENTAL_TREES, ALL_TREES,
 } = require('../js/constants.js');
 
 const {
@@ -22,17 +13,19 @@ const {
     groupSkillsByElement,
 } = require('../js/filter-logic.js');
 
-// ── tree constants ───────────────────────────────────────
 
 test('tree constants', () => {
     it('ELEMENTAL_TREES', () => {
-        assert.deepEqual(ELEMENTAL_TREES,
+        assert.deepEqual(
+            ELEMENTAL_TREES,
             [PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST]);
     });
 
     it('NON_ELEMENTAL_TREES', () => {
-        assert.deepEqual(NON_ELEMENTAL_TREES,
-            [WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER]);
+        assert.deepEqual(
+            NON_ELEMENTAL_TREES,
+            [WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER]
+        );
     });
 
     it('ALL_TREES', () => {
@@ -43,89 +36,105 @@ test('tree constants', () => {
     });
 });
 
-// ── pairing rules (getValidSecondaryOptions) ─────────────
-
 test('valid secondary options', () => {
     it('Summoning pairs with elementals + Necromancer', () => {
         assert.deepEqual(getValidSecondaryOptions(SUMMONING),
             [...ELEMENTAL_TREES, NECROMANCER]);
     });
 
-    it('elemental primary pairs with non-elementals', () => {
-        for (const tree of ELEMENTAL_TREES) {
-            assert.deepEqual(getValidSecondaryOptions(tree), NON_ELEMENTAL_TREES,
-                `${tree} should pair with non-elemental trees`);
-        }
-    });
+    for (const tree of ELEMENTAL_TREES) {
+        it(`${tree} pairs with non-elementals`, () => {
+            assert.deepEqual(
+                getValidSecondaryOptions(tree),
+                NON_ELEMENTAL_TREES);
+        });
+    }
 
-    it('non-elemental primary pairs with elementals', () => {
-        for (const tree of NON_ELEMENTAL_TREES) {
-            assert.deepEqual(getValidSecondaryOptions(tree), ELEMENTAL_TREES,
-                `${tree} should pair with elemental trees`);
-        }
-    });
-
-    it('no tree appears in its own secondary options', () => {
-        for (const tree of ALL_TREES) {
-            assert.ok(!getValidSecondaryOptions(tree).includes(tree),
-                `${tree} should not appear in its own secondary options`);
-        }
-    });
+    for (const tree of NON_ELEMENTAL_TREES) {
+        it(`${tree} pairs with elementals`, () => {
+            assert.deepEqual(
+                getValidSecondaryOptions(tree),
+                ELEMENTAL_TREES);
+        });
+    }
 });
 
-// ── skill grouping ───────────────────────────────────────
-
 test('skill grouping', () => {
+    const sumPyro = mock.skill('Sum+Pyro', [SUMMONING, PYROKINETIC]);
+    const sumGeo = mock.skill('Sum+Geo', [SUMMONING, GEOMANCER]);
+    const pyroNec = mock.skill('Pyro+Nec', [PYROKINETIC, NECROMANCER]);
+    const pyroWar = mock.skill('Pyro+War', [PYROKINETIC, WARFARE]);
+    const aeroNec = mock.skill('Aero+Nec', [AEROTHEURGE, NECROMANCER]);
+    const airNec = mock.skill('Air+Nec', [AEROTHEURGE, NECROMANCER]);
+    const geoHunt = mock.skill('Geo+Hunt', [GEOMANCER, HUNTSMAN]);
+    const geoPoly = mock.skill('Geo+Poly', [GEOMANCER, POLYMORPH]);
+    const hydroNec = mock.skill('Hydro+Nec', [HYDROSOPHIST, NECROMANCER]);
+    const hydroRog = mock.skill('Hydro+Rog', [HYDROSOPHIST, SCOUNDREL]);
+
     const skills = [
-        { name: 'Summon+Pyro',     requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 } },
-        { name: 'Pyro+Necro',      requirements: { [PYROKINETIC]: 1, [NECROMANCER]: 1 } },
-        { name: 'Aero+Warfare',    requirements: { [AEROTHEURGE]: 1, [WARFARE]: 1 } },
-        { name: 'Geo+Huntsman',    requirements: { [GEOMANCER]: 1, [HUNTSMAN]: 1 } },
-        { name: 'Hydro+Scoundrel', requirements: { [HYDROSOPHIST]: 1, [SCOUNDREL]: 1 } },
+        sumPyro, sumGeo, pyroNec, pyroWar, aeroNec,
+        airNec, geoHunt, geoPoly, hydroNec, hydroRog,
     ];
     const grouped = groupSkillsByElement(skills);
-    const toNames = list => list.map(s => s.name.toLowerCase()).sort();
 
-    it('Summoning group contains all Summoning skills', () => {
-        assert.deepEqual(toNames(grouped[SUMMONING]), ['summon+pyro']);
+    it('Summoning group', () => {
+        assert.deepEqual(grouped[SUMMONING], [sumPyro, sumGeo]);
     });
 
-    it('Pyrokinetic group contains non-Summoning pyro skills', () => {
-        assert.deepEqual(toNames(grouped[PYROKINETIC]), ['pyro+necro']);
+    it('Pyrokinetic group', () => {
+        assert.deepEqual(grouped[PYROKINETIC], [pyroNec, pyroWar]);
     });
 
     it('Aerotheurge group', () => {
-        assert.deepEqual(toNames(grouped[AEROTHEURGE]), ['aero+warfare']);
+        assert.deepEqual(grouped[AEROTHEURGE], [aeroNec, airNec]);
     });
 
     it('Geomancer group', () => {
-        assert.deepEqual(toNames(grouped[GEOMANCER]), ['geo+huntsman']);
+        assert.deepEqual(grouped[GEOMANCER], [geoHunt, geoPoly]);
     });
 
     it('Hydrosophist group', () => {
-        assert.deepEqual(toNames(grouped[HYDROSOPHIST]), ['hydro+scoundrel']);
+        assert.deepEqual(grouped[HYDROSOPHIST], [hydroNec, hydroRog]);
     });
 });
 
-// ── summary text ─────────────────────────────────────────
 
 test('summary text', () => {
     it('no filters: "Showing all skills"', () => {
-        assert.equal(buildSummaryText(null, new Set()), 'Showing all skills');
+        assert.equal(
+            buildSummaryText(null, new Set()),
+            'Showing all skills');
     });
 
-    it('primary only: "Showing all {tree} skills"', () => {
-        assert.equal(buildSummaryText(PYROKINETIC, new Set()),
+    it('primary only', () => {
+        assert.equal(
+            buildSummaryText(PYROKINETIC, new Set()),
             `Showing all ${PYROKINETIC} skills`);
     });
 
-    it('primary + secondary: "Showing all {tree} skills, with {tree}"', () => {
+    it('primary + secondary', () => {
         assert.equal(
             buildSummaryText(PYROKINETIC, new Set([WARFARE])),
             `Showing all ${PYROKINETIC} skills, with ${WARFARE}`);
     });
 
-    it('multiple secondary: joins with "or"', () => {
+    it('primary + two secondaries', () => {
+        const expected = (
+            `Showing all ${PYROKINETIC} skills, with ${WARFARE} or `
+            + NECROMANCER
+        );
+        assert.equal(
+            buildSummaryText(PYROKINETIC, new Set([WARFARE, NECROMANCER])),
+            expected);
+    });
+
+    it('single secondary only', () => {
+        assert.equal(
+            buildSummaryText(null, new Set([WARFARE])),
+            `Showing all ${WARFARE} skills`);
+    });
+
+    it('multiple secondaries joins with "or"', () => {
         assert.equal(
             buildSummaryText(null, new Set([WARFARE, NECROMANCER])),
             `Showing skills with ${WARFARE} or ${NECROMANCER}`);
