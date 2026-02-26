@@ -4,6 +4,6 @@ rules:
     line-length:
         max: 80
     indentation:
-        spaces: 4
+        spaces: 2
     document-start: disable
     truthy: disable
