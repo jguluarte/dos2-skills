@@ -4,7 +4,7 @@ const path = require('path');
 
 const jsyaml = require('js-yaml');
 const {
-    VALID_SKILL_COMBINATION, ELEMENTAL_TREES, SUMMONING, NECROMANCER,
+    VALID_SKILL_COMBINATION, SUMMONING,
 } = require('../js/constants.js');
 
 const yamlPath = path.resolve(__dirname, '../data/skills.yaml');
@@ -31,8 +31,6 @@ test('skills.yaml :: file format', () => {
 });
 
 // ── per-skill validation ────────────────────────────────
-
-const validSummonPairs = [...ELEMENTAL_TREES, NECROMANCER];
 
 test('Skill validation', () => {
     it('no duplicate skills', () => {

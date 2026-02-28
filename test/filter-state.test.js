@@ -1,9 +1,3 @@
-/**
- * Tests for filter state management: URL persistence and secondary
- * filter cleanup when primary changes.
- *
- * All tests here use require() directly — no DOM mocking needed.
- */
 const { test, it, assert } = require('./test.js');
 
 const {
@@ -19,60 +13,59 @@ const {
 
 // ── URL parsing ──────────────────────────────────────────
 
-test('URL loading', () => {
+test('URL parsing', () => {
     it('loads primary and secondary from URL params', () => {
-        const result = parseFiltersFromURL(
+        const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
             `?and=${PYROKINETIC}&or=${WARFARE},${NECROMANCER}`
         );
-        assert.equal(result.primaryFilter, PYROKINETIC);
-        assert.deepEqual([...result.secondaryFilters].sort(),
+        assert.equal(primaryFilter, PYROKINETIC);
+        assert.deepEqual(
+            [...secondaryFilters].sort(),
             [NECROMANCER, WARFARE]);
     });
 
     it('ignores invalid tree names', () => {
-        const result = parseFiltersFromURL(
+        const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
             `?and=InvalidTree&or=FakeTree,${WARFARE}`
         );
-        assert.equal(result.primaryFilter, null);
-        assert.deepEqual([...result.secondaryFilters], [WARFARE]);
+        assert.equal(primaryFilter, null);
+        assert.deepEqual([...secondaryFilters], [WARFARE]);
     });
 
-    it('strips invalid secondary combos (e.g. elemental+elemental)', () => {
-        const result = parseFiltersFromURL(
+    it('strips invalid secondary combos', () => {
+        const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
             `?and=${PYROKINETIC}&or=${WARFARE},${AEROTHEURGE}`
         );
-        assert.equal(result.primaryFilter, PYROKINETIC);
-        assert.deepEqual([...result.secondaryFilters], [WARFARE]);
+        assert.equal(primaryFilter, PYROKINETIC);
+        assert.deepEqual([...secondaryFilters], [WARFARE]);
     });
 });
 
 // ── URL round-trip ───────────────────────────────────────
 
 test('URL round-trip', () => {
-    it('primary + secondary survives save → parse', () => {
+    it('primary + secondary survives save then parse', () => {
         const qs = buildFilterQueryString(
-            PYROKINETIC,
-            new Set([WARFARE, NECROMANCER])
+            PYROKINETIC, new Set([WARFARE, NECROMANCER])
         );
-        const result = parseFiltersFromURL(qs);
-        assert.equal(result.primaryFilter, PYROKINETIC);
-        assert.deepEqual([...result.secondaryFilters].sort(),
+        const { primaryFilter, secondaryFilters } = parseFiltersFromURL(qs);
+        assert.equal(primaryFilter, PYROKINETIC);
+        assert.deepEqual(
+            [...secondaryFilters].sort(),
             [NECROMANCER, WARFARE]);
     });
 
-    it('every tree name survives the round-trip', () => {
-        for (const tree of ALL_TREES) {
+    for (const tree of ALL_TREES) {
+        it(`${tree} survives the round-trip`, () => {
             const qs = buildFilterQueryString(tree, new Set());
-            const result = parseFiltersFromURL(qs);
-
-            assert.equal(
-                result.primaryFilter, tree,
-                `${tree} didn't survive round-trip`);
-        }
-    });
+            const { primaryFilter } = parseFiltersFromURL(qs);
+            assert.equal(primaryFilter, tree);
+        });
+    }
 
     it('returns empty string when no filters active', () => {
-        assert.equal(buildFilterQueryString(null, new Set()), '');
+        assert.equal(
+            buildFilterQueryString(null, new Set()), '');
     });
 });
 
@@ -80,17 +73,20 @@ test('URL round-trip', () => {
 
 test('secondary cleanup on primary change', () => {
     it('removes secondary that becomes the new primary', () => {
-        const clean = cleanSecondaryFilters(WARFARE, new Set([WARFARE]));
+        const clean = cleanSecondaryFilters(
+            WARFARE, new Set([WARFARE]));
         assert.deepEqual([...clean], []);
     });
 
-    it('preserves valid secondaries when switching between elementals', () => {
-        const clean = cleanSecondaryFilters(GEOMANCER, new Set([NECROMANCER]));
+    it('preserves valid secondaries', () => {
+        const clean = cleanSecondaryFilters(
+            GEOMANCER, new Set([NECROMANCER]));
         assert.deepEqual([...clean], [NECROMANCER]);
     });
 
-    it('drops Warfare when switching to Summoning primary', () => {
-        const clean = cleanSecondaryFilters(SUMMONING, new Set([WARFARE]));
+    it('drops invalid secondaries for Summoning', () => {
+        const clean = cleanSecondaryFilters(
+            SUMMONING, new Set([WARFARE]));
         assert.deepEqual([...clean], []);
     });
 });
