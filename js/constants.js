@@ -30,3 +30,21 @@ export const NON_SUMMONING_TREES = [
 export const ALL_TREES = [
     ...NON_SUMMONING_TREES, SUMMONING
 ];
+
+export const VALID_SKILL_COMBINATION = {
+    // Summoner is treated special, and other trees don't include it
+    [SUMMONING]: [...ELEMENTAL_TREES, NECROMANCER],
+
+    // These group with non-elemental trees
+    [PYROKINETIC]:  NON_ELEMENTAL_TREES,
+    [AEROTHEURGE]:  NON_ELEMENTAL_TREES,
+    [GEOMANCER]:    NON_ELEMENTAL_TREES,
+    [HYDROSOPHIST]: NON_ELEMENTAL_TREES,
+
+    // These skills group with elemental trees
+    [WARFARE]:     ELEMENTAL_TREES,
+    [HUNTSMAN]:    ELEMENTAL_TREES,
+    [SCOUNDREL]:   ELEMENTAL_TREES,
+    [POLYMORPH]:   ELEMENTAL_TREES,
+    [NECROMANCER]: ELEMENTAL_TREES,
+};

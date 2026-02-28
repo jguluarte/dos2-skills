@@ -1,31 +1,20 @@
 import {
-    SUMMONING, ELEMENTAL_TREES, NON_ELEMENTAL_TREES, ALL_TREES, NECROMANCER,
+    SUMMONING, ELEMENTAL_TREES, ALL_TREES, NON_SUMMONING_TREES,
+    VALID_SKILL_COMBINATION,
 } from './constants.js';
 
 // ===========================
 // Pairing rules
 // ===========================
 
-const VALID_SECONDARY_BY_PRIMARY = {};
-
-VALID_SECONDARY_BY_PRIMARY[null] = ALL_TREES.filter(t => t !== SUMMONING);
-VALID_SECONDARY_BY_PRIMARY[SUMMONING] = [...ELEMENTAL_TREES, NECROMANCER];
-
-ELEMENTAL_TREES.forEach(
-    t => { VALID_SECONDARY_BY_PRIMARY[t] = NON_ELEMENTAL_TREES }
-);
-
-NON_ELEMENTAL_TREES.forEach(
-    t => { VALID_SECONDARY_BY_PRIMARY[t] = ELEMENTAL_TREES }
-);
-
 export const PRIMARY_FILTER_TREES = ALL_TREES;
 
-/**
- * Get valid secondary filter options for a given primary.
- */
 export function getValidSecondaryOptions(primary) {
-    return VALID_SECONDARY_BY_PRIMARY[primary] || [];
+    if (primary === null) {
+        return NON_SUMMONING_TREES;
+    }
+
+    return VALID_SKILL_COMBINATION[primary];
 }
 
 // ===========================
