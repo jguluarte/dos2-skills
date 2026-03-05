@@ -18,3 +18,7 @@ Thumbs.db
 
 # Claude Code worktrees (temporary)
 .claude/worktrees/
+.test-deps/
+
+# Dependencies
+node_modules/

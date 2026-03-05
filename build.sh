@@ -3,9 +3,6 @@
 
 set -e
 
-# Ensure devbox environment is loaded
-eval "$(devbox shellenv)"
-
 # Compile SCSS to CSS
 echo "Compiling SCSS..."
 sass css/styles.scss css/styles.css --style=compressed --no-source-map

@@ -4,8 +4,10 @@
     "dart-sass@latest",
     "python312@latest",
     "pre-commit@latest",
+    "nodejs@latest",
     "nodePackages.prettier@latest",
-    "nodePackages.stylelint@latest"
+    "nodePackages.stylelint@latest",
+    "yamllint@latest"
   ],
   "shell": {
     "init_hook": [

@@ -1,18 +1,12 @@
-/* ===========================
-   DOS2 Cross-Skills Styles
-   =========================== */
-
-/* Critical dark background styles inlined in index.html for instant load */
-
 // ===========================
 // Color Variables
 // ===========================
 
-$color-fire: #ff6600;
+$color-fire: #f60;
 $color-air: #66d9ff;
 $color-earth: #a0785a;
 $color-water: #1e90ff;
-$color-poison: #99cc00;
+$color-poison: #9c0;
 
 // Skill tree colors
 $color-pyrokinetic: $color-fire;
@@ -31,7 +25,7 @@ $bg-primary: #0a0e1a;
 $bg-secondary: #1a1f35;
 $text-primary: #e9ecef;
 $text-secondary: #aaa;
-$bg-overlay: rgba(15, 20, 35, 0.95);
+$bg-overlay: rgb(15 20 35 / 95%);
 
 // ===========================
 // Base Reset & Layout
@@ -47,7 +41,6 @@ html {
   height: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background-color: $bg-primary;
   background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
   background-attachment: fixed;
 }
@@ -56,7 +49,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background-color: $bg-primary;
+  background-color: transparent;
   color: $text-primary;
   padding-bottom: env(safe-area-inset-bottom, 20px);
 }
@@ -69,6 +62,7 @@ body {
   position: absolute;
   inset: 0;
   min-height: 100vh;
+
   // min-height: -webkit-fill-available;
   bottom: -100vh;
   padding-bottom: calc(100vh);
@@ -78,7 +72,7 @@ body {
   z-index: 5;
 
   &.visible {
-    background: rgba(10, 14, 26, 0.5);
+    background: rgb(10 14 26 / 50%);
     pointer-events: auto;
   }
 }
@@ -88,7 +82,7 @@ body {
   top: 0;
   z-index: 10;
   background: $bg-overlay;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
 }
 
 .filter-header {
@@ -101,7 +95,7 @@ body {
   user-select: none;
 
   &:active {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgb(255 255 255 / 5%);
   }
 }
 
@@ -131,8 +125,8 @@ body {
 
 .clear-btn {
   padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgb(255 255 255 / 15%);
+  border: 1px solid rgb(255 255 255 / 30%);
   border-radius: 4px;
   color: #fff;
   font-size: 0.75em;
@@ -144,7 +138,7 @@ body {
   flex-shrink: 0;
   white-space: nowrap;
 
-  &:hover { background: rgba(255, 255, 255, 0.25); }
+  &:hover { background: rgb(255 255 255 / 25%); }
   &:active { transform: scale(0.95); }
   &.hidden { display: none; }
 }
@@ -156,8 +150,8 @@ body {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(20, 25, 40, 0.98);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgb(20 25 40 / 98%);
+  border-top: 1px solid rgb(255 255 255 / 10%);
   padding: 12px 15px;
   z-index: 1;
 
@@ -201,9 +195,9 @@ body {
 
 .tree-filter-btn {
   padding: 6px 12px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgb(255 255 255 / 30%);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   color: #fff;
   font-size: 0.8em;
   font-weight: 600;
@@ -214,17 +208,11 @@ body {
 
   &.active {
     border-color: #fff;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgb(255 255 255 / 30%);
     transform: scale(1.05);
   }
 
-  &.disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-
-  &:not(.disabled):active {
+  &:active {
     transform: scale(0.95);
   }
 }
@@ -261,7 +249,7 @@ tree-header {
   font-size: 1.2em;
   font-weight: 700;
   padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 8%);
   border-radius: 12px;
   margin-bottom: 10px;
   border-left: 4px solid;
@@ -273,13 +261,14 @@ element-icon {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: currentColor;
+  background-color: currentcolor;
 }
 
 // Tree-specific colors
 @mixin tree-color($type, $color) {
   skill-tree[type="#{$type}"] {
     --primary-color: #{$color};
+
     color: $color;
   }
 }
@@ -296,11 +285,11 @@ element-icon {
 
 skill-card {
   display: block;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgb(255 255 255 / 5%);
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 10px;
-  border-left: 4px solid currentColor;
+  border-left: 4px solid currentcolor;
 
   &.hidden {
     display: none;
@@ -391,18 +380,8 @@ skill-effect {
   line-height: 1.4;
   margin-bottom: 8px;
   opacity: 0.9;
-  color: rgba(173, 216, 230, 0.95);
+  color: rgb(173 216 230 / 95%);
 
-  &[data-missing="true"] {
-    font-style: italic;
-    opacity: 0.7;
-  }
-}
-
-.special-term {
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-style: dotted;
 }
 
 skill-requirements {
@@ -418,9 +397,9 @@ req-badge {
   border-radius: 4px;
   font-size: 0.85em;
   font-weight: 600;
-  font-family: 'Courier New', 'Consolas', monospace;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: 'Courier New', Consolas, monospace;
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 15%);
 }
 
 // Requirement badge colors by tree
@@ -506,7 +485,7 @@ status {
 // ===========================
 
 // Desktop
-@media (min-width: 769px) {
+@media (width >= 769px) {
   .filter-overlay {
     display: none;
   }
@@ -534,7 +513,7 @@ status {
 }
 
 // Mobile
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .filter-groups {
     flex-direction: column;
     gap: 15px;
