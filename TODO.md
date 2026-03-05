@@ -2,7 +2,7 @@
 
 ## Environment Setup
 - [x] Set up devbox + direnv for reproducible development environment
-- [ ] Add linting tools (eslint, stylelint, yamllint)
+- [x] Add linting tools (eslint, stylelint, yamllint)
 - [x] Configure pre-commit hooks
 
 ## Refactoring: JavaScript Architecture
