@@ -16,8 +16,7 @@ const {
 test('URL parsing', () => {
     it('loads primary and secondary from URL params', () => {
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
-            `?and=${PYROKINETIC}&or=${WARFARE},${NECROMANCER}`
-        );
+            `?and=${PYROKINETIC}&or=${WARFARE},${NECROMANCER}`);
         assert.equal(primaryFilter, PYROKINETIC);
         assert.deepEqual(
             [...secondaryFilters].sort(),
@@ -26,16 +25,14 @@ test('URL parsing', () => {
 
     it('ignores invalid tree names', () => {
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
-            `?and=InvalidTree&or=FakeTree,${WARFARE}`
-        );
+            `?and=InvalidTree&or=FakeTree,${WARFARE}`);
         assert.equal(primaryFilter, null);
         assert.deepEqual([...secondaryFilters], [WARFARE]);
     });
 
     it('strips invalid secondary combos', () => {
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
-            `?and=${PYROKINETIC}&or=${WARFARE},${AEROTHEURGE}`
-        );
+            `?and=${PYROKINETIC}&or=${WARFARE},${AEROTHEURGE}`);
         assert.equal(primaryFilter, PYROKINETIC);
         assert.deepEqual([...secondaryFilters], [WARFARE]);
     });
@@ -46,8 +43,7 @@ test('URL parsing', () => {
 test('URL round-trip', () => {
     it('primary + secondary survives save then parse', () => {
         const qs = buildFilterQueryString(
-            PYROKINETIC, new Set([WARFARE, NECROMANCER])
-        );
+            PYROKINETIC, new Set([WARFARE, NECROMANCER]));
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(qs);
         assert.equal(primaryFilter, PYROKINETIC);
         assert.deepEqual(
@@ -73,8 +69,7 @@ test('URL round-trip', () => {
 
 test('secondary cleanup on primary change', () => {
     it('removes secondary that becomes the new primary', () => {
-        const clean = cleanSecondaryFilters(
-            WARFARE, new Set([WARFARE]));
+        const clean = cleanSecondaryFilters(WARFARE, new Set([WARFARE]));
         assert.deepEqual([...clean], []);
     });
 
