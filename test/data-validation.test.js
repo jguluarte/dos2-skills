@@ -20,7 +20,7 @@ test('skills.yaml :: file format', () => {
 
     it('the array is not empty', () => {
         assert.ok(skills.length > 0, 'Should have at least one skill');
-    })
+    });
 
     it('no duplicate skill names', () => {
         const names = skills.map(s => s.name);
@@ -120,7 +120,7 @@ test('Skill validation', () => {
                 });
             } else {
                 it('wiki_url is appropriately undefined', () => {
-                    assert.equal(d.wiki_url, undefined);
+                    assert.equal(wiki_url, undefined);
                 });
             }
         });

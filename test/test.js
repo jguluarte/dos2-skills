@@ -1,12 +1,10 @@
 const path = require('path');
-const { describe, it, before } = require('node:test');
+const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
 
 function getCallerFile() {
     const stack = new Error().stack.split('\n');
-    const callerLine = stack.find(
-        line => line.includes('.test.js')
-    );
+    const callerLine = stack.find(line => line.includes('.test.js'));
     if (!callerLine) return 'unknown';
     const match = callerLine.match(/\((.+?):\d+:\d+\)/);
     if (!match) return 'unknown';
@@ -18,4 +16,4 @@ function test(label, fn) {
     describe(`[${file}] ${label}`, fn);
 }
 
-module.exports = { test, describe, it, before, assert };
+module.exports = { test, describe, it, assert };
