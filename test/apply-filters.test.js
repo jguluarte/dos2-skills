@@ -63,7 +63,7 @@ test('filters behave as expected', () => {
                 it(`does not include summoning skills`, () => {
                     assert.ok( summonNames.every(n => !found.includes(n)) );
                 });
-            })
+            });
         }
 
         describe('Summoning as the primary filter...', () => {
