@@ -108,11 +108,10 @@ test('filters behave as expected', () => {
     describe('secondary filters only', () => {
         it('finds four skills', () => {
             const expected = [pyroNecro, aeroNecro, pyroWar, hydroWar];
-            const names = expected.map(s => s.name).sort();
 
             assert.deepEqual(
                 getVisibleSkills(skills, null, [NECROMANCER, WARFARE]),
-                names
+                expected.map(s => s.name).sort()
             );
         });
 

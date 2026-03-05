@@ -80,7 +80,7 @@ test('URL round-trip', () => {
 test('secondary cleanup on primary change', () => {
     it('removes secondary that becomes the new primary', () => {
         const clean = cleanSecondaryFilters( WARFARE, new Set([WARFARE]) );
-        assert.deepEqual([...clean], []);
+        assert.deepEqual( [...clean], [] );
     });
 
     it('preserves valid secondaries', () => {

@@ -18,7 +18,8 @@ test('tree constants', () => {
     it('ELEMENTAL_TREES', () => {
         assert.deepEqual(
             ELEMENTAL_TREES,
-            [PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST]);
+            [PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST]
+        );
     });
 
     it('NON_ELEMENTAL_TREES', () => {
@@ -38,15 +39,18 @@ test('tree constants', () => {
 
 test('valid secondary options', () => {
     it('Summoning pairs with elementals + Necromancer', () => {
-        assert.deepEqual(getValidSecondaryOptions(SUMMONING),
-            [...ELEMENTAL_TREES, NECROMANCER]);
+        assert.deepEqual(
+            getValidSecondaryOptions(SUMMONING),
+            [...ELEMENTAL_TREES, NECROMANCER]
+        );
     });
 
     for (const tree of ELEMENTAL_TREES) {
         it(`${tree} pairs with non-elementals`, () => {
             assert.deepEqual(
                 getValidSecondaryOptions(tree),
-                NON_ELEMENTAL_TREES);
+                NON_ELEMENTAL_TREES
+            );
         });
     }
 
@@ -54,7 +58,8 @@ test('valid secondary options', () => {
         it(`${tree} pairs with elementals`, () => {
             assert.deepEqual(
                 getValidSecondaryOptions(tree),
-                ELEMENTAL_TREES);
+                ELEMENTAL_TREES
+            );
         });
     }
 });
@@ -102,20 +107,23 @@ test('skill grouping', () => {
 test('summary text', () => {
     it('no filters: "Showing all skills"', () => {
         assert.equal(
-            buildSummaryText(null, new Set()),
-            'Showing all skills');
+            buildSummaryText( null, new Set() ),
+            'Showing all skills'
+        );
     });
 
     it('primary only', () => {
         assert.equal(
-            buildSummaryText(PYROKINETIC, new Set()),
-            `Showing all ${PYROKINETIC} skills`);
+            buildSummaryText( PYROKINETIC, new Set() ),
+            `Showing all ${PYROKINETIC} skills`
+        );
     });
 
     it('primary + secondary', () => {
         assert.equal(
-            buildSummaryText(PYROKINETIC, new Set([WARFARE])),
-            `Showing all ${PYROKINETIC} skills, with ${WARFARE}`);
+            buildSummaryText( PYROKINETIC, new Set([WARFARE]) ),
+            `Showing all ${PYROKINETIC} skills, with ${WARFARE}`
+        );
     });
 
     it('primary + two secondaries', () => {
@@ -124,19 +132,22 @@ test('summary text', () => {
             + NECROMANCER
         );
         assert.equal(
-            buildSummaryText(PYROKINETIC, new Set([WARFARE, NECROMANCER])),
-            expected);
+            buildSummaryText( PYROKINETIC, new Set([WARFARE, NECROMANCER]) ),
+            expected
+        );
     });
 
     it('single secondary only', () => {
         assert.equal(
-            buildSummaryText(null, new Set([WARFARE])),
-            `Showing all ${WARFARE} skills`);
+            buildSummaryText( null, new Set([WARFARE])) ,
+            `Showing all ${WARFARE} skills`
+        );
     });
 
     it('multiple secondaries joins with "or"', () => {
         assert.equal(
-            buildSummaryText(null, new Set([WARFARE, NECROMANCER])),
-            `Showing skills with ${WARFARE} or ${NECROMANCER}`);
+            buildSummaryText( null, new Set([WARFARE, NECROMANCER]) ),
+            `Showing skills with ${WARFARE} or ${NECROMANCER}`
+        );
     });
 });
