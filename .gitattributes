@@ -1,4 +1,4 @@
 # Generated files - exclude from git diff
 css/styles.css -diff linguist-generated
-index.html -diff linguist-generated
+/index.html -diff linguist-generated
 devbox.lock -diff
