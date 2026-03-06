@@ -4,6 +4,11 @@
 - [x] Set up devbox + direnv for reproducible development environment
 - [x] Add linting tools (eslint, stylelint, yamllint)
 - [x] Configure pre-commit hooks
+- [x] Move lint configs to `.config/` directory (eslint, stylelint, yamllint)
+- [x] Inline `build.sh` into Makefile as proper Make targets with dependency tracking
+- [x] Extract `src/index.html` as template with `__CSS_HASH__` placeholder
+- [x] Update pre-commit hook to run `make build` on css/scss/html changes
+- [x] Add GitHub Actions CI workflow (lint + test on PRs)
 
 ## Refactoring: JavaScript Architecture
 
@@ -57,6 +62,8 @@ What exists today: raw YAML dicts passed around as plain objects, string constan
 - [ ] Fix non-mobile rendering
 
 ## CSS / Visual Verification
+- [x] Fix iOS background gradient (fallback color for `background-attachment: fixed`)
+- [x] Lighten `$bg-primary` for better contrast with header bar
 - [ ] Add CSS color verification tests (ensure tree colors don't drift during refactoring)
 - [ ] Clean up coupling between JS rendering (data attributes) and CSS selectors — make the contract explicit
 - [ ] Consider screenshot/snapshot tests for visual regression (e.g. Playwright or similar)
