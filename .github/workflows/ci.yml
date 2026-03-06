@@ -5,7 +5,7 @@ on:
 
 jobs:
   lint:
-    name: Lint
+    name: Lint (devbox)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +18,7 @@ jobs:
         run: devbox run make lint
 
   test:
-    name: Test
+    name: Test (devbox)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,3 +29,55 @@ jobs:
 
       - name: Run tests
         run: devbox run make test
+
+  lint-native:
+    name: Lint (native)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-yamllint
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run linters
+        run: make lint
+
+  test-native:
+    name: Test (native)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: make test
