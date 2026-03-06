@@ -23,14 +23,14 @@ watch:
 	@echo "Watching css/styles.scss for changes..."
 	sass css/styles.scss:css/styles.css --watch --style=expanded
 
-# Run tests (uses Node.js built-in test runner, no npm needed)
+# If linters or test runners change...make any corresponding change needed to
+# .github/workflows/ci.yml
 test:
 	node --test --test-reporter=dot test/*.test.js
 
 test-verbose:
 	node --test test/*.test.js
 
-# Linting
 lint: lint-yaml lint-css lint-js
 
 lint-yaml:
