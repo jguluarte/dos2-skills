@@ -33,10 +33,10 @@ lint-yaml:
 	yamllint data/
 
 lint-css:
-	npx stylelint css/styles.scss
+	npx stylelint --config .config/stylelintrc.json css/styles.scss
 
 lint-js:
-	npx eslint js/ test/
+	npx eslint --config .config/eslint.config.mjs js/ test/
 
 # Deploy to GitHub Pages (pre-push hook auto-builds on main)
 deploy: build
