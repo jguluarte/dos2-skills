@@ -34,7 +34,7 @@ test-verbose:
 lint: lint-yaml lint-css lint-js
 
 lint-yaml:
-	yamllint data/
+	yamllint -c .config/yamllint.yml data/
 
 lint-css:
 	npx stylelint --config .config/stylelintrc.json css/styles.scss
