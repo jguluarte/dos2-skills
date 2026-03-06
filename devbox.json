@@ -11,14 +11,7 @@
   ],
   "shell": {
     "init_hook": [
-      "echo 'DevBox environment loaded'",
-      "echo 'Dart Sass: $(sass --version)'",
-      "echo 'Python: $(python3 --version)'",
       "pre-commit install --install-hooks 2>/dev/null || true"
-    ],
-    "scripts": {
-      "build-css": "sass styles.scss styles.css --style=compressed --no-source-map",
-      "watch-css": "sass styles.scss styles.css --watch --style=expanded"
-    }
+    ]
   }
 }
