@@ -141,8 +141,8 @@ function renderSkills() {
             const treeCompare = secondaryA.localeCompare(secondaryB);
             if (treeCompare !== 0) return treeCompare;
 
-            const spA = a.ability_details?.sp_cost || 0;
-            const spB = b.ability_details?.sp_cost || 0;
+            const spA = a.sp_cost || 0;
+            const spB = b.sp_cost || 0;
             return spA - spB;
         });
 
@@ -185,35 +185,30 @@ function createSkillCard(skill, category) {
                     data-secondary-tree="${secondaryTree.toLowerCase()}"
         >${nameHTML}</skill-name>`;
 
+    const icons = [];
+
+    // Add source blips
+    const sp = Math.min(skill.sp_cost || 0, 3);
+    if (sp > 0) {
+        icons.push(
+            `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
+    }
+
+    // Add ability blips
+    const ap = Math.min(skill.ap_cost || 0, 4);
+    if (ap > 0) {
+        icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
+    }
+
     let costHTML = '';
-    if (skill.ability_details) {
-        const icons = [];
-
-        // Add source blips
-        const sp = Math.min(skill.ability_details.sp_cost || 0, 3);
-        if (sp > 0) {
-            icons.push(
-                `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
-        }
-
-        // Add ability blips
-        const ap = Math.min(skill.ability_details.ap_cost || 0, 4);
-        if (ap > 0) {
-            icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
-        }
-
-        if (icons.length > 0) {
-            costHTML = `<skill-cost>${icons.join('')}</skill-cost>`;
-        }
+    if (icons.length > 0) {
+        costHTML = `<skill-cost>${icons.join('')}</skill-cost>`;
     }
 
-    let effectHTML = '';
-    if (skill.ability_details?.effect) {
-        effectHTML = `
+    const effectHTML = `
         <skill-effect>
-            ${skill.ability_details.effect}
+            ${skill.effect}
         </skill-effect>`;
-    }
 
     const reqBadges = Object.entries(skill.requirements)
         .sort(([treeA], [treeB]) => {
@@ -233,22 +228,17 @@ function createSkillCard(skill, category) {
         `<skill-requirements>${reqBadges}</skill-requirements>` : '';
 
     let statsHTML = '';
-    if (skill.ability_details) {
-        const hasRange = skill.ability_details.range;
-        const hasCooldown = skill.ability_details.cooldown;
-        if (hasRange || hasCooldown) {
-            const rangeHTML = hasRange ?
-                `Range: ${skill.ability_details.range}` : '';
-            const cooldownHTML = hasCooldown ?
-                `Cooldown: ${skill.ability_details.cooldown}` : '';
+    if (skill.range || skill.cooldown) {
+        const rangeHTML = skill.range ? `Range: ${skill.range}` : '';
+        const cooldownHTML = skill.cooldown ?
+            `Cooldown: ${skill.cooldown}` : '';
 
-            statsHTML = `
-                <skill-stats>
-                    <div>${rangeHTML}</div>
-                    <div>${cooldownHTML}</div>
-                </skill-stats>
-            `;
-        }
+        statsHTML = `
+            <skill-stats>
+                <div>${rangeHTML}</div>
+                <div>${cooldownHTML}</div>
+            </skill-stats>
+        `;
     }
 
     card.innerHTML = `
