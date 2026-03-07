@@ -43,7 +43,6 @@ test('Skill validation', () => {
     for (const skill of skills) {
         describe(skill.name, () => {
             const { name, requirements, wiki_url } = skill;
-            const d = skill.ability_details;
             const prerequisites = Object.keys(requirements);
 
             // structure
@@ -83,35 +82,34 @@ test('Skill validation', () => {
                 });
             }
 
-            // ability_details
             it('ap_cost is valid', () => {
-                assert.ok(Number.isInteger(d.ap_cost));
-                assert.ok(d.ap_cost >= 0);
+                assert.ok(Number.isInteger(skill.ap_cost));
+                assert.ok(skill.ap_cost >= 0);
             });
 
             it('sp_cost is valid', () => {
-                assert.ok(Number.isInteger(d.sp_cost));
-                assert.ok(d.sp_cost >= 0);
+                assert.ok(Number.isInteger(skill.sp_cost));
+                assert.ok(skill.sp_cost >= 0);
             });
 
             // Cooldown can be undefined for a handful of skills
-            if (d.cooldown !== undefined) {
+            if (skill.cooldown !== undefined) {
                 it('cooldown is a valid number', () => {
-                    assert.ok(Number.isInteger(d.cooldown));
-                    assert.ok(d.cooldown >= 0);
+                    assert.ok(Number.isInteger(skill.cooldown));
+                    assert.ok(skill.cooldown >= 0);
                 });
             } else {
                 it('cooldown is appropriately undefined', () => {
-                    assert.equal(d.cooldown, undefined);
+                    assert.equal(skill.cooldown, undefined);
                 });
             }
 
             it('range is valid', () => {
-                assert.match(d.range, /^(Self|PB AoE|All allies|\d+m)$/);
+                assert.match(skill.range, /^(Self|PB AoE|All allies|\d+m)$/);
             });
 
             it('has ability text', () => {
-                assert.ok(d.effect.trim().length > 0);
+                assert.ok(skill.effect.trim().length > 0);
             });
 
             if (wiki_url) {

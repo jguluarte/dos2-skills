@@ -55,13 +55,12 @@ make test     # Run test suite (Node.js built-in test runner)
     Summoning: 1
     Pyrokinetic: 1
   wiki_url: https://...
-  ability_details:
-    ap_cost: 1
-    sp_cost: 0
-    range: 13m
-    cooldown: 3
-    effect: >
-      Change Incarnate's element to fire...
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Change Incarnate's element to fire...
 ```
 
 ### Filter Logic

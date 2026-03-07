@@ -34,7 +34,7 @@ What exists today: raw YAML dicts passed around as plain objects, string constan
 
 **Model objects needed:**
 
-- [ ] **Skill** — wraps a raw YAML entry. Knows its `name`, `trees` (prereq tree names), `requirements` (tree→level), `ability_details`. Owns filter-matching logic: `skill.has(primary)`, `skill.any(secondaries)`, `skill.isSummoning`
+- [ ] **Skill** — wraps a raw YAML entry. Knows its `name`, `trees` (prereq tree names), `requirements` (tree→level), `ap_cost`, `sp_cost`, `range`, `cooldown`, `effect`. Owns filter-matching logic: `skill.has(primary)`, `skill.any(secondaries)`, `skill.isSummoning`
 - [ ] **SkillTree** — more than a string constant. Has `name`, `type` (elemental / non-elemental / summoning), `color`. Knows its valid pairings. Replaces the loose `ELEMENTAL_TREES` / `NON_ELEMENTAL_TREES` arrays and the `VALID_SECONDARY_BY_PRIMARY` lookup table
 - [ ] **FilterState** — encapsulates `primary` (SkillTree|null) + `secondaries` (Set<SkillTree>). Owns URL serialization (`toURL()`, `static fromURL()`), summary text generation, and valid-secondary cleanup on primary change. Replaces the module globals and scattered helper functions
 - [ ] **SkillCatalog** — holds the full list of Skills loaded from YAML. Can group by tree, filter by a FilterState, sort. Replaces the raw `skillsData` global and `groupSkillsByElement()`
