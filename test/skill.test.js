@@ -140,3 +140,23 @@ test('Skill.isSummoning', () => {
         assert.equal(skill.isSummoning, false);
     });
 });
+
+// ── secondaryTree ───────────────────────────────────────
+
+test('Skill.secondaryTree(category)', () => {
+    const skill = new Skill({
+        name: 'Bleed Fire',
+        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        ap_cost: 1, sp_cost: 0,
+        effect: 'test',
+    });
+
+    it('returns the tree that is not the given category', () => {
+        assert.equal(skill.secondaryTree('Pyrokinetic'), 'Polymorph');
+        assert.equal(skill.secondaryTree('Polymorph'), 'Pyrokinetic');
+    });
+
+    it('returns null when category is not in the skill trees', () => {
+        assert.equal(skill.secondaryTree('Warfare'), null);
+    });
+});
