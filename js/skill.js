@@ -34,7 +34,7 @@ export class Skill {
         this.range = raw.range ?? null;
         this.cooldown = raw.cooldown ?? null;
         this.effect = raw.effect;
-        this.url = raw.wiki_url ?? null;
+        this.url = raw.url ?? null;
 
         if (!raw.primary_tree) {
             throw new MissingPrimaryTreeError(raw.name);
