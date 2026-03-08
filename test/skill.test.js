@@ -17,7 +17,7 @@ test('Skill construction', () => {
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
         primary_tree: PYROKINETIC,
-        wiki_url: 'https://example.com/bleed-fire',
+        url: 'https://example.com/bleed-fire',
         ap_cost: 1,
         sp_cost: 0,
         range: '13m',

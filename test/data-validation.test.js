@@ -42,7 +42,7 @@ test('Skill validation', () => {
 
     for (const skill of skills) {
         describe(skill.name, () => {
-            const { name, requirements, wiki_url } = skill;
+            const { name, requirements } = skill;
             const prerequisites = Object.keys(requirements);
 
             // structure
@@ -127,13 +127,20 @@ test('Skill validation', () => {
                 );
             });
 
-            if (wiki_url) {
-                it('wiki_url is a valid URL', () => {
-                    assert.doesNotThrow(() => new URL(wiki_url));
+            it('does not use legacy wiki_url field', () => {
+                assert.equal(
+                    skill.wiki_url, undefined,
+                    `${name} should use "url" not "wiki_url"`
+                );
+            });
+
+            if (skill.url) {
+                it('url is a valid URL', () => {
+                    assert.doesNotThrow(() => new URL(skill.url));
                 });
             } else {
-                it('wiki_url is appropriately undefined', () => {
-                    assert.equal(wiki_url, undefined);
+                it('url is appropriately undefined', () => {
+                    assert.equal(skill.url, undefined);
                 });
             }
         });
