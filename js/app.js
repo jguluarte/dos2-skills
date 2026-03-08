@@ -132,11 +132,12 @@ function renderSkills() {
         const skills = skillsData[category];
         if (!skills || skills.length === 0) return;
 
-        const sortedSkills = [...skills].sort((a, b) => {
-            const secondaryA = a.secondaryTree(category) || '';
-            const secondaryB = b.secondaryTree(category) || '';
+        const otherTree = (skill) =>
+            skill.trees.find(t => t !== category) || '';
 
-            const treeCompare = secondaryA.localeCompare(secondaryB);
+        const sortedSkills = [...skills].sort((a, b) => {
+            const treeCompare =
+                otherTree(a).localeCompare(otherTree(b));
             if (treeCompare !== 0) return treeCompare;
 
             return a.spCost - b.spCost;
@@ -166,7 +167,8 @@ function createSkillCard(skill, category) {
     card.dataset.name = skill.name.toLowerCase();
     card.dataset.trees = skill.trees.join(',');
 
-    const secondary = skill.secondaryTree(category);
+    const secondary =
+        skill.trees.find(t => t !== category) || '';
 
     const nameHTML = skill.wikiUrl
         ? `<a href="${skill.wikiUrl}" target="_blank" rel="noopener">
