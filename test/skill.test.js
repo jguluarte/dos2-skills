@@ -1,6 +1,6 @@
 const { test, it, assert } = require('./test.js');
 
-const Skill = require('../js/skill.js');
+const { Skill } = require('../js/skill.js');
 
 // ── construction & properties ───────────────────────────
 
