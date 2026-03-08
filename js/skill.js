@@ -10,4 +10,17 @@ export class Skill {
         this.effect = raw.effect;
         this.wikiUrl = raw.wiki_url ?? null;
     }
+
+    get isSummoning() {
+        return this.trees.includes('Summoning');
+    }
+
+    has(tree) {
+        return this.trees.includes(tree);
+    }
+
+    any(trees) {
+        if (trees.size === 0) return true;
+        return this.trees.some(t => trees.has(t));
+    }
 }
