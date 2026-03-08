@@ -16,6 +16,7 @@ test('Skill construction', () => {
     const raw = {
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        primary_tree: PYROKINETIC,
         wiki_url: 'https://example.com/bleed-fire',
         ap_cost: 1,
         sp_cost: 0,
@@ -69,6 +70,7 @@ test('Skill construction with missing optional fields', () => {
     const raw = {
         name: 'Minimal Skill',
         requirements: { [WARFARE]: 2, [GEOMANCER]: 1 },
+        primary_tree: GEOMANCER,
         ap_cost: 2,
         sp_cost: 1,
         effect: 'Does something.',
@@ -92,6 +94,7 @@ test('Skill defaults for cost fields', () => {
     const skill = new Skill({
         name: 'No Costs',
         requirements: { [PYROKINETIC]: 1, [WARFARE]: 1 },
+        primary_tree: PYROKINETIC,
         effect: 'test',
     });
 
@@ -159,6 +162,7 @@ test('Skill.has(tree)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        primary_tree: PYROKINETIC,
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
@@ -178,6 +182,7 @@ test('Skill.any(trees)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        primary_tree: PYROKINETIC,
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
@@ -200,6 +205,7 @@ test('Skill.isSummoning', () => {
         const skill = new Skill({
             name: 'Conjure Incarnate',
             requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 },
+            primary_tree: SUMMONING,
             ap_cost: 2, sp_cost: 0,
             effect: 'test',
         });
@@ -210,6 +216,7 @@ test('Skill.isSummoning', () => {
         const skill = new Skill({
             name: 'Bleed Fire',
             requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
         });

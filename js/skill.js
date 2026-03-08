@@ -1,7 +1,8 @@
-import { ALL_TREES, ELEMENTAL_TREES, SUMMONING } from './constants.js';
+import { ALL_TREES, SUMMONING } from './constants.js';
 import {
     MissingNameError, MissingRequirementsError, MissingEffectError,
-    UnknownTreeError, PrerequisiteError,
+    UnknownTreeError, PrerequisiteError, MissingPrimaryTreeError,
+    InvalidPrimaryTreeError,
 } from './errors.js';
 
 export class Skill {
@@ -35,23 +36,18 @@ export class Skill {
         this.effect = raw.effect;
         this.url = raw.wiki_url ?? null;
 
-        // TODO: Once YAML includes primary_tree, read it directly
-        // instead of computing it here.
-        const { primary, secondary } = this.#classifyTrees();
-        this.primaryTree = primary;
-        this.secondaryTree = secondary;
-    }
-
-    #classifyTrees() {
-        const [a, b] = this.trees;
-
-        if (a === SUMMONING) return { primary: a, secondary: b };
-        if (b === SUMMONING) return { primary: b, secondary: a };
-
-        if (ELEMENTAL_TREES.includes(a)) return { primary: a, secondary: b };
-        if (ELEMENTAL_TREES.includes(b)) return { primary: b, secondary: a };
-
-        return { primary: a, secondary: b };
+        if (!raw.primary_tree) {
+            throw new MissingPrimaryTreeError(raw.name);
+        }
+        if (!this.trees.includes(raw.primary_tree)) {
+            throw new InvalidPrimaryTreeError(
+                raw.name, raw.primary_tree
+            );
+        }
+        this.primaryTree = raw.primary_tree;
+        this.secondaryTree = this.trees.find(
+            t => t !== raw.primary_tree
+        );
     }
 
     get isSummoning() {
