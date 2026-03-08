@@ -78,19 +78,6 @@ git push origin main
 
 Hooks are installed automatically on `direnv` load (idempotent).
 
-### Manual Deployment
-
-```bash
-make deploy   # Builds + commits + pushes to main
-```
-
-This will:
-1. Compile SCSS → CSS
-2. Update CSS cache-busting hash in `index.html`
-3. Commit the updated `index.html`
-4. Push to `main` branch
-5. GitHub Pages auto-deploys
-
 **Live site:** https://jguluarte.github.io/dos2-skills
 
 ### Cache Busting
@@ -111,5 +98,3 @@ Shows one commit at a time with visual separators.
 
 - **User prefers to review diffs manually in shell** - don't show long diffs unless asked
 - **Use branches, not worktrees** - Devbox doesn't work well with worktrees
-- VSCode plugin doesn't allow agents to act without inputs (requires manual approval)
-- Current workaround: Using Claude.ai web interface for more autonomous workflow
