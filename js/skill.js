@@ -23,4 +23,9 @@ export class Skill {
         if (trees.size === 0) return true;
         return this.trees.some(t => trees.has(t));
     }
+
+    secondaryTree(category) {
+        if (!this.trees.includes(category)) return null;
+        return this.trees.find(t => t !== category) ?? null;
+    }
 }
