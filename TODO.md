@@ -36,7 +36,7 @@ What exists today: raw YAML dicts passed around as plain objects, string constan
 
 - [x] **Skill** — wraps a raw YAML entry. Knows its `name`, `trees`, `requirements`, `apCost`, `spCost`, `range`, `cooldown`, `effect`, `wikiUrl`. Owns `has(tree)`, `isSummoning`, `primaryTree`, `secondaryTree`. Validates on construction.
   - [x] Validation error types — `MissingNameError`, `MissingRequirementsError`, `MissingEffectError`, `UnknownTreeError`, `PrerequisiteError` in `js/errors.js`; tests check error type
-  - [ ] Add `primary_tree` to YAML data, read directly instead of computing (removes `#classifyTrees()`)
+  - [x] Add `primary_tree` to YAML data, read directly instead of computing (removes `#classifyTrees()`)
   - [ ] Rename `wiki_url` to `url` in YAML data (Skill class already reads it as `url`)
   - [ ] Consider TypeScript migration for more natural typing & validation
   - [ ] `any(trees)` — refactor out to SkillCatalog when that object is built; filter-matching logic belongs on the collection, not individual skills
