@@ -112,6 +112,21 @@ test('Skill validation', () => {
                 assert.ok(skill.effect.trim().length > 0);
             });
 
+            it('has a primary_tree field', () => {
+                assert.ok(
+                    skill.primary_tree,
+                    `${name} is missing primary_tree`
+                );
+            });
+
+            it('primary_tree is one of the prerequisites', () => {
+                assert.ok(
+                    prerequisites.includes(skill.primary_tree),
+                    `${name}: primary_tree "${skill.primary_tree}"`
+                    + ` is not in requirements`
+                );
+            });
+
             if (wiki_url) {
                 it('wiki_url is a valid URL', () => {
                     assert.doesNotThrow(() => new URL(wiki_url));
