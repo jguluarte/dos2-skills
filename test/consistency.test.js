@@ -1,5 +1,5 @@
 const { test, it, assert } = require('./test.js');
-const mock = require('./mock.js');
+const { buildSkill } = require('./helpers.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
@@ -65,25 +65,25 @@ test('valid secondary options', () => {
 });
 
 test('skill grouping', () => {
-    const sumPyro = mock.skill(
+    const sumPyro = buildSkill(
         'Sum+Pyro', [SUMMONING, PYROKINETIC]);
-    const sumGeo = mock.skill(
+    const sumGeo = buildSkill(
         'Sum+Geo', [SUMMONING, GEOMANCER]);
-    const pyroNec = mock.skill(
+    const pyroNec = buildSkill(
         'Pyro+Nec', [PYROKINETIC, NECROMANCER]);
-    const pyroWar = mock.skill(
+    const pyroWar = buildSkill(
         'Pyro+War', [PYROKINETIC, WARFARE]);
-    const aeroNec = mock.skill(
+    const aeroNec = buildSkill(
         'Aero+Nec', [AEROTHEURGE, NECROMANCER]);
-    const airNec = mock.skill(
+    const airNec = buildSkill(
         'Air+Nec', [AEROTHEURGE, NECROMANCER]);
-    const geoHunt = mock.skill(
+    const geoHunt = buildSkill(
         'Geo+Hunt', [GEOMANCER, HUNTSMAN]);
-    const geoPoly = mock.skill(
+    const geoPoly = buildSkill(
         'Geo+Poly', [GEOMANCER, POLYMORPH]);
-    const hydroNec = mock.skill(
+    const hydroNec = buildSkill(
         'Hydro+Nec', [HYDROSOPHIST, NECROMANCER]);
-    const hydroRog = mock.skill(
+    const hydroRog = buildSkill(
         'Hydro+Rog', [HYDROSOPHIST, SCOUNDREL]);
 
     const skills = [

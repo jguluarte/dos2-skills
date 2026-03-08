@@ -1,6 +1,6 @@
 const { Skill } = require('../js/skill.js');
 
-function rawSkill(name, trees) {
+function buildRawSkill(name, trees) {
     const requirements = {};
     trees.forEach(t => { requirements[t] = 1; });
     return {
@@ -9,8 +9,8 @@ function rawSkill(name, trees) {
     };
 }
 
-function skill(name, trees) {
-    return new Skill(rawSkill(name, trees));
+function buildSkill(name, trees) {
+    return new Skill(buildRawSkill(name, trees));
 }
 
-module.exports = { skill, rawSkill };
+module.exports = { buildSkill, buildRawSkill };
