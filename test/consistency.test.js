@@ -1,5 +1,4 @@
 const { test, it, assert } = require('./test.js');
-const mock = require('./mock.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
@@ -10,7 +9,6 @@ const {
 const {
     getValidSecondaryOptions,
     buildSummaryText,
-    groupSkillsByElement,
 } = require('../js/filter-logic.js');
 
 
@@ -63,46 +61,6 @@ test('valid secondary options', () => {
         });
     }
 });
-
-test('skill grouping', () => {
-    const sumPyro = mock.skill('Sum+Pyro', [SUMMONING, PYROKINETIC]);
-    const sumGeo = mock.skill('Sum+Geo', [SUMMONING, GEOMANCER]);
-    const pyroNec = mock.skill('Pyro+Nec', [PYROKINETIC, NECROMANCER]);
-    const pyroWar = mock.skill('Pyro+War', [PYROKINETIC, WARFARE]);
-    const aeroNec = mock.skill('Aero+Nec', [AEROTHEURGE, NECROMANCER]);
-    const airNec = mock.skill('Air+Nec', [AEROTHEURGE, NECROMANCER]);
-    const geoHunt = mock.skill('Geo+Hunt', [GEOMANCER, HUNTSMAN]);
-    const geoPoly = mock.skill('Geo+Poly', [GEOMANCER, POLYMORPH]);
-    const hydroNec = mock.skill('Hydro+Nec', [HYDROSOPHIST, NECROMANCER]);
-    const hydroRog = mock.skill('Hydro+Rog', [HYDROSOPHIST, SCOUNDREL]);
-
-    const skills = [
-        sumPyro, sumGeo, pyroNec, pyroWar, aeroNec,
-        airNec, geoHunt, geoPoly, hydroNec, hydroRog,
-    ];
-    const grouped = groupSkillsByElement(skills);
-
-    it('Summoning group', () => {
-        assert.deepEqual(grouped[SUMMONING], [sumPyro, sumGeo]);
-    });
-
-    it('Pyrokinetic group', () => {
-        assert.deepEqual(grouped[PYROKINETIC], [pyroNec, pyroWar]);
-    });
-
-    it('Aerotheurge group', () => {
-        assert.deepEqual(grouped[AEROTHEURGE], [aeroNec, airNec]);
-    });
-
-    it('Geomancer group', () => {
-        assert.deepEqual(grouped[GEOMANCER], [geoHunt, geoPoly]);
-    });
-
-    it('Hydrosophist group', () => {
-        assert.deepEqual(grouped[HYDROSOPHIST], [hydroNec, hydroRog]);
-    });
-});
-
 
 test('summary text', () => {
     it('no filters: "Showing all skills"', () => {

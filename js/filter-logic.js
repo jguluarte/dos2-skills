@@ -1,5 +1,5 @@
 import {
-    SUMMONING, ELEMENTAL_TREES, ALL_TREES, NON_SUMMONING_TREES,
+    SUMMONING, ALL_TREES, NON_SUMMONING_TREES,
     VALID_SKILL_COMBINATION,
 } from './constants.js';
 
@@ -132,34 +132,4 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
     const before = joined.substring(0, lastComma);
     const after = joined.substring(lastComma + 2);
     return `${primaryStr}, with ${before} or ${after}`;
-}
-
-// ===========================
-// Utility functions
-// ===========================
-
-/**
- * Get the secondary tree for a skill (the one that's not the category).
- */
-export function getSecondaryTree(skillTrees, primaryCategory) {
-    return skillTrees.find(tree => tree !== primaryCategory) || null;
-}
-
-export function groupSkillsByElement(skills) {
-    const grouped = {
-        [SUMMONING]: [],
-    };
-    ELEMENTAL_TREES.forEach(t => { grouped[t] = []; });
-
-    skills.forEach(skill => {
-        const trees = Object.keys(skill.requirements);
-        if (trees.includes(SUMMONING)) {
-            grouped[SUMMONING].push(skill);
-        } else {
-            const elementTree = trees.find(t => ELEMENTAL_TREES.includes(t));
-            if (elementTree) grouped[elementTree].push(skill);
-        }
-    });
-
-    return grouped;
 }
