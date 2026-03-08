@@ -1,13 +1,16 @@
 const { test, it, assert } = require('./test.js');
 
 const { Skill } = require('../js/skill.js');
+const {
+    SUMMONING, PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER, GEOMANCER,
+} = require('../js/constants.js');
 
 // ── construction & properties ───────────────────────────
 
 test('Skill construction', () => {
     const raw = {
         name: 'Bleed Fire',
-        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
         wiki_url: 'https://example.com/bleed-fire',
         ap_cost: 1,
         sp_cost: 0,
@@ -22,18 +25,21 @@ test('Skill construction', () => {
     });
 
     it('exposes trees as sorted array of requirement keys', () => {
-        assert.deepEqual(skill.trees, ['Polymorph', 'Pyrokinetic']);
+        assert.deepEqual(skill.trees, [POLYMORPH, PYROKINETIC]);
     });
 
     it('exposes requirements map', () => {
-        assert.deepEqual(skill.requirements, { Pyrokinetic: 1, Polymorph: 1 });
+        assert.deepEqual(
+            skill.requirements,
+            { [PYROKINETIC]: 1, [POLYMORPH]: 1 }
+        );
     });
 
-    it('exposes ap_cost', () => {
+    it('exposes apCost', () => {
         assert.equal(skill.apCost, 1);
     });
 
-    it('exposes sp_cost', () => {
+    it('exposes spCost', () => {
         assert.equal(skill.spCost, 0);
     });
 
@@ -57,7 +63,7 @@ test('Skill construction', () => {
 test('Skill construction with missing optional fields', () => {
     const raw = {
         name: 'Minimal Skill',
-        requirements: { Warfare: 2, Geomancer: 1 },
+        requirements: { [WARFARE]: 2, [GEOMANCER]: 1 },
         ap_cost: 2,
         sp_cost: 1,
         effect: 'Does something.',
@@ -77,41 +83,106 @@ test('Skill construction with missing optional fields', () => {
     });
 });
 
+test('Skill defaults for cost fields', () => {
+    const skill = new Skill({
+        name: 'No Costs',
+        requirements: { [PYROKINETIC]: 1, [WARFARE]: 1 },
+        effect: 'test',
+    });
+
+    it('apCost defaults to 0 when missing', () => {
+        assert.equal(skill.apCost, 0);
+    });
+
+    it('spCost defaults to 0 when missing', () => {
+        assert.equal(skill.spCost, 0);
+    });
+});
+
+// ── validation ──────────────────────────────────────────
+
+test('Skill validation', () => {
+    it('throws when name is missing', () => {
+        assert.throws(() => new Skill({
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            effect: 'test',
+        }), /name/i);
+    });
+
+    it('throws when requirements is missing', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Skill',
+            effect: 'test',
+        }), /requirements/i);
+    });
+
+    it('throws when requirements is empty', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Skill',
+            requirements: {},
+            effect: 'test',
+        }), /requirements/i);
+    });
+
+    it('throws when effect is missing', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Skill',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        }), /effect/i);
+    });
+
+    it('throws when a requirement tree name is invalid', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Skill',
+            requirements: { FakeTree: 1, [PYROKINETIC]: 1 },
+            effect: 'test',
+        }), /tree.*FakeTree/i);
+    });
+
+    it('throws when a requirement level is not a positive integer', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Skill',
+            requirements: { [PYROKINETIC]: 0, [POLYMORPH]: 1 },
+            effect: 'test',
+        }), /level/i);
+    });
+});
+
 // ── filter methods ──────────────────────────────────────
 
 test('Skill.has(tree)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
-        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
 
     it('returns true for a tree the skill requires', () => {
-        assert.equal(skill.has('Pyrokinetic'), true);
-        assert.equal(skill.has('Polymorph'), true);
+        assert.equal(skill.has(PYROKINETIC), true);
+        assert.equal(skill.has(POLYMORPH), true);
     });
 
     it('returns false for a tree the skill does not require', () => {
-        assert.equal(skill.has('Warfare'), false);
-        assert.equal(skill.has('Summoning'), false);
+        assert.equal(skill.has(WARFARE), false);
+        assert.equal(skill.has(SUMMONING), false);
     });
 });
 
 test('Skill.any(trees)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
-        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
 
     it('returns true when at least one tree matches', () => {
-        assert.equal(skill.any(new Set(['Pyrokinetic', 'Warfare'])), true);
+        assert.equal(skill.any(new Set([PYROKINETIC, WARFARE])), true);
     });
 
     it('returns false when no trees match', () => {
-        assert.equal(skill.any(new Set(['Warfare', 'Necromancer'])), false);
+        assert.equal(skill.any(new Set([WARFARE, NECROMANCER])), false);
     });
 
     it('returns true for empty set (vacuously true — no constraint)', () => {
@@ -123,7 +194,7 @@ test('Skill.isSummoning', () => {
     it('returns true for summoning skills', () => {
         const skill = new Skill({
             name: 'Conjure Incarnate',
-            requirements: { Summoning: 1, Pyrokinetic: 1 },
+            requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 },
             ap_cost: 2, sp_cost: 0,
             effect: 'test',
         });
@@ -133,7 +204,7 @@ test('Skill.isSummoning', () => {
     it('returns false for non-summoning skills', () => {
         const skill = new Skill({
             name: 'Bleed Fire',
-            requirements: { Pyrokinetic: 1, Polymorph: 1 },
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
         });
@@ -146,17 +217,17 @@ test('Skill.isSummoning', () => {
 test('Skill.secondaryTree(category)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
-        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
 
     it('returns the tree that is not the given category', () => {
-        assert.equal(skill.secondaryTree('Pyrokinetic'), 'Polymorph');
-        assert.equal(skill.secondaryTree('Polymorph'), 'Pyrokinetic');
+        assert.equal(skill.secondaryTree(PYROKINETIC), POLYMORPH);
+        assert.equal(skill.secondaryTree(POLYMORPH), PYROKINETIC);
     });
 
     it('returns null when category is not in the skill trees', () => {
-        assert.equal(skill.secondaryTree('Warfare'), null);
+        assert.equal(skill.secondaryTree(WARFARE), null);
     });
 });
