@@ -13,17 +13,17 @@
 ## Refactoring: JavaScript Architecture
 
 ### State management (app.js)
-- [ ] Replace module-level globals (`skillsData`, `primaryFilter`, `secondaryFilters`) with a single state object — makes data flow explicit and opens the door to passing state rather than mutating shared variables
+- [ ] Replace module-level globals (`skillsByTree`, `primaryFilter`, `secondaryFilters`) with a single state object — makes data flow explicit and opens the door to passing state rather than mutating shared variables
 - [ ] Centralize state syncing — `togglePrimaryFilter`, `toggleSecondaryFilter`, and `clearFilters` each repeat the same 4-5 post-update calls; extract a single `syncUI()` or similar
 - [ ] Fragile initialization order (lines 362-370) — calls must happen in a specific sequence with no indication why; document or restructure
 
 ### Naming clarity
-- [ ] `hasRange`/`hasCooldown` (app.js:237-238) — named like booleans but hold actual values; rename to `range`/`cooldown`
+- [x] `skillsData` (app.js) — renamed to `skillsByCategory`
 - [ ] `category` parameter (app.js `renderSkills`, `createSkillCard`) — easily confused with filter "primary/secondary" terminology; consider `displayTree` or `sectionTree`
 - [ ] `andFilter`/`orFilter` (filter-logic.js:95,100) — URL param names leak into code; rename to `primaryParam`/`secondaryParam` to match app terminology
 
 ### Code structure
-- [ ] `createSkillCard()` (~100 lines of string concatenation) — refactor to DOM construction or break into smaller builders
+- [ ] `createSkillCard()` (~100 lines of string concatenation) — extract into a SkillCardView or similar; this is the most natural next refactor after the Skill class
 - [ ] `reqBadges` sort (app.js:219-223) — non-obvious `return 1/-1/0` to push category tree last; clarify or extract
 - [ ] `buildSummaryText` (filter-logic.js:146-148, 154-156) — duplicated join-with-"or" pattern; extract helper
 - [ ] `applyFilters` (app.js:289) — hidden `window.scrollTo` side effect; move to caller or rename to reflect it
@@ -34,15 +34,21 @@ What exists today: raw YAML dicts passed around as plain objects, string constan
 
 **Model objects needed:**
 
-- [ ] **Skill** — wraps a raw YAML entry. Knows its `name`, `trees` (prereq tree names), `requirements` (tree→level), `ap_cost`, `sp_cost`, `range`, `cooldown`, `effect`. Owns filter-matching logic: `skill.has(primary)`, `skill.any(secondaries)`, `skill.isSummoning`
+- [x] **Skill** — wraps a raw YAML entry. Knows its `name`, `trees`, `requirements`, `apCost`, `spCost`, `range`, `cooldown`, `effect`, `wikiUrl`. Owns `has(tree)`, `isSummoning`, `primaryTree`, `secondaryTree`. Validates on construction.
+  - [x] Validation error types — `MissingNameError`, `MissingRequirementsError`, `MissingEffectError`, `UnknownTreeError`, `PrerequisiteError` in `js/errors.js`; tests check error type
+  - [ ] Add `primary_tree` to YAML data, read directly instead of computing (removes `#classifyTrees()`)
+  - [ ] Rename `wiki_url` to `url` in YAML data (Skill class already reads it as `url`)
+  - [ ] Consider TypeScript migration for more natural typing & validation
+  - [ ] `any(trees)` — refactor out to SkillCatalog when that object is built; filter-matching logic belongs on the collection, not individual skills
 - [ ] **SkillTree** — more than a string constant. Has `name`, `type` (elemental / non-elemental / summoning), `color`. Knows its valid pairings. Replaces the loose `ELEMENTAL_TREES` / `NON_ELEMENTAL_TREES` arrays and the `VALID_SECONDARY_BY_PRIMARY` lookup table
 - [ ] **FilterState** — encapsulates `primary` (SkillTree|null) + `secondaries` (Set<SkillTree>). Owns URL serialization (`toURL()`, `static fromURL()`), summary text generation, and valid-secondary cleanup on primary change. Replaces the module globals and scattered helper functions
-- [ ] **SkillCatalog** — holds the full list of Skills loaded from YAML. Can group by tree, filter by a FilterState, sort. Replaces the raw `skillsData` global and `groupSkillsByElement()`
+- [ ] **SkillCatalog** — holds the full list of Skills loaded from YAML. Can filter by a FilterState, sort. Replaces the `skillsByCategory` global. Absorbs `any()` from Skill class (see FIXME). Will also absorb `groupSkillsByTree` logic from app.js
 
 **View layer:**
 
+- [ ] Extract `createSkillCard()` into a dedicated view module — takes a Skill object and display context, returns DOM. This is tightly coupled to Skill and is the natural next PR after the Skill class refactor
 - [ ] Extract pure rendering functions (data in, DOM elements out)
-- [ ] `createSkillCard()` should take a Skill object, not a raw dict
+- [x] `createSkillCard()` should take a Skill object, not a raw dict
 - [ ] Rendering should read from Model objects, never from raw YAML data
 
 **Controller layer:**
