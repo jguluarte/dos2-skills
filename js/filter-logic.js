@@ -3,6 +3,8 @@ import {
     VALID_SKILL_COMBINATION,
 } from './constants.js';
 
+import { Skill } from './skill.js';
+
 // ===========================
 // Pairing rules
 // ===========================
@@ -135,28 +137,22 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
 }
 
 // ===========================
-// Utility functions
+// Skill grouping
 // ===========================
 
-/**
- * Get the secondary tree for a skill (the one that's not the category).
- */
-export function getSecondaryTree(skillTrees, primaryCategory) {
-    return skillTrees.find(tree => tree !== primaryCategory) || null;
-}
-
-export function groupSkillsByElement(skills) {
+export function groupSkillsByElement(rawSkills) {
     const grouped = {
         [SUMMONING]: [],
     };
     ELEMENTAL_TREES.forEach(t => { grouped[t] = []; });
 
-    skills.forEach(skill => {
-        const trees = Object.keys(skill.requirements);
-        if (trees.includes(SUMMONING)) {
+    rawSkills.forEach(raw => {
+        const skill = raw instanceof Skill ? raw : new Skill(raw);
+        if (skill.isSummoning) {
             grouped[SUMMONING].push(skill);
         } else {
-            const elementTree = trees.find(t => ELEMENTAL_TREES.includes(t));
+            const elementTree = skill.trees.find(t =>
+                ELEMENTAL_TREES.includes(t));
             if (elementTree) grouped[elementTree].push(skill);
         }
     });

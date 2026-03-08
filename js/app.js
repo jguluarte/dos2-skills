@@ -7,7 +7,6 @@ import {
     parseFiltersFromURL,
     buildFilterQueryString,
     buildSummaryText,
-    getSecondaryTree,
     groupSkillsByElement,
 } from './filter-logic.js';
 
@@ -133,17 +132,13 @@ function renderSkills() {
         if (!skills || skills.length === 0) return;
 
         const sortedSkills = [...skills].sort((a, b) => {
-            const treesA = Object.keys(a.requirements);
-            const treesB = Object.keys(b.requirements);
-            const secondaryA = getSecondaryTree(treesA, category) || '';
-            const secondaryB = getSecondaryTree(treesB, category) || '';
+            const secondaryA = a.secondaryTree(category) || '';
+            const secondaryB = b.secondaryTree(category) || '';
 
             const treeCompare = secondaryA.localeCompare(secondaryB);
             if (treeCompare !== 0) return treeCompare;
 
-            const spA = a.sp_cost || 0;
-            const spB = b.sp_cost || 0;
-            return spA - spB;
+            return (a.spCost || 0) - (b.spCost || 0);
         });
 
         const section = document.createElement('skill-tree');
@@ -168,34 +163,30 @@ function renderSkills() {
 function createSkillCard(skill, category) {
     const card = document.createElement('skill-card');
     card.dataset.name = skill.name.toLowerCase();
+    card.dataset.trees = skill.trees.join(',');
 
-    const trees = Object.keys(skill.requirements);
-    card.dataset.trees = trees.join(',');
+    const secondary = skill.secondaryTree(category);
 
-    const secondaryTree = getSecondaryTree(trees, category);
-
-    const nameHTML = skill.wiki_url
-        ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener">
+    const nameHTML = skill.wikiUrl
+        ? `<a href="${skill.wikiUrl}" target="_blank" rel="noopener">
          ${skill.name}
        </a>`
         : `<span>${skill.name}</span>`;
 
     const nameElement = `
         <skill-name data-primary-tree="${category.toLowerCase()}"
-                    data-secondary-tree="${secondaryTree.toLowerCase()}"
+                    data-secondary-tree="${secondary.toLowerCase()}"
         >${nameHTML}</skill-name>`;
 
     const icons = [];
 
-    // Add source blips
-    const sp = Math.min(skill.sp_cost || 0, 3);
+    const sp = Math.min(skill.spCost || 0, 3);
     if (sp > 0) {
         icons.push(
             `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
     }
 
-    // Add ability blips
-    const ap = Math.min(skill.ap_cost || 0, 4);
+    const ap = Math.min(skill.apCost || 0, 4);
     if (ap > 0) {
         icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
     }
