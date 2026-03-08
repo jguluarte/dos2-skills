@@ -76,3 +76,67 @@ test('Skill construction with missing optional fields', () => {
         assert.equal(skill.cooldown, null);
     });
 });
+
+// ── filter methods ──────────────────────────────────────
+
+test('Skill.has(tree)', () => {
+    const skill = new Skill({
+        name: 'Bleed Fire',
+        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        ap_cost: 1, sp_cost: 0,
+        effect: 'test',
+    });
+
+    it('returns true for a tree the skill requires', () => {
+        assert.equal(skill.has('Pyrokinetic'), true);
+        assert.equal(skill.has('Polymorph'), true);
+    });
+
+    it('returns false for a tree the skill does not require', () => {
+        assert.equal(skill.has('Warfare'), false);
+        assert.equal(skill.has('Summoning'), false);
+    });
+});
+
+test('Skill.any(trees)', () => {
+    const skill = new Skill({
+        name: 'Bleed Fire',
+        requirements: { Pyrokinetic: 1, Polymorph: 1 },
+        ap_cost: 1, sp_cost: 0,
+        effect: 'test',
+    });
+
+    it('returns true when at least one tree matches', () => {
+        assert.equal(skill.any(new Set(['Pyrokinetic', 'Warfare'])), true);
+    });
+
+    it('returns false when no trees match', () => {
+        assert.equal(skill.any(new Set(['Warfare', 'Necromancer'])), false);
+    });
+
+    it('returns true for empty set (vacuously true — no constraint)', () => {
+        assert.equal(skill.any(new Set()), true);
+    });
+});
+
+test('Skill.isSummoning', () => {
+    it('returns true for summoning skills', () => {
+        const skill = new Skill({
+            name: 'Conjure Incarnate',
+            requirements: { Summoning: 1, Pyrokinetic: 1 },
+            ap_cost: 2, sp_cost: 0,
+            effect: 'test',
+        });
+        assert.equal(skill.isSummoning, true);
+    });
+
+    it('returns false for non-summoning skills', () => {
+        const skill = new Skill({
+            name: 'Bleed Fire',
+            requirements: { Pyrokinetic: 1, Polymorph: 1 },
+            ap_cost: 1, sp_cost: 0,
+            effect: 'test',
+        });
+        assert.equal(skill.isSummoning, false);
+    });
+});
