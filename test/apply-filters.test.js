@@ -1,5 +1,5 @@
 const { test, describe, it, assert } = require('./test.js');
-const mock = require('./mock.js');
+const { buildSkill } = require('./helpers.js');
 
 const {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
@@ -13,10 +13,8 @@ const { shouldSkillShow } = require('../js/filter-logic.js');
 function getVisibleSkills(skills, primary, secondary = []) {
     const secondarySet = new Set(secondary);
     return skills
-        .filter(s => {
-            const trees = Object.keys(s.requirements);
-            return shouldSkillShow(trees, primary, secondarySet);
-        })
+        .filter(s =>
+            shouldSkillShow(s.trees, primary, secondarySet))
         .map(s => s.name)
         .sort();
 }
@@ -24,12 +22,12 @@ function getVisibleSkills(skills, primary, secondary = []) {
 // ── filter matching ─────────────────────────────────────
 
 test('filters behave as expected', () => {
-    const pyroNecro = mock.skill('Pyro+Necro', [PYROKINETIC, NECROMANCER]);
-    const aeroNecro = mock.skill('Aero+Necro', [AEROTHEURGE, NECROMANCER]);
-    const pyroWar = mock.skill('Pyro+Warfare', [PYROKINETIC, WARFARE]);
-    const hydroWar = mock.skill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
-    const sumPyro = mock.skill('Summon+Pyro', [SUMMONING, PYROKINETIC]);
-    const sumNecro = mock.skill('Summon+Necro', [SUMMONING, NECROMANCER]);
+    const pyroNecro = buildSkill('Pyro+Necro', [PYROKINETIC, NECROMANCER]);
+    const aeroNecro = buildSkill('Aero+Necro', [AEROTHEURGE, NECROMANCER]);
+    const pyroWar = buildSkill('Pyro+Warfare', [PYROKINETIC, WARFARE]);
+    const hydroWar = buildSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
+    const sumPyro = buildSkill('Summon+Pyro', [SUMMONING, PYROKINETIC]);
+    const sumNecro = buildSkill('Summon+Necro', [SUMMONING, NECROMANCER]);
 
     const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
 
@@ -74,8 +72,7 @@ test('filters behave as expected', () => {
             });
 
             for (const skill of [sumNecro, sumPyro]) {
-                const prereqs = Object.keys(skill.requirements);
-                const tree = prereqs.find(t => t !== SUMMONING);
+                const tree = skill.trees.find(t => t !== SUMMONING);
                 const found = getVisibleSkills(skills, SUMMONING, [tree]);
 
                 it(`can find ${skill.name} filtering by ${tree}`, () => {
@@ -94,8 +91,8 @@ test('filters behave as expected', () => {
         });
 
         for (const skill of [pyroNecro, aeroNecro]) {
-            const prereqs = Object.keys(skill.requirements);
-            const tree = prereqs.find(t => t !== NECROMANCER);
+            const tree = skill.trees.find(
+                t => t !== NECROMANCER);
             const found = getVisibleSkills(skills, NECROMANCER, [tree]);
 
             it(`can find ${skill.name} filtering by ${tree}`, () => {

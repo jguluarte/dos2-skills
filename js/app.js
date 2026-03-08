@@ -1,4 +1,5 @@
 import { SUMMONING, ELEMENTAL_TREES } from './constants.js';
+import { Skill } from './skill.js';
 import {
     PRIMARY_FILTER_TREES,
     getValidSecondaryOptions,
@@ -7,7 +8,6 @@ import {
     parseFiltersFromURL,
     buildFilterQueryString,
     buildSummaryText,
-    getSecondaryTree,
     groupSkillsByElement,
 } from './filter-logic.js';
 
@@ -132,18 +132,15 @@ function renderSkills() {
         const skills = skillsData[category];
         if (!skills || skills.length === 0) return;
 
-        const sortedSkills = [...skills].sort((a, b) => {
-            const treesA = Object.keys(a.requirements);
-            const treesB = Object.keys(b.requirements);
-            const secondaryA = getSecondaryTree(treesA, category) || '';
-            const secondaryB = getSecondaryTree(treesB, category) || '';
+        const otherTree = (skill) =>
+            skill.trees.find(t => t !== category) || '';
 
-            const treeCompare = secondaryA.localeCompare(secondaryB);
+        const sortedSkills = [...skills].sort((a, b) => {
+            const treeCompare =
+                otherTree(a).localeCompare(otherTree(b));
             if (treeCompare !== 0) return treeCompare;
 
-            const spA = a.sp_cost || 0;
-            const spB = b.sp_cost || 0;
-            return spA - spB;
+            return a.spCost - b.spCost;
         });
 
         const section = document.createElement('skill-tree');
@@ -168,36 +165,34 @@ function renderSkills() {
 function createSkillCard(skill, category) {
     const card = document.createElement('skill-card');
     card.dataset.name = skill.name.toLowerCase();
+    card.dataset.trees = skill.trees.join(',');
 
-    const trees = Object.keys(skill.requirements);
-    card.dataset.trees = trees.join(',');
+    const secondary =
+        skill.trees.find(t => t !== category) || '';
 
-    const secondaryTree = getSecondaryTree(trees, category);
-
-    const nameHTML = skill.wiki_url
-        ? `<a href="${skill.wiki_url}" target="_blank" rel="noopener">
+    const nameHTML = skill.wikiUrl
+        ? `<a href="${skill.wikiUrl}" target="_blank" rel="noopener">
          ${skill.name}
        </a>`
         : `<span>${skill.name}</span>`;
 
     const nameElement = `
         <skill-name data-primary-tree="${category.toLowerCase()}"
-                    data-secondary-tree="${secondaryTree.toLowerCase()}"
+                    data-secondary-tree="${secondary.toLowerCase()}"
         >${nameHTML}</skill-name>`;
 
     const icons = [];
 
-    // Add source blips
-    const sp = Math.min(skill.sp_cost || 0, 3);
-    if (sp > 0) {
-        icons.push(
-            `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
+    if (skill.spCost) {
+        icons.push(`<span>${
+            '<source-icon></source-icon>'.repeat(skill.spCost)
+        }</span>`);
     }
 
-    // Add ability blips
-    const ap = Math.min(skill.ap_cost || 0, 4);
-    if (ap > 0) {
-        icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
+    if (skill.apCost) {
+        icons.push(`<span>${
+            '<ap-icon></ap-icon>'.repeat(skill.apCost)
+        }</span>`);
     }
 
     let costHTML = '';
@@ -347,9 +342,10 @@ async function initialize() {
     try {
         const response = await fetch('data/skills.yaml');
         const yamlText = await response.text();
-        const SKILLS_DATA = jsyaml.load(yamlText);
+        const rawSkills = jsyaml.load(yamlText);
+        const skills = rawSkills.map(raw => new Skill(raw));
 
-        skillsData = groupSkillsByElement(SKILLS_DATA);
+        skillsData = groupSkillsByElement(skills);
 
         initializePrimaryFilters();
         initializeFilterBar();
