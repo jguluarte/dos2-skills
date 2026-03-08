@@ -1,4 +1,5 @@
 import { SUMMONING, ELEMENTAL_TREES } from './constants.js';
+import { Skill } from './skill.js';
 import {
     PRIMARY_FILTER_TREES,
     getValidSecondaryOptions,
@@ -138,7 +139,7 @@ function renderSkills() {
             const treeCompare = secondaryA.localeCompare(secondaryB);
             if (treeCompare !== 0) return treeCompare;
 
-            return (a.spCost || 0) - (b.spCost || 0);
+            return a.spCost - b.spCost;
         });
 
         const section = document.createElement('skill-tree');
@@ -180,15 +181,16 @@ function createSkillCard(skill, category) {
 
     const icons = [];
 
-    const sp = Math.min(skill.spCost || 0, 3);
-    if (sp > 0) {
-        icons.push(
-            `<span>${'<source-icon></source-icon>'.repeat(sp)}</span>`);
+    if (skill.spCost) {
+        icons.push(`<span>${
+            '<source-icon></source-icon>'.repeat(skill.spCost)
+        }</span>`);
     }
 
-    const ap = Math.min(skill.apCost || 0, 4);
-    if (ap > 0) {
-        icons.push(`<span>${'<ap-icon></ap-icon>'.repeat(ap)}</span>`);
+    if (skill.apCost) {
+        icons.push(`<span>${
+            '<ap-icon></ap-icon>'.repeat(skill.apCost)
+        }</span>`);
     }
 
     let costHTML = '';
@@ -338,9 +340,10 @@ async function initialize() {
     try {
         const response = await fetch('data/skills.yaml');
         const yamlText = await response.text();
-        const SKILLS_DATA = jsyaml.load(yamlText);
+        const rawSkills = jsyaml.load(yamlText);
+        const skills = rawSkills.map(raw => new Skill(raw));
 
-        skillsData = groupSkillsByElement(SKILLS_DATA);
+        skillsData = groupSkillsByElement(skills);
 
         initializePrimaryFilters();
         initializeFilterBar();

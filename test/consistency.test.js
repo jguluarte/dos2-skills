@@ -65,44 +65,57 @@ test('valid secondary options', () => {
 });
 
 test('skill grouping', () => {
+    const sumPyro = mock.skill(
+        'Sum+Pyro', [SUMMONING, PYROKINETIC]);
+    const sumGeo = mock.skill(
+        'Sum+Geo', [SUMMONING, GEOMANCER]);
+    const pyroNec = mock.skill(
+        'Pyro+Nec', [PYROKINETIC, NECROMANCER]);
+    const pyroWar = mock.skill(
+        'Pyro+War', [PYROKINETIC, WARFARE]);
+    const aeroNec = mock.skill(
+        'Aero+Nec', [AEROTHEURGE, NECROMANCER]);
+    const airNec = mock.skill(
+        'Air+Nec', [AEROTHEURGE, NECROMANCER]);
+    const geoHunt = mock.skill(
+        'Geo+Hunt', [GEOMANCER, HUNTSMAN]);
+    const geoPoly = mock.skill(
+        'Geo+Poly', [GEOMANCER, POLYMORPH]);
+    const hydroNec = mock.skill(
+        'Hydro+Nec', [HYDROSOPHIST, NECROMANCER]);
+    const hydroRog = mock.skill(
+        'Hydro+Rog', [HYDROSOPHIST, SCOUNDREL]);
+
     const skills = [
-        mock.skill('Sum+Pyro', [SUMMONING, PYROKINETIC]),
-        mock.skill('Sum+Geo', [SUMMONING, GEOMANCER]),
-        mock.skill('Pyro+Nec', [PYROKINETIC, NECROMANCER]),
-        mock.skill('Pyro+War', [PYROKINETIC, WARFARE]),
-        mock.skill('Aero+Nec', [AEROTHEURGE, NECROMANCER]),
-        mock.skill('Air+Nec', [AEROTHEURGE, NECROMANCER]),
-        mock.skill('Geo+Hunt', [GEOMANCER, HUNTSMAN]),
-        mock.skill('Geo+Poly', [GEOMANCER, POLYMORPH]),
-        mock.skill('Hydro+Nec', [HYDROSOPHIST, NECROMANCER]),
-        mock.skill('Hydro+Rog', [HYDROSOPHIST, SCOUNDREL]),
+        sumPyro, sumGeo, pyroNec, pyroWar, aeroNec,
+        airNec, geoHunt, geoPoly, hydroNec, hydroRog,
     ];
     const grouped = groupSkillsByElement(skills);
-    const names = tree => grouped[tree].map(s => s.name);
 
     it('Summoning group', () => {
-        assert.deepEqual(names(SUMMONING), ['Sum+Pyro', 'Sum+Geo']);
+        assert.deepEqual(
+            grouped[SUMMONING], [sumPyro, sumGeo]);
     });
 
     it('Pyrokinetic group', () => {
-        assert.deepEqual(names(PYROKINETIC), ['Pyro+Nec', 'Pyro+War']);
+        assert.deepEqual(
+            grouped[PYROKINETIC], [pyroNec, pyroWar]);
     });
 
     it('Aerotheurge group', () => {
-        assert.deepEqual(names(AEROTHEURGE), ['Aero+Nec', 'Air+Nec']);
+        assert.deepEqual(
+            grouped[AEROTHEURGE], [aeroNec, airNec]);
     });
 
     it('Geomancer group', () => {
-        assert.deepEqual(names(GEOMANCER), ['Geo+Hunt', 'Geo+Poly']);
+        assert.deepEqual(
+            grouped[GEOMANCER], [geoHunt, geoPoly]);
     });
 
     it('Hydrosophist group', () => {
-        assert.deepEqual(names(HYDROSOPHIST), ['Hydro+Nec', 'Hydro+Rog']);
-    });
-
-    it('grouped skills are Skill instances', () => {
-        const { Skill } = require('../js/skill.js');
-        assert.ok(grouped[SUMMONING][0] instanceof Skill);
+        assert.deepEqual(
+            grouped[HYDROSOPHIST],
+            [hydroNec, hydroRog]);
     });
 });
 

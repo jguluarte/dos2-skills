@@ -3,8 +3,6 @@ import {
     VALID_SKILL_COMBINATION,
 } from './constants.js';
 
-import { Skill } from './skill.js';
-
 // ===========================
 // Pairing rules
 // ===========================
@@ -140,14 +138,13 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
 // Skill grouping
 // ===========================
 
-export function groupSkillsByElement(rawSkills) {
+export function groupSkillsByElement(skills) {
     const grouped = {
         [SUMMONING]: [],
     };
     ELEMENTAL_TREES.forEach(t => { grouped[t] = []; });
 
-    rawSkills.forEach(raw => {
-        const skill = raw instanceof Skill ? raw : new Skill(raw);
+    skills.forEach(skill => {
         if (skill.isSummoning) {
             grouped[SUMMONING].push(skill);
         } else {

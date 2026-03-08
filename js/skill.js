@@ -6,7 +6,9 @@ export class Skill {
             throw new Error('Skill requires a name');
         }
         if (!raw.requirements || Object.keys(raw.requirements).length === 0) {
-            throw new Error(`Skill "${raw.name}" requires non-empty requirements`);
+            throw new Error(
+                `Skill "${raw.name}" requires non-empty requirements`
+            );
         }
         if (!raw.effect) {
             throw new Error(`Skill "${raw.name}" requires an effect`);
