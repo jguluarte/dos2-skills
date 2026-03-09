@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { Skill } from '../js/skill.js';
-import { createSkillCard } from '../js/skill-card-view.js';
+import {
+    createSkillCard, buildViewModel,
+} from '../js/skill-card-view.js';
 import {
     PYROKINETIC, POLYMORPH, WARFARE,
 } from '../js/constants.js';
@@ -26,7 +28,107 @@ const minimalSkill = new Skill({
     effect: 'Does something.',
 });
 
-// ── structure ───────────────────────────────────────────
+// ── buildViewModel ──────────────────────────────────────
+
+describe('buildViewModel', () => {
+    it('includes name', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.name).toBe('Bleed Fire');
+    });
+
+    it('lowercases name for data attribute', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.nameLower).toBe('bleed fire');
+    });
+
+    it('joins trees for data attribute', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.treesJoined).toBe(
+            bleedFire.trees.join(',')
+        );
+    });
+
+    it('includes url when present', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.url).toBe('https://example.com/bleed-fire');
+    });
+
+    it('url is falsy when absent', () => {
+        const vm = buildViewModel(minimalSkill, PYROKINETIC);
+        expect(vm.url).toBeFalsy();
+    });
+
+    it('lowercases primary and secondary tree', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.primaryTree).toBe(
+            PYROKINETIC.toLowerCase()
+        );
+        expect(vm.secondaryTree).toBe(
+            POLYMORPH.toLowerCase()
+        );
+    });
+
+    it('builds AP icon array matching apCost', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.apIcons.length).toBe(bleedFire.apCost);
+    });
+
+    it('builds SP icon array matching spCost', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.spIcons.length).toBe(bleedFire.spCost);
+    });
+
+    it('hasCost is true when either cost > 0', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.hasCost).toBe(true);
+    });
+
+    it('hasCost is false when both costs are 0', () => {
+        const vm = buildViewModel(minimalSkill, PYROKINETIC);
+        expect(vm.hasCost).toBe(false);
+    });
+
+    it('includes effect text', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.effect).toBe('Enemies bleed fire when hit.');
+    });
+
+    it('sorts category tree last in requirements', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        const lastReq = vm.requirements[vm.requirements.length - 1];
+        expect(lastReq.tree).toBe(PYROKINETIC.toLowerCase());
+    });
+
+    it('includes tree name and level in requirements', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        const polyReq = vm.requirements.find(
+            r => r.tree === POLYMORPH.toLowerCase()
+        );
+        expect(polyReq.label).toBe(`${POLYMORPH} 2`);
+    });
+
+    it('includes range when present', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.range).toBe('13m');
+    });
+
+    it('includes cooldown when present', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.cooldown).toBe(3);
+    });
+
+    it('hasStats is true when range or cooldown exist', () => {
+        const vm = buildViewModel(bleedFire, PYROKINETIC);
+        expect(vm.hasStats).toBe(true);
+    });
+
+    it('hasStats is false when neither exists', () => {
+        const vm = buildViewModel(minimalSkill, PYROKINETIC);
+        expect(vm.hasStats).toBe(false);
+    });
+});
+
+// ── createSkillCard (DOM integration) ───────────────────
 
 describe('createSkillCard', () => {
     it('returns a skill-card element', () => {
@@ -46,8 +148,6 @@ describe('createSkillCard', () => {
         );
     });
 });
-
-// ── skill name ──────────────────────────────────────────
 
 describe('skill name rendering', () => {
     it('renders name as a link when url is present', () => {
@@ -83,8 +183,6 @@ describe('skill name rendering', () => {
     });
 });
 
-// ── costs ───────────────────────────────────────────────
-
 describe('cost rendering', () => {
     it('renders AP icons', () => {
         const card = createSkillCard(bleedFire, PYROKINETIC);
@@ -104,8 +202,6 @@ describe('cost rendering', () => {
     });
 });
 
-// ── effect ──────────────────────────────────────────────
-
 describe('effect rendering', () => {
     it('renders skill effect text', () => {
         const card = createSkillCard(bleedFire, PYROKINETIC);
@@ -115,8 +211,6 @@ describe('effect rendering', () => {
         );
     });
 });
-
-// ── requirements ────────────────────────────────────────
 
 describe('requirement badges', () => {
     it('renders a badge for each requirement', () => {
@@ -142,8 +236,6 @@ describe('requirement badges', () => {
         );
     });
 });
-
-// ── stats ───────────────────────────────────────────────
 
 describe('stats rendering', () => {
     it('renders range and cooldown', () => {
