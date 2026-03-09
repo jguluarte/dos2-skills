@@ -2,7 +2,8 @@
   requirements:
     Pyrokinetic: 1
     Polymorph: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Bleed+Fire
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Bleed+Fire
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -15,7 +16,8 @@
   requirements:
     Pyrokinetic: 1
     Necromancer: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Corpse+Explosion
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Corpse+Explosion
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -26,7 +28,8 @@
   requirements:
     Pyrokinetic: 1
     Scoundrel: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Sabotage
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Sabotage
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -39,7 +42,8 @@
   requirements:
     Pyrokinetic: 1
     Warfare: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Sparking+Swings
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Sparking+Swings
   ap_cost: 1
   sp_cost: 0
   range: Self
@@ -53,7 +57,8 @@
   requirements:
     Pyrokinetic: 2
     Necromancer: 2
-  wiki_url:
+  primary_tree: Pyrokinetic
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mass+Corpse+Explosion
   ap_cost: 1
   sp_cost: 1
@@ -65,7 +70,8 @@
   requirements:
     Pyrokinetic: 2
     Warfare: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks
   ap_cost: 1
   sp_cost: 1
   range: 13m
@@ -79,7 +85,8 @@
   requirements:
     Pyrokinetic: 2
     Scoundrel: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage
   ap_cost: 2
   sp_cost: 1
   range: 13m
@@ -92,7 +99,8 @@
   requirements:
     Geomancer: 1
     Necromancer: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Touch
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Touch
   ap_cost: 1
   sp_cost: 0
   range: 2m
@@ -105,7 +113,8 @@
   requirements:
     Geomancer: 1
     Warfare: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Oily+Carapace
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Oily+Carapace
   ap_cost: 1
   sp_cost: 0
   range: PB AoE
@@ -118,7 +127,8 @@
   requirements:
     Geomancer: 1
     Polymorph: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Turn+to+Oil
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Turn+to+Oil
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -131,7 +141,8 @@
   requirements:
     Geomancer: 1
     Scoundrel: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Venom+Coating
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Venom+Coating
   ap_cost: 1
   sp_cost: 0
   range: Self
@@ -144,7 +155,8 @@
   requirements:
     Geomancer: 2
     Necromancer: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray
   ap_cost: 2
   sp_cost: 1
   range: 7m
@@ -157,7 +169,8 @@
   requirements:
     Geomancer: 2
     Warfare: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Oily+Carapace
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Oily+Carapace
   ap_cost: 2
   sp_cost: 0
   range: Self
@@ -170,7 +183,8 @@
   requirements:
     Geomancer: 2
     Scoundrel: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura
   ap_cost: 2
   sp_cost: 1
   range: Self
@@ -183,7 +197,8 @@
   requirements:
     Hydrosophist: 1
     Polymorph: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Healing+Tears
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Healing+Tears
   ap_cost: 1
   sp_cost: 0
   range: PB AoE
@@ -196,7 +211,8 @@
   requirements:
     Hydrosophist: 1
     Scoundrel: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger
   ap_cost: 1
   sp_cost: 0
   range: 2m
@@ -210,7 +226,8 @@
   requirements:
     Hydrosophist: 1
     Warfare: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Cleanse+Wounds
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Cleanse+Wounds
   ap_cost: 2
   sp_cost: 0
   range: 2m
@@ -225,7 +242,8 @@
   requirements:
     Hydrosophist: 2
     Warfare: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds
   ap_cost: 1
   sp_cost: 1
   range: PB AoE
@@ -241,7 +259,8 @@
   requirements:
     Hydrosophist: 2
     Scoundrel: 2
-  wiki_url:
+  primary_tree: Hydrosophist
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger+Aura
   ap_cost: 1
   sp_cost: 1
@@ -256,7 +275,8 @@
   requirements:
     Aerotheurge: 1
     Warfare: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Breathing+Bubble
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Breathing+Bubble
   ap_cost: 1
   sp_cost: 0
   range: PB AoE
@@ -270,7 +290,8 @@
   requirements:
     Aerotheurge: 1
     Necromancer: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Touch
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Touch
   ap_cost: 1
   sp_cost: 0
   range: 2m
@@ -283,7 +304,8 @@
   requirements:
     Aerotheurge: 1
     Polymorph: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vaporize
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Vaporize
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -297,7 +319,8 @@
   requirements:
     Aerotheurge: 1
     Scoundrel: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Smoke+Cover
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Smoke+Cover
   ap_cost: 1
   sp_cost: 0
   range: PB AoE
@@ -308,7 +331,8 @@
   requirements:
     Aerotheurge: 2
     Necromancer: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura
   ap_cost: 2
   sp_cost: 1
   range: Self
@@ -322,7 +346,8 @@
   requirements:
     Aerotheurge: 2
     Warfare: 2
-  wiki_url:
+  primary_tree: Aerotheurge
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mass+Breathing+Bubbles
   ap_cost: 1
   sp_cost: 1
@@ -337,7 +362,8 @@
   requirements:
     Aerotheurge: 2
     Scoundrel: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Blessed+Smoke+Cloud
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Blessed+Smoke+Cloud
   ap_cost: 1
   sp_cost: 2
   range: 13m
@@ -349,7 +375,8 @@
   requirements:
     Polymorph: 2
     Pyrokinetic: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
   ap_cost: 1
   sp_cost: 1
   range: Self
@@ -361,7 +388,8 @@
   requirements:
     Polymorph: 2
     Hydrosophist: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
   ap_cost: 1
   sp_cost: 1
   range: Self
@@ -373,7 +401,8 @@
   requirements:
     Polymorph: 2
     Geomancer: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
   ap_cost: 1
   sp_cost: 1
   range: Self
@@ -386,7 +415,8 @@
   requirements:
     Polymorph: 2
     Aerotheurge: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
   ap_cost: 1
   sp_cost: 1
   range: Self
@@ -399,7 +429,8 @@
   requirements:
     Summoning: 1
     Aerotheurge: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Electric+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Electric+Infusion
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -412,7 +443,8 @@
   requirements:
     Summoning: 1
     Pyrokinetic: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Fire+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fire+Infusion
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -423,7 +455,8 @@
   requirements:
     Summoning: 1
     Geomancer: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Poison+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Poison+Infusion
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -436,7 +469,8 @@
   requirements:
     Summoning: 1
     Hydrosophist: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Water+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Water+Infusion
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -449,6 +483,7 @@
   requirements:
     Summoning: 1
     Necromancer: 1
+  primary_tree: Summoning
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -461,6 +496,7 @@
   requirements:
     Summoning: 2
     Geomancer: 2
+  primary_tree: Summoning
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -472,7 +508,8 @@
   requirements:
     Summoning: 2
     Geomancer: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Acid+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Acid+Infusion
   ap_cost: 1
   sp_cost: 2
   range: 13m
@@ -485,7 +522,8 @@
   requirements:
     Summoning: 2
     Aerotheurge: 2
-  wiki_url:
+  primary_tree: Summoning
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Electric+Infusion
   ap_cost: 1
   sp_cost: 2
@@ -500,7 +538,8 @@
   requirements:
     Summoning: 2
     Hydrosophist: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Ice+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ice+Infusion
   ap_cost: 1
   sp_cost: 2
   range: 13m
@@ -513,7 +552,8 @@
   requirements:
     Summoning: 2
     Pyrokinetic: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Necrofire+Infusion
+  primary_tree: Summoning
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Necrofire+Infusion
   ap_cost: 1
   sp_cost: 2
   range: 13m
@@ -526,7 +566,8 @@
   requirements:
     Huntsman: 1
     Geomancer: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Throw+Dust
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Throw+Dust
   ap_cost: 2
   sp_cost: 0
   range: 13m
@@ -539,7 +580,8 @@
   requirements:
     Huntsman: 1
     Pyrokinetic: 1
-  wiki_url:
+  primary_tree: Pyrokinetic
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Throw+Explosive+Trap
   ap_cost: 1
   sp_cost: 0
@@ -553,7 +595,8 @@
   requirements:
     Huntsman: 2
     Pyrokinetic: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps
+  primary_tree: Pyrokinetic
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps
   ap_cost: 3
   sp_cost: 1
   range: 13m
@@ -566,7 +609,8 @@
   requirements:
     Summoning: 2
     Necromancer: 2
-  wiki_url:
+  primary_tree: Summoning
+  url:
     https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Blood+Infusion
   ap_cost: 1
   sp_cost: 2
@@ -580,7 +624,8 @@
   requirements:
     Geomancer: 2
     Huntsman: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Dust+Blast
+  primary_tree: Geomancer
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Dust+Blast
   ap_cost: 3
   sp_cost: 1
   range: 13m
@@ -593,7 +638,8 @@
   requirements:
     Huntsman: 1
     Hydrosophist: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Cryotherapy
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Cryotherapy
   ap_cost: 1
   sp_cost: 1
   range: Self
@@ -606,7 +652,8 @@
   requirements:
     Huntsman: 2
     Hydrosophist: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cryotherapy
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cryotherapy
   ap_cost: 2
   sp_cost: 2
   range: All allies
@@ -619,7 +666,8 @@
   requirements:
     Huntsman: 1
     Aerotheurge: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -632,7 +680,8 @@
   requirements:
     Huntsman: 2
     Aerotheurge: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura
+  primary_tree: Aerotheurge
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura
   ap_cost: 2
   sp_cost: 1
   range: Self
@@ -645,7 +694,8 @@
   requirements:
     Necromancer: 1
     Hydrosophist: 1
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ap_cost: 2
   sp_cost: 0
   range: 13m
@@ -656,7 +706,8 @@
   requirements:
     Necromancer: 2
     Hydrosophist: 2
-  wiki_url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
+  primary_tree: Hydrosophist
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ap_cost: 4
   sp_cost: 3
   range: 13m

@@ -34,6 +34,24 @@ export class UnknownTreeError extends SkillValidationError {
     }
 }
 
+export class MissingPrimaryTreeError extends SkillValidationError {
+    constructor(skillName) {
+        super(`Skill "${skillName}" requires a primary_tree`);
+        this.name = 'MissingPrimaryTreeError';
+    }
+}
+
+export class InvalidPrimaryTreeError extends SkillValidationError {
+    constructor(skillName, tree) {
+        super(
+            `Skill "${skillName}": primary_tree "${tree}"`
+            + ` is not in requirements`
+        );
+        this.name = 'InvalidPrimaryTreeError';
+        this.tree = tree;
+    }
+}
+
 export class PrerequisiteError extends SkillValidationError {
     constructor(skillName, tree, level) {
         const msg = `Skill "${skillName}": level must be`
