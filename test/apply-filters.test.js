@@ -1,12 +1,9 @@
-const { test, describe, it, assert } = require('./test.js');
-const { makeSkill } = require('./helpers.js');
-
-const {
+import { describe, it, expect } from 'vitest';
+import { makeSkill } from './helpers.js';
+import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
-} = require('../js/constants.js');
-
-const { shouldSkillShow } = require('../js/filter-logic.js');
-
+} from '../js/constants.js';
+import { shouldSkillShow } from '../js/filter-logic.js';
 
 // ── helpers ──────────────────────────────────────────────
 
@@ -21,7 +18,7 @@ function getVisibleSkills(skills, primary, secondary = []) {
 
 // ── filter matching ─────────────────────────────────────
 
-test('filters behave as expected', () => {
+describe('filters behave as expected', () => {
     const pyroNecro = makeSkill('Pyro+Necro', [PYROKINETIC, NECROMANCER]);
     const aeroNecro = makeSkill('Aero+Necro', [AEROTHEURGE, NECROMANCER]);
     const pyroWar = makeSkill('Pyro+Warfare', [PYROKINETIC, WARFARE]);
@@ -30,18 +27,16 @@ test('filters behave as expected', () => {
     const sumNecro = makeSkill('Summon+Necro', [SUMMONING, NECROMANCER]);
 
     const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
-
     const allNames = skills.map(s => s.name).sort();
     const summonNames = [sumNecro, sumPyro].map(s => s.name).sort();
 
     it('An absence of a filter renders all skills', () => {
-        assert.deepEqual(getVisibleSkills(skills, null), allNames);
+        expect(getVisibleSkills(skills, null)).toEqual(allNames);
     });
 
     it('Invalid combination results in an empty list', () => {
-        // This combination doesn't exist in `skills`
         const found = getVisibleSkills(skills, SUMMONING, [WARFARE]);
-        assert.equal(found.length, 0);
+        expect(found.length).toBe(0);
     });
 
     describe(`${SUMMONING} skills behave differently...`, () => {
@@ -49,26 +44,26 @@ test('filters behave as expected', () => {
             PYROKINETIC, AEROTHEURGE, NECROMANCER, WARFARE,
         ];
 
-        // What is common expected behavior for these trees?
         for (const tree of nonSummonFilters) {
             describe(`${tree} as the primary filter...`, () => {
                 const found = getVisibleSkills(skills, tree);
 
-                it(`finds skills`, () => {
-                    assert.ok(found.length > 0);
+                it('finds skills', () => {
+                    expect(found.length).toBeGreaterThan(0);
                 });
 
-                it(`does not include summoning skills`, () => {
-                    assert.ok( summonNames.every(n => !found.includes(n)) );
+                it('does not include summoning skills', () => {
+                    expect(
+                        summonNames.every(n => !found.includes(n))
+                    ).toBe(true);
                 });
             });
         }
 
         describe('Summoning as the primary filter...', () => {
-
             it('all summoning skills can be found', () => {
                 const found = getVisibleSkills(skills, SUMMONING);
-                assert.deepEqual(found, summonNames);
+                expect(found).toEqual(summonNames);
             });
 
             for (const skill of [sumNecro, sumPyro]) {
@@ -76,18 +71,17 @@ test('filters behave as expected', () => {
                     skills, SUMMONING, [skill.secondaryTree]);
 
                 it(`finds ${skill.name} by ${skill.secondaryTree}`, () => {
-                    assert.equal(found.length, 1);
-                    assert.equal(found[0], skill.name);
+                    expect(found.length).toBe(1);
+                    expect(found[0]).toBe(skill.name);
                 });
             }
-
         });
     });
 
     describe(`Primary filter --> ${NECROMANCER}`, () => {
         it('finds two skills', () => {
             const found = getVisibleSkills(skills, NECROMANCER);
-            assert.equal(found.length, 2);
+            expect(found.length).toBe(2);
         });
 
         for (const skill of [pyroNecro, aeroNecro]) {
@@ -95,8 +89,8 @@ test('filters behave as expected', () => {
                 skills, NECROMANCER, [skill.primaryTree]);
 
             it(`finds ${skill.name} by ${skill.primaryTree}`, () => {
-                assert.equal(found.length, 1);
-                assert.equal(found[0], skill.name);
+                expect(found.length).toBe(1);
+                expect(found[0]).toBe(skill.name);
             });
         }
     });
@@ -105,11 +99,9 @@ test('filters behave as expected', () => {
         it('finds four skills', () => {
             const expected = [pyroNecro, aeroNecro, pyroWar, hydroWar];
 
-            assert.deepEqual(
-                getVisibleSkills(skills, null, [NECROMANCER, WARFARE]),
-                expected.map(s => s.name).sort()
-            );
+            expect(
+                getVisibleSkills(skills, null, [NECROMANCER, WARFARE])
+            ).toEqual(expected.map(s => s.name).sort());
         });
-
     });
 });

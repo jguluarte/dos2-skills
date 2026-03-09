@@ -1,52 +1,46 @@
-const { test, it, assert } = require('./test.js');
-
-const {
+import { describe, it, expect } from 'vitest';
+import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
     HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER, ELEMENTAL_TREES,
     NON_ELEMENTAL_TREES, ALL_TREES,
-} = require('../js/constants.js');
-
-const {
+} from '../js/constants.js';
+import {
     getValidSecondaryOptions,
     buildSummaryText,
-} = require('../js/filter-logic.js');
+} from '../js/filter-logic.js';
 
-
-test('tree constants', () => {
+describe('tree constants', () => {
     it('ELEMENTAL_TREES', () => {
-        assert.deepEqual(
-            ELEMENTAL_TREES,
+        expect(ELEMENTAL_TREES).toEqual(
             [PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST]
         );
     });
 
     it('NON_ELEMENTAL_TREES', () => {
-        assert.deepEqual(
-            NON_ELEMENTAL_TREES,
+        expect(NON_ELEMENTAL_TREES).toEqual(
             [WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER]
         );
     });
 
     it('ALL_TREES', () => {
-        assert.deepEqual(ALL_TREES, [
-            PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
-            HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER, SUMMONING,
+        expect(ALL_TREES).toEqual([
+            PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST,
+            WARFARE, HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER,
+            SUMMONING,
         ]);
     });
 });
 
-test('valid secondary options', () => {
+describe('valid secondary options', () => {
     it('Summoning pairs with elementals + Necromancer', () => {
-        assert.deepEqual(
-            getValidSecondaryOptions(SUMMONING),
+        expect(getValidSecondaryOptions(SUMMONING)).toEqual(
             [...ELEMENTAL_TREES, NECROMANCER]
         );
     });
 
     for (const tree of ELEMENTAL_TREES) {
         it(`${tree} pairs with non-elementals`, () => {
-            assert.deepEqual(
-                getValidSecondaryOptions(tree),
+            expect(getValidSecondaryOptions(tree)).toEqual(
                 NON_ELEMENTAL_TREES
             );
         });
@@ -54,34 +48,30 @@ test('valid secondary options', () => {
 
     for (const tree of NON_ELEMENTAL_TREES) {
         it(`${tree} pairs with elementals`, () => {
-            assert.deepEqual(
-                getValidSecondaryOptions(tree),
+            expect(getValidSecondaryOptions(tree)).toEqual(
                 ELEMENTAL_TREES
             );
         });
     }
 });
 
-test('summary text', () => {
+describe('summary text', () => {
     it('no filters: "Showing all skills"', () => {
-        assert.equal(
-            buildSummaryText( null, new Set() ),
+        expect(buildSummaryText(null, new Set())).toBe(
             'Showing all skills'
         );
     });
 
     it('primary only', () => {
-        assert.equal(
-            buildSummaryText( PYROKINETIC, new Set() ),
+        expect(buildSummaryText(PYROKINETIC, new Set())).toBe(
             `Showing all ${PYROKINETIC} skills`
         );
     });
 
     it('primary + secondary', () => {
-        assert.equal(
-            buildSummaryText( PYROKINETIC, new Set([WARFARE]) ),
-            `Showing all ${PYROKINETIC} skills, with ${WARFARE}`
-        );
+        expect(
+            buildSummaryText(PYROKINETIC, new Set([WARFARE]))
+        ).toBe(`Showing all ${PYROKINETIC} skills, with ${WARFARE}`);
     });
 
     it('primary + two secondaries', () => {
@@ -89,23 +79,22 @@ test('summary text', () => {
             `Showing all ${PYROKINETIC} skills, with ${WARFARE} or `
             + NECROMANCER
         );
-        assert.equal(
-            buildSummaryText( PYROKINETIC, new Set([WARFARE, NECROMANCER]) ),
-            expected
-        );
+        expect(
+            buildSummaryText(
+                PYROKINETIC, new Set([WARFARE, NECROMANCER])
+            )
+        ).toBe(expected);
     });
 
     it('single secondary only', () => {
-        assert.equal(
-            buildSummaryText( null, new Set([WARFARE])) ,
+        expect(buildSummaryText(null, new Set([WARFARE]))).toBe(
             `Showing all ${WARFARE} skills`
         );
     });
 
     it('multiple secondaries joins with "or"', () => {
-        assert.equal(
-            buildSummaryText( null, new Set([WARFARE, NECROMANCER]) ),
-            `Showing skills with ${WARFARE} or ${NECROMANCER}`
-        );
+        expect(
+            buildSummaryText(null, new Set([WARFARE, NECROMANCER]))
+        ).toBe(`Showing skills with ${WARFARE} or ${NECROMANCER}`);
     });
 });
