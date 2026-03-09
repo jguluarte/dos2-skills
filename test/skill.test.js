@@ -257,7 +257,7 @@ test('Skill reads primary_tree from raw data', () => {
             requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
-        }), { name: 'MissingPrimaryTreeError' });
+        }), MissingPrimaryTreeError);
     });
 
     it('throws when primary_tree is not in requirements', () => {
@@ -267,6 +267,6 @@ test('Skill reads primary_tree from raw data', () => {
             primary_tree: WARFARE,
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
-        }), { name: 'InvalidPrimaryTreeError' });
+        }), InvalidPrimaryTreeError);
     });
 });

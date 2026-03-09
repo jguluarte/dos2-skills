@@ -42,13 +42,13 @@ test('Skill validation', () => {
 
     for (const skill of skills) {
         describe(skill.name, () => {
-            const { name, requirements } = skill;
+            const { name: skillName, requirements } = skill;
             const prerequisites = Object.keys(requirements);
 
             // structure
             it('has a name', () => {
-                assert.ok(name);
-                assert.ok(name.length > 0);
+                assert.ok(skillName);
+                assert.ok(skillName.length > 0);
             });
 
             it('has prerequisites', () => {
@@ -115,14 +115,14 @@ test('Skill validation', () => {
             it('has a primary_tree field', () => {
                 assert.ok(
                     skill.primary_tree,
-                    `${name} is missing primary_tree`
+                    `${skillName} is missing primary_tree`
                 );
             });
 
             it('primary_tree is one of the prerequisites', () => {
                 assert.ok(
                     prerequisites.includes(skill.primary_tree),
-                    `${name}: primary_tree "${skill.primary_tree}"`
+                    `${skillName}: primary_tree "${skill.primary_tree}"`
                     + ` is not in requirements`
                 );
             });
@@ -130,7 +130,7 @@ test('Skill validation', () => {
             it('does not use legacy wiki_url field', () => {
                 assert.equal(
                     skill.wiki_url, undefined,
-                    `${name} should use "url" not "wiki_url"`
+                    `${skillName} should use "url" not "wiki_url"`
                 );
             });
 
