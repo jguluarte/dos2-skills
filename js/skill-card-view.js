@@ -1,83 +1,57 @@
-export function createSkillCard(skill, category) {
-    const card = document.createElement('skill-card');
-    card.dataset.name = skill.name.toLowerCase();
-    card.dataset.trees = skill.trees.join(',');
+import Mustache from '../node_modules/mustache/mustache.mjs';
 
-    const nameHTML = skill.url
-        ? `<a href="${skill.url}" target="_blank" rel="noopener">
-         ${skill.name}
-       </a>`
-        : `<span>${skill.name}</span>`;
+let _template = null;
 
-    const nameElement = `
-        <skill-name data-primary-tree="${category.toLowerCase()}"
-                    data-secondary-tree="${skill.secondaryTree.toLowerCase()}"
-        >${nameHTML}</skill-name>`;
+async function loadTemplate() {
+    if (_template) return _template;
+    const resp = await fetch('./js/templates/skill-card.mustache');
+    _template = await resp.text();
+    return _template;
+}
 
-    const icons = [];
+// For testing and SSR: set template directly
+export function setTemplate(tmpl) {
+    _template = tmpl;
+}
 
-    if (skill.spCost) {
-        icons.push(`<span>${
-            '<source-icon></source-icon>'.repeat(skill.spCost)
-        }</span>`);
-    }
-
-    if (skill.apCost) {
-        icons.push(`<span>${
-            '<ap-icon></ap-icon>'.repeat(skill.apCost)
-        }</span>`);
-    }
-
-    let costHTML = '';
-    if (icons.length > 0) {
-        costHTML = `<skill-cost>${icons.join('')}</skill-cost>`;
-    }
-
-    const effectHTML = `
-        <skill-effect>
-            ${skill.effect}
-        </skill-effect>`;
-
-    const reqBadges = Object.entries(skill.requirements)
+export function buildViewModel(skill, category) {
+    const requirements = Object.entries(skill.requirements)
         .sort(([treeA], [treeB]) => {
             if (treeA === category) return 1;
             if (treeB === category) return -1;
             return 0;
         })
-        .map(([tree, level]) => {
-            return `
-                <req-badge data-tree="${tree.toLowerCase()}">
-                    ${tree} ${level}
-                </req-badge>`;
-        })
-        .join('');
+        .map(([tree, level]) => ({
+            tree: tree.toLowerCase(),
+            label: `${tree} ${level}`,
+        }));
 
-    const requirementsHTML = reqBadges ?
-        `<skill-requirements>${reqBadges}</skill-requirements>` : '';
+    return {
+        name: skill.name,
+        nameLower: skill.name.toLowerCase(),
+        treesJoined: skill.trees.join(','),
+        url: skill.url,
+        primaryTree: category.toLowerCase(),
+        secondaryTree: skill.secondaryTree.toLowerCase(),
+        apIcons: Array(skill.apCost).fill(true),
+        spIcons: Array(skill.spCost).fill(true),
+        hasCost: skill.apCost > 0 || skill.spCost > 0,
+        effect: skill.effect,
+        requirements,
+        hasRequirements: requirements.length > 0,
+        range: skill.range,
+        cooldown: skill.cooldown,
+        hasStats: !!(skill.range || skill.cooldown),
+    };
+}
 
-    let statsHTML = '';
-    if (skill.range || skill.cooldown) {
-        const rangeHTML = skill.range ? `Range: ${skill.range}` : '';
-        const cooldownHTML = skill.cooldown ?
-            `Cooldown: ${skill.cooldown}` : '';
-
-        statsHTML = `
-            <skill-stats>
-                <div>${rangeHTML}</div>
-                <div>${cooldownHTML}</div>
-            </skill-stats>
-        `;
-    }
-
-    card.innerHTML = `
-        <skill-header>
-            ${nameElement}
-            ${costHTML}
-        </skill-header>
-        ${effectHTML}
-        ${requirementsHTML}
-        ${statsHTML}
-    `;
-
+export function createSkillCard(skill, category) {
+    const vm = buildViewModel(skill, category);
+    const card = document.createElement('skill-card');
+    card.dataset.name = vm.nameLower;
+    card.dataset.trees = vm.treesJoined;
+    card.innerHTML = Mustache.render(_template, vm);
     return card;
 }
+
+export { loadTemplate };

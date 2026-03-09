@@ -1,11 +1,24 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeAll } from 'vitest';
+import fs from 'fs';
+import path from 'path';
 import { Skill } from '../js/skill.js';
 import {
-    createSkillCard, buildViewModel,
+    createSkillCard, buildViewModel, setTemplate,
 } from '../js/skill-card-view.js';
 import {
     PYROKINETIC, POLYMORPH, WARFARE,
 } from '../js/constants.js';
+
+beforeAll(() => {
+    const tmpl = fs.readFileSync(
+        path.resolve(
+            import.meta.dirname,
+            '../js/templates/skill-card.mustache'
+        ),
+        'utf8'
+    );
+    setTemplate(tmpl);
+});
 
 // ── fixtures ────────────────────────────────────────────
 

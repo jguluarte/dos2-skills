@@ -9,7 +9,9 @@ import {
     buildFilterQueryString,
     buildSummaryText,
 } from './filter-logic.js';
-import { createSkillCard } from './skill-card-view.js';
+import {
+    createSkillCard, loadTemplate,
+} from './skill-card-view.js';
 
 // ===========================
 // State
@@ -250,7 +252,10 @@ function initializeFilterBar() {
 
 async function initialize() {
     try {
-        const response = await fetch('data/skills.yaml');
+        const [response] = await Promise.all([
+            fetch('data/skills.yaml'),
+            loadTemplate(),
+        ]);
         const yamlText = await response.text();
         skillsByCategory = { [SUMMONING]: [] };
         ELEMENTAL_TREES.forEach(t => { skillsByCategory[t] = []; });

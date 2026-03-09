@@ -1,0 +1,15 @@
+<skill-header>
+    <skill-name data-primary-tree="{{primaryTree}}"
+                data-secondary-tree="{{secondaryTree}}"
+    >{{#url}}<a href="{{url}}" target="_blank" rel="noopener">{{name}}</a>{{/url}}{{^url}}<span>{{name}}</span>{{/url}}</skill-name>
+    {{#hasCost}}<skill-cost>{{#spIcons}}<span><source-icon></source-icon></span>{{/spIcons}}{{#apIcons}}<span><ap-icon></ap-icon></span>{{/apIcons}}</skill-cost>{{/hasCost}}
+</skill-header>
+<skill-effect>{{effect}}</skill-effect>
+{{#hasRequirements}}<skill-requirements>
+    {{#requirements}}<req-badge data-tree="{{tree}}">{{label}}</req-badge>
+    {{/requirements}}
+</skill-requirements>{{/hasRequirements}}
+{{#hasStats}}<skill-stats>
+    <div>{{#range}}Range: {{range}}{{/range}}</div>
+    <div>{{#cooldown}}Cooldown: {{cooldown}}{{/cooldown}}</div>
+</skill-stats>{{/hasStats}}
