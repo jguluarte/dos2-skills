@@ -26,10 +26,10 @@ watch:
 # If linters or test runners change...make any corresponding change needed to
 # .github/workflows/ci.yml
 test:
-	node --test --test-reporter=dot test/*.test.js
+	npx vitest run
 
 test-verbose:
-	node --test test/*.test.js
+	npx vitest run
 
 lint: lint-yaml lint-css lint-js
 

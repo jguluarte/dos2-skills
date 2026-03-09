@@ -1,9 +1,9 @@
-const { Skill } = require('../js/skill.js');
-const {
+import { Skill } from '../js/skill.js';
+import {
     SUMMONING, ELEMENTAL_TREES,
-} = require('../js/constants.js');
+} from '../js/constants.js';
 
-function buildRawSkill(name, trees) {
+export function makeSkill(name, trees) {
     const requirements = {};
     trees.forEach(t => { requirements[t] = 1; });
     const sorted = [...trees].sort();
@@ -14,14 +14,8 @@ function buildRawSkill(name, trees) {
     else if (ELEMENTAL_TREES.includes(a)) primary_tree = a;
     else if (ELEMENTAL_TREES.includes(b)) primary_tree = b;
     else primary_tree = a;
-    return {
+    return new Skill({
         name, requirements, primary_tree,
         ap_cost: 1, sp_cost: 0, effect: 'test',
-    };
+    });
 }
-
-function makeSkill(name, trees) {
-    return new Skill(buildRawSkill(name, trees));
-}
-
-module.exports = { makeSkill, buildRawSkill };
