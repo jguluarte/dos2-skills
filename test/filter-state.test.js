@@ -1,27 +1,26 @@
-const { test, it, assert } = require('./test.js');
-
-const {
+import { describe, it, expect } from 'vitest';
+import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER,
     WARFARE, NECROMANCER, ALL_TREES,
-} = require('../js/constants.js');
-
-const {
+} from '../js/constants.js';
+import {
     parseFiltersFromURL,
     buildFilterQueryString,
     cleanSecondaryFilters,
-} = require('../js/filter-logic.js');
+} from '../js/filter-logic.js';
+
+const EMPTY_SET = new Set();
 
 // ── URL parsing ──────────────────────────────────────────
 
-test('URL parsing', () => {
+describe('URL parsing', () => {
     it('loads primary and secondary from URL params', () => {
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(
             `?and=${PYROKINETIC}&or=${WARFARE},${NECROMANCER}`
         );
 
-        assert.equal(primaryFilter, PYROKINETIC);
-        assert.deepEqual(
-            [...secondaryFilters].sort(),
+        expect(primaryFilter).toBe(PYROKINETIC);
+        expect([...secondaryFilters].sort()).toEqual(
             [NECROMANCER, WARFARE]
         );
     });
@@ -31,8 +30,8 @@ test('URL parsing', () => {
             `?and=InvalidTree&or=FakeTree,${WARFARE}`
         );
 
-        assert.equal(primaryFilter, null);
-        assert.deepEqual([...secondaryFilters], [WARFARE]);
+        expect(primaryFilter).toBeNull();
+        expect([...secondaryFilters]).toEqual([WARFARE]);
     });
 
     it('strips invalid secondary combos', () => {
@@ -40,58 +39,57 @@ test('URL parsing', () => {
             `?and=${PYROKINETIC}&or=${WARFARE},${AEROTHEURGE}`
         );
 
-        assert.equal(primaryFilter, PYROKINETIC);
-        assert.deepEqual([...secondaryFilters], [WARFARE]);
+        expect(primaryFilter).toBe(PYROKINETIC);
+        expect([...secondaryFilters]).toEqual([WARFARE]);
     });
 });
 
 // ── URL round-trip ───────────────────────────────────────
 
-test('URL round-trip', () => {
+describe('URL round-trip', () => {
     it('primary + secondary survives save then parse', () => {
         const qs = buildFilterQueryString(
             PYROKINETIC, new Set([WARFARE, NECROMANCER])
         );
         const { primaryFilter, secondaryFilters } = parseFiltersFromURL(qs);
-        assert.equal(primaryFilter, PYROKINETIC);
-        assert.deepEqual(
-            [...secondaryFilters].sort(),
+        expect(primaryFilter).toBe(PYROKINETIC);
+        expect([...secondaryFilters].sort()).toEqual(
             [NECROMANCER, WARFARE]
         );
     });
 
     for (const tree of ALL_TREES) {
         it(`${tree} survives the round-trip`, () => {
-            const qs = buildFilterQueryString(tree, new Set());
+            const qs = buildFilterQueryString(tree, EMPTY_SET);
             const { primaryFilter } = parseFiltersFromURL(qs);
-
-            assert.equal(primaryFilter, tree);
+            expect(primaryFilter).toBe(tree);
         });
     }
 
     it('returns empty string when no filters active', () => {
-        assert.equal(
-            buildFilterQueryString(null, new Set()), '');
+        expect(buildFilterQueryString(null, EMPTY_SET)).toBe('');
     });
 });
 
 // ── secondary cleanup on primary change ──────────────────
 
-test('secondary cleanup on primary change', () => {
+describe('secondary cleanup on primary change', () => {
     it('removes secondary that becomes the new primary', () => {
-        const clean = cleanSecondaryFilters( WARFARE, new Set([WARFARE]) );
-        assert.deepEqual( [...clean], [] );
+        const clean = cleanSecondaryFilters(
+            WARFARE, new Set([WARFARE])
+        );
+        expect([...clean]).toEqual([]);
     });
 
     it('preserves valid secondaries', () => {
         const clean = cleanSecondaryFilters(
             GEOMANCER, new Set([NECROMANCER])
         );
-        assert.deepEqual( [...clean], [NECROMANCER] );
+        expect([...clean]).toEqual([NECROMANCER]);
     });
 
     it('drops invalid secondaries for Summoning', () => {
         const clean = cleanSecondaryFilters( SUMMONING, new Set([WARFARE]) );
-        assert.deepEqual( [...clean], [] );
+        expect([...clean]).toEqual([]);
     });
 });

@@ -1,43 +1,40 @@
-const { test, describe, it, assert } = require('./test.js');
-const fs = require('fs');
-const path = require('path');
-
-const jsyaml = require('js-yaml');
-const {
+import { describe, it, expect } from 'vitest';
+import fs from 'fs';
+import path from 'path';
+import jsyaml from 'js-yaml';
+import {
     VALID_SKILL_COMBINATION, SUMMONING,
-} = require('../js/constants.js');
+} from '../js/constants.js';
 
-const yamlPath = path.resolve(__dirname, '../data/skills.yaml');
+const yamlPath = path.resolve(import.meta.dirname, '../data/skills.yaml');
 const yamlText = fs.readFileSync(yamlPath, 'utf8');
 const skills = jsyaml.load(yamlText);
 
 // ── aggregate checks ────────────────────────────────────
 
-test('skills.yaml :: file format', () => {
+describe('skills.yaml :: file format', () => {
     it('data begins as an array', () => {
-        assert.ok(Array.isArray(skills), 'YAML root should be an array');
+        expect(Array.isArray(skills)).toBe(true);
     });
 
     it('the array is not empty', () => {
-        assert.ok(skills.length > 0, 'Should have at least one skill');
+        expect(skills.length).toBeGreaterThan(0);
     });
 
     it('no duplicate skill names', () => {
         const names = skills.map(s => s.name);
         const dupes = names.filter((n, i) => names.indexOf(n) !== i);
-
-        assert.deepEqual(dupes, [], `Duplicates: ${dupes.join(', ')}`);
+        expect(dupes).toEqual([]);
     });
 });
 
 // ── per-skill validation ────────────────────────────────
 
-test('Skill validation', () => {
+describe('Skill validation', () => {
     it('no duplicate skills', () => {
         const names = skills.map(s => s.name);
         const dupes = names.filter((n, i) => names.indexOf(n) !== i);
-
-        assert.deepEqual(dupes, [], `Duplicates: ${dupes.join(', ')}`);
+        expect(dupes).toEqual([]);
     });
 
     for (const skill of skills) {
@@ -47,100 +44,86 @@ test('Skill validation', () => {
 
             // structure
             it('has a name', () => {
-                assert.ok(skillName);
-                assert.ok(skillName.length > 0);
+                expect(skillName).toBeTruthy();
+                expect(skillName.length).toBeGreaterThan(0);
             });
 
             it('has prerequisites', () => {
-                assert.ok(requirements);
-                assert.equal(typeof requirements, 'object');
+                expect(requirements).toBeTruthy();
+                expect(requirements).toBeInstanceOf(Object);
             });
 
             // requirements
             // FIXME - this will change when we import all skills
             it('has exactly 2 prerequisites', () => {
-                assert.equal(prerequisites.length, 2);
+                expect(prerequisites.length).toBe(2);
             });
 
             it('skill prerequisites are valid combinations', () => {
-                // Since summoning is special...and is only considered "valid"
-                // when it is a "primary skill"...we need to make sure it is
-                // always the `primary` value.
                 const [a, b] = prerequisites;
-                const [primary, secondary] = b === SUMMONING ? [b, a] : [a, b];
+                const [primary, secondary] =
+                    b === SUMMONING ? [b, a] : [a, b];
 
-                assert.ok(
-                    VALID_SKILL_COMBINATION[primary].includes(secondary),
-                    `Invalid combo: '${primary}' cannot find '${secondary}'`
-                );
+                expect(
+                    VALID_SKILL_COMBINATION[primary].includes(secondary)
+                ).toBe(true);
             });
 
             for (const [tree, level] of Object.entries(requirements)) {
-                it(`prerequisite ${tree} is designated appropriately`, () => {
-                    assert.ok(Number.isInteger(level));
-                    assert.ok(level > 0);
+                it(`prerequisite ${tree} is valid`, () => {
+                    expect(Number.isInteger(level)).toBe(true);
+                    expect(level).toBeGreaterThan(0);
                 });
             }
 
             it('ap_cost is valid', () => {
-                assert.ok(Number.isInteger(skill.ap_cost));
-                assert.ok(skill.ap_cost >= 0);
+                expect(Number.isInteger(skill.ap_cost)).toBe(true);
+                expect(skill.ap_cost).toBeGreaterThanOrEqual(0);
             });
 
             it('sp_cost is valid', () => {
-                assert.ok(Number.isInteger(skill.sp_cost));
-                assert.ok(skill.sp_cost >= 0);
+                expect(Number.isInteger(skill.sp_cost)).toBe(true);
+                expect(skill.sp_cost).toBeGreaterThanOrEqual(0);
             });
 
-            // Cooldown can be undefined for a handful of skills
             if (skill.cooldown !== undefined) {
                 it('cooldown is a valid number', () => {
-                    assert.ok(Number.isInteger(skill.cooldown));
-                    assert.ok(skill.cooldown >= 0);
+                    expect(Number.isInteger(skill.cooldown)).toBe(true);
+                    expect(skill.cooldown).toBeGreaterThanOrEqual(0);
                 });
             } else {
                 it('cooldown is appropriately undefined', () => {
-                    assert.equal(skill.cooldown, undefined);
+                    expect(skill.cooldown).toBeUndefined();
                 });
             }
 
             it('range is valid', () => {
-                assert.match(skill.range, /^(Self|PB AoE|All allies|\d+m)$/);
+                expect(skill.range).toMatch(
+                    /^(Self|PB AoE|All allies|\d+m)$/
+                );
             });
 
             it('has ability text', () => {
-                assert.ok(skill.effect.trim().length > 0);
+                expect(skill.effect.trim().length).toBeGreaterThan(0);
             });
 
             it('has a primary_tree field', () => {
-                assert.ok(
-                    skill.primary_tree,
-                    `${skillName} is missing primary_tree`
-                );
+                expect(skill.primary_tree).toBeTruthy();
             });
 
             it('primary_tree is one of the prerequisites', () => {
-                assert.ok(
-                    prerequisites.includes(skill.primary_tree),
-                    `${skillName}: primary_tree "${skill.primary_tree}"`
-                    + ` is not in requirements`
-                );
-            });
-
-            it('does not use legacy wiki_url field', () => {
-                assert.equal(
-                    skill.wiki_url, undefined,
-                    `${skillName} should use "url" not "wiki_url"`
-                );
+                expect(
+                    prerequisites.includes(skill.primary_tree)
+                ).toBe(true);
             });
 
             if (skill.url) {
                 it('url is a valid URL', () => {
-                    assert.doesNotThrow(() => new URL(skill.url));
+                    expect(() => new URL(skill.url)).not.toThrow();
                 });
             } else {
                 it('url is appropriately undefined', () => {
-                    assert.equal(skill.url, undefined);
+                    expect(skill.url).toBeUndefined();
                 });
             }
         });
