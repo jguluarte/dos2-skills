@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Skill } from '../js/skill.js';
 import { createSkillCard } from '../js/skill-card-view.js';
 import {
-    PYROKINETIC, POLYMORPH, SUMMONING, WARFARE,
+    PYROKINETIC, POLYMORPH, WARFARE,
 } from '../js/constants.js';
 
 // ── fixtures ────────────────────────────────────────────
