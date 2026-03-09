@@ -19,38 +19,15 @@ class SkillCardViewModel extends ViewModel {
     constructor(skill, category) {
         super(skill);
         this._category = category;
-    }
-
-    get nameLower() {
-        return this._source.name.toLowerCase();
-    }
-
-    get primaryTree() {
-        return this._category.toLowerCase();
-    }
-
-    get secondaryTree() {
-        return this._source.secondaryTree.toLowerCase();
-    }
-
-    get treesJoined() {
-        return this._source.trees.join(',');
-    }
-
-    get apIcons() {
-        return Array(this._source.apCost).fill(true);
-    }
-
-    get spIcons() {
-        return Array(this._source.spCost).fill(true);
-    }
-
-    get hasCost() {
-        return this._source.apCost > 0 || this._source.spCost > 0;
-    }
-
-    get hasStats() {
-        return !!(this._source.range || this._source.cooldown);
+        this.nameLower = skill.name.toLowerCase();
+        this.primaryTree = category.toLowerCase();
+        this.secondaryTree = skill.secondaryTree.toLowerCase();
+        this.treesJoined = skill.trees.join(',');
+        this.apIcons = Array(skill.apCost).fill(true);
+        this.spIcons = Array(skill.spCost).fill(true);
+        this.hasCost = skill.apCost > 0 || skill.spCost > 0;
+        this.hasStats = !!(skill.range || skill.cooldown);
+        this.hasRequirements = Object.keys(skill.requirements).length > 0;
     }
 
     get requirements() {
@@ -64,10 +41,6 @@ class SkillCardViewModel extends ViewModel {
                 tree: tree.toLowerCase(),
                 label: `${tree} ${level}`,
             }));
-    }
-
-    get hasRequirements() {
-        return Object.keys(this._source.requirements).length > 0;
     }
 }
 
