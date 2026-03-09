@@ -1,4 +1,5 @@
 import Mustache from '../node_modules/mustache/mustache.mjs';
+import { viewModel } from './view-model.js';
 
 let _template = null;
 
@@ -15,34 +16,31 @@ export function setTemplate(tmpl) {
 }
 
 export function buildViewModel(skill, category) {
-    const requirements = Object.entries(skill.requirements)
-        .sort(([treeA], [treeB]) => {
-            if (treeA === category) return 1;
-            if (treeB === category) return -1;
-            return 0;
-        })
-        .map(([tree, level]) => ({
-            tree: tree.toLowerCase(),
-            label: `${tree} ${level}`,
-        }));
-
-    return {
-        name: skill.name,
-        nameLower: skill.name.toLowerCase(),
-        treesJoined: skill.trees.join(','),
-        url: skill.url,
-        primaryTree: category.toLowerCase(),
-        secondaryTree: skill.secondaryTree.toLowerCase(),
-        apIcons: Array(skill.apCost).fill(true),
-        spIcons: Array(skill.spCost).fill(true),
-        hasCost: skill.apCost > 0 || skill.spCost > 0,
-        effect: skill.effect,
-        requirements,
-        hasRequirements: requirements.length > 0,
-        range: skill.range,
-        cooldown: skill.cooldown,
-        hasStats: !!(skill.range || skill.cooldown),
-    };
+    return viewModel(skill, {
+        nameLower: s => s.name.toLowerCase(),
+        primaryTree: () => category.toLowerCase(),
+        secondaryTree: s => s.secondaryTree.toLowerCase(),
+        treesJoined: s => s.trees.join(','),
+        apIcons: s => Array(s.apCost).fill(true),
+        spIcons: s => Array(s.spCost).fill(true),
+        hasCost: s => s.apCost > 0 || s.spCost > 0,
+        hasStats: s => !!(s.range || s.cooldown),
+        requirements: s => {
+            return Object.entries(s.requirements)
+                .sort(([treeA], [treeB]) => {
+                    if (treeA === category) return 1;
+                    if (treeB === category) return -1;
+                    return 0;
+                })
+                .map(([tree, level]) => ({
+                    tree: tree.toLowerCase(),
+                    label: `${tree} ${level}`,
+                }));
+        },
+        hasRequirements: s => {
+            return Object.keys(s.requirements).length > 0;
+        },
+    });
 }
 
 export function createSkillCard(skill, category) {
