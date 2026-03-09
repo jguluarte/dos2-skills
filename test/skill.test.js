@@ -3,7 +3,8 @@ const { test, it, assert } = require('./test.js');
 const { Skill } = require('../js/skill.js');
 const {
     MissingNameError, MissingRequirementsError, MissingEffectError,
-    UnknownTreeError, PrerequisiteError,
+    UnknownTreeError, PrerequisiteError, MissingPrimaryTreeError,
+    InvalidPrimaryTreeError,
 } = require('../js/errors.js');
 const {
     SUMMONING, PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER, GEOMANCER,
@@ -15,7 +16,8 @@ test('Skill construction', () => {
     const raw = {
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
-        wiki_url: 'https://example.com/bleed-fire',
+        primary_tree: PYROKINETIC,
+        url: 'https://example.com/bleed-fire',
         ap_cost: 1,
         sp_cost: 0,
         range: '13m',
@@ -68,6 +70,7 @@ test('Skill construction with missing optional fields', () => {
     const raw = {
         name: 'Minimal Skill',
         requirements: { [WARFARE]: 2, [GEOMANCER]: 1 },
+        primary_tree: GEOMANCER,
         ap_cost: 2,
         sp_cost: 1,
         effect: 'Does something.',
@@ -91,6 +94,7 @@ test('Skill defaults for cost fields', () => {
     const skill = new Skill({
         name: 'No Costs',
         requirements: { [PYROKINETIC]: 1, [WARFARE]: 1 },
+        primary_tree: PYROKINETIC,
         effect: 'test',
     });
 
@@ -158,6 +162,7 @@ test('Skill.has(tree)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        primary_tree: PYROKINETIC,
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
@@ -177,6 +182,7 @@ test('Skill.any(trees)', () => {
     const skill = new Skill({
         name: 'Bleed Fire',
         requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+        primary_tree: PYROKINETIC,
         ap_cost: 1, sp_cost: 0,
         effect: 'test',
     });
@@ -199,6 +205,7 @@ test('Skill.isSummoning', () => {
         const skill = new Skill({
             name: 'Conjure Incarnate',
             requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 },
+            primary_tree: SUMMONING,
             ap_cost: 2, sp_cost: 0,
             effect: 'test',
         });
@@ -209,6 +216,7 @@ test('Skill.isSummoning', () => {
         const skill = new Skill({
             name: 'Bleed Fire',
             requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
         });
@@ -218,48 +226,47 @@ test('Skill.isSummoning', () => {
 
 // ── primaryTree / secondaryTree ────────────────────────
 
-test('Skill.primaryTree for dual-tree skills', () => {
-    it('elemental + non-elemental → primary is the elemental tree', () => {
+test('Skill reads primary_tree from raw data', () => {
+    it('uses primary_tree field directly', () => {
         const skill = new Skill({
             name: 'Bleed Fire',
             requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
             ap_cost: 1, sp_cost: 0,
             effect: 'test',
         });
         assert.equal(skill.primaryTree, PYROKINETIC);
-    });
-
-    it('summoning + elemental → primary is Summoning', () => {
-        const skill = new Skill({
-            name: 'Conjure Incarnate',
-            requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 },
-            ap_cost: 2, sp_cost: 0,
-            effect: 'test',
-        });
-        assert.equal(skill.primaryTree, SUMMONING);
-    });
-});
-
-test('Skill.secondaryTree for dual-tree skills', () => {
-    it('elemental + non-elemental → secondary is non-elemental', () => {
-        const skill = new Skill({
-            name: 'Bleed Fire',
-            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
-            ap_cost: 1, sp_cost: 0,
-            effect: 'test',
-        });
         assert.equal(skill.secondaryTree, POLYMORPH);
     });
 
-    it('summoning + elemental → secondary is the elemental tree', () => {
+    it('summoning primary_tree', () => {
         const skill = new Skill({
-            name: 'Conjure Incarnate',
+            name: 'Fire Infusion',
             requirements: { [SUMMONING]: 1, [PYROKINETIC]: 1 },
-            ap_cost: 2, sp_cost: 0,
+            primary_tree: SUMMONING,
+            ap_cost: 1, sp_cost: 0,
             effect: 'test',
         });
+        assert.equal(skill.primaryTree, SUMMONING);
         assert.equal(skill.secondaryTree, PYROKINETIC);
     });
+
+    it('throws when primary_tree is missing', () => {
+        assert.throws(() => new Skill({
+            name: 'No Primary',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            ap_cost: 1, sp_cost: 0,
+            effect: 'test',
+        }), MissingPrimaryTreeError);
+    });
+
+    it('throws when primary_tree is not in requirements', () => {
+        assert.throws(() => new Skill({
+            name: 'Bad Primary',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: WARFARE,
+            ap_cost: 1, sp_cost: 0,
+            effect: 'test',
+        }), InvalidPrimaryTreeError);
+    });
 });
-
-

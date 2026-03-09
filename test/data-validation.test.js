@@ -42,13 +42,13 @@ test('Skill validation', () => {
 
     for (const skill of skills) {
         describe(skill.name, () => {
-            const { name, requirements, wiki_url } = skill;
+            const { name: skillName, requirements } = skill;
             const prerequisites = Object.keys(requirements);
 
             // structure
             it('has a name', () => {
-                assert.ok(name);
-                assert.ok(name.length > 0);
+                assert.ok(skillName);
+                assert.ok(skillName.length > 0);
             });
 
             it('has prerequisites', () => {
@@ -112,13 +112,35 @@ test('Skill validation', () => {
                 assert.ok(skill.effect.trim().length > 0);
             });
 
-            if (wiki_url) {
-                it('wiki_url is a valid URL', () => {
-                    assert.doesNotThrow(() => new URL(wiki_url));
+            it('has a primary_tree field', () => {
+                assert.ok(
+                    skill.primary_tree,
+                    `${skillName} is missing primary_tree`
+                );
+            });
+
+            it('primary_tree is one of the prerequisites', () => {
+                assert.ok(
+                    prerequisites.includes(skill.primary_tree),
+                    `${skillName}: primary_tree "${skill.primary_tree}"`
+                    + ` is not in requirements`
+                );
+            });
+
+            it('does not use legacy wiki_url field', () => {
+                assert.equal(
+                    skill.wiki_url, undefined,
+                    `${skillName} should use "url" not "wiki_url"`
+                );
+            });
+
+            if (skill.url) {
+                it('url is a valid URL', () => {
+                    assert.doesNotThrow(() => new URL(skill.url));
                 });
             } else {
-                it('wiki_url is appropriately undefined', () => {
-                    assert.equal(wiki_url, undefined);
+                it('url is appropriately undefined', () => {
+                    assert.equal(skill.url, undefined);
                 });
             }
         });
