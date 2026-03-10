@@ -29,14 +29,8 @@ describe('Skill construction', () => {
         expect(skill.name).toBe('Bleed Fire');
     });
 
-    it('exposes trees as sorted array of requirement keys', () => {
+    it('exposes trees as [secondary, primary]', () => {
         expect(skill.trees).toEqual([POLYMORPH, PYROKINETIC]);
-    });
-
-    it('exposes requirements map', () => {
-        expect(skill.requirements).toEqual(
-            { [PYROKINETIC]: 1, [POLYMORPH]: 1 }
-        );
     });
 
     it('exposes apCost', () => {
@@ -219,6 +213,146 @@ describe('Skill.isSummoning', () => {
             effect: 'test',
         });
         expect(skill.isSummoning).toBe(false);
+    });
+});
+
+// ── investment ──────────────────────────────────────────
+
+describe('Skill.investment', () => {
+    it('derives investment from requirements values', () => {
+        const skill = new Skill({
+            name: 'Level 2',
+            requirements: { [PYROKINETIC]: 2, [POLYMORPH]: 2 },
+            primary_tree: PYROKINETIC,
+            effect: 'test',
+        });
+        expect(skill.investment).toBe(2);
+    });
+
+    it('works for level 1 skills', () => {
+        const skill = new Skill({
+            name: 'Level 1',
+            requirements: { [WARFARE]: 1, [NECROMANCER]: 1 },
+            primary_tree: WARFARE,
+            effect: 'test',
+        });
+        expect(skill.investment).toBe(1);
+    });
+});
+
+// ── icon arrays ─────────────────────────────────────────
+
+describe('Skill.apIcons', () => {
+    it('returns array matching apCost length', () => {
+        const skill = new Skill({
+            name: 'Test',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            ap_cost: 3, effect: 'test',
+        });
+        expect(skill.apIcons.length).toBe(3);
+    });
+
+    it('returns empty array when apCost is 0', () => {
+        const skill = new Skill({
+            name: 'Test',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            effect: 'test',
+        });
+        expect(skill.apIcons.length).toBe(0);
+    });
+});
+
+describe('Skill.spIcons', () => {
+    it('returns array matching spCost length', () => {
+        const skill = new Skill({
+            name: 'Test',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            sp_cost: 2, effect: 'test',
+        });
+        expect(skill.spIcons.length).toBe(2);
+    });
+
+    it('returns empty array when spCost is 0', () => {
+        const skill = new Skill({
+            name: 'Test',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            effect: 'test',
+        });
+        expect(skill.spIcons.length).toBe(0);
+    });
+});
+
+// ── computed properties ─────────────────────────────────
+
+describe('Skill.hasCost', () => {
+    it('true when apCost > 0', () => {
+        const skill = new Skill({
+            name: 'AP Only',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            ap_cost: 1, sp_cost: 0,
+            effect: 'test',
+        });
+        expect(skill.hasCost).toBe(true);
+    });
+
+    it('true when spCost > 0', () => {
+        const skill = new Skill({
+            name: 'SP Only',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            ap_cost: 0, sp_cost: 1,
+            effect: 'test',
+        });
+        expect(skill.hasCost).toBe(true);
+    });
+
+    it('false when both costs are 0', () => {
+        const skill = new Skill({
+            name: 'Free',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            effect: 'test',
+        });
+        expect(skill.hasCost).toBe(false);
+    });
+});
+
+describe('Skill.hasMetadata', () => {
+    it('true when range exists', () => {
+        const skill = new Skill({
+            name: 'Ranged',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            range: '13m',
+            effect: 'test',
+        });
+        expect(skill.hasMetadata).toBe(true);
+    });
+
+    it('true when cooldown exists', () => {
+        const skill = new Skill({
+            name: 'Cooldown',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            cooldown: 3,
+            effect: 'test',
+        });
+        expect(skill.hasMetadata).toBe(true);
+    });
+
+    it('false when neither exists', () => {
+        const skill = new Skill({
+            name: 'No Meta',
+            requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 1 },
+            primary_tree: PYROKINETIC,
+            effect: 'test',
+        });
+        expect(skill.hasMetadata).toBe(false);
     });
 });
 
