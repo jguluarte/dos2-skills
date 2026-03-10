@@ -1,0 +1,44 @@
+<skill-header>
+    <skill-name>
+        {{#if url}}
+            <a href="{{url}}" target="_blank" rel="noopener">{{name}}</a>
+        {{else}}
+            <span>{{name}}</span>
+        {{/if}}
+    </skill-name>
+
+    {{#if hasCost}}
+        <skill-cost>
+            {{#if spIcons}}
+                <span>
+                    {{#each spIcons}}<source-icon></source-icon>{{/each}}
+                </span>
+            {{/if}}
+
+            {{#if apIcons}}
+                <span>
+                    {{#each apIcons}}<ap-icon></ap-icon>{{/each}}
+                </span>
+            {{/if}}
+        </skill-cost>
+    {{/if}}
+
+</skill-header>
+
+<skill-effect>{{{effect}}}</skill-effect>
+
+<skill-requirements>
+    <req-badge data-tree="{{lowercase secondaryTree}}">
+        {{~secondaryTree}} {{investment~}}
+    </req-badge>
+    <req-badge data-tree="{{lowercase primaryTree}}">
+        {{~primaryTree}} {{investment~}}
+    </req-badge>
+</skill-requirements>
+
+{{#if hasMetadata}}
+    <skill-metadata>
+        {{#if range}}<div>Range: {{range}}</div>{{/if}}
+        {{#if cooldown}}<div>Cooldown: {{cooldown}}</div>{{/if}}
+    </skill-metadata>
+{{/if}}
