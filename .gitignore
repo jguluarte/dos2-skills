@@ -20,5 +20,8 @@ Thumbs.db
 .claude/worktrees/
 .test-deps/
 
+# Playwright MCP artifacts
+.playwright-mcp/
+
 # Dependencies
 node_modules/
