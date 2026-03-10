@@ -27,31 +27,58 @@ export class Skill {
         }
 
         this.name = raw.name;
-        this.requirements = raw.requirements;
-        this.trees = Object.keys(raw.requirements).sort();
         this.apCost = raw.ap_cost ?? 0;
         this.spCost = raw.sp_cost ?? 0;
         this.range = raw.range ?? null;
         this.cooldown = raw.cooldown ?? null;
+        this.investment = Object.values(raw.requirements)[0];
         this.effect = raw.effect;
         this.url = raw.url ?? null;
 
         if (!raw.primary_tree) {
             throw new MissingPrimaryTreeError(raw.name);
         }
-        if (!this.trees.includes(raw.primary_tree)) {
+        const reqTrees = Object.keys(raw.requirements);
+        if (!reqTrees.includes(raw.primary_tree)) {
             throw new InvalidPrimaryTreeError(
                 raw.name, raw.primary_tree
             );
         }
         this.primaryTree = raw.primary_tree;
-        this.secondaryTree = this.trees.find(
+        this.secondaryTree = reqTrees.find(
             t => t !== raw.primary_tree
         );
+        this.trees = [this.secondaryTree, this.primaryTree];
+    }
+
+    get hasCost() {
+        return !!(this.apCost || this.spCost);
+    }
+
+    get hasMetadata() {
+        return !!(this.range || this.cooldown);
+    }
+
+    get apIcons() {
+        return Array(this.apCost).fill(true);
+    }
+
+    get spIcons() {
+        return Array(this.spCost).fill(true);
     }
 
     get isSummoning() {
         return this.primaryTree === SUMMONING;
+    }
+
+    toJSON() {
+        return {
+            ...this,
+            hasCost: this.hasCost,
+            hasMetadata: this.hasMetadata,
+            apIcons: this.apIcons,
+            spIcons: this.spIcons,
+        };
     }
 
     has(tree) {

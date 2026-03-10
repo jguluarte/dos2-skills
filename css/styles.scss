@@ -335,7 +335,7 @@ skill-name {
 
 // Skill name secondary tree colors
 @mixin secondary-tree-color($tree, $color) {
-  skill-name[data-secondary-tree="#{$tree}"] {
+  skill-card[data-secondary-tree="#{$tree}"] {
     --secondary-color: #{$color};
   }
 }
@@ -421,7 +421,7 @@ req-badge {
 @include req-badge-color('scoundrel', $color-scoundrel);
 @include req-badge-color('polymorph', $color-polymorph);
 
-skill-stats {
+skill-metadata {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -12,6 +12,40 @@ repos:
         name: Build CSS and index.html
         entry: make build
         language: system
-        types_or: [css, scss, html]
+        files: (css/styles\.scss|src/index\.html)
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: check-css-staged
+        name: Ensure css/styles.css and index.html are staged
+        entry: >-
+          bash -c '
+            staged=$(git diff --cached --name-only);
+            missing="";
+            echo "$staged" | grep -q "css/styles.css" || missing="$missing css/styles.css";
+            echo "$staged" | grep -q "^index.html$" || missing="$missing index.html";
+            if [ -n "$missing" ]; then
+              echo "Missing:$missing";
+              echo "Run: make build && git add$missing";
+              exit 1;
+            fi
+          '
+        language: system
+        files: css/styles\.scss
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: check-html-staged
+        name: Ensure index.html is staged
+        entry: >-
+          bash -c '
+            git diff --cached --name-only | grep -q "^index.html$" || {
+              echo "Missing: index.html";
+              echo "Run: make build && git add index.html";
+              exit 1;
+            }
+          '
+        language: system
+        files: src/index\.html
         pass_filenames: false
         stages: [pre-commit]
