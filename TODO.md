@@ -8,20 +8,18 @@
 - [ ] Fragile initialization order — calls must happen in a specific sequence with no indication why; document or restructure
 
 ### Naming clarity
-- [ ] `category` parameter (app.js `renderSkills`) — easily confused with filter "primary/secondary" terminology; consider `displayTree` or `sectionTree`
 - [ ] `andFilter`/`orFilter` (filter-logic.js) — URL param names leak into code; rename to `primaryParam`/`secondaryParam` to match app terminology
 
 ### Code structure
-- [ ] `buildSummaryText` (filter-logic.js) — extract `joinWithOr(items)` helper for the repeated join-with-last-comma pattern
 - [ ] `applyFilters` (app.js) — hidden `window.scrollTo` side effect; move to caller or rename to reflect it
 
 ### Data modeling (MVC — Model layer)
 
 - [ ] Consider TypeScript migration for more natural typing & validation
-- [ ] `any(trees)` — refactor out to SkillCatalog when that object is built; filter-matching logic belongs on the collection, not individual skills
+- [ ] `any(trees)` — refactor out to SkillDatabase when that object is built; filter-matching logic belongs on the collection, not individual skills
 - [ ] **SkillTree** — more than a string constant. Has `name`, `type` (elemental / non-elemental / summoning), `color`. Knows its valid pairings. Replaces the loose `ELEMENTAL_TREES` / `NON_ELEMENTAL_TREES` arrays and the `VALID_SECONDARY_BY_PRIMARY` lookup table
 - [ ] **FilterState** — encapsulates `primary` (SkillTree|null) + `secondaries` (Set<SkillTree>). Owns URL serialization (`toURL()`, `static fromURL()`), summary text generation, and valid-secondary cleanup on primary change. Replaces the module globals and scattered helper functions
-- [ ] **SkillCatalog** — holds the full list of Skills loaded from YAML. Can filter by a FilterState, sort. Replaces the `skillsByCategory` global. Absorbs `any()` from Skill class. Will also absorb `groupSkillsByTree` logic from app.js
+- [ ] **SkillDatabase** — holds the full list of Skills loaded from YAML. Can filter by a FilterState, sort. Replaces the `skillsByCategory` global. Absorbs `any()` from Skill class. Will also absorb `groupSkillsByTree` logic from app.js
 
 ### View layer
 - [ ] `applyFilters` still reads `data-trees` from the DOM — refactor to work with Skill objects directly, then remove `data-trees` from the template
@@ -37,4 +35,3 @@
 
 ## CSS
 - [ ] Clean up coupling between JS rendering (data attributes) and CSS selectors — make the contract explicit
-- [ ] Add more space between SP/AP icons
