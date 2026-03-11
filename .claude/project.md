@@ -4,8 +4,6 @@
 
 This project uses **devbox** for sandboxed tooling (no npm/node_modules!). All tools are managed via Nix packages.
 
-**⚠️ Important:** Use regular git branches, not worktrees. Devbox doesn't play well with worktrees.
-
 ### First-Time Setup
 
 ```bash
@@ -97,4 +95,3 @@ Shows one commit at a time with visual separators.
 ## Agent Workflow Notes
 
 - **User prefers to review diffs manually in shell** - don't show long diffs unless asked
-- **Use branches, not worktrees** - Devbox doesn't work well with worktrees

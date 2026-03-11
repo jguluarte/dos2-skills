@@ -25,3 +25,6 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+
+# Make target trackers
+.make-timestamp.*
