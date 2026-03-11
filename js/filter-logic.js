@@ -118,18 +118,22 @@ export function buildSummaryText(primaryFilter, secondaryFilters) {
     if (!primaryFilter) {
         if (trees.length === 1) return `Showing all ${trees[0]} skills`;
 
-        const joined = trees.join(', ');
-        const lastComma = joined.lastIndexOf(', ');
-        const before = joined.substring(0, lastComma);
-        const after = joined.substring(lastComma + 2);
+        const { before, after } = commaizeList(trees);
         return `Showing skills with ${before} or ${after}`;
     }
 
     if (trees.length === 1) return `${primaryStr}, with ${trees[0]}`;
 
-    const joined = trees.join(', ');
+    const { before, after } = commaizeList(trees);
+    return `${primaryStr}, with ${before} or ${after}`;
+}
+
+function commaizeList(list) {
+    const joined = list.join(', ');
     const lastComma = joined.lastIndexOf(', ');
     const before = joined.substring(0, lastComma);
     const after = joined.substring(lastComma + 2);
-    return `${primaryStr}, with ${before} or ${after}`;
+
+
+    return { before, after }
 }
