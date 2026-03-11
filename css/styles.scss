@@ -355,7 +355,16 @@ skill-name {
 skill-cost {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+
+  span {
+    display: flex;
+    gap: 1px;
+
+    &:has(source-icon) {
+      gap: 2px;
+    }
+  }
 }
 
 ap-icon {
