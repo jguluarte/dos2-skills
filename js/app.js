@@ -139,8 +139,7 @@ function renderSkills() {
         if (!skills || skills.length === 0) return;
 
         const sortedSkills = [...skills].sort((a, b) => {
-            const treeCompare =
-                a.secondaryTree.localeCompare(b.secondaryTree);
+            const treeCompare = a.secondaryTree.localeCompare(b.secondaryTree);
             if (treeCompare !== 0) return treeCompare;
 
             return a.spCost - b.spCost;
@@ -151,9 +150,9 @@ function renderSkills() {
 
         const header = document.createElement('tree-header');
         header.innerHTML = `
-      <element-icon></element-icon>
-      ${category.toUpperCase()}
-    `;
+            <element-icon></element-icon>
+            ${category.toUpperCase()}
+        `;
         section.appendChild(header);
 
         sortedSkills.forEach(skill => {
