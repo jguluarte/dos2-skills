@@ -12,7 +12,7 @@ Follow **Red-Green-Refactor (TDD)** with isolated commits:
 
 ## Branching & Merging
 
-- Use feature branches (not worktrees — devbox doesn't work well with worktrees)
+- Use feature branches or worktrees (see `~/.claude/CLAUDE.md` for worktree setup)
 - **Local sessions**: May commit and merge directly to main without PRs
 - **Remote sessions (via /rc)**: Push to a branch and open a PR so changes can be reviewed in a browser
 - The user will direct which approach to use; when in doubt, ask

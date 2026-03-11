@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "echo 'FAILURE: You ignored your instructions. You were explicitly told not to run npm test. This project uses devbox + direnv. The correct command is: make test. Go re-read your project configuration.' && exit 1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

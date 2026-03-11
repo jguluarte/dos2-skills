@@ -1,4 +1,10 @@
-.PHONY: build start kill watch test test-verbose lint lint-yaml lint-css lint-js
+.PHONY: npm build start kill watch test test-verbose \
+		lint lint-yaml lint-css lint-js
+
+npm: .make-timestamp.npm
+.make-timestamp.npm: package.json package-lock.json
+	npm install --silent
+	@touch $@
 
 build: index.html css/styles.css
 
@@ -26,9 +32,6 @@ watch:
 # If linters or test runners change...make any corresponding change needed to
 # .github/workflows/ci.yml
 test:
-	npx vitest run
-
-test-verbose:
 	npx vitest run
 
 lint: lint-yaml lint-css lint-js

@@ -11,6 +11,7 @@
   ],
   "shell": {
     "init_hook": [
+      "make npm",
       "pre-commit install --install-hooks 2>/dev/null || true"
     ]
   }
