@@ -1,44 +1,38 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { applyFilters, syncUI } from '../js/app.js';
 
-describe('syncUI orchestration', () => {
-    describe('applyFilters does not scroll', () => {
-        it('does not call window.scrollTo', async () => {
-            const scrollSpy = vi.spyOn(window, 'scrollTo')
-                .mockImplementation(() => {});
+beforeEach(() => {
+    document.body.innerHTML = `
+        <div id="no-results" class="hidden"></div>
+        <div id="secondary-filters"></div>
+        <div id="summary"></div>
+        <div id="clear-btn" class="hidden"></div>
+        <div id="primary-filters"></div>
+    `;
+});
 
-            // Set up minimal DOM for applyFilters
-            document.body.innerHTML = `
-                <div id="no-results" class="hidden"></div>
-            `;
+describe('applyFilters does not scroll', () => {
+    it('does not call window.scrollTo', () => {
+        const scrollSpy = vi.spyOn(window, 'scrollTo')
+            .mockImplementation(() => {});
 
-            const { applyFilters } = await import('../js/app.js');
-            applyFilters();
+        applyFilters();
 
-            expect(scrollSpy).not.toHaveBeenCalled();
-            scrollSpy.mockRestore();
-        });
+        expect(scrollSpy).not.toHaveBeenCalled();
+        scrollSpy.mockRestore();
     });
+});
 
-    describe('syncUI calls scrollTo', () => {
-        it('scrolls to top when called', async () => {
-            const scrollSpy = vi.spyOn(window, 'scrollTo')
-                .mockImplementation(() => {});
+describe('syncUI scrolls to top', () => {
+    it('calls window.scrollTo with smooth scroll', () => {
+        const scrollSpy = vi.spyOn(window, 'scrollTo')
+            .mockImplementation(() => {});
 
-            document.body.innerHTML = `
-                <div id="no-results" class="hidden"></div>
-                <div id="secondary-filters"></div>
-                <div id="summary"></div>
-                <div id="clear-btn" class="hidden"></div>
-                <div id="primary-filters"></div>
-            `;
+        syncUI();
 
-            const { syncUI } = await import('../js/app.js');
-            syncUI();
-
-            expect(scrollSpy).toHaveBeenCalledWith(
-                { top: 0, behavior: 'smooth' }
-            );
-            scrollSpy.mockRestore();
-        });
+        expect(scrollSpy).toHaveBeenCalledWith(
+            { top: 0, behavior: 'smooth' }
+        );
+        scrollSpy.mockRestore();
     });
 });
