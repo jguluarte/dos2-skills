@@ -7,6 +7,7 @@
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.9.0",
     "eslint": "^10.0.2",
+    "eslint-plugin-diff": "^2.0.3",
     "globals": "^17.3.0",
     "happy-dom": "^20.8.3",
     "js-yaml": "^4.1.0",
