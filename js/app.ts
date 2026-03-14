@@ -332,12 +332,13 @@ async function initialize(): Promise<void> {
         const rawSkills =
             jsyaml.load(yamlText) as RawSkill[];
 
-        skillsByCategory = {
-            [SUMMONING]: [],
-        } as SkillsByCategory;
+        const categories: Partial<SkillsByCategory> =
+            { [SUMMONING]: [] };
         ELEMENTAL_TREES.forEach(t => {
-            skillsByCategory![t] = [];
+            categories[t] = [];
         });
+        skillsByCategory =
+            categories as SkillsByCategory;
 
         for (const raw of rawSkills) {
             const skill = new Skill(raw);
