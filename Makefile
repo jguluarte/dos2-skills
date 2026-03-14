@@ -1,5 +1,5 @@
 .PHONY: npm build start kill watch test test-verbose \
-		lint lint-yaml lint-css lint-js
+		lint lint-yaml lint-css lint-js lint-fix lint-fix-all
 
 npm: .make-timestamp.npm
 .make-timestamp.npm: package.json package-lock.json
@@ -44,3 +44,9 @@ lint-css:
 
 lint-js:
 	npx eslint --config .config/eslint.config.mjs js/ test/
+
+lint-fix:
+	npx eslint --config .config/eslint-diff.config.mjs --fix js/ test/
+
+lint-fix-all:
+	npx eslint --config .config/eslint.config.mjs --fix js/ test/
