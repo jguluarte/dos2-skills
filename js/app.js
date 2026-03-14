@@ -56,6 +56,19 @@ function updateFilterSummary() {
 }
 
 // ===========================
+// UI Sync
+// ===========================
+
+function syncUI({ updatePrimary = false } = {}) {
+    if (updatePrimary) updatePrimaryFilterButtons();
+    renderSecondaryFilters();
+    applyFilters();
+    saveFiltersToURL();
+    updateFilterSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===========================
 // UI Interactions
 // ===========================
 
@@ -105,15 +118,6 @@ function updatePrimaryFilterButtons() {
         .forEach(btn => {
             btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
         });
-}
-
-function syncUI({ updatePrimary = false } = {}) {
-    if (updatePrimary) updatePrimaryFilterButtons();
-    renderSecondaryFilters();
-    applyFilters();
-    saveFiltersToURL();
-    updateFilterSummary();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function clearFilters() {
