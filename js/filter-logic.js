@@ -135,5 +135,5 @@ function commaizeList(list) {
     const after = joined.substring(lastComma + 2);
 
 
-    return { before, after }
+    return { before, after };
 }

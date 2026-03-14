@@ -10,6 +10,7 @@ export default [
         },
         rules: {
             "@stylistic/indent": ["error", 4],
+            "@stylistic/semi": ["error", "always"],
             "@stylistic/max-len": ["error", {
                 code: 80,
             }],
