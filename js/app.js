@@ -224,7 +224,7 @@ function initializeFilterBar() {
         filterOverlay.classList.add('visible');
     }
 
-    filterHeader.addEventListener('click', (e) => {
+    filterHeader.addEventListener('click', e => {
         if (e.target === clearBtn || clearBtn.contains(e.target)) return;
 
         if (filterContent.classList.contains('expanded')) {
@@ -234,7 +234,7 @@ function initializeFilterBar() {
         }
     });
 
-    filterOverlay.addEventListener('touchstart', (e) => {
+    filterOverlay.addEventListener('touchstart', e => {
         e.preventDefault();
         closeFilters();
     }, { passive: false });
@@ -243,7 +243,7 @@ function initializeFilterBar() {
         closeFilters();
     });
 
-    clearBtn.addEventListener('click', (e) => {
+    clearBtn.addEventListener('click', e => {
         e.stopPropagation();
         clearFilters();
     });
