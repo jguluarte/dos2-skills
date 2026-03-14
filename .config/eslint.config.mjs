@@ -30,6 +30,8 @@ export default [
             }],
             "@stylistic/max-len": ["error", {
                 code: 80,
+                ignoreUrls: true,
+                ignoreTemplateLiterals: true,
             }],
             "@stylistic/arrow-parens": ["error", "as-needed"],
             "@stylistic/arrow-spacing": "error",
