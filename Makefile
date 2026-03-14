@@ -1,4 +1,4 @@
-.PHONY: npm build start kill watch test test-verbose \
+.PHONY: npm build start kill test test-verbose typecheck \
 		lint lint-yaml lint-css lint-js
 
 npm: .make-timestamp.npm
@@ -6,28 +6,19 @@ npm: .make-timestamp.npm
 	npm install --silent
 	@touch $@
 
-build: index.html css/styles.css
+build: npm
+	npx vite build
+	cp -r data docs/data
 
-index.html: src/index.html css/styles.css
-	@echo "rebuilding $@..."
-	sed 's/__CSS_HASH__/$(shell shasum -a 256 css/styles.css | cut -c1-8)/g' $< > $@
-
-css/styles.css: css/styles.scss
-	sass $< $@ --style=compressed --no-source-map
-
-start:
-	@echo "Starting SCSS watch and dev server..."
-	@trap 'kill 0' EXIT; \
-	sass css/styles.scss:css/styles.css --watch --style=expanded & \
-	python3 -m http.server 8000
+start: npm
+	npx vite
 
 kill:
-	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
-		echo "No processes found on port 8000"
+	lsof -ti:5173 | xargs kill -9 2>/dev/null && echo "Port 5173 freed" || \
+		echo "No processes found on port 5173"
 
-watch:
-	@echo "Watching css/styles.scss for changes..."
-	sass css/styles.scss:css/styles.css --watch --style=expanded
+typecheck:
+	npx tsc --noEmit
 
 # If linters or test runners change...make any corresponding change needed to
 # .github/workflows/ci.yml
