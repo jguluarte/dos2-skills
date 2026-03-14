@@ -4,7 +4,7 @@ import path from 'path';
 import jsyaml from 'js-yaml';
 import {
     VALID_SKILL_COMBINATION, SUMMONING,
-} from '../js/constants.js';
+} from '../js/constants.ts';
 
 const yamlPath = path.resolve(import.meta.dirname, '../data/skills.yaml');
 const yamlText = fs.readFileSync(yamlPath, 'utf8');

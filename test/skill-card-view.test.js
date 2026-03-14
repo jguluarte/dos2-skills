@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { Skill } from '../js/skill.js';
-import { createSkillCard, setTemplate } from '../js/skill-card-view.js';
+import { Skill } from '../js/skill.ts';
+import { createSkillCard, setTemplate } from '../js/skill-card-view.ts';
 import {
     PYROKINETIC, POLYMORPH, WARFARE,
-} from '../js/constants.js';
+} from '../js/constants.ts';
 
 beforeAll(() => {
     const dir = path.resolve(import.meta.dirname, '../js/templates');

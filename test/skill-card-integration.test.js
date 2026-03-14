@@ -2,10 +2,10 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import jsyaml from 'js-yaml';
-import { Skill } from '../js/skill.js';
+import { Skill } from '../js/skill.ts';
 import {
     createSkillCard, setTemplate,
-} from '../js/skill-card-view.js';
+} from '../js/skill-card-view.ts';
 
 const yamlPath = path.resolve(
     import.meta.dirname, '../data/skills.yaml'

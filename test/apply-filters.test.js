@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { makeSkill } from './helpers.js';
 import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
-} from '../js/constants.js';
-import { shouldSkillShow } from '../js/filter-logic.js';
+} from '../js/constants.ts';
+import { shouldSkillShow } from '../js/filter-logic.ts';
 
 // ── helpers ──────────────────────────────────────────────
 
