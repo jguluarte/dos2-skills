@@ -1,5 +1,6 @@
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
+import tseslint from "typescript-eslint";
 import globals from "globals";
 
 export default [
@@ -16,14 +17,24 @@ export default [
         },
     },
     {
-        files: ["js/**/*.js"],
+        files: ["js/**/*.ts"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
+            parser: tseslint.parser,
             globals: {
                 ...globals.browser,
-                jsyaml: "readonly",
             },
+        },
+        plugins: {
+            "@typescript-eslint": tseslint.plugin,
+        },
+        rules: {
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                { argsIgnorePattern: "^_" },
+            ],
         },
     },
     {

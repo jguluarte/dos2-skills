@@ -2,12 +2,12 @@ import { describe, it, expect } from 'vitest';
 import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER,
     WARFARE, NECROMANCER, ALL_TREES,
-} from '../js/constants.js';
+} from '../js/constants.ts';
 import {
     parseFiltersFromURL,
     buildFilterQueryString,
     cleanSecondaryFilters,
-} from '../js/filter-logic.js';
+} from '../js/filter-logic.ts';
 
 const EMPTY_SET = new Set();
 

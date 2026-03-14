@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { Skill } from '../js/skill.js';
+import { Skill } from '../js/skill.ts';
 import {
     MissingNameError, MissingRequirementsError, MissingEffectError,
     UnknownTreeError, PrerequisiteError, MissingPrimaryTreeError,
     InvalidPrimaryTreeError,
-} from '../js/errors.js';
+} from '../js/errors.ts';
 import {
     SUMMONING, PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER, GEOMANCER,
-} from '../js/constants.js';
+} from '../js/constants.ts';
 
 // ── construction & properties ───────────────────────────
 
