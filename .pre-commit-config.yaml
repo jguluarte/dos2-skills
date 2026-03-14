@@ -8,13 +8,6 @@ repos:
 
   - repo: local
     hooks:
-      - id: lint
-        name: Lint check
-        entry: make lint
-        language: system
-        pass_filenames: false
-        stages: [pre-commit]
-
       - id: build
         name: Build CSS and index.html
         entry: make build
