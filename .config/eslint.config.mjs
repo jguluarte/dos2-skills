@@ -9,7 +9,16 @@ export default [
             "@stylistic": stylistic,
         },
         rules: {
-            "@stylistic/indent": ["error", 4],
+            "eqeqeq": ["error", "always", { null: "ignore" }],
+            "no-var": "error",
+            "prefer-const": "error",
+            "no-console": ["warn", {
+                allow: ["error", "warn"],
+            }],
+            "@stylistic/indent": ["error", 4, {
+                FunctionDeclaration: { parameters: 2, body: 1 },
+                FunctionExpression: { parameters: 2, body: 1 },
+            }],
             "@stylistic/semi": ["error", "always"],
             "@stylistic/comma-dangle": ["error", {
                 arrays: "always-multiline",
@@ -35,6 +44,12 @@ export default [
             }],
             "@stylistic/arrow-parens": ["error", "as-needed"],
             "@stylistic/arrow-spacing": "error",
+            "@stylistic/brace-style": ["error", "1tbs", {
+                allowSingleLine: true,
+            }],
+            "@stylistic/no-multiple-empty-lines": ["error", {
+                max: 1,
+            }],
         },
     },
     {
