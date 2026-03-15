@@ -10,9 +10,9 @@ import { shouldSkillShow } from '../js/filter-logic.js';
 function getVisibleSkills(skills, primary, secondary = []) {
     const secondarySet = new Set(secondary);
     return skills
-        .filter(skill =>
+        .filter((skill) =>
             shouldSkillShow(skill.trees, primary, secondarySet))
-        .map(skill => skill.name)
+        .map((skill) => skill.name)
         .sort();
 }
 
@@ -27,8 +27,8 @@ describe('filters behave as expected', () => {
     const sumNecro = makeSkill('Summon+Necro', [SUMMONING, NECROMANCER]);
 
     const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
-    const allNames = skills.map(s => s.name).sort();
-    const summonNames = [sumNecro, sumPyro].map(s => s.name).sort();
+    const allNames = skills.map((s) => s.name).sort();
+    const summonNames = [sumNecro, sumPyro].map((s) => s.name).sort();
 
     it('An absence of a filter renders all skills', () => {
         expect(getVisibleSkills(skills, null)).toEqual(allNames);
@@ -54,7 +54,7 @@ describe('filters behave as expected', () => {
 
                 it('does not include summoning skills', () => {
                     expect(
-                        summonNames.every(n => !found.includes(n))
+                        summonNames.every((n) => !found.includes(n))
                     ).toBe(true);
                 });
             });
@@ -101,7 +101,7 @@ describe('filters behave as expected', () => {
 
             expect(
                 getVisibleSkills(skills, null, [NECROMANCER, WARFARE])
-            ).toEqual(expected.map(s => s.name).sort());
+            ).toEqual(expected.map((s) => s.name).sort());
         });
     });
 });

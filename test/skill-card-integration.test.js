@@ -12,7 +12,7 @@ const yamlPath = path.resolve(
 );
 const skills = jsyaml.load(
     fs.readFileSync(yamlPath, 'utf8')
-).map(raw => new Skill(raw));
+).map((raw) => new Skill(raw));
 
 beforeAll(() => {
     const dir = path.resolve(import.meta.dirname, '../js/templates');

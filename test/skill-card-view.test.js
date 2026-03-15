@@ -124,7 +124,7 @@ describe('requirement badges', () => {
     it('sets data-tree on each badge (lowercase)', () => {
         const card = createSkillCard(bleedFire);
         const badges = card.querySelectorAll('req-badge');
-        const trees = [...badges].map(b => b.dataset.tree);
+        const trees = [...badges].map((b) => b.dataset.tree);
         expect(trees).toContain(POLYMORPH.toLowerCase());
         expect(trees).toContain(PYROKINETIC.toLowerCase());
     });

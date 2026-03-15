@@ -22,7 +22,7 @@ describe('skills.yaml :: file format', () => {
     });
 
     it('no duplicate skill names', () => {
-        const names = skills.map(s => s.name);
+        const names = skills.map((s) => s.name);
         const dupes = names.filter((n, i) => names.indexOf(n) !== i);
         expect(dupes).toEqual([]);
     });
@@ -32,7 +32,7 @@ describe('skills.yaml :: file format', () => {
 
 describe('Skill validation', () => {
     it('no duplicate skills', () => {
-        const names = skills.map(s => s.name);
+        const names = skills.map((s) => s.name);
         const dupes = names.filter((n, i) => names.indexOf(n) !== i);
         expect(dupes).toEqual([]);
     });
