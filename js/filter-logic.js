@@ -37,7 +37,7 @@ export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
     const primary = !primaryFilter || skillTrees.includes(primaryFilter);
 
     const secondary = secondaryFilters.size === 0
-        || skillTrees.some(t => secondaryFilters.has(t));
+        || skillTrees.some((t) => secondaryFilters.has(t));
 
     return primary && secondary;
 }
@@ -48,7 +48,7 @@ export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
  */
 export function cleanSecondaryFilters(primaryFilter, secondaryFilters) {
     const valid = getValidSecondaryOptions(primaryFilter);
-    return new Set([...secondaryFilters].filter(t => valid.includes(t)));
+    return new Set([...secondaryFilters].filter((t) => valid.includes(t)));
 }
 
 // ===========================
@@ -72,7 +72,7 @@ export function parseFiltersFromURL(searchString) {
 
     const orFilter = params.get('or');
     if (orFilter) {
-        orFilter.split(',').forEach(tree => {
+        orFilter.split(',').forEach((tree) => {
             if (ALL_TREES.includes(tree)) secondaryFilters.add(tree);
         });
     }

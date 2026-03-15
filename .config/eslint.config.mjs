@@ -31,6 +31,8 @@ export default [
             "@stylistic/max-len": ["error", {
                 code: 80,
             }],
+            "@stylistic/arrow-parens": ["error", "always"],
+            "@stylistic/arrow-spacing": "error",
         },
     },
     {

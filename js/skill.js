@@ -46,7 +46,7 @@ export class Skill {
         }
         this.primaryTree = raw.primary_tree;
         this.secondaryTree = reqTrees.find(
-            t => t !== raw.primary_tree
+            (t) => t !== raw.primary_tree
         );
         this.trees = [this.secondaryTree, this.primaryTree];
     }
@@ -89,7 +89,7 @@ export class Skill {
     // filter-matching logic belongs on the catalog, not here
     any(trees) {
         if (trees.size === 0) return true;
-        return this.trees.some(t => trees.has(t));
+        return this.trees.some((t) => trees.has(t));
     }
 
 }
