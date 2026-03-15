@@ -11,6 +11,14 @@ export default [
         rules: {
             "@stylistic/indent": ["error", 4],
             "@stylistic/semi": ["error", "always"],
+            "@stylistic/comma-dangle": ["error", {
+                arrays: "always-multiline",
+                objects: "always-multiline",
+                imports: "always-multiline",
+                exports: "always-multiline",
+                functions: "only-multiline",
+            }],
+            "@stylistic/comma-spacing": "error",
             "@stylistic/max-len": ["error", {
                 code: 80,
             }],
