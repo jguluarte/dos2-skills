@@ -94,7 +94,7 @@ function renderSecondaryFilters() {
 
     const validOptions = getValidSecondaryOptions(primaryFilter);
 
-    validOptions.forEach(tree => {
+    validOptions.forEach((tree) => {
         const btn = document.createElement('button');
         btn.className = 'tree-filter-btn';
         if (secondaryFilters.has(tree)) {
@@ -109,7 +109,7 @@ function renderSecondaryFilters() {
 
 function updatePrimaryFilterButtons() {
     document.querySelectorAll('#primary-filters .tree-filter-btn')
-        .forEach(btn => {
+        .forEach((btn) => {
             btn.classList.toggle('active', primaryFilter === btn.dataset.tree);
         });
 }
@@ -134,7 +134,7 @@ function renderSkills() {
 
     const categories = [SUMMONING, ...ELEMENTAL_TREES];
 
-    categories.forEach(category => {
+    categories.forEach((category) => {
         const skills = skillsByCategory[category];
         if (!skills || skills.length === 0) return;
 
@@ -155,7 +155,7 @@ function renderSkills() {
         `;
         section.appendChild(header);
 
-        sortedSkills.forEach(skill => {
+        sortedSkills.forEach((skill) => {
             const card = createSkillCard(skill);
             section.appendChild(card);
         });
@@ -169,11 +169,11 @@ function applyFilters() {
     const noResultsEl = document.getElementById('no-results');
     let totalVisible = 0;
 
-    sections.forEach(section => {
+    sections.forEach((section) => {
         const cards = section.querySelectorAll('skill-card');
         let visibleInSection = 0;
 
-        cards.forEach(card => {
+        cards.forEach((card) => {
             const trees = card.dataset.trees.split(',');
             const visible = shouldSkillShow(
                 trees, primaryFilter, secondaryFilters);
@@ -194,7 +194,7 @@ function applyFilters() {
 function initializePrimaryFilters() {
     const container = document.getElementById('primary-filters');
 
-    PRIMARY_FILTER_TREES.forEach(tree => {
+    PRIMARY_FILTER_TREES.forEach((tree) => {
         const btn = document.createElement('button');
         btn.className = 'tree-filter-btn';
         btn.textContent = tree;
@@ -261,7 +261,7 @@ async function initialize() {
         ]);
         const yamlText = await response.text();
         skillsByCategory = { [SUMMONING]: [] };
-        ELEMENTAL_TREES.forEach(t => { skillsByCategory[t] = []; });
+        ELEMENTAL_TREES.forEach((t) => { skillsByCategory[t] = []; });
         for (const raw of jsyaml.load(yamlText)) {
             const skill = new Skill(raw);
             skillsByCategory[skill.primaryTree].push(skill);

@@ -5,7 +5,7 @@ import {
 
 export function makeSkill(name, trees) {
     const requirements = {};
-    trees.forEach(t => { requirements[t] = 1; });
+    trees.forEach((t) => { requirements[t] = 1; });
     const sorted = [...trees].sort();
     const [a, b] = sorted;
     let primary_tree;
