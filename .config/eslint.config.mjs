@@ -19,6 +19,15 @@ export default [
                 functions: "only-multiline",
             }],
             "@stylistic/comma-spacing": "error",
+            "@stylistic/object-curly-spacing": ["error", "always"],
+            "@stylistic/keyword-spacing": "error",
+            "@stylistic/space-before-blocks": "error",
+            "@stylistic/space-infix-ops": "error",
+            "@stylistic/key-spacing": ["error", {
+                beforeColon: false,
+                afterColon: true,
+                mode: "minimum",
+            }],
             "@stylistic/max-len": ["error", {
                 code: 80,
             }],
