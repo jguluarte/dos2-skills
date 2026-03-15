@@ -3,13 +3,34 @@ import stylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
 
 export default [
+    {
+        ignores: [
+            "node_modules/",
+            ".devbox/",
+            ".venv/",
+        ],
+    },
     js.configs.recommended,
     {
         plugins: {
             "@stylistic": stylistic,
         },
         rules: {
-            "@stylistic/indent": ["error", 4],
+            "eqeqeq": ["error", "always", { null: "ignore" }],
+            "no-var": "error",
+            "prefer-const": "error",
+            "no-console": ["warn", {
+                allow: ["error", "warn"],
+            }],
+            "one-var": ["error", "never"],
+            "no-nested-ternary": "error",
+            "@stylistic/indent": ["error", 4, {
+                SwitchCase: 1,
+                MemberExpression: 1,
+                FunctionDeclaration: { parameters: 2, body: 1 },
+                FunctionExpression: { parameters: 2, body: 1 },
+                offsetTernaryExpressions: true,
+            }],
             "@stylistic/semi": ["error", "always"],
             "@stylistic/comma-dangle": ["error", {
                 arrays: "always-multiline",
@@ -33,6 +54,12 @@ export default [
             }],
             "@stylistic/arrow-parens": ["error", "always"],
             "@stylistic/arrow-spacing": "error",
+            "@stylistic/brace-style": ["error", "1tbs", {
+                allowSingleLine: true,
+            }],
+            "@stylistic/no-multiple-empty-lines": ["error", {
+                max: 1,
+            }],
         },
     },
     {
