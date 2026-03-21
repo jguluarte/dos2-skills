@@ -49,3 +49,10 @@ repos:
         files: src/index\.html
         pass_filenames: false
         stages: [pre-commit]
+
+      - id: lint-no-warnings
+        name: No lint warnings (TODOs, unreachable code, etc.)
+        entry: MAX_LINT_WARNINGS=0 make lint
+        language: system
+        pass_filenames: false
+        stages: [pre-merge-commit]
