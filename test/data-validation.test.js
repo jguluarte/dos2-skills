@@ -54,7 +54,7 @@ describe('Skill validation', () => {
             });
 
             // requirements
-            // FIXME - this will change when we import all skills
+            // REVISIT - this will change when we import all skills
             it('has exactly 2 prerequisites', () => {
                 expect(prerequisites.length).toBe(2);
             });
