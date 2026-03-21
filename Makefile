@@ -1,10 +1,11 @@
-.PHONY: npm build start kill watch test test-verbose \
+.PHONY: build npm start kill watch test test-verbose \
 		lint lint-yaml lint-css lint-js lint-fix lint-fix-all
 
-npm: .make-timestamp.npm
-.make-timestamp.npm: package.json package-lock.json
-	npm install --silent
-	@touch $@
+MAX_LINT_WARNINGS ?= -1
+
+STYLELINT := npx stylelint --config .config/stylelintrc.json
+ESLINT := npx eslint --config .config/eslint.config.mjs
+ESLINT_DIFF := npx eslint --config .config/eslint-diff.config.mjs
 
 build: index.html css/styles.css
 
@@ -15,11 +16,16 @@ index.html: src/index.html css/styles.css
 css/styles.css: css/styles.scss
 	sass $< $@ --style=compressed --no-source-map
 
+npm: .make-timestamp.npm
+.make-timestamp.npm: package.json package-lock.json
+	npm install --silent
+	@touch $@
+
 start:
 	@echo "Starting SCSS watch and dev server..."
 	@trap 'kill 0' EXIT; \
-	sass css/styles.scss:css/styles.css --watch --style=expanded & \
-	python3 -m http.server 8000
+		sass css/styles.scss:css/styles.css --watch --style=expanded & \
+		python3 -m http.server 8000
 
 kill:
 	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
@@ -40,13 +46,13 @@ lint-yaml:
 	yamllint -c .config/yamllint.yml data/
 
 lint-css:
-	npx stylelint --config .config/stylelintrc.json css/styles.scss
+	$(STYLELINT) --max-warnings=$(MAX_LINT_WARNINGS) css/styles.scss
 
 lint-js:
-	npx eslint --config .config/eslint.config.mjs --max-warnings 0 js/ test/
+	$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) js/ test/
 
 lint-fix:
-	npx eslint --config .config/eslint-diff.config.mjs --fix js/ test/
+	$(ESLINT_DIFF) --fix js/ test/
 
 lint-fix-all:
-	npx eslint --config .config/eslint.config.mjs --fix js/ test/
+	$(ESLINT) --fix js/ test/

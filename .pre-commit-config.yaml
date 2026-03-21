@@ -52,7 +52,7 @@ repos:
 
       - id: lint-no-warnings
         name: No lint warnings (TODOs, unreachable code, etc.)
-        entry: make lint-js
+        entry: MAX_LINT_WARNINGS=0 make lint
         language: system
         pass_filenames: false
         stages: [pre-merge-commit]
