@@ -1,6 +1,8 @@
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
+// WIP: custom rule, not yet wired in
+// import adjacentBracketSpacing from "./eslint-rules/adjacent-bracket-spacing.js";
 
 const FOUR_SPACES = 4;
 
@@ -249,6 +251,12 @@ export default [
         },
         rules: {
             "max-nested-callbacks": ["error", 5],
+        },
+    },
+    {
+        files: ["test/eslint-rules/**/*.js"],
+        rules: {
+            "no-template-curly-in-string": "off",
         },
     },
 ];
