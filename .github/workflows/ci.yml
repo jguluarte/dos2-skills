@@ -35,7 +35,7 @@ jobs:
         run: pip install yamllint
 
       - name: Run linters
-        run: make lint
+        run: MAX_LINT_WARNINGS=0 make lint
 
   test:
     name: Test

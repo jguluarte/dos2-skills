@@ -126,6 +126,13 @@ export default [
             "grouped-accessor-pairs": "error",
             "accessor-pairs": "error",
 
+            // === Warn-only (not dev blockers; caught by CI and pre-merge) ===
+            "no-warning-comments": ["warn", {
+                terms: ["todo", "fixme", "hack", "blocker"],
+            }],
+            "no-unreachable": "warn",
+            "no-constant-condition": "warn",
+
             // === Stylistic (@stylistic) ===
             "@stylistic/indent": ["error", FOUR_SPACES, {
                 SwitchCase: 1,
