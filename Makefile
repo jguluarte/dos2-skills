@@ -43,7 +43,7 @@ lint-css:
 	npx stylelint --config .config/stylelintrc.json css/styles.scss
 
 lint-js:
-	npx eslint --config .config/eslint.config.mjs js/ test/
+	npx eslint --config .config/eslint.config.mjs --max-warnings 0 js/ test/
 
 lint-fix:
 	npx eslint --config .config/eslint-diff.config.mjs --fix js/ test/
