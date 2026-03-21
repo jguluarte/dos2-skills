@@ -11,7 +11,7 @@ async function loadTemplate() {
     Handlebars.registerPartial(
         'skill-card-body', await bodyResp.text()
     );
-    // REVISIT: cache the promise instead of the result to fix race condition
+    // TODO: cache the promise instead of the result to fix race condition
     // eslint-disable-next-line require-atomic-updates
     _compiled = Handlebars.compile(await mainResp.text());
     return _compiled;

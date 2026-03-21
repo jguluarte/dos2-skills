@@ -85,7 +85,7 @@ export class Skill {
         return this.trees.includes(tree);
     }
 
-    // REVISIT: Refactor out when building SkillCatalog —
+    // FIXME: Refactor out when building SkillCatalog —
     // filter-matching logic belongs on the catalog, not here
     any(trees) {
         if (trees.size === 0) return true;
