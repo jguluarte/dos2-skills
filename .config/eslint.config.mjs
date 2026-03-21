@@ -127,7 +127,9 @@ export default [
             "accessor-pairs": "error",
 
             // === Warn-only (not dev blockers; caught by CI and pre-merge) ===
-            "no-warning-comments": "warn",
+            "no-warning-comments": ["warn", {
+                terms: ["todo", "fixme", "hack", "blocker"],
+            }],
             "no-unreachable": "warn",
             "no-constant-condition": "warn",
 
