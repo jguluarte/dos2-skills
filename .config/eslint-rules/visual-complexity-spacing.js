@@ -165,30 +165,21 @@ function isTokenOnSameLine(left, right) {
 function checkContentSuppression(
     tokens, openIdx, closeIdx, contentLen
 ) {
-    // Check outer callee
-    if (openIdx > 0) {
-        const callee = tokens[openIdx - 1];
-        const calleeLen = callee.value.length;
-
-        // Member expression: obj.method
-        if (
-            openIdx > 2
-            && tokens[openIdx - 2].value === '.'
-        ) {
-            const obj = tokens[openIdx - 3];
-            const objLen = obj ? obj.value.length : 0;
-            if (objLen >= 5 && calleeLen >= 4) return true;
-            if (calleeLen >= 5) return true;
-        } else if (calleeLen >= 8 || contentLen >= 15) {
-            return true;
-        }
-    }
-
-    // Check inner callee expressions.
-    // Scan for identifier.identifier( patterns inside the
-    // container brackets.
+    // Check inner callee expressions FIRST — the inner
+    // callee is what the eye actually parses between the
+    // brackets. Only consider callees whose matching )
+    // is close to closeIdx (i.e., directly contributing
+    // to the nesting density, not buried in a block body).
+    let foundInnerCallee = false;
     for (let j = openIdx + 1; j < closeIdx - 1; j++) {
         if (tokens[j].value !== '(') continue;
+        const matchJ = findMatchingBracket(tokens, j);
+        if (matchJ === -1) continue;
+        // Only consider this callee if its closing )
+        // is near the container's close — within 2
+        // tokens means it's part of the nesting stack
+        if (closeIdx - matchJ > 2) continue;
+        foundInnerCallee = true;
         // Check for member callee: obj.method(
         if (
             j >= 3
@@ -207,6 +198,26 @@ function checkContentSuppression(
             && tokens[j - 1].type === 'Identifier'
             && tokens[j - 1].value.length >= 8
         ) {
+            return true;
+        }
+    }
+
+    // Fall back to outer callee check only if no inner
+    // callee pattern was found inside the brackets.
+    if (!foundInnerCallee && openIdx > 0) {
+        const callee = tokens[openIdx - 1];
+        const calleeLen = callee.value.length;
+
+        // Member expression: obj.method
+        if (
+            openIdx > 2
+            && tokens[openIdx - 2].value === '.'
+        ) {
+            const obj = tokens[openIdx - 3];
+            const objLen = obj ? obj.value.length : 0;
+            if (objLen >= 5 && calleeLen >= 4) return true;
+            if (calleeLen >= 5) return true;
+        } else if (calleeLen >= 8 || contentLen >= 15) {
             return true;
         }
     }
