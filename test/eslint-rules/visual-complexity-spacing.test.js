@@ -279,6 +279,13 @@ describe('Gap 6: content-aware suppression', () => {
                     output: 'wrap( pa.arse(data) );',
                     errors: 2,
                 },
+                // Short inner callee (fn = 2 chars) →
+                // NOT suppressed despite long outer callee
+                {
+                    code: 'callback(fn(x));',
+                    output: 'callback( fn(x) );',
+                    errors: 2,
+                },
             ],
         });
     });
