@@ -80,7 +80,7 @@ function isDenseTrailing(token) {
         && DENSE_TRAILING.has(token.value);
 }
 
-function openingWeight(token) {
+function tokenWeight(token) {
     if (token.type === TEMPLATE && token.value.endsWith('${')) {
         return TEMPLATE_EXPR_WEIGHT;
     }
@@ -133,7 +133,7 @@ function expandRight(tokens, startIdx) {
             continue;
         }
 
-        count += openingWeight(tok);
+        count += tokenWeight(tok);
         right = i;
         if (!connectsOnRightEdge(tok)) break;
         i++;
@@ -155,7 +155,7 @@ function expandLeft(tokens, startIdx) {
         if (!areAdjacent(tok, next)) break;
         if (!isGrouping(tok)) break;
         if (!connectsOnRightEdge(tok)) break;
-        count += openingWeight(tok);
+        count += tokenWeight(tok);
         left = i;
         if (!connectsOnLeftEdge(tok)) break;
         i--;
@@ -170,7 +170,7 @@ function expandLeft(tokens, startIdx) {
  * remain source-adjacent.
  */
 function adjacentCluster(tokens, startIdx) {
-    let count = openingWeight( tokens[startIdx] );
+    let count = tokenWeight( tokens[startIdx] );
     const rightResult = expandRight(tokens, startIdx);
     const leftResult = expandLeft(tokens, startIdx);
     count += rightResult.count + leftResult.count;
@@ -427,7 +427,7 @@ function findWidestPairInCluster(tokenCtx, cluster) {
     return { openIdx: bestOpenIdx, closeIdx: bestCloseIdx };
 }
 
-function findOutermostContainer(tokenCtx, cluster) {
+function findEnclosingContainer(tokenCtx, cluster) {
     const { hasOpening, hasClosing } = clusterComposition(
         tokenCtx.tokens, cluster
     );
@@ -602,7 +602,7 @@ function markProcessed(processed, cluster) {
     }
 }
 
-function effectiveClusterCount(tokens, cluster, exemptBrackets) {
+function nonExemptClusterCount(tokens, cluster, exemptBrackets) {
     let effectiveCount = cluster.count;
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
         if (exemptBrackets.has( tokens[j] )) effectiveCount--;
@@ -643,7 +643,7 @@ function containerIsEmpty(container) {
 
 function processCluster(tokenCtx, spacingEdits, cluster) {
     const classification = classifyCluster(tokenCtx, cluster);
-    const container = findOutermostContainer(tokenCtx, cluster);
+    const container = findEnclosingContainer(tokenCtx, cluster);
     if (!container) return;
     if (containerIsEmpty(container)) return;
 
@@ -662,7 +662,7 @@ function processMainClusters(tokenCtx, spacingEdits, astMarkers) {
         const cluster = adjacentCluster(tokenCtx.tokens, i);
         markProcessed(processed, cluster);
 
-        const effectiveCount = effectiveClusterCount(
+        const effectiveCount = nonExemptClusterCount(
             tokenCtx.tokens, cluster, astMarkers.exemptBrackets
         );
         if (effectiveCount < tokenCtx.threshold) continue;
