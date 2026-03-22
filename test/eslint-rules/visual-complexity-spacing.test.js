@@ -31,15 +31,15 @@ function invalid(...cases) {
     return { valid: [], invalid: cases };
 }
 
+// errors = 2 because each fix adds both an open-side space
+// and a close-side space (two separate violations)
 function fix(code, output, errors = 2) {
     return { code, output, errors };
 }
 
 describe('visual-complexity-spacing', () => {
 
-    // =========================================================
-    // Nested brackets (3+ adjacent)
-    // =========================================================
+    // Principle 1: density threshold
     describe('nested brackets (3+ adjacent)', () => {
 
         it('allows 2 adjacent: foo([bar])', () => {
@@ -77,7 +77,7 @@ describe('visual-complexity-spacing', () => {
             ));
         });
 
-        it('adds spaces for nested call cluster: outer(mid(inner()), \'x\') -> outer( ... )', () => {
+        it('adds spaces for nested call cluster: outer(mid(inner()), \'x\') -> outer( mid(inner()), \'x\' )', () => {
             ruleTester.run(RULE, rule, invalid(
                 fix(
                     "outer(mid(inner()), 'x')",
@@ -94,11 +94,27 @@ describe('visual-complexity-spacing', () => {
                 'foo( bar() );',
             ));
         });
+
+        it('adds spaces for new keyword with nested constructors: new Set(new Map([])) -> new Set( new Map([]) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'new Set(new Map([]))',
+                    'new Set( new Map([]) )',
+                ),
+            ));
+        });
+
+        it('adds spaces for spread with nested calls: foo(...bar(baz())) -> foo( ...bar(baz()) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'foo(...bar(baz()))',
+                    'foo( ...bar(baz()) )',
+                ),
+            ));
+        });
     });
 
-    // =========================================================
-    // Single-line symmetry
-    // =========================================================
+    // Principle 2: single-line balance
     describe('single-line symmetry', () => {
 
         it('adds missing space on the unspaced close side: foo( [[bar]]) -> foo( [[bar]] )', () => {
@@ -114,9 +130,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Multi-line expressions
-    // =========================================================
+    // Principle 3: multi-line whitespace provides separation
     describe('multi-line expressions', () => {
 
         it('allows multi-line calls where line breaks provide separation: foo(\\n  bar()\\n);', () => {
@@ -132,9 +146,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Template literal ${} expressions
-    // =========================================================
+    // Principle 6: template expression density
     describe('template literal ${} expressions', () => {
 
         it('allows ${} without brackets or parens: `${name}`', () => {
@@ -163,9 +175,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Chained access after nested parens (always spaces)
-    // =========================================================
+    // Principle 5: continuation always needs spacing
     describe('chained access after nested parens (always spaces)', () => {
 
         it('adds spaces before .method(): wrap(parse(data)).unwrap() -> wrap( parse(data) ).unwrap()', () => {
@@ -193,9 +203,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Semicolons and trailing punctuation
-    // =========================================================
+    // Principle 8: trailing punctuation density
     describe('semicolons and trailing punctuation', () => {
 
         it('allows 2 adjacent + semicolon: foo(bar);', () => {
@@ -218,14 +226,21 @@ describe('visual-complexity-spacing', () => {
                 ),
             ));
         });
+
+        it('adds spaces for await with short nested call: await foo(bar()); -> await foo( bar() );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'await foo(bar());',
+                    'await foo( bar() );',
+                ),
+            ));
+        });
     });
 
-    // =========================================================
-    // Concise arrow functions inside calls
-    // =========================================================
+    // Principle 9: concise arrow body density
     describe('concise arrow functions inside calls', () => {
 
-        it('adds spaces for arrow with call body: forEach(skill => renderCard(skill)) -> forEach( ... )', () => {
+        it('adds spaces for arrow with call body: forEach(skill => renderCard(skill)) -> forEach( skill => renderCard(skill) )', () => {
             ruleTester.run(RULE, rule, invalid(
                 fix(
                     'skills.forEach(skill => renderCard(skill))',
@@ -247,11 +262,19 @@ describe('visual-complexity-spacing', () => {
                 'foo(function handler(){ bar(); });',
             ));
         });
+
+        it('adds spaces for each concise arrow call in chain: arr.map(x => f(x)).filter(y => g(y)) -> arr.map( x => f(x) ).filter( y => g(y) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'arr.map(x => f(x)).filter(y => g(y))',
+                    'arr.map( x => f(x) ).filter( y => g(y) )',
+                    4,
+                ),
+            ));
+        });
     });
 
-    // =========================================================
-    // Long identifiers reduce spacing need (statement end only)
-    // =========================================================
+    // Principle 4: visual anchoring suppression
     describe('long identifiers reduce spacing need (statement end only)', () => {
 
         it('allows long method name at statement end: callback(obj.method());', () => {
@@ -272,11 +295,11 @@ describe('visual-complexity-spacing', () => {
             ));
         });
 
-        it('adds spaces for short method at statement end: wrap(pa.arse(data)); -> wrap( pa.arse(data) );', () => {
+        it('adds spaces for short method at statement end: wrap(ab.cdef(data)); -> wrap( ab.cdef(data) );', () => {
             ruleTester.run(RULE, rule, invalid(
                 fix(
-                    'wrap(pa.arse(data));',
-                    'wrap( pa.arse(data) );',
+                    'wrap(ab.cdef(data));',
+                    'wrap( ab.cdef(data) );',
                 ),
             ));
         });
@@ -297,9 +320,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Nested bracket access (computed properties)
-    // =========================================================
+    // Principle 7: bracket access inversion
     describe('nested bracket access (computed properties)', () => {
 
         it('allows short nested access: obj[arr[index]]', () => {
@@ -324,9 +345,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // Multiple arguments absorb trailing-only density
-    // =========================================================
+    // Principle 13: multi-arg absorption
     describe('multiple arguments absorb trailing-only density', () => {
 
         it('allows multi-arg with nested call at end: foo(data, parse());', () => {
@@ -341,7 +360,7 @@ describe('visual-complexity-spacing', () => {
             ));
         });
 
-        it('adds spaces when 3+ real brackets stack in multi-arg: foo(data, bar(parse())); -> foo( ... );', () => {
+        it('adds spaces when 3+ real brackets stack in multi-arg: foo(data, bar(parse())); -> foo( data, bar(parse()) );', () => {
             ruleTester.run(RULE, rule, invalid(
                 fix(
                     'foo(data, bar(parse()));',
@@ -350,7 +369,7 @@ describe('visual-complexity-spacing', () => {
             ));
         });
 
-        it('adds spaces for ])) in multi-arg: buildSummaryText(null, new Set([...])) -> buildSummaryText( ... )', () => {
+        it('adds spaces for ])) in multi-arg: buildSummaryText(null, new Set([WARFARE, NECROMANCER])) -> buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )', () => {
             ruleTester.run(RULE, rule, invalid(
                 fix(
                     'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))',
@@ -369,58 +388,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    // =========================================================
-    // New test cases from QA review
-    // =========================================================
-    describe('new keyword with nested constructors', () => {
-
-        it('adds spaces for ])) at end: new Set(new Map([])) -> new Set( new Map([]) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'new Set(new Map([]))',
-                    'new Set( new Map([]) )',
-                ),
-            ));
-        });
-    });
-
-    describe('spread with deep nesting', () => {
-
-        it('adds spaces for spread with nested calls: foo(...bar(baz())) -> foo( ...bar(baz()) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'foo(...bar(baz()))',
-                    'foo( ...bar(baz()) )',
-                ),
-            ));
-        });
-    });
-
-    describe('chained arrows', () => {
-
-        it('adds spaces for each concise arrow call in chain: arr.map(x => f(x)).filter(y => g(y)) -> spaced', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'arr.map(x => f(x)).filter(y => g(y))',
-                    'arr.map( x => f(x) ).filter( y => g(y) )',
-                    4,
-                ),
-            ));
-        });
-    });
-
-    describe('await with short names', () => {
-
-        it('adds spaces for await with short nested call: await foo(bar()); -> await foo( bar() );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'await foo(bar());',
-                    'await foo( bar() );',
-                ),
-            ));
-        });
-    });
-
+    // Edge cases: comments, optional chaining, custom threshold
     describe('comments between grouping characters', () => {
 
         it('allows comment breaking adjacency: foo(bar()/* comment */)', () => {
