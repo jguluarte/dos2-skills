@@ -548,16 +548,6 @@ export default {
 
                     if (effectiveCount < threshold) continue;
 
-                    // Count actual grouping chars in cluster
-                    let realGrouping = 0;
-                    for (
-                        let j = cluster.startIdx;
-                        j <= cluster.endIdx;
-                        j++
-                    ) {
-                        if (isGrouping(tokens[j])) realGrouping++;
-                    }
-
                     // Dense trailing detection
                     const lastGroupingIdx = (() => {
                         for (
