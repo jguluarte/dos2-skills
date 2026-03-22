@@ -34,8 +34,17 @@ const MIN_OBJ_LEN_FOR_ANCHORING = 5;
 const MIN_CALLEE_LEN_FOR_SUPPRESSION = 8;
 
 // Total character width between brackets — at 15+ chars the
-// content itself provides enough visual separation
+// content itself provides enough visual separation.
+// Note: bracket access uses a separate constant
+// (MIN_BRACKET_CONTENT_FOR_SPACING) because the semantics
+// are inverted — long content there ADDS spacing.
 const MIN_CONTENT_LEN_FOR_SUPPRESSION = 15;
+
+// Content-length threshold for bracket access: when inner content
+// between nested brackets exceeds this, spacing is ADDED to help
+// the eye match the brackets over distance. This is the inverse
+// of call-expression suppression where long content SKIPS spacing.
+const MIN_BRACKET_CONTENT_FOR_SPACING = 15;
 
 // Bracket access obj[arr[idx]] — 10+ char outer/inner names
 // anchor the eye so nested brackets don't need extra spacing
@@ -564,7 +573,7 @@ function checkBracketAccessSpacing(tokenCtx, spacingEdits, i, matchIdx) {
     const contentLen = tokenCtx.tokens[matchIdx].range[0]
         - tokenCtx.tokens[i].range[1];
 
-    if (contentLen >= MIN_CONTENT_LEN_FOR_SUPPRESSION) {
+    if (contentLen >= MIN_BRACKET_CONTENT_FOR_SPACING) {
         addSpaceAfterIfMissing(tokenCtx, spacingEdits, i);
         addSpaceBeforeIfMissing(tokenCtx, spacingEdits, matchIdx);
     }
