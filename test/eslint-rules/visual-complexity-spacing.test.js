@@ -18,6 +18,15 @@
  * separate short-content check. foo(bar(baz)) with 3-char
  * content is currently spaced (callee 'bar' is only 3 chars).
  * This may be revisited as a separate enhancement.
+ *
+ * Glossary:
+ * - pile-up: 3+ grouping characters (parens, brackets, braces, or dense
+ *   trailing chars like ; . !) adjacent without whitespace. E.g., )), ]], }).
+ * - anchoring: when a long identifier name (5+ chars for methods, 8+ for
+ *   standalone callees) provides enough visual separation that spacing
+ *   becomes optional at statement end.
+ * - skips vs fixes: "skips" = the rule does not add spaces (valid case).
+ *   "fixes" = the rule inserts spaces (invalid case, autofix applied).
  */
 
 import { RuleTester } from 'eslint';
