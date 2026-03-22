@@ -11,6 +11,13 @@
  * functions, function name length, and argument count to
  * decide when spacing is needed vs when the code is already
  * readable without it.
+ *
+ * Principle 6 (short inner content as independent trigger) is
+ * documented in the formatting philosophy but handled implicitly
+ * through content-length suppression. The rule does not have a
+ * separate short-content check. foo(bar(baz)) with 3-char
+ * content is currently spaced (callee 'bar' is only 3 chars).
+ * This may be revisited as a separate enhancement.
  */
 
 import { RuleTester } from 'eslint';
