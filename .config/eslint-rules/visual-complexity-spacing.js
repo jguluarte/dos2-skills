@@ -6,6 +6,7 @@ const DENSE_TRAILING = new Set([';', '.', '!']);
 const ARROW_FUNC = 'ArrowFunctionExpression';
 const BLOCK_STMT = 'BlockStatement';
 const CALL_EXPR = 'CallExpression';
+const FUNC_EXPR = 'FunctionExpression';
 const IDENTIFIER = 'Identifier';
 const MEMBER_EXPR = 'MemberExpression';
 const PUNCTUATOR = 'Punctuator';
@@ -77,14 +78,14 @@ function openingWeight(token) {
     return 1;
 }
 
-function continuesClusterLeft(token) {
+function connectsOnLeftEdge(token) {
     if (token.type === TEMPLATE) {
         return !token.value.startsWith('`');
     }
     return true;
 }
 
-function continuesClusterRight(token) {
+function connectsOnRightEdge(token) {
     if (token.type === TEMPLATE) {
         return !token.value.endsWith('`');
     }
@@ -113,7 +114,7 @@ function expandRight(tokens, startIdx) {
         const tok = tokens[i];
         if (!areAdjacent(tokens[i - 1], tok)) break;
         if (!isGrouping(tok) && !isDenseTrailing(tok)) break;
-        if (!continuesClusterLeft(tok)) break;
+        if (!connectsOnLeftEdge(tok)) break;
 
         if (isDenseTrailing(tok)) {
             count++;
@@ -125,13 +126,15 @@ function expandRight(tokens, startIdx) {
 
         count += openingWeight(tok);
         right = i;
-        if (!continuesClusterRight(tok)) break;
+        if (!connectsOnRightEdge(tok)) break;
         i++;
     }
 
     return { count, right };
 }
 
+// Dense trailing chars (;, .) only appear at the right end of
+// clusters — left expansion only includes grouping chars.
 function expandLeft(tokens, startIdx) {
     let count = 0;
     let left = startIdx;
@@ -142,9 +145,9 @@ function expandLeft(tokens, startIdx) {
         const next = tokens[i + 1];
         if (!areAdjacent(tok, next)) break;
         if (!isGrouping(tok)) break;
-        if (!continuesClusterRight(tok)) break;
+        if (!connectsOnRightEdge(tok)) break;
         count += openingWeight(tok);
-        if (!continuesClusterLeft(tok)) {
+        if (!connectsOnLeftEdge(tok)) {
             left = i;
             break;
         }
@@ -590,7 +593,7 @@ function tokenAfterCluster(tokens, cluster) {
     return nextIdx < tokens.length ? tokens[nextIdx] : null;
 }
 
-function clusterHasDenseTrailing(tokens, cluster) {
+function endsWithTrailingAfterClose(tokens, cluster) {
     const lastGroupingIdx = findLastClosingIdx(tokens, cluster);
     return cluster.endIdx !== lastGroupingIdx
         && lastGroupingIdx !== -1
@@ -602,7 +605,7 @@ function clusterHasDenseTrailing(tokens, cluster) {
 // -------------------------------------------------------
 
 function classifyCluster(ctx, cluster) {
-    const hasDenseTrailing = clusterHasDenseTrailing(
+    const hasDenseTrailing = endsWithTrailingAfterClose(
         ctx.tokens, cluster
     );
     const afterCluster = tokenAfterCluster(ctx.tokens, cluster);
@@ -811,7 +814,7 @@ export default {
                 exemptBlockBodyBrackets(sourceCode, openParen, node, exempt);
             },
 
-            FunctionExpression(node) {
+            [FUNC_EXPR](node) {
                 const firstToken = sourceCode.getFirstToken(node);
                 const isParen = (t) => t.value === '(';
                 const openParen = sourceCode.getTokenAfter(firstToken, isParen);
