@@ -234,6 +234,34 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
+    describe('P11: block braces provide visual separation', () => {
+        // Block bodies ({}) give the eye enough structure that
+        // adjacent brackets don't need spacing. Tests for this
+        // behavior also appear in P10 (multi-line) and P12 (arrows).
+
+        it('skips block body arrow: foo(() => { bar() })', () => {
+            ruleTester.run(
+                RULE, rule, valid('foo(() => { bar() })')
+            );
+        });
+
+        // eslint-disable-next-line @stylistic/max-len
+        it('skips block body function: foo(function(){ bar(); })', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('foo(function(){ bar(); });')
+            );
+        });
+
+        // eslint-disable-next-line @stylistic/max-len
+        it('skips named function: foo(function handler(){ bar(); })', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('foo(function handler(){ bar(); });')
+            );
+        });
+    });
+
     describe('P9: template literal ${} expressions', () => {
 
         it('skips ${} without grouping chars', () => {
@@ -491,6 +519,21 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // INNER_CALLEE_PROXIMITY = 2: inner callee's close paren
+        // must be within 2 tokens of the outer close to count as
+        // contributing to the visual pile-up. When it's too far,
+        // findInnerCallee returns -1 and we fall to outer checks.
+
+        // closeIdx - matchJ = 2 (at boundary): inner callee
+        // 'abcdefgh' (8 chars) is within proximity and anchors
+        it('skips inner callee at proximity boundary', () => {
+            // wrap(abcdefgh(x)); -> inner ) at 5, outer ) at 7
+            // 7 - 5 = 2 = INNER_CALLEE_PROXIMITY
+            ruleTester.run(
+                RULE, rule, valid('wrap(abcdefgh(x));')
+            );
+        });
+
         // MIN_CONTENT_LEN_FOR_SUPPRESSION = 15
         // 13 chars + {} = 15 total, at MIN_CONTENT_LEN_FOR_SUPPRESSION
         it('skips when content >= 15 chars (no inner callee)', () => {
@@ -598,6 +641,35 @@ describe('visual-complexity-spacing', () => {
             const code = 'callbacks[getName()]';
             const output = 'callbacks[ getName() ]';
             const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+    });
+
+    describe('P6: short inner content (implicit via anchoring)', () => {
+        // P6 is handled implicitly through callee-length suppression.
+        // These tests document the current behavior for the philosophy
+        // doc's examples. See header comment for details.
+
+        it('fixes 1-char inner content: foo(bar(x));', () => {
+            const f = expectFix(
+                'foo(bar(x));', 'foo( bar(x) );'
+            );
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes 2-char inner content: foo(bar(ab));', () => {
+            const f = expectFix(
+                'foo(bar(ab));', 'foo( bar(ab) );'
+            );
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        // foo(bar(baz)); - 3 chars - currently ALSO fixes because
+        // callee 'bar' is only 3 chars. This is the P6 gap.
+        it('fixes 3-char inner content (P6 gap): foo(bar(baz));', () => {
+            const f = expectFix(
+                'foo(bar(baz));', 'foo( bar(baz) );'
+            );
             ruleTester.run(RULE, rule, invalid(f));
         });
     });

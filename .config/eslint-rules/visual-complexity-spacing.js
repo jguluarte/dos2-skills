@@ -89,16 +89,20 @@ function exemptBlockBodyBrackets(sourceCode, openParen, node, set) {
 // Continuation vs termination classification
 // -------------------------------------------------------
 
-function classifyContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
-    if (hasDenseTrailing) {
-        const trailing = tokens[cluster.endIdx];
-        // `!` after `)` is not valid in standard JS — it's a
-        // prefix operator, not postfix. This branch exists for
-        // TypeScript's non-null assertion (e.g., getResult()!.prop)
-        // if the rule is ever used with a TS parser.
-        return trailing.value === '.' || trailing.value === '!';
-    }
+// Dense trailing (. or !) after a closing bracket means
+// the expression chains onward: getResult().prop
+function trailingContinues(tokens, cluster) {
+    const trailing = tokens[cluster.endIdx];
+    // `!` after `)` is not valid in standard JS — it's a
+    // prefix operator, not postfix. This branch exists for
+    // TypeScript's non-null assertion (e.g., getResult()!.prop)
+    // if the rule is ever used with a TS parser.
+    return trailing.value === '.' || trailing.value === '!';
+}
 
+// The token after the cluster starts a new access/call:
+// wrap(x)[0], wrap(x).y, wrap(x)(args)
+function adjacentTokenContinues(tokens, cluster, afterCluster) {
     const lastToken = tokens[cluster.endIdx];
     if (isOpening(lastToken)) return true;
 
@@ -110,6 +114,13 @@ function classifyContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
         || afterCluster.value === '['
         || afterCluster.value === '(';
     return adjacent && continuesAfter;
+}
+
+function isContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
+    if (hasDenseTrailing) {
+        return trailingContinues(tokens, cluster);
+    }
+    return adjacentTokenContinues(tokens, cluster, afterCluster);
 }
 
 function isTokenOnSameLine(left, right) {
@@ -149,15 +160,19 @@ function applyClusterSpacing(ctx, cluster, container) {
 // Suppression policy
 // -------------------------------------------------------
 
+// Suppression only applies when the cluster is a terminated
+// statement (not a continuation) with dense trailing, and
+// the close-brackets alone don't meet the threshold.
+// When those preconditions hold, commas or long content
+// provide enough visual separation to skip extra spaces.
 function shouldSuppressSpacing(ctx, classification, container) {
-    const closingGrouping = countClosingInCluster(
+    if (classification.continues) return false;
+    if (!classification.hasDenseTrailing) return false;
+
+    const closingCount = countClosingInCluster(
         ctx.tokens, classification.cluster
     );
-    const canSuppress = !classification.isContinuation
-        && classification.hasDenseTrailing
-        && closingGrouping < ctx.threshold;
-
-    if (!canSuppress) return false;
+    if (closingCount >= ctx.threshold) return false;
 
     if (hasTopLevelComma(ctx.tokens, container)) return true;
 
@@ -198,10 +213,7 @@ function checkBracketAccessSpacing(ctx, i, matchIdx) {
     if (outerNameAnchors(ctx.tokens, i)) return;
     if (innerNameAnchors(ctx.tokens, i, matchIdx)) return;
 
-    const contentLen = ctx.tokens[matchIdx].range[0]
-        - ctx.tokens[i].range[1];
-
-    if (contentLen >= MIN_BRACKET_CONTENT_FOR_SPACING) {
+    if (ctx.contentLength(i, matchIdx) >= MIN_BRACKET_CONTENT_FOR_SPACING) {
         ctx.addSpaceAfter(i);
         ctx.addSpaceBefore(matchIdx);
     }
@@ -232,10 +244,10 @@ function classifyCluster(ctx, cluster) {
         ctx.tokens, cluster
     );
     const afterCluster = tokenAfterCluster(ctx.tokens, cluster);
-    const isContinuation = classifyContinuation(
+    const continues = isContinuation(
         ctx.tokens, cluster, hasDenseTrailing, afterCluster
     );
-    return { cluster, hasDenseTrailing, isContinuation };
+    return { cluster, hasDenseTrailing, continues };
 }
 
 function containerIsEmpty(container) {
