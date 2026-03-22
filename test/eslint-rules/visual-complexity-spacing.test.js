@@ -80,19 +80,15 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes setState([[initialRow]])', () => {
-            const f = expectFix(
-                'setState([[initialRow]])',
-                'setState( [[initialRow]] )'
-            );
-            ruleTester.run(RULE, rule, invalid(f));
+            const code = 'setState([[initialRow]])';
+            const output = 'setState( [[initialRow]] )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
         it('fixes db.insert([{name: val}])', () => {
-            const f = expectFix(
-                'db.insert([{name: val}])',
-                'db.insert( [{name: val}] )'
-            );
-            ruleTester.run(RULE, rule, invalid(f));
+            const code = 'db.insert([{name: val}])';
+            const output = 'db.insert( [{name: val}] )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
         it('fixes run(init(setup()))', () => {
@@ -163,11 +159,9 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes parseInt(getValue())', () => {
-            const f = expectFix(
-                'parseInt(getValue())',
-                'parseInt( getValue() )'
-            );
-            ruleTester.run(RULE, rule, invalid(f));
+            const code = 'parseInt(getValue())';
+            const output = 'parseInt( getValue() )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
         it('fixes Promise.all([fetch(a), fetch(b)])', () => {
@@ -279,10 +273,7 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('skips already-spaced chained access', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('wrap( parse(data) ).unwrap()')
-            );
+            ruleTester.run(RULE, rule, valid('wrap( parse(data) ).unwrap()'));
         });
 
         it('fixes require(resolve(path))(config)', () => {
@@ -293,6 +284,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // eslint-disable-next-line @stylistic/max-len
         it('fixes chained access even with long names: callback(obj.method()).next()', () => {
             const code = 'callback(obj.method()).next()';
             const output = 'callback( obj.method() ).next()';
@@ -322,11 +314,9 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes await with short nested call', () => {
-            const f = expectFix(
-                'await emit(parse());',
-                'await emit( parse() );'
-            );
-            ruleTester.run(RULE, rule, invalid(f));
+            const code = 'await emit(parse());';
+            const output = 'await emit( parse() );';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
         it('fixes if (has(get(key))) condition', () => {
@@ -347,13 +337,9 @@ describe('visual-complexity-spacing', () => {
     describe('concise arrow inside calls: arr.map(x => f(x))', () => {
 
         it('fixes arrow with call body', () => {
-            // eslint-disable-next-line @stylistic/max-len
             const code = 'skills.forEach(skill => renderCard(skill))';
-            // eslint-disable-next-line @stylistic/max-len
             const output = 'skills.forEach( skill => renderCard(skill) )';
-            ruleTester.run(
-                RULE, rule, invalid(expectFix(code, output))
-            );
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
         it('skips block body arrows', () => {
@@ -377,14 +363,10 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes each arrow call in a chain', () => {
-            // eslint-disable-next-line @stylistic/max-len
             const code = 'items.map(x => parse(x)).filter(y => validate(y))';
             // eslint-disable-next-line @stylistic/max-len
             const output = 'items.map( x => parse(x) ).filter( y => validate(y) )';
-            ruleTester.run(
-                RULE, rule,
-                invalid(expectFix(code, output, 4))
-            );
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output, 4)));
         });
 
         it('skips arrow with non-call body', () => {
@@ -509,10 +491,7 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('skips long outer name (10+ chars)', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('obj[longArrayName[index]]')
-            );
+            ruleTester.run(RULE, rule, valid('obj[longArrayName[index]]'));
         });
 
         it('fixes long inner content', () => {
@@ -522,34 +501,27 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // eslint-disable-next-line @stylistic/max-len
         it('skips inner name exactly 10 chars (MIN_BRACKET_INNER_LEN boundary)', () => {
             // eslint-disable-next-line @stylistic/max-len
-            ruleTester.run(
-                RULE, rule,
-                valid('obj[abcdefghij[longPropertyName]]')
-            );
+            ruleTester.run(RULE, rule, valid('obj[abcdefghij[longPropertyName]]'));
         });
 
         it('fixes inner name 9 chars (below MIN_BRACKET_INNER_LEN)', () => {
             const code = 'obj[abcdefghi[longPropertyName]]';
-            const output =
-                'obj[ abcdefghi[longPropertyName] ]';
+            const output = 'obj[ abcdefghi[longPropertyName] ]';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // eslint-disable-next-line @stylistic/max-len
         it('skips outer name exactly 10 chars (MIN_BRACKET_OUTER_LEN boundary)', () => {
             // eslint-disable-next-line @stylistic/max-len
-            ruleTester.run(
-                RULE, rule,
-                valid('abcdefghij[arr[longPropertyName]]')
-            );
+            ruleTester.run(RULE, rule, valid('abcdefghij[arr[longPropertyName]]'));
         });
 
         it('fixes outer name 9 chars (below MIN_BRACKET_OUTER_LEN)', () => {
-            // eslint-disable-next-line @stylistic/max-len
             const code = 'abcdefghi[arr[longPropertyName]]';
-            // eslint-disable-next-line @stylistic/max-len
             const output = 'abcdefghi[ arr[longPropertyName] ]';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
@@ -559,15 +531,11 @@ describe('visual-complexity-spacing', () => {
     describe(MULTI_ARG_DESC, () => {
 
         it('skips multi-arg with nested call', () => {
-            ruleTester.run(
-                RULE, rule, valid('foo(data, parse());')
-            );
+            ruleTester.run(RULE, rule, valid('foo(data, parse());'));
         });
 
         it('fixes single-arg nested call', () => {
-            const f = expectFix(
-                'foo(parse());', 'foo( parse() );'
-            );
+            const f = expectFix('foo(parse());', 'foo( parse() );');
             ruleTester.run(RULE, rule, invalid(f));
         });
 
@@ -589,10 +557,7 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes single-arg object with commas', () => {
-            const f = expectFix(
-                'foo({a: 1, b: 2});',
-                'foo( {a: 1, b: 2} );'
-            );
+            const f = expectFix('foo({a: 1, b: 2});', 'foo( {a: 1, b: 2} );');
             ruleTester.run(RULE, rule, invalid(f));
         });
     });
@@ -613,10 +578,9 @@ describe('visual-complexity-spacing', () => {
 
     describe('real-world patterns', () => {
 
+        // eslint-disable-next-line @stylistic/max-len
         it('fixes Object.keys chained: Object.keys(getConfig()).forEach(fn)', () => {
-            // eslint-disable-next-line @stylistic/max-len
             const code = 'Object.keys(getConfig()).forEach(fn)';
-            // eslint-disable-next-line @stylistic/max-len
             const output = 'Object.keys( getConfig() ).forEach(fn)';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
@@ -653,58 +617,42 @@ describe('visual-complexity-spacing', () => {
         });
 
         it('fixes arrow with destructured param', () => {
-            // eslint-disable-next-line @stylistic/max-len
             const code = 'arr.forEach(({name}) => process(name))';
-            // eslint-disable-next-line @stylistic/max-len
             const output = 'arr.forEach( ({name}) => process(name) )';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
 
         it('fixes tagged template with nested call', () => {
-            const f = expectFix(
-                'html`${fn(bar())}`',
-                'html`${ fn(bar()) }`'
-            );
+            const f = expectFix('html`${fn(bar())}`', 'html`${ fn(bar()) }`');
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('skips JSON.parse(JSON.stringify(obj)) — inner callee anchors', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('JSON.parse(JSON.stringify(obj))')
-            );
+        // eslint-disable-next-line @stylistic/max-len
+        it('skips JSON.parse(JSON.stringify(obj)) -- inner callee anchors', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            ruleTester.run(RULE, rule, valid('JSON.parse(JSON.stringify(obj))'));
         });
 
-        it('skips console.log(obj.method()) — member callee anchors', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('console.log(obj.method());')
-            );
+        it('skips console.log(obj.method()) -- member callee anchors', () => {
+            ruleTester.run(RULE, rule, valid('console.log(obj.method());'));
         });
 
         it('skips return fn(bar()) inside function body', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('function x() { return fn(bar()); }')
-            );
+            // eslint-disable-next-line @stylistic/max-len
+            ruleTester.run(RULE, rule, valid('function x() { return fn(bar()); }'));
         });
 
-        it('skips assert(equal(a, b)) without semicolon — below threshold', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('assert(equal(a, b))')
-            );
+        // eslint-disable-next-line @stylistic/max-len
+        it('skips assert(equal(a, b)) without semicolon -- below threshold', () => {
+            ruleTester.run(RULE, rule, valid('assert(equal(a, b))'));
         });
     });
 
     describe('comments between grouping characters', () => {
 
         it('skips when comment breaks adjacency', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('foo(bar()/* comment */)')
-            );
+            ruleTester.run(RULE, rule, valid('foo(bar()/* comment */)'));
         });
     });
 
@@ -781,12 +729,9 @@ describe('visual-complexity-spacing', () => {
                 "require( resolve('./path') );",
                 'assert( equal(a, b) );',
                 'const x = cond ? fn( bar() ) : baz',
-                // eslint-disable-next-line @stylistic/max-len
                 'arr.forEach( ({name}) => process(name) )',
                 'html`${ fn(bar()) }`',
-                // eslint-disable-next-line @stylistic/max-len
                 'obj[ abcdefghi[longPropertyName] ]',
-                // eslint-disable-next-line @stylistic/max-len
                 'abcdefghi[ arr[longPropertyName] ]',
             ];
             ruleTester.run(RULE, rule, valid(...fixOutputs));
