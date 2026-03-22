@@ -300,4 +300,53 @@ describe('edge cases', () => {
     it('handles empty parens', () => {
         expect(transform('foo();')).toBe('foo();');
     });
+
+    it('handles chained method calls without density', () => {
+        expect(transform('foo.bar.baz();'))
+            .toBe('foo.bar.baz();');
+    });
+
+    it('handles assignment without density', () => {
+        expect(transform('const x = foo(bar);'))
+            .toBe('const x = foo(bar);');
+    });
+});
+
+// ============================================================
+// Additional cases from user philosophy
+// ============================================================
+
+describe('content suppression thresholds', () => {
+    it('suppresses pa.parse(data) — method=5, short obj', () => {
+        expect(transform('wrap(pa.parse(data));'))
+            .toBe('wrap(pa.parse(data));');
+    });
+
+    it('spaces pa.arse(data) — method=4, short obj', () => {
+        expect(transform('wrap(pa.arse(data));'))
+            .toBe('wrap( pa.arse(data) );');
+    });
+
+    it('suppresses parse.pars(data) — method=4, long obj', () => {
+        expect(transform('wrap(parse.pars(data));'))
+            .toBe('wrap(parse.pars(data));');
+    });
+});
+
+describe('empty call as density multiplier', () => {
+    it('spaces callbacks[getName()]', () => {
+        expect(transform('callbacks[getName()];'))
+            .toBe('callbacks[ getName() ];');
+    });
+});
+
+describe('balance: space the outermost container', () => {
+    // NOTE: Ideally this would space outer(), not mid(), per the
+    // philosophy. The current prototype spaces the bracket pair
+    // that directly contains the density run. Promoting the spacing
+    // to the outermost container is a future enhancement.
+    it('outer(mid(inner()), x) — spaces mid for now', () => {
+        expect(transform("outer(mid(inner()), 'x');"))
+            .toBe("outer(mid( inner() ), 'x');");
+    });
 });

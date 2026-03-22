@@ -142,34 +142,50 @@ function isTermination(tokens, runEndIdx) {
 
 /**
  * Get content info for suppression analysis.
- * Looks at the identifier before the opening bracket (the callee).
+ *
+ * Looks at the INNER callee — the function/method name that creates
+ * the nested call density inside the outer brackets. For:
+ *   wrap(parse(data))      -> inner callee is "parse"
+ *   wrap(pa.parse(data))   -> inner callee is "parse", obj "pa"
+ *   callback(obj.method()) -> inner callee is "method", obj "obj"
+ *
+ * The inner callee determines readability because that's the text
+ * between the outer brackets that the eye uses for anchoring.
  */
-function getContentInfo(tokens, outerOpenIdx) {
+function getContentInfo(tokens, outerOpenIdx, outerCloseIdx) {
     const result = {
         calleeName: '',
         objectName: null,
         totalLength: 0,
     };
 
-    if (outerOpenIdx <= 0) return result;
+    // Find the innermost call expression inside the outer brackets.
+    // Look for identifier followed by ( between the outer brackets.
+    for (let i = outerOpenIdx + 1; i < outerCloseIdx; i++) {
+        if (tokens[i].value === '(' && i > outerOpenIdx + 1) {
+            const callee = tokens[i - 1];
+            if (callee && callee.type === 'identifier') {
+                result.calleeName = callee.value;
 
-    const beforeOpen = tokens[outerOpenIdx - 1];
-    if (beforeOpen && beforeOpen.type === 'identifier') {
-        result.calleeName = beforeOpen.value;
+                // Check for member access: obj.method(
+                if (i >= 3) {
+                    const dot = tokens[i - 2];
+                    const obj = tokens[i - 3];
+                    if (dot && dot.value === '.'
+                        && obj && obj.type === 'identifier') {
+                        result.objectName = obj.value;
+                    }
+                }
 
-        if (outerOpenIdx >= 3) {
-            const dot = tokens[outerOpenIdx - 2];
-            const obj = tokens[outerOpenIdx - 3];
-            if (dot && dot.value === '.'
-                && obj && obj.type === 'identifier') {
-                result.objectName = obj.value;
+                result.totalLength = result.objectName
+                    ? result.objectName.length + 1
+                        + result.calleeName.length
+                    : result.calleeName.length;
+
+                return result;
             }
         }
     }
-
-    result.totalLength = result.objectName
-        ? result.objectName.length + 1 + result.calleeName.length
-        : result.calleeName.length;
 
     return result;
 }
@@ -235,13 +251,31 @@ function checkArrowWithCall(tokens, openIdx, closeIdx) {
  * For [], long content makes bracket matching hard -> space.
  * Short content -> easy match -> no space.
  *
- * Uses character distance between outer brackets.
+ * Inner CALLS (parens) add density that prevents suppression.
+ * Inner nested BRACKETS are just more bracket access and use
+ * the same distance-based threshold.
  */
 function checkBracketAccessSuppresses(tokens, openIdx, closeIdx) {
     const distance = tokens[closeIdx].range[0] - tokens[openIdx].range[1];
-    // Short distance (< 12 chars of content): easy match, suppress spacing
+
+    // Check if content contains function calls (parens)
+    let hasInnerCall = false;
+    for (let i = openIdx + 1; i < closeIdx; i++) {
+        if (tokens[i].value === '(' || tokens[i].value === ')') {
+            hasInnerCall = true;
+            break;
+        }
+    }
+
+    if (hasInnerCall) {
+        // Function calls inside brackets always add density
+        // Don't suppress — let it be spaced
+        return false;
+    }
+
+    // Plain bracket access (just nested brackets, identifiers)
+    // Short distance = easy to match, suppress spacing
     if (distance < 12) return true;
-    // Long distance: hard match, don't suppress
     return false;
 }
 
@@ -377,8 +411,9 @@ function analyze(tokens, metadata = {}) {
             if (suppressed) continue;
         }
 
-        // Content suppression (only at termination, not continuation)
-        if (!continuation && termination && !hasArrow) {
+        // Content suppression (only for call expressions at termination)
+        const isCallExpr = tokens[openIdx].value === '(';
+        if (isCallExpr && !continuation && termination && !hasArrow) {
             // Multi-argument suppression: 2+ args absorb trailing char
             // contribution, but NOT 3+ actual grouping char stacks
             const argCount = countArgs(tokens, openIdx, closeIdx);
@@ -390,7 +425,9 @@ function analyze(tokens, metadata = {}) {
             // at termination points (no groupingCount guard — content
             // can suppress even with 3 grouping chars)
             if (!suppressed) {
-                const contentInfo = getContentInfo(tokens, openIdx);
+                const contentInfo = getContentInfo(
+                        tokens, openIdx, closeIdx,
+                    );
                 if (contentSuppresses(contentInfo)) {
                     suppressed = true;
                 }
