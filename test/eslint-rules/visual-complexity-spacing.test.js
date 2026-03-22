@@ -39,20 +39,19 @@ import rule from
 
 /*
  * Principle mapping (see user_grouping_char_spacing_philosophy.md):
- *   P1  -> brackets that pile up
- *   P2  -> semicolons and trailing punctuation
- *   P3  -> chained .method() or [index]
- *   P4  -> long names make spacing optional
- *   P5  -> empty call inside other brackets
- *   P7  -> completing partially-spaced brackets
- *   P8  -> nested bracket access
- *   P9  -> template literal expressions
- *   P10 -> multi-line expressions
- *   P11 -> concise arrow / block body (within P10 and arrow sections)
- *   P12 -> concise arrow inside calls
- *   P13 -> commas provide visual separation
- *   P6  -> (implicit, see header note)
- *   P14 -> (separate companion rule, not implemented here)
+ *   P1     -> brackets that pile up: setState([[initialRow]])
+ *   P2     -> semicolons and trailing punctuation
+ *   P3     -> chained .method() or [index] after nested calls
+ *   P4     -> long names make spacing optional at statement end
+ *   P5     -> empty call inside other brackets: callbacks[getName()]
+ *   P7     -> completing partially-spaced brackets
+ *   P8     -> nested bracket access: obj[arr[index]]
+ *   P9     -> template literal ${} expressions
+ *   P10/11 -> multi-line expressions
+ *   P12    -> concise arrow inside calls: items.map(x => parse(x))
+ *   P13    -> commas provide visual separation in multi-arg calls
+ *   P6     -> (implicit, see header note)
+ *   P14    -> (separate companion rule, not implemented here)
  */
 
 const RULE = 'visual-complexity-spacing';
@@ -84,12 +83,14 @@ function expectFix(code, output, errors = 2) {
 }
 
 // eslint-disable-next-line @stylistic/max-len
-const FN_NAME_DESC = 'long names make spacing optional at statement end: callback(obj.method())';
-const MULTI_ARG_DESC = 'commas provide visual separation in multi-arg calls';
+const FN_NAME_DESC = 'P4: long names make spacing optional at statement end: callback(obj.method())';
+const ARROW_DESC = 'P12: concise arrow inside calls: items.map(x => parse(x))';
+// eslint-disable-next-line @stylistic/max-len
+const EMPTY_CALL_DESC = 'P5: empty call inside other brackets: callbacks[getName()]';
 
 describe('visual-complexity-spacing', () => {
 
-    describe('brackets that pile up: foo([[bar]])', () => {
+    describe('P1: brackets that pile up: setState([[initialRow]])', () => {
 
         it('skips 2 brackets: foo([bar])', () => {
             const cases = [
@@ -194,7 +195,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('completing partially-spaced brackets: foo( [[bar]])', () => {
+    describe('P7: completing partially-spaced brackets', () => {
 
         it('fixes missing close space', () => {
             const f = expectFix(
@@ -211,7 +212,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('multi-line expressions', () => {
+    describe('P10/P11: multi-line expressions', () => {
 
         it('skips when line breaks separate', () => {
             ruleTester.run(
@@ -233,7 +234,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('template literal ${} expressions', () => {
+    describe('P9: template literal ${} expressions', () => {
 
         it('skips ${} without grouping chars', () => {
             ruleTester.run(
@@ -277,7 +278,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('chained .method() or [index] after nested calls', () => {
+    describe('P3: chained .method() or [index] after nested calls', () => {
 
         it('fixes .method() after nested parens', () => {
             const code = 'wrap(parse(data)).unwrap()';
@@ -314,7 +315,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('semicolons and trailing punctuation', () => {
+    describe('P2: semicolons and trailing punctuation', () => {
 
         it('skips 2 brackets + semicolon', () => {
             ruleTester.run(RULE, rule, valid('foo(bar);'));
@@ -355,7 +356,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('concise arrow inside calls: arr.map(x => f(x))', () => {
+    describe(ARROW_DESC, () => {
 
         it('fixes arrow with call body', () => {
             const code = 'skills.forEach(skill => renderCard(skill))';
@@ -491,6 +492,7 @@ describe('visual-complexity-spacing', () => {
         });
 
         // MIN_CONTENT_LEN_FOR_SUPPRESSION = 15
+        // 13 chars + {} = 15 total, at MIN_CONTENT_LEN_FOR_SUPPRESSION
         it('skips when content >= 15 chars (no inner callee)', () => {
             ruleTester.run(
                 RULE, rule, valid('fn({longValueStri});')
@@ -506,7 +508,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('nested bracket access: obj[arr[index]]', () => {
+    describe('P8: nested bracket access: obj[arr[index]]', () => {
 
         it('skips short nested access', () => {
             ruleTester.run(
@@ -552,7 +554,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe(MULTI_ARG_DESC, () => {
+    describe('P13: commas provide visual separation in multi-arg calls', () => {
 
         it('skips multi-arg with nested call', () => {
             ruleTester.run(RULE, rule, valid('foo(data, parse());'));
@@ -586,7 +588,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('empty call inside other brackets: callbacks[getName()]', () => {
+    describe(EMPTY_CALL_DESC, () => {
 
         it('skips fn()() (double invocation)', () => {
             ruleTester.run(RULE, rule, valid('fn()()'));
