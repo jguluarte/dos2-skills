@@ -212,6 +212,12 @@ describe('Gap 4: continuation vs termination', () => {
                     output: 'foo( bar() );',
                     errors: 2,
                 },
+                // (!( = 3 density chars → space outer
+                {
+                    code: 'if (!(foo || bar)) { }',
+                    output: 'if ( !(foo || bar) ) { }',
+                    errors: 2,
+                },
             ],
         });
     });

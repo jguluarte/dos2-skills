@@ -83,7 +83,19 @@ function adjacentCluster(tokens, startIdx) {
         if (isDenseTrailing(tok)) {
             count++;
             right = i;
-            break;
+            // ! can precede grouping chars (e.g., `(!(`)
+            // so only break if the next token isn't adjacent
+            // grouping — otherwise keep expanding
+            const next = tokens[i + 1];
+            if (
+                !next
+                || !areAdjacent(tok, next)
+                || !isGrouping(next)
+            ) {
+                break;
+            }
+            i++;
+            continue;
         }
         count += openingWeight(tok);
         if (!chainsRight(tok)) {
