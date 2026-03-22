@@ -1,6 +1,20 @@
+/**
+ * Tests for the visual-complexity-spacing ESLint rule.
+ *
+ * This rule adds spaces inside the outermost bracket when 3 or more
+ * adjacent grouping characters (parens, brackets, braces, plus ; . !)
+ * pile up without whitespace, e.g., foo([[bar]]) becomes foo( [[bar]] ).
+ *
+ * It accounts for chained access, template literals, arrow functions,
+ * function name length, and argument count to decide when spacing is
+ * needed vs when the code is already readable without it.
+ */
+
 import { RuleTester } from 'eslint';
 import { describe, it } from 'vitest';
 import rule from '../../.config/eslint-rules/visual-complexity-spacing.js';
+
+const RULE = 'visual-complexity-spacing';
 
 const ruleTester = new RuleTester({
     languageOptions: {
@@ -9,368 +23,430 @@ const ruleTester = new RuleTester({
     },
 });
 
-// =============================================================
-// Gap 1: Mixed-direction counting
-// Principle 1 — any grouping chars count, regardless of direction
-// =============================================================
-describe('Gap 1: mixed-direction counting', () => {
-    it('counts opening+closing chars together', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // 2 adjacent — no trigger
+function valid(...cases) {
+    return { valid: cases, invalid: [] };
+}
+
+function invalid(...cases) {
+    return { valid: [], invalid: cases };
+}
+
+function fix(code, output, errors = 2) {
+    return { code, output, errors };
+}
+
+describe('visual-complexity-spacing', () => {
+
+    // =========================================================
+    // Nested brackets (3+ adjacent)
+    // =========================================================
+    describe('nested brackets (3+ adjacent)', () => {
+
+        it('allows 2 adjacent: foo([bar])', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo([bar])',
                 'foo({bar: 1})',
                 'arr.push([1, 2])',
-                'bar([baz])',
+            ));
+        });
 
-                // Already spaced
+        it('adds spaces for 3+ adjacent brackets: foo([[bar]]) -> foo( [[bar]] )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo([[bar]])', 'foo( [[bar]] )'),
+            ));
+        });
+
+        it('adds spaces for mixed types: foo([{key: 1}]) -> foo( [{key: 1}] )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo([{key: 1}])', 'foo( [{key: 1}] )'),
+            ));
+        });
+
+        it('adds spaces for 3 closing parens: a(b(c())) -> a( b(c()) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('a(b(c()))', 'a( b(c()) )'),
+            ));
+        });
+
+        it('adds spaces at open boundary: setup({key: fn()}, x) -> setup( {key: fn()}, x )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'setup({key: fn()}, x)',
+                    'setup( {key: fn()}, x )',
+                ),
+            ));
+        });
+
+        it('adds spaces for nested call cluster: outer(mid(inner()), \'x\') -> outer( ... )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    "outer(mid(inner()), 'x')",
+                    "outer( mid(inner()), 'x' )",
+                ),
+            ));
+        });
+
+        it('allows already-spaced expressions: foo( [[bar]] )', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo( [[bar]] )',
                 'foo( [{key: 1}] )',
                 'foo( bar([baz]) )',
-            ],
-
-            invalid: [
-                // [[ at open = 3 adjacent with outer (
-                {
-                    code: 'foo([[bar]])',
-                    output: 'foo( [[bar]] )',
-                    errors: 2,
-                },
-                // [{ at open = 3 adjacent with outer (
-                {
-                    code: 'foo([{key: 1}])',
-                    output: 'foo( [{key: 1}] )',
-                    errors: 2,
-                },
-                // ))) = 3 adjacent closing
-                {
-                    code: 'a(b(c()))',
-                    output: 'a( b(c()) )',
-                    errors: 2,
-                },
-            ],
+                'foo( bar() );',
+            ));
         });
     });
 
-    it('counts mixed open+close clusters', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // setup({key: fn()}, x) — already spaced
-                'setup( {key: fn()}, x )',
-            ],
-            invalid: [
-                // ({  at open = 3 adjacent mixed → space outer
-                {
-                    code: 'setup({key: fn()}, x)',
-                    output: 'setup( {key: fn()}, x )',
-                    errors: 2,
-                },
-                // outer(mid(inner()), 'x') — ()) at close = 3
-                {
-                    code: "outer(mid(inner()), 'x')",
-                    output: "outer( mid(inner()), 'x' )",
-                    errors: 2,
-                },
-            ],
-        });
-    });
-});
+    // =========================================================
+    // Single-line symmetry
+    // =========================================================
+    describe('single-line symmetry', () => {
 
-// =============================================================
-// Gap 2: Balance fix (single-line vs multi-line)
-// Principle 7, 10 — single-line balances, multi-line only dense
-// =============================================================
-describe('Gap 2: single-line vs multi-line balance', () => {
-    it('balances both sides on single-line', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                'foo( [[bar]] )',
-            ],
-            invalid: [
-                // Single-line: space both sides
-                {
-                    code: 'foo([[bar]])',
-                    output: 'foo( [[bar]] )',
-                    errors: 2,
-                },
-                // One side already spaced
-                {
-                    code: 'foo( [[bar]])',
-                    output: 'foo( [[bar]] )',
-                    errors: 1,
-                },
-                {
-                    code: 'foo([[bar]] )',
-                    output: 'foo( [[bar]] )',
-                    errors: 1,
-                },
-            ],
+        it('adds missing space on the unspaced close side: foo( [[bar]]) -> foo( [[bar]] )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo( [[bar]])', 'foo( [[bar]] )', 1),
+            ));
+        });
+
+        it('adds missing space on the unspaced open side: foo([[bar]] ) -> foo( [[bar]] )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo([[bar]] )', 'foo( [[bar]] )', 1),
+            ));
         });
     });
 
-    it('only spaces dense side on multi-line', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Multi-line: }); at end is only 2 actual
-                // grouping chars + ; = 3 but multi-line block
-                // provides structure (Principle 11)
+    // =========================================================
+    // Multi-line expressions
+    // =========================================================
+    describe('multi-line expressions', () => {
+
+        it('allows multi-line calls where line breaks provide separation: foo(\\n  bar()\\n);', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo(\n    bar()\n);',
+            ));
+        });
 
-                // Multi-line callback — block separates
+        it('allows multi-line callbacks with block body: setTimeout(() => {\\n  doStuff();\\n});', () => {
+            ruleTester.run(RULE, rule, valid(
                 'setTimeout(() => {\n    doStuff();\n});',
-            ],
-            invalid: [],
+            ));
         });
     });
-});
 
-// =============================================================
-// Gap 3: Template literal sub-rule
-// Principle 9 — any grouping chars inside ${} = space
-// =============================================================
-describe('Gap 3: template literal sub-rule', () => {
-    it('spaces ${} when content has grouping chars', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // No grouping chars — no space
+    // =========================================================
+    // Template literal ${} expressions
+    // =========================================================
+    describe('template literal ${} expressions', () => {
+
+        it('allows ${} without brackets or parens: `${name}`', () => {
+            ruleTester.run(RULE, rule, valid(
                 '`${name}`',
                 '`${obj.name}`',
+            ));
+        });
 
-                // Already spaced
-                '`${ getName() }`',
-                '`${ items[0] }`',
-            ],
-            invalid: [
-                // Call inside template
-                {
-                    code: '`${getName()}`',
-                    output: '`${ getName() }`',
-                    errors: 2,
-                },
-                // Bracket access inside template
-                {
-                    code: '`${items[0]}`',
-                    output: '`${ items[0] }`',
-                    errors: 2,
-                },
-                // Method call inside template
-                {
-                    code: '`${obj().name}`',
-                    output: '`${ obj().name }`',
-                    errors: 2,
-                },
-            ],
+        it('adds spaces when ${} contains a call: `${getName()}` -> `${ getName() }`', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('`${getName()}`', '`${ getName() }`'),
+            ));
+        });
+
+        it('adds spaces when ${} contains brackets: `${items[0]}` -> `${ items[0] }`', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('`${items[0]}`', '`${ items[0] }`'),
+            ));
+        });
+
+        it('adds spaces when ${} contains a method call: `${obj().name}` -> `${ obj().name }`', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('`${obj().name}`', '`${ obj().name }`'),
+            ));
         });
     });
-});
 
-// =============================================================
-// Gap 4: Dense trailing + continuation vs termination
-// Principles 2, 3 — . and ! are dense trailing;
-//   continuation = unsuppressible, termination = suppressible
-// =============================================================
-describe('Gap 4: continuation vs termination', () => {
-    it('always spaces continuation points', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Already spaced continuation
+    // =========================================================
+    // Chained access after nested parens (always spaces)
+    // =========================================================
+    describe('chained access after nested parens (always spaces)', () => {
+
+        it('adds spaces before .method(): wrap(parse(data)).unwrap() -> wrap( parse(data) ).unwrap()', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'wrap(parse(data)).unwrap()',
+                    'wrap( parse(data) ).unwrap()',
+                ),
+            ));
+        });
+
+        it('adds spaces before [index]: getMap(buildKey(userId))[0] -> getMap( buildKey(userId) )[0]', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'getMap(buildKey(userId))[0]',
+                    'getMap( buildKey(userId) )[0]',
+                ),
+            ));
+        });
+
+        it('allows already-spaced continuation: wrap( parse(data) ).unwrap()', () => {
+            ruleTester.run(RULE, rule, valid(
                 'wrap( parse(data) ).unwrap()',
-            ],
-            invalid: [
-                // )). continuation → must space
-                {
-                    code: 'wrap(parse(data)).unwrap()',
-                    output: 'wrap( parse(data) ).unwrap()',
-                    errors: 2,
-                },
-                // ))[ continuation → must space
-                {
-                    code: 'getMap(buildKey(userId))[0]',
-                    output: 'getMap( buildKey(userId) )[0]',
-                    errors: 2,
-                },
-            ],
+            ));
         });
     });
 
-    it('counts ; . ! as dense trailing', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // ); is only 2 — OK
+    // =========================================================
+    // Semicolons and trailing punctuation
+    // =========================================================
+    describe('semicolons and trailing punctuation', () => {
+
+        it('allows 2 adjacent + semicolon: foo(bar);', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo(bar);',
+            ));
+        });
 
-                // Already spaced
-                'foo( bar(baz) );',
+        it('adds spaces for )); at statement end: foo(bar()); -> foo( bar() );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo(bar());', 'foo( bar() );'),
+            ));
+        });
 
-                // Already spaced — )); terminated
-                'foo( bar() );',
-            ],
-            invalid: [
-                // )); = 3 dense chars (termination, short content)
-                {
-                    code: 'foo(bar());',
-                    output: 'foo( bar() );',
-                    errors: 2,
-                },
-                // (!( = 3 density chars → space outer
-                {
-                    code: 'if (!(foo || bar)) { }',
-                    output: 'if ( !(foo || bar) ) { }',
-                    errors: 2,
-                },
-            ],
+        it('adds spaces for !( prefix: if (!(foo || bar)) -> if ( !(foo || bar) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'if (!(foo || bar)) { }',
+                    'if ( !(foo || bar) ) { }',
+                ),
+            ));
         });
     });
-});
 
-// =============================================================
-// Gap 5: Arrow function detection
-// Principle 12 — concise arrow with nested call = space outer
-// =============================================================
-describe('Gap 5: arrow function detection', () => {
-    it('spaces outer call around concise arrow with nested call', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Already spaced
-                'skills.forEach( skill => renderCard(skill) )',
+    // =========================================================
+    // Concise arrow functions inside calls
+    // =========================================================
+    describe('concise arrow functions inside calls', () => {
 
-                // Block body arrow — block separates (Principle 11)
+        it('adds spaces for arrow with call body: forEach(skill => renderCard(skill)) -> forEach( ... )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'skills.forEach(skill => renderCard(skill))',
+                    'skills.forEach( skill => renderCard(skill) )',
+                ),
+            ));
+        });
+
+        it('allows block body arrows: foo(() => { bar() })', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo(() => { bar() })',
-            ],
-            invalid: [
-                // Concise arrow with call body inside call
-                {
-                    code: 'skills.forEach(skill => renderCard(skill))',
-                    output: 'skills.forEach( skill => renderCard(skill) )',
-                    errors: 2,
-                },
-            ],
+            ));
         });
     });
-});
 
-// =============================================================
-// Gap 6: Content-aware suppression
-// Principle 4 — long content at termination suppresses spacing
-// =============================================================
-describe('Gap 6: content-aware suppression', () => {
-    it('suppresses spacing for long callee at termination', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // obj.method = 10+ chars → no space
+    // =========================================================
+    // Long identifiers reduce spacing need (statement end only)
+    // =========================================================
+    describe('long identifiers reduce spacing need (statement end only)', () => {
+
+        it('allows long method name at statement end: callback(obj.method());', () => {
+            ruleTester.run(RULE, rule, valid(
                 'callback(obj.method());',
+            ));
+        });
 
-                // Long callee → no space
+        it('allows long callee at statement end: getData(parseResponse(result));', () => {
+            ruleTester.run(RULE, rule, valid(
                 'getData(parseResponse(result));',
+            ));
+        });
 
-                // method parse = 5, short obj pa → no space
+        it('adds spaces for short names at statement end: foo(bar(x)); -> foo( bar(x) );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo(bar(x));', 'foo( bar(x) );'),
+            ));
+        });
+
+        it('adds spaces for short method at statement end: wrap(pa.arse(data)); -> wrap( pa.arse(data) );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'wrap(pa.arse(data));',
+                    'wrap( pa.arse(data) );',
+                ),
+            ));
+        });
+
+        it('prioritizes inner callee over outer: callback(fn(x)); -> callback( fn(x) );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'callback(fn(x));',
+                    'callback( fn(x) );',
+                ),
+            ));
+        });
+
+        it('allows long method (5+ chars) with short object: wrap(pa.parse(data));', () => {
+            ruleTester.run(RULE, rule, valid(
                 'wrap(pa.parse(data));',
-            ],
-            invalid: [
-                // Short content at termination → space
-                {
-                    code: 'foo(bar(x));',
-                    output: 'foo( bar(x) );',
-                    errors: 2,
-                },
-                // method arse = 4, short obj pa → space
-                {
-                    code: 'wrap(pa.arse(data));',
-                    output: 'wrap( pa.arse(data) );',
-                    errors: 2,
-                },
-                // Short inner callee (fn = 2 chars) →
-                // NOT suppressed despite long outer callee
-                {
-                    code: 'callback(fn(x));',
-                    output: 'callback( fn(x) );',
-                    errors: 2,
-                },
-            ],
+            ));
         });
     });
-});
 
-// =============================================================
-// Gap 7: Bracket access inversion
-// Principle 8 — long content in brackets = MORE spacing need
-// =============================================================
-describe('Gap 7: bracket access inversion', () => {
-    it('spaces brackets with long nested content', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Short content — no space needed
+    // =========================================================
+    // Nested bracket access (computed properties)
+    // =========================================================
+    describe('nested bracket access (computed properties)', () => {
+
+        it('allows short nested access: obj[arr[index]]', () => {
+            ruleTester.run(RULE, rule, valid(
                 'obj[arr[index]]',
+            ));
+        });
 
-                // Long outer name anchors
+        it('allows long outer name: obj[longArrayName[index]]', () => {
+            ruleTester.run(RULE, rule, valid(
                 'obj[longArrayName[index]]',
-            ],
-            invalid: [
-                // Long content inside brackets → space
-                {
-                    code: 'obj[arr[longPropertyName]]',
-                    output: 'obj[ arr[longPropertyName] ]',
-                    errors: 2,
-                },
-            ],
+            ));
+        });
+
+        it('adds spaces for long inner content: obj[arr[longPropertyName]] -> obj[ arr[longPropertyName] ]', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'obj[arr[longPropertyName]]',
+                    'obj[ arr[longPropertyName] ]',
+                ),
+            ));
         });
     });
-});
 
-// =============================================================
-// Multi-arg suppression
-// Principle 13 — multi-arg absorbs trailing char density
-// =============================================================
-describe('Multi-arg suppression', () => {
-    it('suppresses density when trailing char pushed to threshold', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Multi arg, )) + ; = trailing-only → no space
+    // =========================================================
+    // Multiple arguments absorb trailing-only density
+    // =========================================================
+    describe('multiple arguments absorb trailing-only density', () => {
+
+        it('allows multi-arg with nested call at end: foo(data, parse());', () => {
+            ruleTester.run(RULE, rule, valid(
                 'foo(data, parse());',
-            ],
-            invalid: [
-                // Single arg, )); = 3 → spaced
-                {
-                    code: 'foo(parse());',
-                    output: 'foo( parse() );',
-                    errors: 2,
-                },
-                // Multi arg, but ))) = 3 real → spaced
-                {
-                    code: "foo(data, bar(parse()));",
-                    output: "foo( data, bar(parse()) );",
-                    errors: 2,
-                },
-                // Multi arg, ])) = 3 real grouping → spaced
-                {
-                    code: 'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))',
-                    output: 'buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )',
-                    errors: 2,
-                },
-            ],
+            ));
+        });
+
+        it('adds spaces for single-arg: foo(parse()); -> foo( parse() );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix('foo(parse());', 'foo( parse() );'),
+            ));
+        });
+
+        it('adds spaces when 3+ real brackets stack in multi-arg: foo(data, bar(parse())); -> foo( ... );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'foo(data, bar(parse()));',
+                    'foo( data, bar(parse()) );',
+                ),
+            ));
+        });
+
+        it('adds spaces for ])) in multi-arg: buildSummaryText(null, new Set([...])) -> buildSummaryText( ... )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))',
+                    'buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )',
+                ),
+            ));
         });
     });
-});
 
-// =============================================================
-// Empty () as density multiplier
-// Principle 5
-// =============================================================
-describe('Empty () as density multiplier', () => {
-    it('counts empty () as extending the cluster', () => {
-        ruleTester.run('visual-complexity-spacing', rule, {
-            valid: [
-                // Already spaced
-                'foo( bar() )',
-            ],
-            invalid: [
-                // bar() inside foo() — ())] is dense
-                {
-                    code: 'a(b(c()))',
-                    output: 'a( b(c()) )',
+    // =========================================================
+    // New test cases from QA review
+    // =========================================================
+    describe('new keyword with nested constructors', () => {
+
+        it('adds spaces for ])) at end: new Set(new Map([])) -> new Set( new Map([]) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'new Set(new Map([]))',
+                    'new Set( new Map([]) )',
+                ),
+            ));
+        });
+    });
+
+    describe('spread with deep nesting', () => {
+
+        it('adds spaces for spread with nested calls: foo(...bar(baz())) -> foo( ...bar(baz()) )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'foo(...bar(baz()))',
+                    'foo( ...bar(baz()) )',
+                ),
+            ));
+        });
+    });
+
+    describe('chained arrows', () => {
+
+        it('adds spaces for each concise arrow call in chain: arr.map(x => f(x)).filter(y => g(y)) -> spaced', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'arr.map(x => f(x)).filter(y => g(y))',
+                    'arr.map( x => f(x) ).filter( y => g(y) )',
+                    4,
+                ),
+            ));
+        });
+    });
+
+    describe('await with short names', () => {
+
+        it('adds spaces for await with short nested call: await foo(bar()); -> await foo( bar() );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'await foo(bar());',
+                    'await foo( bar() );',
+                ),
+            ));
+        });
+    });
+
+    describe('comments between grouping characters', () => {
+
+        it('allows comment breaking adjacency: foo(bar()/* comment */)', () => {
+            ruleTester.run(RULE, rule, valid(
+                'foo(bar()/* comment */)',
+            ));
+        });
+    });
+
+    describe('optional chaining', () => {
+
+        it('adds spaces for closing )) density despite ?.: foo?.(bar?.()) -> foo?.( bar?.() )', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'foo?.(bar?.())',
+                    'foo?.( bar?.() )',
+                ),
+            ));
+        });
+    });
+
+    describe('custom threshold option', () => {
+
+        it('triggers at threshold 2: foo([bar]) -> foo( [bar] ) with {threshold: 2}', () => {
+            ruleTester.run(RULE, rule, {
+                valid: [],
+                invalid: [{
+                    code: 'foo([bar])',
+                    output: 'foo( [bar] )',
                     errors: 2,
-                },
-            ],
+                    options: [{ threshold: 2 }],
+                }],
+            });
+        });
+
+        it('allows 3 adjacent at threshold 4: foo([[bar]]) with {threshold: 4}', () => {
+            ruleTester.run(RULE, rule, {
+                valid: [{
+                    code: 'foo([[bar]])',
+                    options: [{ threshold: 4 }],
+                }],
+                invalid: [],
+            });
         });
     });
 });
