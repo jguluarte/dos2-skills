@@ -38,7 +38,7 @@ import rule from
     '../../.config/eslint-rules/visual-complexity-spacing.js';
 
 /*
- * Principle mapping (see user_grouping_char_spacing_philosophy.md):
+ * Principle mapping (see FORMATTING-PHILOSOPHY.md):
  *   P1     -> brackets that pile up: setState([[initialRow]])
  *   P2     -> semicolons and trailing punctuation
  *   P3     -> chained .method() or [index] after nested calls
@@ -245,20 +245,15 @@ describe('visual-complexity-spacing', () => {
             );
         });
 
-        // eslint-disable-next-line @stylistic/max-len
-        it('skips block body function: foo(function(){ bar(); })', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('foo(function(){ bar(); });')
-            );
+        it('skips block body function', () => {
+            const code = 'foo(function(){ bar(); });';
+            ruleTester.run(RULE, rule, valid(code));
         });
 
-        // eslint-disable-next-line @stylistic/max-len
-        it('skips named function: foo(function handler(){ bar(); })', () => {
-            ruleTester.run(
-                RULE, rule,
-                valid('foo(function handler(){ bar(); });')
-            );
+        it('skips named function', () => {
+            const code =
+                'foo(function handler(){ bar(); });';
+            ruleTester.run(RULE, rule, valid(code));
         });
     });
 

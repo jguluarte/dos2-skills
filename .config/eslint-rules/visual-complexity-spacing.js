@@ -1,4 +1,6 @@
+// eslint-disable-next-line @stylistic/max-len
 import { contentSuppressesSpacing } from './visual-complexity-spacing/anchoring.js';
+// eslint-disable-next-line @stylistic/max-len
 import { buildBracketMap, lookupBracket } from './visual-complexity-spacing/bracket-map.js';
 import {
     adjacentCluster,
@@ -21,6 +23,7 @@ import {
     MIN_BRACKET_OUTER_LEN,
     TEMPLATE_LIT,
 } from './visual-complexity-spacing/constants.js';
+// eslint-disable-next-line @stylistic/max-len
 import { findEnclosingContainer } from './visual-complexity-spacing/container.js';
 import {
     areAdjacent,
