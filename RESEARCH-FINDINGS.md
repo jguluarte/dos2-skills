@@ -15,6 +15,10 @@
 6. [Content-Aware Object Curly Spacing](#6-content-aware-object-curly-spacing)
 7. [Recommendations](#7-recommendations)
 8. [Open Questions](#8-open-questions)
+9. [User Testing: Refined Spacing Rules](#9-user-testing-refined-spacing-rules)
+10. [Cognitive Density & Expression Complexity](#10-cognitive-density--expression-complexity)
+11. [WIP Rule Architecture Gaps](#11-wip-rule-architecture-gaps)
+12. [Revised Recommendations](#12-revised-recommendations)
 
 ## Terminology
 
@@ -723,6 +727,308 @@ the default changes?
 
 ---
 
+## 9. User Testing: Refined Spacing Rules
+
+Through stepping through ~40 code examples with the user, the original
+"3+ adjacent grouping chars" model evolved significantly. The rule is
+more nuanced than character counting.
+
+### 9.1 Mixed-direction counting
+
+The WIP rule counts opening runs and closing runs separately. Testing
+revealed that mixed-direction clusters also trigger: `())` (open-close-
+close) = 3 adjacent, `()}` (paren-close, brace-close) = 3 adjacent.
+Any adjacent grouping chars regardless of type or direction count.
+
+```js
+setup( {key: fn()}, x )   // fn()}  = ( ) } = 3 mixed
+outer( mid(inner()), 'x' ) // inner()) = ( ) ) = 3 mixed
+```
+
+### 9.2 Dense trailing: `;` is soft, `.` is hard
+
+Both `;` and `.` count as dense trailing characters. But they behave
+differently:
+
+- **`.` is a hard trigger** — `)).` ALWAYS triggers spacing regardless
+  of content length. The reader must parse past the density to continue
+  reading the chained call.
+- **`;` is a soft trigger** — `));` can be suppressed by long content.
+  The line ends at the density; nothing more to parse.
+
+```js
+wrap( parse(data) ).unwrap()       // )). → always triggers
+arr.filter( x => fn(x) ).map(cb)  // )). → always triggers
+callback(obj.method());            // )); → suppressed, long content
+```
+
+**`,` does NOT count as dense trailing.** `comma-spacing` always adds
+a space after commas, which breaks the cluster: `), ` is not dense.
+
+### 9.3 Content-aware suppression for `));`
+
+Long, readable content between the outer parens can suppress `));`.
+The method name (identifier before `(`) is the primary factor:
+
+| Callee | Method after dot | Spaced? |
+|---|---|---|
+| `pa.rse` | `rse` (3) | Yes |
+| `pa.arse` | `arse` (4) | Yes |
+| `pa.parse` | `parse` (5) | No |
+| `parse.p` | `p` (1) | Yes |
+| `parse.par` | `par` (3) | Yes |
+| `parse.pars` | `pars` (4) | No |
+
+The object name shifts the threshold: a longer object provides more
+visual anchor, so the method can be slightly shorter. With `pa` (2 chars)
+the method needs 5+ chars. With `parse` (5 chars) the method needs 4+.
+
+### 9.4 Empty `()` as a density multiplier
+
+Empty function calls create `(` `)` adjacent, extending any surrounding
+cluster. `fn()` inside brackets means `()]` or `())` = 3 adjacent.
+
+```js
+callbacks[ getName() ];         // ()]; = dense
+const msg = `${ getId() }`;    // () inside ${} = dense
+foo( bar() );                   // () extends )) to ())
+```
+
+### 9.5 Template literals: any grouping chars = space
+
+`${ }` gets spaced whenever the content contains ANY grouping characters
+— calls, brackets, property access. No threshold counting needed.
+
+```js
+const msg = `${ getName() }`;     // call inside → space
+const msg = `${ items[0] }`;      // brackets inside → space
+const msg = `${ obj().name }`;    // call inside → space
+const msg = `${obj.name}`;        // no grouping chars → no space
+```
+
+### 9.6 Bracket access inversion
+
+For property access `[]`, long content INCREASES the need for spacing —
+the opposite of function calls. Long content pushes `]` far from `[`,
+making bracket matching hard.
+
+```js
+return obj[ arr[longPropertyName] ];   // long → space (matching help)
+return obj[arr[index]];                // short → no space (easy match)
+return obj[longArrayName[index]];      // long outer anchor → no space
+```
+
+### 9.7 Arrow functions add cognitive density
+
+Arrow functions inside call arguments create a "bouncing" reading pattern
+(`param => call(param)`) that needs spacing even when identifiers are
+long:
+
+```js
+skills.forEach( skill => renderCard(skill) );  // bouncing pattern
+callback(obj.method());                        // smooth left-to-right
+```
+
+Block arrows (`=> { ... }`) provide visual scaffolding and do NOT
+trigger this:
+
+```js
+foo(() => { bar() });    // block braces separate → no spacing
+foo( () => bar() );      // concise arrow, no braces → spacing
+```
+
+---
+
+## 10. Cognitive Density & Expression Complexity
+
+### 10.1 Existing complexity rules are per-function only
+
+| Rule | Measures | Per-expression? |
+|---|---|---|
+| `complexity` | Cyclomatic (branching paths) | No — per-function |
+| `max-depth` | Block nesting (if/for/while) | No — per-function |
+| `max-nested-callbacks` | Callback function nesting | No — per-chain |
+| `max-statements` | Statement count | No — per-function |
+| sonarjs `cognitive-complexity` | Nesting + branching score | No — per-function |
+
+No existing rule provides per-expression cognitive density scoring.
+
+### 10.2 The "bouncing parens" AST selector
+
+The exact pattern that correlates with "needs spacing" has a precise
+AST selector:
+
+```
+CallExpression > ArrowFunctionExpression[expression=true] > CallExpression.body
+```
+
+This detects: a concise arrow whose body is a call, where the arrow
+itself is an argument of another call. Tested against 11 cases with
+100% accuracy:
+
+| Expression | Matches? | Needs spacing? |
+|---|---|---|
+| `forEach(skill => renderCard(skill))` | Yes | Yes |
+| `foo(() => bar())` | Yes | Yes |
+| `filter(item => item.isActive())` | Yes | Yes |
+| `sort((a, b) => compare(a, b))` | Yes | Yes |
+| `callback(obj.method())` | No | No |
+| `foo(() => { bar() })` | No (block arrow) | No |
+| `filter(item => item.active)` | No (body is MemberExpr) | No |
+| `map(x => x.name)` | No (body is MemberExpr) | No |
+
+### 10.3 Expression depth detection via AST
+
+`node.parent` is always available in ESLint rules.
+`sourceCode.getAncestors(node)` returns all ancestors. Walking the
+parent chain and counting `CallExpression`, `ArrowFunctionExpression`,
+`MemberExpression` gives expression nesting depth.
+
+For token-based rules, `sourceCode.getNodeByRangeIndex(token.range[0])`
+bridges from a token to the deepest AST node at that position, then
+you can walk up via `node.parent`.
+
+### 10.4 No formatter does this anywhere
+
+Survey of production formatters:
+
+| Formatter | Content-aware spacing? | Content-aware line breaking? |
+|---|---|---|
+| Prettier | No | Width-only |
+| Biome | No | Width-only (best-fitting) |
+| clang-format | No (boolean toggles) | Yes (penalty system) |
+| rustfmt | No | Width-only |
+| Black / Ruff | No | Width-only |
+| F# / Fantomas | **Yes** (atomic vs non-atomic) | Width-based |
+
+**F# is the only language** with content-characteristic-based spacing:
+the range operator `..` gets spaces only when either side is "non-atomic"
+(contains operators or dots). `[ 2..7 ]` is fine, but `[ 0.7 .. 9.2 ]`
+needs spaces because the doubles are visually complex.
+
+The specific concept this project explores — spacing around grouping
+characters that adapts to identifier length, content length, expression
+type, and density — is unexplored territory in both production tools
+and academic literature.
+
+---
+
+## 11. WIP Rule Architecture Gaps
+
+Seven gaps between the current implementation and discovered requirements:
+
+| # | Gap | Complexity | Dependencies |
+|---|-----|-----------|--------------|
+| 1 | Mixed-direction counting | Medium | Foundational |
+| 2 | Dense trailing `.` (hard/soft) | Low | Needs Gap 3 |
+| 3 | Content-aware suppression | High | Needs Gaps 1, 2 |
+| 4 | Template literal sub-rule | Low | Independent |
+| 5 | Bracket access inversion | Medium-high | Needs Gap 3 |
+| 6 | Arrow function detection | Medium | Independent |
+| 7 | Balance: single vs multi-line | Low | Needs Gap 1 |
+
+### Hybrid architecture: AST pre-passes + token iteration
+
+The rule should use **AST visitors** as pre-passes to tag tokens with
+context, then do the token-iteration phase with that metadata:
+
+```js
+return {
+    // Pre-pass: tag computed member brackets
+    MemberExpression(node) {
+        if (node.computed) {
+            computedMemberBrackets.add(
+                sourceCode.getTokenBefore(node.property)
+            );
+        }
+    },
+    // Pre-pass: tag calls with concise-arrow-call arguments
+    CallExpression(node) {
+        for (const arg of node.arguments) {
+            if (arg.type === 'ArrowFunctionExpression'
+                && arg.expression
+                && arg.body.type === 'CallExpression') {
+                callsWithBouncingParens.add(node);
+            }
+        }
+    },
+    // Pre-pass: tag template expressions with grouping chars
+    TemplateLiteral(node) {
+        for (const expr of node.expressions) {
+            const tokens = sourceCode.getTokens(expr);
+            if (tokens.some(t => isGrouping(t))) {
+                templatesNeedingSpaces.add(expr);
+            }
+        }
+    },
+    // Main pass: token iteration with context
+    'Program:exit'() {
+        // ... existing token iteration, now with access to
+        // the pre-pass metadata sets
+    },
+};
+```
+
+### Key API for bridging tokens to AST
+
+`sourceCode.getNodeByRangeIndex(token.range[0])` returns the deepest
+AST node at a token's position. From there, `node.parent` walks up.
+This lets the token-iteration phase query AST context on demand without
+a full pre-pass for every pattern.
+
+---
+
+## 12. Revised Recommendations
+
+Based on user testing and the second round of research:
+
+### The rule is more than character counting
+
+The original model — "count adjacent grouping chars, space if 3+" — is
+necessary but not sufficient. The rule needs:
+
+1. **Mixed-direction counting** (not just same-direction runs)
+2. **Content-aware suppression** (long identifiers can suppress `));`)
+3. **Hard vs soft triggers** (`.` always triggers, `;` is suppressible)
+4. **Template literal sub-rule** (any grouping chars inside = space)
+5. **Bracket access inversion** (long content = more spacing needed)
+6. **Arrow function detection** (concise arrows with nested calls)
+7. **Multi-line balance** (only space the dense side)
+
+### Implementation order
+
+1. **Gap 7** — Balance fix (low risk, immediate bug fix)
+2. **Gap 1** — Mixed-direction counting (foundational refactor)
+3. **Gap 4** — Template literal sub-rule (independent, simple)
+4. **Gap 2** — Dense trailing `.` hard/soft distinction
+5. **Gap 6** — Arrow function detection (AST pre-pass)
+6. **Gap 3** — Content-aware suppression (highest complexity)
+7. **Gap 5** — Bracket access inversion (depends on Gap 3)
+
+### Architecture shift
+
+Move from pure token iteration to a **hybrid AST + token** approach:
+AST visitors pre-tag tokens with context metadata, then token iteration
+uses that metadata for spacing decisions. This preserves the existing
+approach's cross-node-boundary strength while adding the AST awareness
+the new requirements demand.
+
+### This is genuinely novel
+
+No production formatter, linter, or academic paper implements content-
+characteristic-based intra-line spacing. F#'s atomic/non-atomic rule
+for range operators is the closest precedent but far simpler. The
+concept has upstream contribution potential once proven in practice.
+
+### Formatting philosophy document
+
+The user's spacing preferences have been captured in a cross-language
+formatting philosophy document at
+`~/.claude/memory/user_grouping_char_spacing_philosophy.md`. This can
+be used to configure formatters/linters in other languages.
+
+---
+
 ## Appendix: Source References
 
 ### ESLint Core
@@ -747,3 +1053,17 @@ the default changes?
 - [prettier#1303 — Space between parens and brackets](https://github.com/prettier/prettier/issues/1303)
 - [prettier#13107 — Paren spacing option](https://github.com/prettier/prettier/issues/13107)
 - [rustfmt#5435 — spaces_within_parenthesized_items](https://github.com/rust-lang/rustfmt/issues/5435)
+
+### Complexity & Cognitive Density
+- [eslint-plugin-sonarjs cognitive-complexity source](https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/src/rules/cognitive-complexity.ts)
+- [SonarSource Cognitive Complexity whitepaper](https://www.sonarsource.com/docs/CognitiveComplexity.pdf)
+- [ESTree ES2015 spec (ArrowFunctionExpression)](https://github.com/estree/estree/blob/master/es2015.md)
+- [ESLint Selectors documentation](https://eslint.org/docs/latest/extend/selectors)
+
+### Formatter Internals
+- [Prettier Doc IR / Technical Details](https://prettier.io/docs/technical-details)
+- [clang-format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
+- [Daniel Jasper — clang-format penalty system (LLVM DevMtg 2013)](https://llvm.org/devmtg/2013-04/jasper-slides.pdf)
+- [F# Code Formatting Guidelines (Microsoft)](https://learn.microsoft.com/en-us/dotnet/fsharp/style-guide/formatting)
+- [Yelland — A New Approach to Optimal Code Formatting (Google)](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44667.pdf)
+- [Wadler — A prettier printer](https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf)
