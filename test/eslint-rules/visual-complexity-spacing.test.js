@@ -48,7 +48,7 @@ function expectFix(code, output, errors = 2) {
 
 // eslint-disable-next-line @stylistic/max-len
 const FN_NAME_DESC = 'long names suppress spacing at statement end: callback(obj.method())';
-const MULTI_ARG_DESC = 'multiple arguments absorb closing pile-up';
+const MULTI_ARG_DESC = 'commas provide visual separation in multi-arg calls';
 
 describe('visual-complexity-spacing', () => {
 
@@ -153,6 +153,13 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, valid('foo(\n    bar()\n);'));
         });
 
+        it('fixes close side only when cluster is single-line', () => {
+            const f = expectFix(
+                'foo(\n    bar())', 'foo(\n    bar() )', 1
+            );
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
         it('skips callback with block body', () => {
             const code = 'setTimeout(() => {\n    doStuff();\n});';
             ruleTester.run(RULE, rule, valid(code));
@@ -186,6 +193,13 @@ describe('visual-complexity-spacing', () => {
             const f = expectFix(code, output, 4);
             ruleTester.run(RULE, rule, invalid(f));
         });
+
+        it('fixes ${} with nested call', () => {
+            const f = expectFix(
+                '`${fn(bar())}`', '`${ fn(bar()) }`'
+            );
+            ruleTester.run(RULE, rule, invalid(f));
+        });
     });
 
     describe('chained .method() or [index] after nested calls', () => {
@@ -211,6 +225,13 @@ describe('visual-complexity-spacing', () => {
         it('fixes double invocation: get(make(x))(y)', () => {
             const code = 'get(make(x))(y)';
             const output = 'get( make(x) )(y)';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('continuation overrides long-content suppression', () => {
+            const code = 'callback(obj.method()).next()';
+            const output = 'callback( obj.method() ).next()';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
@@ -294,6 +315,20 @@ describe('visual-complexity-spacing', () => {
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
+
+        it('fixes arrow with call body + multiple params', () => {
+            const code = 'arr.forEach((x, i) => process(x))';
+            const output = 'arr.forEach( (x, i) => process(x) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes multiple arrows in same call', () => {
+            const code = 'combine(x => f(x), y => g(y))';
+            const output = 'combine( x => f(x), y => g(y) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
     });
 
     describe(FN_NAME_DESC, () => {
@@ -328,7 +363,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, valid('wrap(pa.parse(data));'));
         });
 
-        it('skips obj=5 method=4 (long object absorbs short method)', () => {
+        it('skips obj=5 method=4 (long object offsets short method)', () => {
             ruleTester.run(RULE, rule, valid('wrap(items.find(data));'));
         });
 
@@ -345,6 +380,19 @@ describe('visual-complexity-spacing', () => {
 
         it('fixes inner callee 7 chars (too short)', () => {
             const f = expectFix('a(abcdefg(x));', 'a( abcdefg(x) );');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('suppresses when content >= 15 chars (no inner callee)', () => {
+            ruleTester.run(
+                RULE, rule, valid('fn({longValueStri});')
+            );
+        });
+
+        it('fixes when content < 15 chars (no inner callee)', () => {
+            const code = 'fn({longValueStr});';
+            const output = 'fn( {longValueStr} );';
+            const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
     });
@@ -451,6 +499,16 @@ describe('visual-complexity-spacing', () => {
             });
         });
 
+        it('skips empty container fn() at threshold 2', () => {
+            ruleTester.run(RULE, rule, {
+                valid: [{
+                    code: 'fn()',
+                    options: [{ threshold: 2 }],
+                }],
+                invalid: [],
+            });
+        });
+
         it('skips 3 pile-up at threshold 4', () => {
             ruleTester.run(RULE, rule, {
                 valid: [{
@@ -478,6 +536,13 @@ describe('visual-complexity-spacing', () => {
                 'arr.map( x => ({key: x}) )',
                 'foo( bar() );',
                 'wrap( parse(data) ).unwrap()',
+                'foo(\n    bar() )',
+                'fn( sh(longArg) );',
+                'fn( {longValueStr} );',
+                'callback( obj.method() ).next()',
+                '`${ fn(bar()) }`',
+                'arr.forEach( (x, i) => process(x) )',
+                'combine( x => f(x), y => g(y) )',
             ];
             ruleTester.run(RULE, rule, valid(...fixOutputs));
         });
