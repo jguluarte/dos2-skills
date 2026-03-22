@@ -334,6 +334,12 @@ describe('Multi-arg suppression', () => {
                     output: "foo( data, bar(parse()) );",
                     errors: 2,
                 },
+                // Multi arg, ])) = 3 real grouping → spaced
+                {
+                    code: 'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))',
+                    output: 'buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )',
+                    errors: 2,
+                },
             ],
         });
     });
