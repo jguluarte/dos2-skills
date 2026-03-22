@@ -156,28 +156,38 @@ function applyClusterSpacing(ctx, cluster, container) {
 }
 
 // -------------------------------------------------------
-// Suppression policy
+// Spacing decision
 // -------------------------------------------------------
 
-// Suppression only applies when the cluster is a terminated
-// statement (not a continuation) with dense trailing, and
-// the close-brackets alone don't meet the threshold.
-// When those preconditions hold, commas or long content
-// provide enough visual separation to skip extra spaces.
-function shouldSuppressSpacing(ctx, classification, container) {
-    if (classification.continues) return false;
-    if (!classification.hasDenseTrailing) return false;
+// Determines whether a cluster needs spacing inserted.
+// Read as a checklist: each condition that returns true
+// is a reason spacing IS required; each false means the
+// existing code already has enough visual separation.
+function needsSpacing(ctx, classification, container) {
+    // Continuation chains always need spacing (P3)
+    if (classification.continues) return true;
 
+    // Without dense trailing, the cluster alone decides
+    if (!classification.hasDenseTrailing) return true;
+
+    // 3+ real closing brackets always need spacing (P13)
     const closingCount = countClosingInCluster(
         ctx.tokens, classification.cluster
     );
-    if (closingCount >= ctx.threshold) return false;
+    if (closingCount >= ctx.threshold) return true;
 
-    if (hasTopLevelComma(ctx.tokens, container)) return true;
+    // Commas provide visual separation (P13)
+    if (hasTopLevelComma(ctx.tokens, container)) return false;
 
-    return contentSuppressesSpacing(
+    // Long content or anchoring names handle it (P4)
+    if (contentSuppressesSpacing(
         ctx, container.openIdx, container.closeIdx
-    );
+    )) {
+        return false;
+    }
+
+    // Default: spacing needed
+    return true;
 }
 
 // -------------------------------------------------------
@@ -259,7 +269,7 @@ function processCluster(ctx, cluster) {
     if (!container) return;
     if (containerIsEmpty(container)) return;
 
-    if (shouldSuppressSpacing(ctx, classification, container)) return;
+    if (!needsSpacing(ctx, classification, container)) return;
 
     applyClusterSpacing(ctx, cluster, container);
 }
