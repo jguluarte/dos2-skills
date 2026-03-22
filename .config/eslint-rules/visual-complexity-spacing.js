@@ -173,7 +173,7 @@ function expandLeft(tokens, startIdx) {
  * remain source-adjacent.
  */
 function adjacentCluster(tokens, startIdx) {
-    let count = openingWeight(tokens[startIdx]);
+    let count = openingWeight( tokens[startIdx] );
     const rightResult = expandRight(tokens, startIdx);
     const leftResult = expandLeft(tokens, startIdx);
     count += rightResult.count + leftResult.count;
@@ -193,9 +193,9 @@ function buildBracketMap(tokens) {
     const stack = [];
 
     for (let i = 0; i < tokens.length; i++) {
-        if (isOpening(tokens[i])) {
+        if (isOpening( tokens[i] )) {
             stack.push(i);
-        } else if (isClosing(tokens[i])) {
+        } else if (isClosing( tokens[i] )) {
             if (stack.length > 0) {
                 const openIdx = stack.pop();
                 map.set(openIdx, i);
@@ -312,8 +312,8 @@ function clusterComposition(tokens, cluster) {
     let hasOpening = false;
     let hasClosing = false;
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (isOpening(tokens[j])) hasOpening = true;
-        if (isClosing(tokens[j])) hasClosing = true;
+        if (isOpening( tokens[j] )) hasOpening = true;
+        if (isClosing( tokens[j] )) hasClosing = true;
     }
     return { hasOpening, hasClosing };
 }
@@ -321,14 +321,14 @@ function clusterComposition(tokens, cluster) {
 function countClosingInCluster(tokens, cluster) {
     let count = 0;
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (isClosing(tokens[j])) count++;
+        if (isClosing( tokens[j] )) count++;
     }
     return count;
 }
 
 function findLastClosingIdx(tokens, cluster) {
     for (let j = cluster.endIdx; j >= cluster.startIdx; j--) {
-        if (isClosing(tokens[j])) return j;
+        if (isClosing( tokens[j] )) return j;
     }
     return -1;
 }
@@ -336,8 +336,8 @@ function findLastClosingIdx(tokens, cluster) {
 function hasTopLevelComma(tokens, container) {
     let depth = 0;
     for (let j = container.openIdx + 1; j < container.closeIdx; j++) {
-        if (isOpening(tokens[j])) depth++;
-        if (isClosing(tokens[j])) depth--;
+        if (isOpening( tokens[j] )) depth++;
+        if (isClosing( tokens[j] )) depth--;
         if (depth === 0 && tokens[j].value === ',') return true;
     }
     return false;
@@ -349,7 +349,7 @@ function hasTopLevelComma(tokens, container) {
 
 function findClosingOnlyContainer(tokenCtx, cluster) {
     for (let j = cluster.endIdx; j >= cluster.startIdx; j--) {
-        if (!isClosing(tokenCtx.tokens[j])) continue;
+        if (!isClosing( tokenCtx.tokens[j] )) continue;
         const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx !== -1) {
             return { openIdx: matchIdx, closeIdx: j };
@@ -360,7 +360,7 @@ function findClosingOnlyContainer(tokenCtx, cluster) {
 
 function findOpeningOnlyContainer(tokenCtx, cluster) {
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (!isOpening(tokenCtx.tokens[j])) continue;
+        if (!isOpening( tokenCtx.tokens[j] )) continue;
         const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx !== -1) {
             return { openIdx: j, closeIdx: matchIdx };
@@ -371,7 +371,7 @@ function findOpeningOnlyContainer(tokenCtx, cluster) {
 
 function findMixedContainer(tokenCtx, cluster) {
     for (let j = cluster.startIdx - 1; j >= 0; j--) {
-        if (!isOpening(tokenCtx.tokens[j])) continue;
+        if (!isOpening( tokenCtx.tokens[j] )) continue;
         const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         if (matchIdx > cluster.endIdx) {
@@ -380,7 +380,7 @@ function findMixedContainer(tokenCtx, cluster) {
     }
 
     for (let j = cluster.endIdx + 1; j < tokenCtx.tokens.length; j++) {
-        if (!isClosing(tokenCtx.tokens[j])) continue;
+        if (!isClosing( tokenCtx.tokens[j] )) continue;
         const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         if (matchIdx < cluster.startIdx) {
@@ -397,7 +397,7 @@ function findWidestPairInCluster(tokenCtx, cluster) {
     let bestSpan = -1;
 
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (!isGrouping(tokenCtx.tokens[j])) continue;
+        if (!isGrouping( tokenCtx.tokens[j] )) continue;
         const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         const openIdx = Math.min(j, matchIdx);
@@ -481,13 +481,13 @@ function classifyContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
 // -------------------------------------------------------
 
 function addSpaceAfterIfMissing(tokenCtx, spacingEdits, idx) {
-    if (!hasSpaceAfter(tokenCtx.sourceCode, tokenCtx.tokens[idx])) {
+    if (!hasSpaceAfter( tokenCtx.sourceCode, tokenCtx.tokens[idx] )) {
         spacingEdits.after.add(idx);
     }
 }
 
 function addSpaceBeforeIfMissing(tokenCtx, spacingEdits, idx) {
-    if (!hasSpaceBefore(tokenCtx.sourceCode, tokenCtx.tokens[idx])) {
+    if (!hasSpaceBefore( tokenCtx.sourceCode, tokenCtx.tokens[idx] )) {
         spacingEdits.before.add(idx);
     }
 }
@@ -592,7 +592,7 @@ function markProcessed(processed, cluster) {
 function effectiveClusterCount(tokens, cluster, exemptBrackets) {
     let effectiveCount = cluster.count;
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (exemptBrackets.has(tokens[j])) effectiveCount--;
+        if (exemptBrackets.has( tokens[j] )) effectiveCount--;
     }
     return effectiveCount;
 }
@@ -606,7 +606,7 @@ function endsWithTrailingAfterClose(tokens, cluster) {
     const lastGroupingIdx = findLastClosingIdx(tokens, cluster);
     return cluster.endIdx !== lastGroupingIdx
         && lastGroupingIdx !== -1
-        && isDenseTrailing(tokens[cluster.endIdx]);
+        && isDenseTrailing( tokens[cluster.endIdx] );
 }
 
 // -------------------------------------------------------
@@ -644,7 +644,7 @@ function processMainClusters(tokenCtx, spacingEdits, astMarkers) {
 
     for (let i = 0; i < tokenCtx.tokens.length; i++) {
         if (processed.has(i)) continue;
-        if (!isGrouping(tokenCtx.tokens[i])) continue;
+        if (!isGrouping( tokenCtx.tokens[i] )) continue;
 
         const cluster = adjacentCluster(tokenCtx.tokens, i);
         markProcessed(processed, cluster);
