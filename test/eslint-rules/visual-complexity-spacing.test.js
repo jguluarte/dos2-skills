@@ -350,6 +350,15 @@ describe('visual-complexity-spacing', () => {
                 ),
             ));
         });
+
+        it('adds spaces for single-arg object with inner commas: foo({a: 1, b: 2}); -> foo( {a: 1, b: 2} );', () => {
+            ruleTester.run(RULE, rule, invalid(
+                fix(
+                    'foo({a: 1, b: 2});',
+                    'foo( {a: 1, b: 2} );',
+                ),
+            ));
+        });
     });
 
     // =========================================================

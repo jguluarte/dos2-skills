@@ -647,12 +647,18 @@ export default {
                         && closingGrouping < threshold
                     ) {
                         let hasComma = false;
+                        let depth = 0;
                         for (
                             let j = container.openIdx + 1;
                             j < container.closeIdx;
                             j++
                         ) {
-                            if (tokens[j].value === ',') {
+                            if (isOpening(tokens[j])) depth++;
+                            if (isClosing(tokens[j])) depth--;
+                            if (
+                                depth === 0
+                                && tokens[j].value === ','
+                            ) {
                                 hasComma = true;
                                 break;
                             }
