@@ -2,8 +2,8 @@
  * Tests for the visual-complexity-spacing ESLint rule.
  *
  * This rule adds spaces inside the outermost bracket when
- * 3+ adjacent grouping characters (parens, brackets, braces,
- * plus ; . !) pile up without whitespace.
+ * 3+ grouping characters (parens, brackets, braces, plus
+ * ; . !) pile up without whitespace.
  *
  * Example: foo([[bar]]) becomes foo( [[bar]] ).
  *
@@ -47,14 +47,14 @@ function expectFix(code, output, errors = 2) {
 }
 
 // eslint-disable-next-line @stylistic/max-len
-const FN_NAME_DESC = 'long function names (5+ chars) make spacing optional at statement end';
-const MULTI_ARG_DESC = 'multiple arguments offset closing bracket pile-up';
+const FN_NAME_DESC = 'long names suppress spacing at statement end: callback(obj.method())';
+const MULTI_ARG_DESC = 'multiple arguments absorb closing pile-up';
 
 describe('visual-complexity-spacing', () => {
 
-    describe('nested brackets (3+ adjacent)', () => {
+    describe('brackets that pile up: foo([[bar]])', () => {
 
-        it('skips 2 adjacent brackets', () => {
+        it('skips 2 brackets: foo([bar])', () => {
             const cases = [
                 'foo([bar])',
                 'foo({bar: 1})',
@@ -68,7 +68,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('fixes foo([{key: 1}])', () => {
+        it('fixes foo([{key: 1}]) -> foo( [{key: 1}] )', () => {
             const f = expectFix('foo([{key: 1}])', 'foo( [{key: 1}] )');
             ruleTester.run(RULE, rule, invalid(f));
         });
@@ -78,14 +78,14 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('fixes open boundary cluster', () => {
+        it('fixes ({  pile-up at argument start', () => {
             const code = 'setup({key: fn()}, x)';
             const output = 'setup( {key: fn()}, x )';
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('fixes nested call cluster', () => {
+        it('fixes triple-nested calls', () => {
             const code = "outer(mid(inner()), 'x')";
             const output = "outer( mid(inner()), 'x' )";
             ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
@@ -114,7 +114,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('half-spaced pairs get completed', () => {
+    describe('completing partially-spaced brackets: foo( [[bar]])', () => {
 
         it('fixes missing close space', () => {
             const f = expectFix('foo( [[bar]])', 'foo( [[bar]] )', 1);
@@ -184,7 +184,7 @@ describe('visual-complexity-spacing', () => {
 
     describe('semicolons and trailing punctuation', () => {
 
-        it('skips 2 adjacent + semicolon', () => {
+        it('skips 2 brackets + semicolon', () => {
             ruleTester.run(RULE, rule, valid('foo(bar);'));
         });
 
@@ -206,7 +206,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('concise arrow functions inside calls', () => {
+    describe('concise arrow inside calls: arr.map(x => f(x))', () => {
 
         it('fixes arrow with call body', () => {
             const code = 'skills.forEach(skill => renderCard(skill))';
@@ -273,7 +273,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, valid('wrap(pa.parse(data));'));
         });
 
-        it('skips obj=5, method=4 (path 1)', () => {
+        it('skips obj=5 method=4 (long object absorbs short method)', () => {
             ruleTester.run(RULE, rule, valid('wrap(items.find(data));'));
         });
 
@@ -294,7 +294,7 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('nested bracket access (computed properties)', () => {
+    describe('nested bracket access: obj[arr[index]]', () => {
 
         it('skips short nested access', () => {
             ruleTester.run(RULE, rule, valid('obj[arr[index]]'));
@@ -323,7 +323,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('fixes 3+ bracket stack in multi-arg', () => {
+        it('fixes 3+ pile-up in multi-arg', () => {
             const code = 'foo(data, bar(parse()));';
             const output = 'foo( data, bar(parse()) );';
             const f = expectFix(code, output);
@@ -344,13 +344,13 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
-    describe('empty call inside other brackets', () => {
+    describe('empty call inside other brackets: callbacks[getName()]', () => {
 
         it('skips fn()() (double invocation)', () => {
             ruleTester.run(RULE, rule, valid('fn()()'));
         });
 
-        it('fixes callbacks[getName()]', () => {
+        it('fixes callbacks[getName()] -> callbacks[ getName() ]', () => {
             const code = 'callbacks[getName()]';
             const output = 'callbacks[ getName() ]';
             const f = expectFix(code, output);
@@ -396,7 +396,7 @@ describe('visual-complexity-spacing', () => {
             });
         });
 
-        it('skips 3 adjacent at threshold 4', () => {
+        it('skips 3 pile-up at threshold 4', () => {
             ruleTester.run(RULE, rule, {
                 valid: [{
                     code: 'foo([[bar]])',
