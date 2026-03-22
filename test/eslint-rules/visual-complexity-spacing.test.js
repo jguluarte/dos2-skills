@@ -1,18 +1,22 @@
 /**
  * Tests for the visual-complexity-spacing ESLint rule.
  *
- * This rule adds spaces inside the outermost bracket when 3 or more
- * adjacent grouping characters (parens, brackets, braces, plus ; . !)
- * pile up without whitespace, e.g., foo([[bar]]) becomes foo( [[bar]] ).
+ * This rule adds spaces inside the outermost bracket when
+ * 3+ adjacent grouping characters (parens, brackets, braces,
+ * plus ; . !) pile up without whitespace.
  *
- * It accounts for chained access, template literals, arrow functions,
- * function name length, and argument count to decide when spacing is
- * needed vs when the code is already readable without it.
+ * Example: foo([[bar]]) becomes foo( [[bar]] ).
+ *
+ * It accounts for chained access, template literals, arrow
+ * functions, function name length, and argument count to
+ * decide when spacing is needed vs when the code is already
+ * readable without it.
  */
 
 import { RuleTester } from 'eslint';
 import { describe, it } from 'vitest';
-import rule from '../../.config/eslint-rules/visual-complexity-spacing.js';
+import rule from
+    '../../.config/eslint-rules/visual-complexity-spacing.js';
 
 const RULE = 'visual-complexity-spacing';
 
@@ -31,388 +35,356 @@ function invalid(...cases) {
     return { valid: [], invalid: cases };
 }
 
-// errors = 2 because each fix adds both an open-side space
-// and a close-side space (two separate violations)
-function fix(code, output, errors = 2) {
+/**
+ * Build an invalid test case expecting autofix.
+ *
+ * Default errors = 2 because most fixes insert a space on
+ * both the open side and the close side — each is reported
+ * as a separate violation.
+ */
+function expectFix(code, output, errors = 2) {
     return { code, output, errors };
 }
 
+// eslint-disable-next-line @stylistic/max-len
+const FN_NAME_DESC = 'long function names (5+ chars) make spacing optional at statement end';
+const MULTI_ARG_DESC = 'multiple arguments offset closing bracket pile-up';
+
 describe('visual-complexity-spacing', () => {
 
-    // Principle 1: density threshold
     describe('nested brackets (3+ adjacent)', () => {
 
-        it('allows 2 adjacent: foo([bar])', () => {
-            ruleTester.run(RULE, rule, valid(
+        it('skips 2 adjacent brackets', () => {
+            const cases = [
                 'foo([bar])',
                 'foo({bar: 1})',
                 'arr.push([1, 2])',
-            ));
+            ];
+            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
         });
 
-        it('adds spaces for 3+ adjacent brackets: foo([[bar]]) -> foo( [[bar]] )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo([[bar]])', 'foo( [[bar]] )'),
-            ));
+        it('fixes foo([[bar]]) -> foo( [[bar]] )', () => {
+            const f = expectFix('foo([[bar]])', 'foo( [[bar]] )');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for mixed types: foo([{key: 1}]) -> foo( [{key: 1}] )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo([{key: 1}])', 'foo( [{key: 1}] )'),
-            ));
+        it('fixes foo([{key: 1}])', () => {
+            const f = expectFix('foo([{key: 1}])', 'foo( [{key: 1}] )');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for 3 closing parens: a(b(c())) -> a( b(c()) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('a(b(c()))', 'a( b(c()) )'),
-            ));
+        it('fixes a(b(c())) -> a( b(c()) )', () => {
+            const f = expectFix('a(b(c()))', 'a( b(c()) )');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces at open boundary: setup({key: fn()}, x) -> setup( {key: fn()}, x )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'setup({key: fn()}, x)',
-                    'setup( {key: fn()}, x )',
-                ),
-            ));
+        it('fixes open boundary cluster', () => {
+            const code = 'setup({key: fn()}, x)';
+            const output = 'setup( {key: fn()}, x )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for nested call cluster: outer(mid(inner()), \'x\') -> outer( mid(inner()), \'x\' )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    "outer(mid(inner()), 'x')",
-                    "outer( mid(inner()), 'x' )",
-                ),
-            ));
+        it('fixes nested call cluster', () => {
+            const code = "outer(mid(inner()), 'x')";
+            const output = "outer( mid(inner()), 'x' )";
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
-        it('allows already-spaced expressions: foo( [[bar]] )', () => {
-            ruleTester.run(RULE, rule, valid(
+        it('skips already-spaced expressions', () => {
+            const cases = [
                 'foo( [[bar]] )',
                 'foo( [{key: 1}] )',
                 'foo( bar([baz]) )',
                 'foo( bar() );',
-            ));
+            ];
+            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
         });
 
-        it('adds spaces for new keyword with nested constructors: new Set(new Map([])) -> new Set( new Map([]) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'new Set(new Map([]))',
-                    'new Set( new Map([]) )',
-                ),
-            ));
+        it('fixes new + nested constructor', () => {
+            const code = 'new Set(new Map([]))';
+            const output = 'new Set( new Map([]) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for spread with nested calls: foo(...bar(baz())) -> foo( ...bar(baz()) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'foo(...bar(baz()))',
-                    'foo( ...bar(baz()) )',
-                ),
-            ));
+        it('fixes spread + nested calls', () => {
+            const f = expectFix('foo(...bar(baz()))', 'foo( ...bar(baz()) )');
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Principle 2: single-line balance
-    describe('single-line symmetry', () => {
+    describe('half-spaced pairs get completed', () => {
 
-        it('adds missing space on the unspaced close side: foo( [[bar]]) -> foo( [[bar]] )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo( [[bar]])', 'foo( [[bar]] )', 1),
-            ));
+        it('fixes missing close space', () => {
+            const f = expectFix('foo( [[bar]])', 'foo( [[bar]] )', 1);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds missing space on the unspaced open side: foo([[bar]] ) -> foo( [[bar]] )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo([[bar]] )', 'foo( [[bar]] )', 1),
-            ));
+        it('fixes missing open space', () => {
+            const f = expectFix('foo([[bar]] )', 'foo( [[bar]] )', 1);
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Principle 3: multi-line whitespace provides separation
     describe('multi-line expressions', () => {
 
-        it('allows multi-line calls where line breaks provide separation: foo(\\n  bar()\\n);', () => {
-            ruleTester.run(RULE, rule, valid(
-                'foo(\n    bar()\n);',
-            ));
+        it('skips when line breaks separate', () => {
+            ruleTester.run(RULE, rule, valid('foo(\n    bar()\n);'));
         });
 
-        it('allows multi-line callbacks with block body: setTimeout(() => {\\n  doStuff();\\n});', () => {
-            ruleTester.run(RULE, rule, valid(
-                'setTimeout(() => {\n    doStuff();\n});',
-            ));
+        it('skips callback with block body', () => {
+            const code = 'setTimeout(() => {\n    doStuff();\n});';
+            ruleTester.run(RULE, rule, valid(code));
         });
     });
 
-    // Principle 6: template expression density
     describe('template literal ${} expressions', () => {
 
-        it('allows ${} without brackets or parens: `${name}`', () => {
-            ruleTester.run(RULE, rule, valid(
-                '`${name}`',
-                '`${obj.name}`',
-            ));
+        it('skips ${} without grouping chars', () => {
+            ruleTester.run(RULE, rule, valid('`${name}`', '`${obj.name}`'));
         });
 
-        it('adds spaces when ${} contains a call: `${getName()}` -> `${ getName() }`', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('`${getName()}`', '`${ getName() }`'),
-            ));
+        it('fixes ${} with call inside', () => {
+            const f = expectFix('`${getName()}`', '`${ getName() }`');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces when ${} contains brackets: `${items[0]}` -> `${ items[0] }`', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('`${items[0]}`', '`${ items[0] }`'),
-            ));
+        it('fixes ${} with bracket access', () => {
+            const f = expectFix('`${items[0]}`', '`${ items[0] }`');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces when ${} contains a method call: `${obj().name}` -> `${ obj().name }`', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('`${obj().name}`', '`${ obj().name }`'),
-            ));
+        it('fixes ${} with method call', () => {
+            const f = expectFix('`${obj().name}`', '`${ obj().name }`');
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Principle 5: continuation always needs spacing
-    describe('chained access after nested parens (always spaces)', () => {
+    describe('chained .method() or [index] after nested calls', () => {
 
-        it('adds spaces before .method(): wrap(parse(data)).unwrap() -> wrap( parse(data) ).unwrap()', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'wrap(parse(data)).unwrap()',
-                    'wrap( parse(data) ).unwrap()',
-                ),
-            ));
+        it('fixes .method() after nested parens', () => {
+            const code = 'wrap(parse(data)).unwrap()';
+            const output = 'wrap( parse(data) ).unwrap()';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces before [index]: getMap(buildKey(userId))[0] -> getMap( buildKey(userId) )[0]', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'getMap(buildKey(userId))[0]',
-                    'getMap( buildKey(userId) )[0]',
-                ),
-            ));
+        it('fixes [index] after nested parens', () => {
+            const code = 'getMap(buildKey(userId))[0]';
+            const output = 'getMap( buildKey(userId) )[0]';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('allows already-spaced continuation: wrap( parse(data) ).unwrap()', () => {
-            ruleTester.run(RULE, rule, valid(
-                'wrap( parse(data) ).unwrap()',
-            ));
+        it('skips already-spaced chained access', () => {
+            ruleTester.run(RULE, rule, valid('wrap( parse(data) ).unwrap()'));
         });
     });
 
-    // Principle 8: trailing punctuation density
     describe('semicolons and trailing punctuation', () => {
 
-        it('allows 2 adjacent + semicolon: foo(bar);', () => {
-            ruleTester.run(RULE, rule, valid(
-                'foo(bar);',
-            ));
+        it('skips 2 adjacent + semicolon', () => {
+            ruleTester.run(RULE, rule, valid('foo(bar);'));
         });
 
-        it('adds spaces for )); at statement end: foo(bar()); -> foo( bar() );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo(bar());', 'foo( bar() );'),
-            ));
+        it('fixes )); at statement end', () => {
+            const f = expectFix('foo(bar());', 'foo( bar() );');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for !( prefix: if (!(foo || bar)) -> if ( !(foo || bar) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'if (!(foo || bar)) { }',
-                    'if ( !(foo || bar) ) { }',
-                ),
-            ));
+        it('fixes !( prefix in condition', () => {
+            const code = 'if (!(foo || bar)) { }';
+            const output = 'if ( !(foo || bar) ) { }';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for await with short nested call: await foo(bar()); -> await foo( bar() );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'await foo(bar());',
-                    'await foo( bar() );',
-                ),
-            ));
+        it('fixes await with short nested call', () => {
+            const f = expectFix('await foo(bar());', 'await foo( bar() );');
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Principle 9: concise arrow body density
     describe('concise arrow functions inside calls', () => {
 
-        it('adds spaces for arrow with call body: forEach(skill => renderCard(skill)) -> forEach( skill => renderCard(skill) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'skills.forEach(skill => renderCard(skill))',
-                    'skills.forEach( skill => renderCard(skill) )',
-                ),
-            ));
+        it('fixes arrow with call body', () => {
+            const code = 'skills.forEach(skill => renderCard(skill))';
+            const output = 'skills.forEach( skill => renderCard(skill) )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
-        it('allows block body arrows: foo(() => { bar() })', () => {
-            ruleTester.run(RULE, rule, valid(
+        it('skips block body arrows', () => {
+            const cases = [
                 'foo(() => { bar() })',
                 'foo(()=>{ bar(); });',
-            ));
+            ];
+            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
         });
 
-        it('allows block body function expressions: foo(function(){ bar(); });', () => {
-            ruleTester.run(RULE, rule, valid(
+        it('skips block body function expressions', () => {
+            const cases = [
                 'foo(function(){ bar(); });',
                 'foo(function handler(){ bar(); });',
-            ));
+            ];
+            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
         });
 
-        it('adds spaces for each concise arrow call in chain: arr.map(x => f(x)).filter(y => g(y)) -> arr.map( x => f(x) ).filter( y => g(y) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'arr.map(x => f(x)).filter(y => g(y))',
-                    'arr.map( x => f(x) ).filter( y => g(y) )',
-                    4,
-                ),
-            ));
-        });
-    });
-
-    // Principle 4: visual anchoring suppression
-    describe('long identifiers reduce spacing need (statement end only)', () => {
-
-        it('allows long method name at statement end: callback(obj.method());', () => {
-            ruleTester.run(RULE, rule, valid(
-                'callback(obj.method());',
-            ));
+        it('fixes each arrow call in a chain', () => {
+            const code = 'arr.map(x => f(x)).filter(y => g(y))';
+            const output = 'arr.map( x => f(x) ).filter( y => g(y) )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output, 4)));
         });
 
-        it('allows long callee at statement end: getData(parseResponse(result));', () => {
-            ruleTester.run(RULE, rule, valid(
-                'getData(parseResponse(result));',
-            ));
-        });
-
-        it('adds spaces for short names at statement end: foo(bar(x)); -> foo( bar(x) );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo(bar(x));', 'foo( bar(x) );'),
-            ));
-        });
-
-        it('adds spaces for short method at statement end: wrap(ab.cdef(data)); -> wrap( ab.cdef(data) );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'wrap(ab.cdef(data));',
-                    'wrap( ab.cdef(data) );',
-                ),
-            ));
-        });
-
-        it('prioritizes inner callee over outer: callback(fn(x)); -> callback( fn(x) );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'callback(fn(x));',
-                    'callback( fn(x) );',
-                ),
-            ));
-        });
-
-        it('allows long method (5+ chars) with short object: wrap(pa.parse(data));', () => {
-            ruleTester.run(RULE, rule, valid(
-                'wrap(pa.parse(data));',
-            ));
+        it('skips arrow with non-call body', () => {
+            ruleTester.run(RULE, rule, valid('arr.map(x => x.name)'));
         });
     });
 
-    // Principle 7: bracket access inversion
+    describe(FN_NAME_DESC, () => {
+
+        it('skips long obj.method() name', () => {
+            ruleTester.run(RULE, rule, valid('callback(obj.method());'));
+        });
+
+        it('skips long callee name (8+ chars)', () => {
+            const cases = valid('getData(parseResponse(result));');
+            ruleTester.run(RULE, rule, cases);
+        });
+
+        it('fixes short names at statement end', () => {
+            const f = expectFix('foo(bar(x));', 'foo( bar(x) );');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes short obj.method at statement end', () => {
+            const code = 'wrap(ab.cdef(data));';
+            const output = 'wrap( ab.cdef(data) );';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes short inner callee despite long outer', () => {
+            const f = expectFix('callback(fn(x));', 'callback( fn(x) );');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('skips 5+ char method with short object', () => {
+            ruleTester.run(RULE, rule, valid('wrap(pa.parse(data));'));
+        });
+
+        it('skips obj=5, method=4 (path 1)', () => {
+            ruleTester.run(RULE, rule, valid('wrap(items.find(data));'));
+        });
+
+        it('fixes obj=4, method=4 (too short)', () => {
+            const code = 'wrap(item.find(data));';
+            const output = 'wrap( item.find(data) );';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('skips inner callee exactly 8 chars', () => {
+            ruleTester.run(RULE, rule, valid('a(abcdefgh(x));'));
+        });
+
+        it('fixes inner callee 7 chars (too short)', () => {
+            const f = expectFix('a(abcdefg(x));', 'a( abcdefg(x) );');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+    });
+
     describe('nested bracket access (computed properties)', () => {
 
-        it('allows short nested access: obj[arr[index]]', () => {
-            ruleTester.run(RULE, rule, valid(
-                'obj[arr[index]]',
-            ));
+        it('skips short nested access', () => {
+            ruleTester.run(RULE, rule, valid('obj[arr[index]]'));
         });
 
-        it('allows long outer name: obj[longArrayName[index]]', () => {
-            ruleTester.run(RULE, rule, valid(
-                'obj[longArrayName[index]]',
-            ));
+        it('skips long outer name (10+ chars)', () => {
+            ruleTester.run(RULE, rule, valid('obj[longArrayName[index]]'));
         });
 
-        it('adds spaces for long inner content: obj[arr[longPropertyName]] -> obj[ arr[longPropertyName] ]', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'obj[arr[longPropertyName]]',
-                    'obj[ arr[longPropertyName] ]',
-                ),
-            ));
+        it('fixes long inner content', () => {
+            const code = 'obj[arr[longPropertyName]]';
+            const output = 'obj[ arr[longPropertyName] ]';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Principle 13: multi-arg absorption
-    describe('multiple arguments absorb trailing-only density', () => {
+    describe(MULTI_ARG_DESC, () => {
 
-        it('allows multi-arg with nested call at end: foo(data, parse());', () => {
-            ruleTester.run(RULE, rule, valid(
-                'foo(data, parse());',
-            ));
+        it('skips multi-arg with nested call', () => {
+            ruleTester.run(RULE, rule, valid('foo(data, parse());'));
         });
 
-        it('adds spaces for single-arg: foo(parse()); -> foo( parse() );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix('foo(parse());', 'foo( parse() );'),
-            ));
+        it('fixes single-arg nested call', () => {
+            const f = expectFix('foo(parse());', 'foo( parse() );');
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces when 3+ real brackets stack in multi-arg: foo(data, bar(parse())); -> foo( data, bar(parse()) );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'foo(data, bar(parse()));',
-                    'foo( data, bar(parse()) );',
-                ),
-            ));
+        it('fixes 3+ bracket stack in multi-arg', () => {
+            const code = 'foo(data, bar(parse()));';
+            const output = 'foo( data, bar(parse()) );';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('adds spaces for ])) in multi-arg: buildSummaryText(null, new Set([WARFARE, NECROMANCER])) -> buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))',
-                    'buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )',
-                ),
-            ));
+        it('fixes ])) in multi-arg call', () => {
+            /* eslint-disable @stylistic/max-len */
+            const code = 'buildSummaryText(null, new Set([WARFARE, NECROMANCER]))';
+            const output = 'buildSummaryText( null, new Set([WARFARE, NECROMANCER]) )';
+            /* eslint-enable @stylistic/max-len */
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
         });
 
-        it('adds spaces for single-arg object with inner commas: foo({a: 1, b: 2}); -> foo( {a: 1, b: 2} );', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'foo({a: 1, b: 2});',
-                    'foo( {a: 1, b: 2} );',
-                ),
-            ));
+        it('fixes single-arg object with commas', () => {
+            const f = expectFix('foo({a: 1, b: 2});', 'foo( {a: 1, b: 2} );');
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
-    // Edge cases: comments, optional chaining, custom threshold
+    describe('empty call inside other brackets', () => {
+
+        it('skips fn()() (double invocation)', () => {
+            ruleTester.run(RULE, rule, valid('fn()()'));
+        });
+
+        it('fixes callbacks[getName()]', () => {
+            const code = 'callbacks[getName()]';
+            const output = 'callbacks[ getName() ]';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+    });
+
+    describe('real-world patterns', () => {
+
+        it('fixes Promise.all with fetch calls', () => {
+            const code = 'Promise.all([fetch(a), fetch(b)])';
+            const output = 'Promise.all( [fetch(a), fetch(b)] )';
+            ruleTester.run(RULE, rule, invalid(expectFix(code, output)));
+        });
+    });
+
     describe('comments between grouping characters', () => {
 
-        it('allows comment breaking adjacency: foo(bar()/* comment */)', () => {
-            ruleTester.run(RULE, rule, valid(
-                'foo(bar()/* comment */)',
-            ));
+        it('skips when comment breaks adjacency', () => {
+            ruleTester.run(RULE, rule, valid('foo(bar()/* comment */)'));
         });
     });
 
     describe('optional chaining', () => {
 
-        it('adds spaces for closing )) density despite ?.: foo?.(bar?.()) -> foo?.( bar?.() )', () => {
-            ruleTester.run(RULE, rule, invalid(
-                fix(
-                    'foo?.(bar?.())',
-                    'foo?.( bar?.() )',
-                ),
-            ));
+        it('fixes )) pile-up with ?.', () => {
+            const f = expectFix('foo?.(bar?.())', 'foo?.( bar?.() )');
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
     describe('custom threshold option', () => {
 
-        it('triggers at threshold 2: foo([bar]) -> foo( [bar] ) with {threshold: 2}', () => {
+        it('fixes at threshold 2', () => {
             ruleTester.run(RULE, rule, {
                 valid: [],
                 invalid: [{
@@ -424,7 +396,7 @@ describe('visual-complexity-spacing', () => {
             });
         });
 
-        it('allows 3 adjacent at threshold 4: foo([[bar]]) with {threshold: 4}', () => {
+        it('skips 3 adjacent at threshold 4', () => {
             ruleTester.run(RULE, rule, {
                 valid: [{
                     code: 'foo([[bar]])',
