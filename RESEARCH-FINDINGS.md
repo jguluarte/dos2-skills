@@ -745,25 +745,29 @@ setup( {key: fn()}, x )   // fn()}  = ( ) } = 3 mixed
 outer( mid(inner()), 'x' ) // inner()) = ( ) ) = 3 mixed
 ```
 
-### 9.2 Dense trailing: `;` is soft, `.` is hard
+### 9.2 Dense trailing and continuation vs termination
 
-Both `;` and `.` count as dense trailing characters. But they behave
-differently:
+The density character set is `(){}[]!.;`. Characters beyond grouping
+chars that contribute when adjacent. `,` does NOT count (`comma-spacing`
+adds a space, breaking the cluster). Most operators don't count either
+(`space-infix-ops` adds spaces). This set is language-specific.
 
-- **`.` is a hard trigger** — `)).` ALWAYS triggers spacing regardless
-  of content length. The reader must parse past the density to continue
-  reading the chained call.
-- **`;` is a soft trigger** — `));` can be suppressed by long content.
-  The line ends at the density; nothing more to parse.
+The critical distinction for content-aware suppression is **not** the
+specific trailing character — it's whether the expression **continues**
+or **terminates** after the dense cluster:
+
+- **Continuation** (`.method()`, `[prop]`, `(args)`) — the reader must
+  parse through the density to keep reading. NOT suppressible by content.
+- **Termination** (`;`, end-of-line) — the reader is done. Density at
+  the end of a reading path is more tolerable. Suppressible by long
+  content.
 
 ```js
-wrap( parse(data) ).unwrap()       // )). → always triggers
-arr.filter( x => fn(x) ).map(cb)  // )). → always triggers
-callback(obj.method());            // )); → suppressed, long content
+wrap( parse(data) ).unwrap()       // )). continuation → always spaced
+getMap( buildKey(userId) )[0];     // ))[ continuation → always spaced
+callback(obj.method());            // )); termination, long content → no space
+foo( bar(x) );                     // )); termination, short content → spaced
 ```
-
-**`,` does NOT count as dense trailing.** `comma-spacing` always adds
-a space after commas, which breaks the cluster: `), ` is not dense.
 
 ### 9.3 Content-aware suppression for `));`
 
@@ -1000,7 +1004,7 @@ necessary but not sufficient. The rule needs:
 1. **Gap 7** — Balance fix (low risk, immediate bug fix)
 2. **Gap 1** — Mixed-direction counting (foundational refactor)
 3. **Gap 4** — Template literal sub-rule (independent, simple)
-4. **Gap 2** — Dense trailing `.` hard/soft distinction
+4. **Gap 2** — Dense trailing + continuation vs termination detection
 5. **Gap 6** — Arrow function detection (AST pre-pass)
 6. **Gap 3** — Content-aware suppression (highest complexity)
 7. **Gap 5** — Bracket access inversion (depends on Gap 3)
