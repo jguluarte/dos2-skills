@@ -56,6 +56,19 @@ function updateFilterSummary() {
 }
 
 // ===========================
+// UI Sync
+// ===========================
+
+function syncUI({ updatePrimary = false } = {}) {
+    if (updatePrimary) updatePrimaryFilterButtons();
+    renderSecondaryFilters();
+    applyFilters();
+    saveFiltersToURL();
+    updateFilterSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===========================
 // UI Interactions
 // ===========================
 
@@ -68,11 +81,7 @@ function togglePrimaryFilter(tree) {
             cleanSecondaryFilters(primaryFilter, secondaryFilters);
     }
 
-    updatePrimaryFilterButtons();
-    renderSecondaryFilters();
-    applyFilters();
-    saveFiltersToURL();
-    updateFilterSummary();
+    syncUI({ updatePrimary: true });
 }
 
 function toggleSecondaryFilter(tree) {
@@ -82,10 +91,7 @@ function toggleSecondaryFilter(tree) {
         secondaryFilters.add(tree);
     }
 
-    renderSecondaryFilters();
-    applyFilters();
-    saveFiltersToURL();
-    updateFilterSummary();
+    syncUI();
 }
 
 function renderSecondaryFilters() {
@@ -117,11 +123,7 @@ function updatePrimaryFilterButtons() {
 function clearFilters() {
     primaryFilter = null;
     secondaryFilters.clear();
-    updatePrimaryFilterButtons();
-    renderSecondaryFilters();
-    applyFilters();
-    saveFiltersToURL();
-    updateFilterSummary();
+    syncUI({ updatePrimary: true });
 }
 
 // ===========================
@@ -188,7 +190,6 @@ function applyFilters() {
     });
 
     noResultsEl.classList.toggle('hidden', totalVisible > 0);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function initializePrimaryFilters() {
@@ -288,3 +289,5 @@ async function initialize() {
 }
 
 document.addEventListener('DOMContentLoaded', initialize);
+
+export { applyFilters, syncUI };
