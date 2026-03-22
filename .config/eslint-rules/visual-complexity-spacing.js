@@ -13,23 +13,13 @@ const TEMPLATE = 'Template';
 const TEMPLATE_LIT = 'TemplateLiteral';
 
 function isOpening(token) {
-    if (token.type === PUNCTUATOR && OPENING.has(token.value)) {
-        return true;
-    }
-    if (token.type === TEMPLATE && token.value.endsWith('${')) {
-        return true;
-    }
-    return false;
+    return (token.type === PUNCTUATOR && OPENING.has(token.value))
+        || (token.type === TEMPLATE && token.value.endsWith('${'));
 }
 
 function isClosing(token) {
-    if (token.type === PUNCTUATOR && CLOSING.has(token.value)) {
-        return true;
-    }
-    if (token.type === TEMPLATE && token.value.startsWith('}')) {
-        return true;
-    }
-    return false;
+    return (token.type === PUNCTUATOR && CLOSING.has(token.value))
+        || (token.type === TEMPLATE && token.value.startsWith('}'));
 }
 
 function isGrouping(token) {
@@ -232,22 +222,13 @@ function checkContentSuppression(
     // Fall back to outer callee check only if no inner
     // callee pattern was found inside the brackets.
     if (!foundInnerCallee && openIdx > 0) {
-        const callee = tokens[openIdx - 1];
-        const calleeLen = callee.value.length;
-
-        // Member expression: obj.method
-        const hasDotBefore = openIdx > 2
-            && tokens[openIdx - 2].value === '.';
-
-        if (hasDotBefore) {
-            const obj = tokens[openIdx - 3];
-            const objLen = obj ? obj.value.length : 0;
-            if (objLen >= 5 && calleeLen >= 4) return true;
-            if (calleeLen >= 5) return true;
-
-        } else if (calleeLen >= 8 || contentLen >= 15) {
+        if (isMemberCalleeAnchored(tokens, openIdx)) {
             return true;
         }
+        if (isSimpleCalleeAnchored(tokens, openIdx, 8)) {
+            return true;
+        }
+        if (contentLen >= 15) return true;
     }
 
     return false;
@@ -385,11 +366,10 @@ function findOutermostContainer(tokens, cluster) {
 }
 
 /**
- * Exempt a bracket token pair from cluster counting if
- * both the token and its value match expectations.
+ * Exempt a bracket token from cluster counting if
+ * it exists and its value matches.
  */
-function exemptIfMatch(sourceCode, node, getter, value, set) {
-    const token = getter.call(sourceCode, node);
+function exemptIfMatch(token, value, set) {
     if (token && token.value === value) set.add(token);
 }
 
@@ -399,21 +379,13 @@ function exemptIfMatch(sourceCode, node, getter, value, set) {
  */
 function exemptBlockBodyBrackets(
         sourceCode, openParen, node, exemptBrackets) {
-    if (openParen && openParen.value === '(') {
-        exemptBrackets.add(openParen);
-    }
+    exemptIfMatch(openParen, '(', exemptBrackets);
     const closeParen = sourceCode.getTokenBefore(node.body);
-    if (closeParen && closeParen.value === ')') {
-        exemptBrackets.add(closeParen);
-    }
-    exemptIfMatch(
-        sourceCode, node.body,
-        sourceCode.getFirstToken, '{', exemptBrackets
-    );
-    exemptIfMatch(
-        sourceCode, node.body,
-        sourceCode.getLastToken, '}', exemptBrackets
-    );
+    exemptIfMatch(closeParen, ')', exemptBrackets);
+    const openBrace = sourceCode.getFirstToken(node.body);
+    exemptIfMatch(openBrace, '{', exemptBrackets);
+    const closeBrace = sourceCode.getLastToken(node.body);
+    exemptIfMatch(closeBrace, '}', exemptBrackets);
 }
 
 /**
@@ -620,10 +592,10 @@ export default {
             [TEMPLATE_LIT](node) {
                 for (const expr of node.expressions) {
                     const exprTokens = sourceCode.getTokens(expr);
-                    const hasGrp = exprTokens.some(
-                        t => isGrouping(t)
+                    const hasGrouping = exprTokens.some(
+                        (t) => isGrouping(t)
                     );
-                    if (!hasGrp) continue;
+                    if (!hasGrouping) continue;
                     const before = sourceCode.getTokenBefore(expr);
                     const after = sourceCode.getTokenAfter(expr);
                     if (before) templateExprSpaced.add(before);
@@ -640,7 +612,7 @@ export default {
                     if (!isWrappedArrow) continue;
 
                     const openParen = sourceCode.getTokenAfter(
-                        node.callee, t => t.value === '('
+                        node.callee, (t) => t.value === '('
                     );
                     const closeParen = sourceCode.getLastToken(node);
                     if (openParen) {
@@ -672,7 +644,7 @@ export default {
                 const firstToken = sourceCode.getFirstToken(node);
                 // Skip `function` keyword to find the (
                 const openParen = sourceCode.getTokenAfter(
-                    firstToken, t => t.value === '('
+                    firstToken, (t) => t.value === '('
                 );
                 exemptBlockBodyBrackets(
                     sourceCode, openParen, node, exemptBrackets
@@ -683,16 +655,10 @@ export default {
             [MEMBER_EXPR](node) {
                 if (!node.computed) return;
                 const prop = node.property;
-                exemptIfMatch(
-                    sourceCode, prop,
-                    sourceCode.getTokenBefore, '[',
-                    computedMemberBrackets
-                );
-                exemptIfMatch(
-                    sourceCode, prop,
-                    sourceCode.getTokenAfter, ']',
-                    computedMemberBrackets
-                );
+                const open = sourceCode.getTokenBefore(prop);
+                exemptIfMatch(open, '[', computedMemberBrackets);
+                const close = sourceCode.getTokenAfter(prop);
+                exemptIfMatch(close, ']', computedMemberBrackets);
             },
 
             'Program:exit'() {
@@ -822,23 +788,23 @@ function processMainClusters(
         const container = findOutermostContainer(tokens, cluster);
         if (!container) continue;
 
-        // --- Multi-arg suppression (Principle 13) ---
+        // --- Suppression checks (Principles 4, 13) ---
+        // Both multi-arg and content suppression share the
+        // same precondition: termination with trailing density
+        // where the actual grouping chars alone don't meet
+        // the threshold.
         const closingGrouping = countClosingInCluster(
             tokens, cluster
         );
-        const suppressMultiArg = !isContinuation
+        const canSuppress = !isContinuation
             && hasDenseTrailing
             && closingGrouping < threshold;
-        if (suppressMultiArg && hasTopLevelComma(tokens, container)) {
+
+        if (canSuppress && hasTopLevelComma(tokens, container)) {
             continue;
         }
 
-        // --- Gap 6: content-aware suppression ---
-        const suppressContent = !isContinuation
-            && hasDenseTrailing
-            && closingGrouping < threshold
-            && lastGroupingIdx !== -1;
-        if (suppressContent) {
+        if (canSuppress) {
             const openToken = tokens[container.openIdx];
             const closeToken = tokens[container.closeIdx];
             const contentLen = closeToken.range[0]
