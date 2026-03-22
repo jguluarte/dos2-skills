@@ -562,6 +562,93 @@ describe('visual-complexity-spacing', () => {
         });
     });
 
+    describe('real-world patterns', () => {
+
+        it('fixes Object.keys chained: Object.keys(getConfig()).forEach(fn)', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            const code = 'Object.keys(getConfig()).forEach(fn)';
+            // eslint-disable-next-line @stylistic/max-len
+            const output = 'Object.keys( getConfig() ).forEach(fn)';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes Array.from with nested constructor', () => {
+            const code = 'Array.from(new Set([...items]))';
+            const output =
+                'Array.from( new Set([...items]) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes require(resolve()) with semicolon', () => {
+            const code = "require(resolve('./path'));";
+            const output = "require( resolve('./path') );";
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes assert(equal()) with semicolon', () => {
+            const code = 'assert(equal(a, b));';
+            const output = 'assert( equal(a, b) );';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes ternary with nested call', () => {
+            const code = 'const x = cond ? fn(bar()) : baz';
+            const output =
+                'const x = cond ? fn( bar() ) : baz';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes arrow with destructured param', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            const code = 'arr.forEach(({name}) => process(name))';
+            // eslint-disable-next-line @stylistic/max-len
+            const output = 'arr.forEach( ({name}) => process(name) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes tagged template with nested call', () => {
+            const f = expectFix(
+                'html`${fn(bar())}`',
+                'html`${ fn(bar()) }`'
+            );
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('skips JSON.parse(JSON.stringify(obj)) — inner callee anchors', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('JSON.parse(JSON.stringify(obj))')
+            );
+        });
+
+        it('skips console.log(obj.method()) — member callee anchors', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('console.log(obj.method());')
+            );
+        });
+
+        it('skips return fn(bar()) inside function body', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('function x() { return fn(bar()); }')
+            );
+        });
+
+        it('skips assert(equal(a, b)) without semicolon — below threshold', () => {
+            ruleTester.run(
+                RULE, rule,
+                valid('assert(equal(a, b))')
+            );
+        });
+    });
+
     describe('comments between grouping characters', () => {
 
         it('skips when comment breaks adjacency', () => {
@@ -640,6 +727,14 @@ describe('visual-complexity-spacing', () => {
                 '`${ fn(bar()) }`',
                 'arr.forEach( (x, i) => process(x) )',
                 'race( x => fetch(x), y => cache(y) )',
+                'Object.keys( getConfig() ).forEach(fn)',
+                'Array.from( new Set([...items]) )',
+                "require( resolve('./path') );",
+                'assert( equal(a, b) );',
+                'const x = cond ? fn( bar() ) : baz',
+                // eslint-disable-next-line @stylistic/max-len
+                'arr.forEach( ({name}) => process(name) )',
+                'html`${ fn(bar()) }`',
             ];
             ruleTester.run(RULE, rule, valid(...fixOutputs));
         });
