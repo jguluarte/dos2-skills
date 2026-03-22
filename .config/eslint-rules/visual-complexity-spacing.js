@@ -281,18 +281,18 @@ function outerCalleeAnchors(tokens, openIdx, contentLen) {
  * anchoring to suppress spacing. Checks inner callees first
  * (what the eye parses between brackets), falls back to outer.
  */
-function contentSuppressesSpacing(ctx, openIdx, closeIdx) {
-    const contentLen = ctx.tokens[closeIdx].range[0]
-        - ctx.tokens[openIdx].range[1];
+function contentSuppressesSpacing(tokenCtx, openIdx, closeIdx) {
+    const contentLen = tokenCtx.tokens[closeIdx].range[0]
+        - tokenCtx.tokens[openIdx].range[1];
 
     const innerIdx = findInnerCallee(
-        ctx.tokens, ctx.bracketMap, openIdx, closeIdx
+        tokenCtx.tokens, tokenCtx.bracketMap, openIdx, closeIdx
     );
     if (innerIdx !== -1) {
-        return innerCalleeAnchors(ctx.tokens, innerIdx);
+        return innerCalleeAnchors(tokenCtx.tokens, innerIdx);
     }
 
-    return outerCalleeAnchors(ctx.tokens, openIdx, contentLen);
+    return outerCalleeAnchors(tokenCtx.tokens, openIdx, contentLen);
 }
 
 // -------------------------------------------------------
@@ -338,10 +338,10 @@ function hasTopLevelComma(tokens, container) {
 // Container finding — by cluster composition mode
 // -------------------------------------------------------
 
-function findClosingOnlyContainer(ctx, cluster) {
+function findClosingOnlyContainer(tokenCtx, cluster) {
     for (let j = cluster.endIdx; j >= cluster.startIdx; j--) {
-        if (!isClosing(ctx.tokens[j])) continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, j);
+        if (!isClosing(tokenCtx.tokens[j])) continue;
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx !== -1) {
             return { openIdx: matchIdx, closeIdx: j };
         }
@@ -349,10 +349,10 @@ function findClosingOnlyContainer(ctx, cluster) {
     return null;
 }
 
-function findOpeningOnlyContainer(ctx, cluster) {
+function findOpeningOnlyContainer(tokenCtx, cluster) {
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (!isOpening(ctx.tokens[j])) continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, j);
+        if (!isOpening(tokenCtx.tokens[j])) continue;
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx !== -1) {
             return { openIdx: j, closeIdx: matchIdx };
         }
@@ -360,19 +360,19 @@ function findOpeningOnlyContainer(ctx, cluster) {
     return null;
 }
 
-function findMixedContainer(ctx, cluster) {
+function findMixedContainer(tokenCtx, cluster) {
     for (let j = cluster.startIdx - 1; j >= 0; j--) {
-        if (!isOpening(ctx.tokens[j])) continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, j);
+        if (!isOpening(tokenCtx.tokens[j])) continue;
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         if (matchIdx > cluster.endIdx) {
             return { openIdx: j, closeIdx: matchIdx };
         }
     }
 
-    for (let j = cluster.endIdx + 1; j < ctx.tokens.length; j++) {
-        if (!isClosing(ctx.tokens[j])) continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, j);
+    for (let j = cluster.endIdx + 1; j < tokenCtx.tokens.length; j++) {
+        if (!isClosing(tokenCtx.tokens[j])) continue;
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         if (matchIdx < cluster.startIdx) {
             return { openIdx: matchIdx, closeIdx: j };
@@ -382,14 +382,14 @@ function findMixedContainer(ctx, cluster) {
     return null;
 }
 
-function findWidestPairInCluster(ctx, cluster) {
+function findWidestPairInCluster(tokenCtx, cluster) {
     let bestOpenIdx = -1;
     let bestCloseIdx = -1;
     let bestSpan = -1;
 
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
-        if (!isGrouping(ctx.tokens[j])) continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, j);
+        if (!isGrouping(tokenCtx.tokens[j])) continue;
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, j);
         if (matchIdx === -1) continue;
         const openIdx = Math.min(j, matchIdx);
         const closeIdx = Math.max(j, matchIdx);
@@ -405,21 +405,21 @@ function findWidestPairInCluster(ctx, cluster) {
     return { openIdx: bestOpenIdx, closeIdx: bestCloseIdx };
 }
 
-function findOutermostContainer(ctx, cluster) {
+function findOutermostContainer(tokenCtx, cluster) {
     const { hasOpening, hasClosing } = clusterComposition(
-        ctx.tokens, cluster
+        tokenCtx.tokens, cluster
     );
 
     if (hasClosing && !hasOpening) {
-        return findClosingOnlyContainer(ctx, cluster);
+        return findClosingOnlyContainer(tokenCtx, cluster);
     }
 
     if (hasOpening && !hasClosing) {
-        return findOpeningOnlyContainer(ctx, cluster);
+        return findOpeningOnlyContainer(tokenCtx, cluster);
     }
 
-    return findMixedContainer(ctx, cluster)
-        || findWidestPairInCluster(ctx, cluster);
+    return findMixedContainer(tokenCtx, cluster)
+        || findWidestPairInCluster(tokenCtx, cluster);
 }
 
 // -------------------------------------------------------
@@ -471,40 +471,40 @@ function classifyContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
 // Spacing application
 // -------------------------------------------------------
 
-function addSpaceAfterIfMissing(ctx, results, idx) {
-    if (!hasSpaceAfter(ctx.sourceCode, ctx.tokens[idx])) {
-        results.after.add(idx);
+function addSpaceAfterIfMissing(tokenCtx, spacingEdits, idx) {
+    if (!hasSpaceAfter(tokenCtx.sourceCode, tokenCtx.tokens[idx])) {
+        spacingEdits.after.add(idx);
     }
 }
 
-function addSpaceBeforeIfMissing(ctx, results, idx) {
-    if (!hasSpaceBefore(ctx.sourceCode, ctx.tokens[idx])) {
-        results.before.add(idx);
+function addSpaceBeforeIfMissing(tokenCtx, spacingEdits, idx) {
+    if (!hasSpaceBefore(tokenCtx.sourceCode, tokenCtx.tokens[idx])) {
+        spacingEdits.before.add(idx);
     }
 }
 
-function applyClusterSpacing(ctx, results, cluster, container) {
-    const openToken = ctx.tokens[container.openIdx];
-    const closeToken = ctx.tokens[container.closeIdx];
+function applyClusterSpacing(tokenCtx, spacingEdits, cluster, container) {
+    const openToken = tokenCtx.tokens[container.openIdx];
+    const closeToken = tokenCtx.tokens[container.closeIdx];
     const sameLine = isTokenOnSameLine(openToken, closeToken);
     const { hasOpening, hasClosing } = clusterComposition(
-        ctx.tokens, cluster
+        tokenCtx.tokens, cluster
     );
 
     if (hasClosing) {
-        addSpaceBeforeIfMissing(ctx, results, container.closeIdx);
+        addSpaceBeforeIfMissing(tokenCtx, spacingEdits, container.closeIdx);
     }
     if (hasOpening) {
-        addSpaceAfterIfMissing(ctx, results, container.openIdx);
+        addSpaceAfterIfMissing(tokenCtx, spacingEdits, container.openIdx);
     }
 
     if (!sameLine) return;
 
     if (hasClosing && !hasOpening) {
-        addSpaceAfterIfMissing(ctx, results, container.openIdx);
+        addSpaceAfterIfMissing(tokenCtx, spacingEdits, container.openIdx);
     }
     if (hasOpening && !hasClosing) {
-        addSpaceBeforeIfMissing(ctx, results, container.closeIdx);
+        addSpaceBeforeIfMissing(tokenCtx, spacingEdits, container.closeIdx);
     }
 }
 
@@ -512,20 +512,20 @@ function applyClusterSpacing(ctx, results, cluster, container) {
 // Suppression policy — extracted from processMainClusters
 // -------------------------------------------------------
 
-function shouldSuppressSpacing(ctx, info, container) {
+function shouldSuppressSpacing(tokenCtx, classification, container) {
     const closingGrouping = countClosingInCluster(
-        ctx.tokens, info.cluster
+        tokenCtx.tokens, classification.cluster
     );
-    const canSuppress = !info.isContinuation
-        && info.hasDenseTrailing
-        && closingGrouping < ctx.threshold;
+    const canSuppress = !classification.isContinuation
+        && classification.hasDenseTrailing
+        && closingGrouping < tokenCtx.threshold;
 
     if (!canSuppress) return false;
 
-    if (hasTopLevelComma(ctx.tokens, container)) return true;
+    if (hasTopLevelComma(tokenCtx.tokens, container)) return true;
 
     return contentSuppressesSpacing(
-        ctx, container.openIdx, container.closeIdx
+        tokenCtx, container.openIdx, container.closeIdx
     );
 }
 
@@ -556,17 +556,17 @@ function innerNameAnchors(tokens, bracketIdx, closeIdx) {
         && firstInner.value.length >= MIN_BRACKET_INNER_LEN;
 }
 
-function checkBracketAccessSpacing(ctx, results, i, matchIdx) {
-    if (!containsNestedBrackets(ctx.tokens, i, matchIdx)) return;
-    if (outerNameAnchors(ctx.tokens, i)) return;
-    if (innerNameAnchors(ctx.tokens, i, matchIdx)) return;
+function checkBracketAccessSpacing(tokenCtx, spacingEdits, i, matchIdx) {
+    if (!containsNestedBrackets(tokenCtx.tokens, i, matchIdx)) return;
+    if (outerNameAnchors(tokenCtx.tokens, i)) return;
+    if (innerNameAnchors(tokenCtx.tokens, i, matchIdx)) return;
 
-    const contentLen = ctx.tokens[matchIdx].range[0]
-        - ctx.tokens[i].range[1];
+    const contentLen = tokenCtx.tokens[matchIdx].range[0]
+        - tokenCtx.tokens[i].range[1];
 
     if (contentLen >= MIN_CONTENT_LEN_FOR_SUPPRESSION) {
-        addSpaceAfterIfMissing(ctx, results, i);
-        addSpaceBeforeIfMissing(ctx, results, matchIdx);
+        addSpaceAfterIfMissing(tokenCtx, spacingEdits, i);
+        addSpaceBeforeIfMissing(tokenCtx, spacingEdits, matchIdx);
     }
 }
 
@@ -604,13 +604,13 @@ function endsWithTrailingAfterClose(tokens, cluster) {
 // Main cluster detection loop
 // -------------------------------------------------------
 
-function classifyCluster(ctx, cluster) {
+function classifyCluster(tokenCtx, cluster) {
     const hasDenseTrailing = endsWithTrailingAfterClose(
-        ctx.tokens, cluster
+        tokenCtx.tokens, cluster
     );
-    const afterCluster = tokenAfterCluster(ctx.tokens, cluster);
+    const afterCluster = tokenAfterCluster(tokenCtx.tokens, cluster);
     const isContinuation = classifyContinuation(
-        ctx.tokens, cluster, hasDenseTrailing, afterCluster
+        tokenCtx.tokens, cluster, hasDenseTrailing, afterCluster
     );
     return { cluster, hasDenseTrailing, isContinuation };
 }
@@ -619,33 +619,33 @@ function containerIsEmpty(container) {
     return container.closeIdx === container.openIdx + 1;
 }
 
-function processCluster(ctx, results, cluster) {
-    const info = classifyCluster(ctx, cluster);
-    const container = findOutermostContainer(ctx, cluster);
+function processCluster(tokenCtx, spacingEdits, cluster) {
+    const classification = classifyCluster(tokenCtx, cluster);
+    const container = findOutermostContainer(tokenCtx, cluster);
     if (!container) return;
     if (containerIsEmpty(container)) return;
 
-    if (shouldSuppressSpacing(ctx, info, container)) return;
+    if (shouldSuppressSpacing(tokenCtx, classification, container)) return;
 
-    applyClusterSpacing(ctx, results, cluster, container);
+    applyClusterSpacing(tokenCtx, spacingEdits, cluster, container);
 }
 
-function processMainClusters(ctx, results, metadata) {
+function processMainClusters(tokenCtx, spacingEdits, astMarkers) {
     const processed = new Set();
 
-    for (let i = 0; i < ctx.tokens.length; i++) {
+    for (let i = 0; i < tokenCtx.tokens.length; i++) {
         if (processed.has(i)) continue;
-        if (!isGrouping(ctx.tokens[i])) continue;
+        if (!isGrouping(tokenCtx.tokens[i])) continue;
 
-        const cluster = adjacentCluster(ctx.tokens, i);
+        const cluster = adjacentCluster(tokenCtx.tokens, i);
         markProcessed(processed, cluster);
 
         const effectiveCount = effectiveClusterCount(
-            ctx.tokens, cluster, metadata.exemptBrackets
+            tokenCtx.tokens, cluster, astMarkers.exemptBrackets
         );
-        if (effectiveCount < ctx.threshold) continue;
+        if (effectiveCount < tokenCtx.threshold) continue;
 
-        processCluster(ctx, results, cluster);
+        processCluster(tokenCtx, spacingEdits, cluster);
     }
 }
 
@@ -653,40 +653,40 @@ function processMainClusters(ctx, results, metadata) {
 // Template and arrow sub-rules
 // -------------------------------------------------------
 
-function applyTemplateExprSpacing(ctx, results, metadata) {
-    for (let i = 0; i < ctx.tokens.length; i++) {
-        const token = ctx.tokens[i];
-        if (!metadata.templateExprSpaced.has(token)) continue;
+function applyTemplateExprSpacing(tokenCtx, spacingEdits, astMarkers) {
+    for (let i = 0; i < tokenCtx.tokens.length; i++) {
+        const token = tokenCtx.tokens[i];
+        if (!astMarkers.templateExprSpaced.has(token)) continue;
         if (isOpening(token)) {
-            addSpaceAfterIfMissing(ctx, results, i);
+            addSpaceAfterIfMissing(tokenCtx, spacingEdits, i);
         }
         if (isClosing(token)) {
-            addSpaceBeforeIfMissing(ctx, results, i);
+            addSpaceBeforeIfMissing(tokenCtx, spacingEdits, i);
         }
     }
 }
 
-function applyArrowInCallSpacing(ctx, results, metadata) {
-    for (let i = 0; i < ctx.tokens.length; i++) {
-        const token = ctx.tokens[i];
-        if (!metadata.arrowInCallOuters.has(token)) continue;
+function applyArrowInCallSpacing(tokenCtx, spacingEdits, astMarkers) {
+    for (let i = 0; i < tokenCtx.tokens.length; i++) {
+        const token = tokenCtx.tokens[i];
+        if (!astMarkers.arrowInCallOuters.has(token)) continue;
         if (token.value === '(') {
-            addSpaceAfterIfMissing(ctx, results, i);
+            addSpaceAfterIfMissing(tokenCtx, spacingEdits, i);
         }
         if (token.value === ')') {
-            addSpaceBeforeIfMissing(ctx, results, i);
+            addSpaceBeforeIfMissing(tokenCtx, spacingEdits, i);
         }
     }
 }
 
-function applyBracketAccessSpacing(ctx, results, metadata) {
-    for (let i = 0; i < ctx.tokens.length; i++) {
-        const token = ctx.tokens[i];
-        if (!metadata.computedMemberBrackets.has(token)) continue;
+function applyBracketAccessSpacing(tokenCtx, spacingEdits, astMarkers) {
+    for (let i = 0; i < tokenCtx.tokens.length; i++) {
+        const token = tokenCtx.tokens[i];
+        if (!astMarkers.computedMemberBrackets.has(token)) continue;
         if (token.value !== '[') continue;
-        const matchIdx = lookupBracket(ctx.bracketMap, i);
+        const matchIdx = lookupBracket(tokenCtx.bracketMap, i);
         if (matchIdx === -1) continue;
-        checkBracketAccessSpacing(ctx, results, i, matchIdx);
+        checkBracketAccessSpacing(tokenCtx, spacingEdits, i, matchIdx);
     }
 }
 
@@ -694,29 +694,29 @@ function applyBracketAccessSpacing(ctx, results, metadata) {
 // Violation reporting
 // -------------------------------------------------------
 
-function reportIndexSet(report, ctx, violation) {
+function reportIndexSet(report, tokenCtx, violation) {
     for (const idx of violation.indexSet) {
-        const token = ctx.tokens[idx];
+        const token = tokenCtx.tokens[idx];
         report({
             loc: token.loc,
             messageId: violation.messageId,
             data: {
                 token: token.value,
-                count: String(ctx.threshold),
+                count: String(tokenCtx.threshold),
             },
             fix: (fixer) => violation.fixFn(fixer, token),
         });
     }
 }
 
-function reportViolations(report, ctx, results) {
-    reportIndexSet(report, ctx, {
-        indexSet: results.after,
+function reportViolations(report, tokenCtx, spacingEdits) {
+    reportIndexSet(report, tokenCtx, {
+        indexSet: spacingEdits.after,
         messageId: 'requireSpaceAfter',
         fixFn: (fixer, token) => fixer.insertTextAfter(token, ' '),
     });
-    reportIndexSet(report, ctx, {
-        indexSet: results.before,
+    reportIndexSet(report, tokenCtx, {
+        indexSet: spacingEdits.before,
         messageId: 'requireSpaceBefore',
         fixFn: (fixer, token) => fixer.insertTextBefore(token, ' '),
     });
@@ -761,13 +761,13 @@ export default {
         const options = context.options[0] || {};
         const threshold = options.threshold || 3;
 
-        const metadata = {
+        const astMarkers = {
             templateExprSpaced: new Set(),
             arrowInCallOuters: new Set(),
             computedMemberBrackets: new Set(),
             exemptBrackets: new Set(),
         };
-        const exempt = metadata.exemptBrackets;
+        const exempt = astMarkers.exemptBrackets;
 
         return {
             [TEMPLATE_LIT](node) {
@@ -780,10 +780,10 @@ export default {
                     const before = sourceCode.getTokenBefore(expr);
                     const after = sourceCode.getTokenAfter(expr);
                     if (before) {
-                        metadata.templateExprSpaced.add(before);
+                        astMarkers.templateExprSpaced.add(before);
                     }
                     if (after) {
-                        metadata.templateExprSpaced.add(after);
+                        astMarkers.templateExprSpaced.add(after);
                     }
                 }
             },
@@ -800,10 +800,10 @@ export default {
                     );
                     const closeParen = sourceCode.getLastToken(node);
                     if (openParen) {
-                        metadata.arrowInCallOuters.add(openParen);
+                        astMarkers.arrowInCallOuters.add(openParen);
                     }
                     if (closeParen && closeParen.value === ')') {
-                        metadata.arrowInCallOuters.add(closeParen);
+                        astMarkers.arrowInCallOuters.add(closeParen);
                     }
                 }
             },
@@ -826,11 +826,11 @@ export default {
                 const prop = node.property;
                 const open = sourceCode.getTokenBefore(prop);
                 exemptIfMatch(
-                    open, '[', metadata.computedMemberBrackets
+                    open, '[', astMarkers.computedMemberBrackets
                 );
                 const close = sourceCode.getTokenAfter(prop);
                 exemptIfMatch(
-                    close, ']', metadata.computedMemberBrackets
+                    close, ']', astMarkers.computedMemberBrackets
                 );
             },
 
@@ -840,23 +840,23 @@ export default {
                 );
                 const bracketMap = buildBracketMap(tokens);
 
-                const ctx = {
+                const tokenCtx = {
                     sourceCode,
                     tokens,
                     threshold,
                     bracketMap,
                 };
-                const results = {
+                const spacingEdits = {
                     after: new Set(),
                     before: new Set(),
                 };
 
-                applyTemplateExprSpacing(ctx, results, metadata);
-                applyArrowInCallSpacing(ctx, results, metadata);
-                processMainClusters(ctx, results, metadata);
-                applyBracketAccessSpacing(ctx, results, metadata);
+                applyTemplateExprSpacing(tokenCtx, spacingEdits, astMarkers);
+                applyArrowInCallSpacing(tokenCtx, spacingEdits, astMarkers);
+                processMainClusters(tokenCtx, spacingEdits, astMarkers);
+                applyBracketAccessSpacing(tokenCtx, spacingEdits, astMarkers);
                 reportViolations(
-                    context.report.bind(context), ctx, results
+                    context.report.bind(context), tokenCtx, spacingEdits
                 );
             },
         };
