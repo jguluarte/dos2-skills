@@ -156,11 +156,8 @@ function expandLeft(tokens, startIdx) {
         if (!isGrouping(tok)) break;
         if (!connectsOnRightEdge(tok)) break;
         count += openingWeight(tok);
-        if (!connectsOnLeftEdge(tok)) {
-            left = i;
-            break;
-        }
         left = i;
+        if (!connectsOnLeftEdge(tok)) break;
         i--;
     }
 
@@ -188,18 +185,34 @@ function adjacentCluster(tokens, startIdx) {
 // Bracket map — O(n) pre-pass replaces O(n) per-lookup
 // -------------------------------------------------------
 
+const BRACKET_PAIRS = { ')': '(', ']': '[', '}': '{' };
+const TEMPLATE_BRACKET = '${';
+
+function bracketType(token) {
+    if (token.type === TEMPLATE) return TEMPLATE_BRACKET;
+    return token.value;
+}
+
+function expectedOpener(token) {
+    if (token.type === TEMPLATE) return TEMPLATE_BRACKET;
+    return BRACKET_PAIRS[token.value];
+}
+
 function buildBracketMap(tokens) {
     const map = new Map();
     const stack = [];
 
     for (let i = 0; i < tokens.length; i++) {
-        if (isOpening( tokens[i] )) {
-            stack.push(i);
-        } else if (isClosing( tokens[i] )) {
-            if (stack.length > 0) {
-                const openIdx = stack.pop();
-                map.set(openIdx, i);
-                map.set(i, openIdx);
+        const tok = tokens[i];
+        if (isOpening(tok)) {
+            stack.push({ index: i, type: bracketType(tok) });
+        } else if (isClosing(tok)) {
+            const expected = expectedOpener(tok);
+            if (stack.length > 0
+                && stack[stack.length - 1].type === expected) {
+                const open = stack.pop();
+                map.set(open.index, i);
+                map.set(i, open.index);
             }
         }
     }
@@ -768,7 +781,7 @@ export default {
     create(context) {
         const sourceCode = context.sourceCode;
         const options = context.options[0] || {};
-        const threshold = options.threshold || 3;
+        const threshold = options.threshold ?? 3;
 
         const astMarkers = {
             templateExprSpaced: new Set(),
