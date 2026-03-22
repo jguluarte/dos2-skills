@@ -112,6 +112,26 @@ describe('visual-complexity-spacing', () => {
             const f = expectFix('foo(...bar(baz()))', 'foo( ...bar(baz()) )');
             ruleTester.run(RULE, rule, invalid(f));
         });
+
+        it('fixes 4-deep nesting: a(b(c(d())))', () => {
+            const f = expectFix('a(b(c(d())))', 'a( b(c(d())) )');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes empty object literal in call: fn({})', () => {
+            const f = expectFix('fn({})', 'fn( {} )');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes empty array literal in call: fn([])', () => {
+            const f = expectFix('fn([])', 'fn( [] )');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes without semicolon: fn(bar())', () => {
+            const f = expectFix('fn(bar())', 'fn( bar() )');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
     });
 
     describe('completing partially-spaced brackets: foo( [[bar]])', () => {
@@ -159,6 +179,13 @@ describe('visual-complexity-spacing', () => {
             const f = expectFix('`${obj().name}`', '`${ obj().name }`');
             ruleTester.run(RULE, rule, invalid(f));
         });
+
+        it('fixes multiple ${} expressions in one literal', () => {
+            const code = '`${fn()} and ${bar()}`';
+            const output = '`${ fn() } and ${ bar() }`';
+            const f = expectFix(code, output, 4);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
     });
 
     describe('chained .method() or [index] after nested calls', () => {
@@ -179,6 +206,13 @@ describe('visual-complexity-spacing', () => {
 
         it('skips already-spaced chained access', () => {
             ruleTester.run(RULE, rule, valid('wrap( parse(data) ).unwrap()'));
+        });
+
+        it('fixes double invocation: get(make(x))(y)', () => {
+            const code = 'get(make(x))(y)';
+            const output = 'get( make(x) )(y)';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
@@ -202,6 +236,20 @@ describe('visual-complexity-spacing', () => {
 
         it('fixes await with short nested call', () => {
             const f = expectFix('await foo(bar());', 'await foo( bar() );');
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes if with nested call: if (fn(bar()))', () => {
+            const code = 'if (fn(bar())) {}';
+            const output = 'if ( fn(bar()) ) {}';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('fixes while with nested call: while (fn(bar()))', () => {
+            const code = 'while (fn(bar())) {}';
+            const output = 'while ( fn(bar()) ) {}';
+            const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
     });
@@ -238,6 +286,13 @@ describe('visual-complexity-spacing', () => {
 
         it('skips arrow with non-call body', () => {
             ruleTester.run(RULE, rule, valid('arr.map(x => x.name)'));
+        });
+
+        it('fixes arrow returning parenthesized object', () => {
+            const code = 'arr.map(x => ({key: x}))';
+            const output = 'arr.map( x => ({key: x}) )';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
         });
     });
 
@@ -404,6 +459,27 @@ describe('visual-complexity-spacing', () => {
                 }],
                 invalid: [],
             });
+        });
+    });
+
+    describe('fix idempotency', () => {
+
+        it('skips already-fixed output (re-running produces no errors)', () => {
+            const fixOutputs = [
+                'foo( [[bar]] )',
+                'foo( [{key: 1}] )',
+                'a( b(c()) )',
+                'a( b(c(d())) )',
+                'fn( {} )',
+                'fn( [] )',
+                'fn( bar() )',
+                'get( make(x) )(y)',
+                'if ( fn(bar()) ) {}',
+                'arr.map( x => ({key: x}) )',
+                'foo( bar() );',
+                'wrap( parse(data) ).unwrap()',
+            ];
+            ruleTester.run(RULE, rule, valid(...fixOutputs));
         });
     });
 });
