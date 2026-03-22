@@ -458,6 +458,69 @@ export default {
                     ) {
                         exemptBrackets.add(closeParen);
                     }
+                    // Exempt block body braces too
+                    const openBrace = sourceCode.getFirstToken(
+                        node.body
+                    );
+                    if (
+                        openBrace
+                        && openBrace.value === '{'
+                    ) {
+                        exemptBrackets.add(openBrace);
+                    }
+                    const closeBrace = sourceCode.getLastToken(
+                        node.body
+                    );
+                    if (
+                        closeBrace
+                        && closeBrace.value === '}'
+                    ) {
+                        exemptBrackets.add(closeBrace);
+                    }
+                }
+            },
+
+            // Principle 11: block body function expressions exempt
+            FunctionExpression(node) {
+                // function() { } — the block body provides
+                // visual separation, same as arrow functions
+                const firstToken = sourceCode.getFirstToken(
+                    node
+                );
+                // Skip `function` keyword to find the (
+                const openParen = sourceCode.getTokenAfter(
+                    firstToken,
+                    t => t.value === '('
+                );
+                if (openParen) {
+                    exemptBrackets.add(openParen);
+                }
+                const closeParen
+                    = sourceCode.getTokenBefore(node.body);
+                if (
+                    closeParen
+                    && closeParen.value === ')'
+                ) {
+                    exemptBrackets.add(closeParen);
+                }
+                // Exempt the block body braces too
+                const openBrace = sourceCode.getFirstToken(
+                    node.body
+                );
+                if (
+                    openBrace
+                    && openBrace.value === '{'
+                ) {
+                    exemptBrackets.add(openBrace);
+                }
+                const closeBrace = sourceCode.getLastToken(
+                    node.body
+                );
+                if (
+                    closeBrace
+                    && closeBrace.value === '}'
+                ) {
+                    exemptBrackets.add(closeBrace);
                 }
             },
 

@@ -237,6 +237,14 @@ describe('visual-complexity-spacing', () => {
         it('allows block body arrows: foo(() => { bar() })', () => {
             ruleTester.run(RULE, rule, valid(
                 'foo(() => { bar() })',
+                'foo(()=>{ bar(); });',
+            ));
+        });
+
+        it('allows block body function expressions: foo(function(){ bar(); });', () => {
+            ruleTester.run(RULE, rule, valid(
+                'foo(function(){ bar(); });',
+                'foo(function handler(){ bar(); });',
             ));
         });
     });
