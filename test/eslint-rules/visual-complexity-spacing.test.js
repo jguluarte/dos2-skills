@@ -19,6 +19,9 @@
  * content is currently spaced (callee 'bar' is only 3 chars).
  * This may be revisited as a separate enhancement.
  *
+ * Principle 14 (operator-adjacent spacing) is intentionally out
+ * of scope — it belongs in a separate companion rule.
+ *
  * Glossary:
  * - pile-up: 3+ grouping characters (parens, brackets, braces, or dense
  *   trailing chars like ; . !) adjacent without whitespace. E.g., )), ]], }).
@@ -33,6 +36,24 @@ import { RuleTester } from 'eslint';
 import { describe, it } from 'vitest';
 import rule from
     '../../.config/eslint-rules/visual-complexity-spacing.js';
+
+/*
+ * Principle mapping (see user_grouping_char_spacing_philosophy.md):
+ *   P1  -> brackets that pile up
+ *   P2  -> semicolons and trailing punctuation
+ *   P3  -> chained .method() or [index]
+ *   P4  -> long names make spacing optional
+ *   P5  -> empty call inside other brackets
+ *   P7  -> completing partially-spaced brackets
+ *   P8  -> nested bracket access
+ *   P9  -> template literal expressions
+ *   P10 -> multi-line expressions
+ *   P11 -> concise arrow / block body (within P10 and arrow sections)
+ *   P12 -> concise arrow inside calls
+ *   P13 -> commas provide visual separation
+ *   P6  -> (implicit, see header note)
+ *   P14 -> (separate companion rule, not implemented here)
+ */
 
 const RULE = 'visual-complexity-spacing';
 
@@ -76,7 +97,7 @@ describe('visual-complexity-spacing', () => {
                 'foo({bar: 1})',
                 'arr.push([1, 2])',
             ];
-            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
+            ruleTester.run(RULE, rule, valid(...cases));
         });
 
         it('fixes setState([[initialRow]])', () => {
@@ -120,7 +141,7 @@ describe('visual-complexity-spacing', () => {
                 'run( init(setup()) )',
                 'parseInt( getValue() )',
             ];
-            ruleTester.run(RULE, rule, { valid: cases, invalid: [] });
+            ruleTester.run(RULE, rule, valid(...cases));
         });
 
         it('fixes new + nested constructor', () => {
@@ -347,9 +368,7 @@ describe('visual-complexity-spacing', () => {
                 'foo(() => { bar() })',
                 'foo(()=>{ bar(); });',
             ];
-            ruleTester.run(
-                RULE, rule, { valid: cases, invalid: [] }
-            );
+            ruleTester.run(RULE, rule, valid(...cases));
         });
 
         it('skips block body function expressions', () => {
@@ -357,9 +376,7 @@ describe('visual-complexity-spacing', () => {
                 'foo(function(){ bar(); });',
                 'foo(function handler(){ bar(); });',
             ];
-            ruleTester.run(
-                RULE, rule, { valid: cases, invalid: [] }
-            );
+            ruleTester.run(RULE, rule, valid(...cases));
         });
 
         it('fixes each arrow call in a chain', () => {
@@ -436,18 +453,21 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // MIN_METHOD_LEN_STANDALONE = 5: 'parse' is 5 chars
         it('skips 5+ char method with short object', () => {
             ruleTester.run(
                 RULE, rule, valid('wrap(pa.parse(data));')
             );
         });
 
+        // MIN_OBJ_LEN_FOR_ANCHORING=5 + MIN_METHOD_LEN_WITH_LONG_OBJ=4
         it('skips obj=5 method=4 (long object offsets short method)', () => {
             ruleTester.run(
                 RULE, rule, valid('wrap(items.find(data));')
             );
         });
 
+        // obj 'item' = 4 chars, below MIN_OBJ_LEN_FOR_ANCHORING
         it('fixes obj=4, method=4 (too short)', () => {
             const code = 'wrap(item.find(data));';
             const output = 'wrap( item.find(data) );';
@@ -455,12 +475,14 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // MIN_CALLEE_LEN_FOR_SUPPRESSION = 8: 'abcdefgh' is exactly 8
         it('skips inner callee exactly 8 chars', () => {
             ruleTester.run(
                 RULE, rule, valid('a(abcdefgh(x));')
             );
         });
 
+        // 'abcdefg' = 7, below MIN_CALLEE_LEN_FOR_SUPPRESSION
         it('fixes inner callee 7 chars (too short)', () => {
             const f = expectFix(
                 'a(abcdefg(x));', 'a( abcdefg(x) );'
@@ -468,12 +490,14 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
+        // MIN_CONTENT_LEN_FOR_SUPPRESSION = 15
         it('skips when content >= 15 chars (no inner callee)', () => {
             ruleTester.run(
                 RULE, rule, valid('fn({longValueStri});')
             );
         });
 
+        // content 'longValueStr' + braces = 14, below threshold
         it('fixes when content < 15 chars (no inner callee)', () => {
             const code = 'fn({longValueStr});';
             const output = 'fn( {longValueStr} );';
