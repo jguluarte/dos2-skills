@@ -505,6 +505,39 @@ describe('visual-complexity-spacing', () => {
             const f = expectFix(code, output);
             ruleTester.run(RULE, rule, invalid(f));
         });
+
+        it('skips inner name exactly 10 chars (MIN_BRACKET_INNER_LEN boundary)', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            ruleTester.run(
+                RULE, rule,
+                valid('obj[abcdefghij[longPropertyName]]')
+            );
+        });
+
+        it('fixes inner name 9 chars (below MIN_BRACKET_INNER_LEN)', () => {
+            const code = 'obj[abcdefghi[longPropertyName]]';
+            const output =
+                'obj[ abcdefghi[longPropertyName] ]';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
+
+        it('skips outer name exactly 10 chars (MIN_BRACKET_OUTER_LEN boundary)', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            ruleTester.run(
+                RULE, rule,
+                valid('abcdefghij[arr[longPropertyName]]')
+            );
+        });
+
+        it('fixes outer name 9 chars (below MIN_BRACKET_OUTER_LEN)', () => {
+            // eslint-disable-next-line @stylistic/max-len
+            const code = 'abcdefghi[arr[longPropertyName]]';
+            // eslint-disable-next-line @stylistic/max-len
+            const output = 'abcdefghi[ arr[longPropertyName] ]';
+            const f = expectFix(code, output);
+            ruleTester.run(RULE, rule, invalid(f));
+        });
     });
 
     describe(MULTI_ARG_DESC, () => {
@@ -735,6 +768,10 @@ describe('visual-complexity-spacing', () => {
                 // eslint-disable-next-line @stylistic/max-len
                 'arr.forEach( ({name}) => process(name) )',
                 'html`${ fn(bar()) }`',
+                // eslint-disable-next-line @stylistic/max-len
+                'obj[ abcdefghi[longPropertyName] ]',
+                // eslint-disable-next-line @stylistic/max-len
+                'abcdefghi[ arr[longPropertyName] ]',
             ];
             ruleTester.run(RULE, rule, valid(...fixOutputs));
         });
