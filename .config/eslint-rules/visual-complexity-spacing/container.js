@@ -2,6 +2,8 @@ import { lookupBracket } from './bracket-map.js';
 import { clusterComposition } from './cluster.js';
 import { isClosing, isGrouping, isOpening } from './tokens.js';
 
+// Cluster is all closing brackets (e.g., )))). Walk backward
+// to find the outermost open paren that encloses the pile-up.
 export function findClosingOnlyContainer(ctx, cluster) {
     for (let j = cluster.endIdx; j >= cluster.startIdx; j--) {
         if (!isClosing( ctx.tokens[j] )) continue;
@@ -13,6 +15,8 @@ export function findClosingOnlyContainer(ctx, cluster) {
     return null;
 }
 
+// Cluster is all opening brackets (e.g., (([). Walk forward
+// to find the matched close.
 export function findOpeningOnlyContainer(ctx, cluster) {
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
         if (!isOpening( ctx.tokens[j] )) continue;
@@ -24,6 +28,9 @@ export function findOpeningOnlyContainer(ctx, cluster) {
     return null;
 }
 
+// Cluster has both opens and closes (e.g., )(). Search backward
+// for an opening whose match is past the cluster, then forward
+// for a closing whose match precedes it.
 export function findMixedContainer(ctx, cluster) {
     for (let j = cluster.startIdx - 1; j >= 0; j--) {
         if (!isOpening( ctx.tokens[j] )) continue;
@@ -46,6 +53,8 @@ export function findMixedContainer(ctx, cluster) {
     return null;
 }
 
+// Fallback when findMixedContainer can't find an enclosing
+// pair. Picks the widest matched pair within the cluster itself.
 export function findWidestPairInCluster(ctx, cluster) {
     let bestOpenIdx = -1;
     let bestCloseIdx = -1;
@@ -82,6 +91,8 @@ export function findEnclosingContainer(ctx, cluster) {
         return findOpeningOnlyContainer(ctx, cluster);
     }
 
+    // Mixed clusters may not have an enclosing bracket outside
+    // the cluster. Fall back to the widest pair inside it.
     return findMixedContainer(ctx, cluster)
         || findWidestPairInCluster(ctx, cluster);
 }

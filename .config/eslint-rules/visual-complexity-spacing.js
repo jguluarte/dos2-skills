@@ -92,15 +92,11 @@ function exemptBlockBodyBrackets(sourceCode, openParen, node, set) {
 // Continuation vs termination classification
 // -------------------------------------------------------
 
-// Dense trailing (. or !) after a closing bracket means
+// Dense trailing (.) after a closing bracket means
 // the expression chains onward: getResult().prop
 function trailingContinues(tokens, cluster) {
     const trailing = tokens[cluster.endIdx];
-    // `!` after `)` is not valid in standard JS — it's a
-    // prefix operator, not postfix. This branch exists for
-    // TypeScript's non-null assertion (e.g., getResult()!.prop)
-    // if the rule is ever used with a TS parser.
-    return trailing.value === '.' || trailing.value === '!';
+    return trailing.value === '.';
 }
 
 // The token after the cluster starts a new access/call:

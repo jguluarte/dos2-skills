@@ -26,20 +26,20 @@ export function expandRight(tokens, startIdx) {
     while (i < tokens.length) {
         const tok = tokens[i];
         if (!areAdjacent(tokens[i - 1], tok)) break;
-        if (!isGrouping(tok) && !isDenseTrailing(tok)) break;
-        if (!connectsOnLeftEdge(tok)) break;
 
         if (isDenseTrailing(tok)) {
             count++;
             right = i;
             if (!denseTrailingContinues(tokens, tok, i)) break;
-            i++;
-            continue;
+        } else if (isOpening(tok) || isClosing(tok)) {
+            if (!connectsOnLeftEdge(tok)) break;
+            count += tokenWeight(tok);
+            right = i;
+            if (!connectsOnRightEdge(tok)) break;
+        } else {
+            break;
         }
 
-        count += tokenWeight(tok);
-        right = i;
-        if (!connectsOnRightEdge(tok)) break;
         i++;
     }
 
