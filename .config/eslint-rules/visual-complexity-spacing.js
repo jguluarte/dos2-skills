@@ -14,14 +14,41 @@ const TEMPLATE_LIT = 'TemplateLiteral';
 
 // Visual anchoring thresholds — named so the design
 // decisions are grep-able, not buried in comparisons
+
+// obj.meth() — 4-char method suffices when the object name
+// is already long enough to anchor the eye (5+ chars gives
+// 9+ chars of context before the paren)
 const MIN_METHOD_LEN_WITH_LONG_OBJ = 4;
+
+// parse() alone — 5+ chars gives the eye a word to land on,
+// shorter names like fn() or go() look like noise in a pile
 const MIN_METHOD_LEN_STANDALONE = 5;
+
+// items.find() — the object name counts as context only when
+// it's a real word (5+ chars), not a 1-2 char abbreviation
 const MIN_OBJ_LEN_FOR_ANCHORING = 5;
+
+// Inner callee inside wrap(longName(x)) — 8+ chars is
+// unmistakable as a word boundary even inside nested parens
 const MIN_CALLEE_LEN_FOR_SUPPRESSION = 8;
+
+// Total character width between brackets — at 15+ chars the
+// content itself provides enough visual separation
 const MIN_CONTENT_LEN_FOR_SUPPRESSION = 15;
+
+// Bracket access obj[arr[idx]] — 10+ char outer/inner names
+// anchor the eye so nested brackets don't need extra spacing
 const MIN_BRACKET_OUTER_LEN = 10;
 const MIN_BRACKET_INNER_LEN = 10;
+
+// How close an inner callee's closing paren must be to the
+// outer close — at most 2 tokens away (e.g., `))`  or `);`)
+// so we only check callees that actually contribute to the
+// visual pile-up at the close boundary
 const INNER_CALLEE_PROXIMITY = 2;
+
+// ${expr} counts as 2 grouping chars because it contributes
+// both an opening `${` and a closing `}` to visual density
 const TEMPLATE_EXPR_WEIGHT = 2;
 
 function isOpening(token) {
@@ -156,9 +183,7 @@ function buildBracketMap(tokens) {
     for (let i = 0; i < tokens.length; i++) {
         if (isOpening(tokens[i])) {
             stack.push(i);
-        }
-
-        else if (isClosing(tokens[i])) {
+        } else if (isClosing(tokens[i])) {
             if (stack.length > 0) {
                 const openIdx = stack.pop();
                 map.set(openIdx, i);
@@ -207,12 +232,10 @@ function isMemberCalleeAnchored(tokens, parenIdx) {
     if (!isMethodIdent || !isDot || !isObjIdent) return false;
     const method = tokens[parenIdx - 1].value.length;
     const obj = tokens[parenIdx - 3].value.length;
-    if (obj >= MIN_OBJ_LEN_FOR_ANCHORING
-            && method >= MIN_METHOD_LEN_WITH_LONG_OBJ) {
-        return true;
-    }
-    if (method >= MIN_METHOD_LEN_STANDALONE) return true;
-    return false;
+    const hasLongObjAndMethod = obj >= MIN_OBJ_LEN_FOR_ANCHORING
+        && method >= MIN_METHOD_LEN_WITH_LONG_OBJ;
+    const hasLongMethod = method >= MIN_METHOD_LEN_STANDALONE;
+    return hasLongObjAndMethod || hasLongMethod;
 }
 
 function isSimpleCalleeAnchored(tokens, parenIdx, minLen) {
@@ -222,26 +245,29 @@ function isSimpleCalleeAnchored(tokens, parenIdx, minLen) {
         && callee.value.length >= minLen;
 }
 
-function innerCalleeAnchors(tokens, bracketMap, openIdx, closeIdx) {
-    let foundInnerCallee = false;
+function findInnerCallee(tokens, bracketMap, openIdx, closeIdx) {
     for (let j = openIdx + 1; j < closeIdx - 1; j++) {
         if (tokens[j].value !== '(') continue;
         const matchJ = lookupBracket(bracketMap, j);
         if (matchJ === -1) continue;
         if (closeIdx - matchJ > INNER_CALLEE_PROXIMITY) continue;
-        foundInnerCallee = true;
-        if (isMemberCalleeAnchored(tokens, j)) return true;
-        if (isSimpleCalleeAnchored(tokens, j, MIN_CALLEE_LEN_FOR_SUPPRESSION)) {
-            return true;
-        }
+        return j;
     }
-    return foundInnerCallee ? false : null;
+    return -1;
+}
+
+function innerCalleeAnchors(tokens, calleeIdx) {
+    if (isMemberCalleeAnchored(tokens, calleeIdx)) return true;
+    return isSimpleCalleeAnchored(
+        tokens, calleeIdx, MIN_CALLEE_LEN_FOR_SUPPRESSION
+    );
 }
 
 function outerCalleeAnchors(tokens, openIdx, contentLen) {
     if (openIdx <= 0) return false;
     if (isMemberCalleeAnchored(tokens, openIdx)) return true;
-    if (isSimpleCalleeAnchored(tokens, openIdx, MIN_CALLEE_LEN_FOR_SUPPRESSION)) {
+    const minLen = MIN_CALLEE_LEN_FOR_SUPPRESSION;
+    if (isSimpleCalleeAnchored(tokens, openIdx, minLen)) {
         return true;
     }
     return contentLen >= MIN_CONTENT_LEN_FOR_SUPPRESSION;
@@ -256,11 +282,12 @@ function contentSuppressesSpacing(ctx, openIdx, closeIdx) {
     const contentLen = ctx.tokens[closeIdx].range[0]
         - ctx.tokens[openIdx].range[1];
 
-    const innerResult = innerCalleeAnchors(
+    const innerIdx = findInnerCallee(
         ctx.tokens, ctx.bracketMap, openIdx, closeIdx
     );
-    if (innerResult === true) return true;
-    if (innerResult === false) return false;
+    if (innerIdx !== -1) {
+        return innerCalleeAnchors(ctx.tokens, innerIdx);
+    }
 
     return outerCalleeAnchors(ctx.tokens, openIdx, contentLen);
 }
@@ -417,6 +444,10 @@ function exemptBlockBodyBrackets(sourceCode, openParen, node, set) {
 function classifyContinuation(tokens, cluster, hasDenseTrailing, afterCluster) {
     if (hasDenseTrailing) {
         const trailing = tokens[cluster.endIdx];
+        // `!` after `)` is not valid in standard JS — it's a
+        // prefix operator, not postfix. This branch exists for
+        // TypeScript's non-null assertion (e.g., getResult()!.prop)
+        // if the rule is ever used with a TS parser.
         return trailing.value === '.' || trailing.value === '!';
     }
 
@@ -581,10 +612,15 @@ function classifyCluster(ctx, cluster) {
     return { cluster, hasDenseTrailing, isContinuation };
 }
 
+function containerIsEmpty(container) {
+    return container.closeIdx === container.openIdx + 1;
+}
+
 function processCluster(ctx, results, cluster) {
     const info = classifyCluster(ctx, cluster);
     const container = findOutermostContainer(ctx, cluster);
     if (!container) return;
+    if (containerIsEmpty(container)) return;
 
     if (shouldSuppressSpacing(ctx, info, container)) return;
 
@@ -728,6 +764,7 @@ export default {
             computedMemberBrackets: new Set(),
             exemptBrackets: new Set(),
         };
+        const exempt = metadata.exemptBrackets;
 
         return {
             [TEMPLATE_LIT](node) {
@@ -771,21 +808,14 @@ export default {
             [ARROW_FUNC](node) {
                 if (node.body.type !== BLOCK_STMT) return;
                 const openParen = sourceCode.getFirstToken(node);
-                exemptBlockBodyBrackets(
-                    sourceCode, openParen, node,
-                    metadata.exemptBrackets
-                );
+                exemptBlockBodyBrackets(sourceCode, openParen, node, exempt);
             },
 
             FunctionExpression(node) {
                 const firstToken = sourceCode.getFirstToken(node);
-                const openParen = sourceCode.getTokenAfter(
-                    firstToken, (t) => t.value === '('
-                );
-                exemptBlockBodyBrackets(
-                    sourceCode, openParen, node,
-                    metadata.exemptBrackets
-                );
+                const isParen = (t) => t.value === '(';
+                const openParen = sourceCode.getTokenAfter(firstToken, isParen);
+                exemptBlockBodyBrackets(sourceCode, openParen, node, exempt);
             },
 
             [MEMBER_EXPR](node) {
