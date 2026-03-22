@@ -47,7 +47,7 @@ function expectFix(code, output, errors = 2) {
 }
 
 // eslint-disable-next-line @stylistic/max-len
-const FN_NAME_DESC = 'long names suppress spacing at statement end: callback(obj.method())';
+const FN_NAME_DESC = 'long names make spacing optional at statement end: callback(obj.method())';
 const MULTI_ARG_DESC = 'commas provide visual separation in multi-arg calls';
 
 describe('visual-complexity-spacing', () => {
@@ -277,7 +277,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('continuation overrides long-content suppression', () => {
+        it('fixes chained access even with long names: callback(obj.method()).next()', () => {
             const code = 'callback(obj.method()).next()';
             const output = 'callback( obj.method() ).next()';
             const f = expectFix(code, output);
@@ -470,7 +470,7 @@ describe('visual-complexity-spacing', () => {
             ruleTester.run(RULE, rule, invalid(f));
         });
 
-        it('suppresses when content >= 15 chars (no inner callee)', () => {
+        it('skips when content >= 15 chars (no inner callee)', () => {
             ruleTester.run(
                 RULE, rule, valid('fn({longValueStri});')
             );
