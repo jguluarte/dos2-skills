@@ -77,14 +77,14 @@ function openingWeight(token) {
     return 1;
 }
 
-function chainsLeft(token) {
+function continuesClusterLeft(token) {
     if (token.type === TEMPLATE) {
         return !token.value.startsWith('`');
     }
     return true;
 }
 
-function chainsRight(token) {
+function continuesClusterRight(token) {
     if (token.type === TEMPLATE) {
         return !token.value.endsWith('`');
     }
@@ -113,7 +113,7 @@ function expandRight(tokens, startIdx) {
         const tok = tokens[i];
         if (!areAdjacent(tokens[i - 1], tok)) break;
         if (!isGrouping(tok) && !isDenseTrailing(tok)) break;
-        if (!chainsLeft(tok)) break;
+        if (!continuesClusterLeft(tok)) break;
 
         if (isDenseTrailing(tok)) {
             count++;
@@ -125,7 +125,7 @@ function expandRight(tokens, startIdx) {
 
         count += openingWeight(tok);
         right = i;
-        if (!chainsRight(tok)) break;
+        if (!continuesClusterRight(tok)) break;
         i++;
     }
 
@@ -142,9 +142,9 @@ function expandLeft(tokens, startIdx) {
         const next = tokens[i + 1];
         if (!areAdjacent(tok, next)) break;
         if (!isGrouping(tok)) break;
-        if (!chainsRight(tok)) break;
+        if (!continuesClusterRight(tok)) break;
         count += openingWeight(tok);
-        if (!chainsLeft(tok)) {
+        if (!continuesClusterLeft(tok)) {
             left = i;
             break;
         }
@@ -577,7 +577,7 @@ function markProcessed(processed, cluster) {
     }
 }
 
-function subtractExempt(tokens, cluster, exemptBrackets) {
+function effectiveClusterCount(tokens, cluster, exemptBrackets) {
     let effectiveCount = cluster.count;
     for (let j = cluster.startIdx; j <= cluster.endIdx; j++) {
         if (exemptBrackets.has(tokens[j])) effectiveCount--;
@@ -637,7 +637,7 @@ function processMainClusters(ctx, results, metadata) {
         const cluster = adjacentCluster(ctx.tokens, i);
         markProcessed(processed, cluster);
 
-        const effectiveCount = subtractExempt(
+        const effectiveCount = effectiveClusterCount(
             ctx.tokens, cluster, metadata.exemptBrackets
         );
         if (effectiveCount < ctx.threshold) continue;
