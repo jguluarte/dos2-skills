@@ -28,3 +28,8 @@ node_modules/
 
 # Make target trackers
 .make-timestamp.*
+
+# Build artifacts
+css/styles.css
+index.html
+dist/

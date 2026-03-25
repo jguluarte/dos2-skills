@@ -1,20 +1,18 @@
-.PHONY: build npm start kill watch test test-verbose \
-		lint lint-yaml lint-css lint-js lint-fix lint-fix-all
+##########################################################
+# Actual build related
+.PHONY: build clean
 
-MAX_LINT_WARNINGS ?= -1
+RELEASE := index.html css/styles.css $(wildcard js/*.js js/templates/* data/*)
+DIST := $(addprefix dist/,$(RELEASE))
 
-STYLELINT := npx stylelint --config .config/stylelintrc.json
-ESLINT := npx eslint --config .config/eslint.config.mjs
-ESLINT_DIFF := npx eslint --config .config/eslint-diff.config.mjs
+build: $(DIST)
 
-build: index.html css/styles.css
+clean:
+	-rm -rf dist/ .make-timestamp*
 
-index.html: src/index.html css/styles.css
-	@echo "rebuilding $@..."
-	sed 's/__CSS_HASH__/$(shell shasum -a 256 css/styles.css | cut -c1-8)/g' $< > $@
-
-css/styles.css: css/styles.scss
-	sass $< $@ --style=compressed --no-source-map
+##########################################################
+# Local dev helpers
+.PHONY: npm start kill test
 
 npm: .make-timestamp.npm
 .make-timestamp.npm: package.json package-lock.json
@@ -31,14 +29,20 @@ kill:
 	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
 		echo "No processes found on port 8000"
 
-watch:
-	@echo "Watching css/styles.scss for changes..."
-	sass css/styles.scss:css/styles.css --watch --style=expanded
-
-# If linters or test runners change...make any corresponding change needed to
-# .github/workflows/ci.yml
 test:
 	npx vitest run
+
+##########################################################
+# Lint helpers
+#
+# If these change, also update `.github/workflows/ci.yml
+.PHONY: lint lint-yaml lint-css lint-js lint-fix lint-fix-all
+
+MAX_LINT_WARNINGS ?= -1
+
+STYLELINT := npx stylelint --config .config/stylelintrc.json
+ESLINT := npx eslint --config .config/eslint.config.mjs
+ESLINT_DIFF := npx eslint --config .config/eslint-diff.config.mjs
 
 lint: lint-yaml lint-css lint-js
 
@@ -56,3 +60,27 @@ lint-fix:
 
 lint-fix-all:
 	$(ESLINT) --fix js/ test/
+
+
+##########################################################
+# Also build related
+#
+# This file uses `.SECONDEXPANSION` so we can use `$(@D)` to help determine what
+# folders need to be created for CD. As such, we use a special wildcard to
+# capture those as well. This allows us to see when these folders are created.
+%/.:
+	mkdir -p $@
+
+# Everything after this point is evaluated twice, that way we can use
+# as a prerequisite :)
+.SECONDEXPANSION:
+
+dist/index.html: src/index.html css/styles.scss | $$(@D)/.
+	@echo "rebuilding $@..."
+	sed 's/__HASH__/$(shell shasum -a 256 css/styles.scss | cut -c1-8)/g' $< > $@
+
+dist/css/styles.css: css/styles.scss | $$(@D)/.
+	sass $< $@ --style=compressed --no-source-map
+
+$(filter-out %/index.html %/styles.css,$(DIST)): dist/%: % | $$(@D)/.
+	cp $< $@
