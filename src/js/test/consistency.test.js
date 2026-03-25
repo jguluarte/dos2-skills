@@ -3,11 +3,11 @@ import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, GEOMANCER, HYDROSOPHIST, WARFARE,
     HUNTSMAN, SCOUNDREL, POLYMORPH, NECROMANCER, ELEMENTAL_TREES,
     NON_ELEMENTAL_TREES, ALL_TREES,
-} from '../js/constants.js';
+} from '@constants';
 import {
     getValidSecondaryOptions,
     buildSummaryText,
-} from '../js/filter-logic.js';
+} from '@js/filter-logic.js';
 
 describe('tree constants', () => {
     it('ELEMENTAL_TREES', () => {

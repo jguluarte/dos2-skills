@@ -1,22 +1,8 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import fs from 'fs';
-import path from 'path';
-import { Skill } from '../js/skill.js';
-import { createSkillCard, setTemplate } from '../js/skill-card-view.js';
+import { describe, it, expect } from 'vitest';
+import { Skill, createSkillCard } from '@js/skill';
 import {
     PYROKINETIC, POLYMORPH, WARFARE,
-} from '../js/constants.js';
-
-beforeAll(() => {
-    const dir = path.resolve(import.meta.dirname, '../js/templates');
-    const main = fs.readFileSync(
-        path.join(dir, 'skill-card.hbs'), 'utf8'
-    );
-    const body = fs.readFileSync(
-        path.join(dir, 'skill-card-body.hbs'), 'utf8'
-    );
-    setTemplate(main, body);
-});
+} from '@constants';
 
 // ── fixtures ────────────────────────────────────────────
 

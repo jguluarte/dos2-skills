@@ -228,18 +228,19 @@ export default [
         },
     },
     {
-        files: ["js/**/*.js"],
+        files: ["src/**/*.js"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
             globals: {
                 ...globals.browser,
                 jsyaml: "readonly",
+                Handlebars: "readonly",
             },
         },
     },
     {
-        files: ["test/**/*.js"],
+        files: ["**/test/*.js"],
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
@@ -250,6 +251,16 @@ export default [
         },
         rules: {
             "max-nested-callbacks": ["error", 5],
+        },
+    },
+    {
+        files: [".config/*.js"],
+        languageOptions: {
+            ecmaVersion: "latest",
+            sourceType: "module",
+            globals: {
+                ...globals.node,
+            },
         },
     },
 ];

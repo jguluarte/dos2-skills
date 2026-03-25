@@ -1,7 +1,7 @@
 import {
     SUMMONING, ALL_TREES, NON_SUMMONING_TREES,
     VALID_SKILL_COMBINATION,
-} from './constants.js';
+} from '@constants';
 
 // ===========================
 // Pairing rules

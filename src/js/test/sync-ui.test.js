@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { applyFilters, syncUI } from '../js/app.js';
+import { applyFilters, syncUI } from '@js/app.js';
 
 beforeEach(() => {
     document.body.innerHTML = `

@@ -31,5 +31,4 @@ node_modules/
 
 # Build artifacts
 css/styles.css
-index.html
 dist/

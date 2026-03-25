@@ -1,14 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import fs from 'fs';
-import path from 'path';
 import jsyaml from 'js-yaml';
 import {
     VALID_SKILL_COMBINATION, SUMMONING,
-} from '../js/constants.js';
+} from '@constants';
+import skillsYaml from '@data/skills.yaml?raw';
 
-const yamlPath = path.resolve(import.meta.dirname, '../data/skills.yaml');
-const yamlText = fs.readFileSync(yamlPath, 'utf8');
-const skills = jsyaml.load(yamlText);
+const skills = jsyaml.load(skillsYaml);
 
 // ── aggregate checks ────────────────────────────────────
 

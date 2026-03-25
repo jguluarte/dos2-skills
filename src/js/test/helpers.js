@@ -1,7 +1,7 @@
-import { Skill } from '../js/skill.js';
+import { Skill } from '@js/skill';
 import {
     SUMMONING, ELEMENTAL_TREES,
-} from '../js/constants.js';
+} from '@constants';
 
 export function makeSkill(name, trees) {
     const requirements = {};

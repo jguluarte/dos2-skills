@@ -1,5 +1,5 @@
-import { SUMMONING, ELEMENTAL_TREES } from './constants.js';
-import { Skill } from './skill.js';
+import { SUMMONING, ELEMENTAL_TREES } from '@constants';
+import { Skill, createSkillCard } from '@js/skill';
 import {
     PRIMARY_FILTER_TREES,
     getValidSecondaryOptions,
@@ -8,13 +8,9 @@ import {
     parseFiltersFromURL,
     buildFilterQueryString,
     buildSummaryText,
-} from './filter-logic.js';
-import {
-    createSkillCard, loadTemplate,
-} from './skill-card-view.js';
-import { registerHelpers } from './handlebars-helpers.js';
+} from '@js/filter-logic.js';
+import { registerHelpers } from '@js/handlebars-helpers.js';
 
-/* global Handlebars */
 registerHelpers(Handlebars);
 
 // ===========================
@@ -256,10 +252,7 @@ function initializeFilterBar() {
 
 async function initialize() {
     try {
-        const [response] = await Promise.all([
-            fetch('data/skills.yaml'),
-            loadTemplate(),
-        ]);
+        const response = await fetch('data/skills.yaml');
         const yamlText = await response.text();
         skillsByCategory = { [SUMMONING]: [] };
         ELEMENTAL_TREES.forEach((t) => { skillsByCategory[t] = []; });

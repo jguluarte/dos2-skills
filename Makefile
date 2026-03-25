@@ -2,10 +2,8 @@
 # Actual build related
 .PHONY: build clean
 
-RELEASE := index.html css/styles.css $(wildcard js/*.js js/templates/* data/*)
-DIST := $(addprefix dist/,$(RELEASE))
-
-build: $(DIST)
+build:
+	npx vite build --config .config/vite.config.js
 
 clean:
 	-rm -rf dist/ .make-timestamp*
@@ -20,17 +18,14 @@ npm: .make-timestamp.npm
 	@touch $@
 
 start:
-	@echo "Starting SCSS watch and dev server..."
-	@trap 'kill 0' EXIT; \
-		npx sass css/styles.scss:css/styles.css --watch --style=expanded & \
-		python3 -m http.server 8000
+	npx vite --config .config/vite.config.js
 
 kill:
 	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
 		echo "No processes found on port 8000"
 
 test:
-	npx vitest run
+	npx vitest run --config .config/vitest.config.js
 
 ##########################################################
 # Lint helpers
@@ -47,40 +42,16 @@ ESLINT_DIFF := npx eslint --config .config/eslint-diff.config.mjs
 lint: lint-yaml lint-css lint-js
 
 lint-yaml:
-	yamllint -c .config/yamllint.yml data/
+	yamllint -c .config/yamllint.yml src/data/
 
 lint-css:
-	$(STYLELINT) --max-warnings=$(MAX_LINT_WARNINGS) css/styles.scss
+	$(STYLELINT) --max-warnings=$(MAX_LINT_WARNINGS) src/css/
 
 lint-js:
-	$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) js/ test/
+	$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) src/ .config/
 
 lint-fix:
-	$(ESLINT_DIFF) --fix js/ test/
+	$(ESLINT_DIFF) --fix src/ .config/
 
 lint-fix-all:
-	$(ESLINT) --fix js/ test/
-
-
-##########################################################
-# Also build related
-#
-# This file uses `.SECONDEXPANSION` so we can use `$(@D)` to help determine what
-# folders need to be created for CD. As such, we use a special wildcard to
-# capture those as well. This allows us to see when these folders are created.
-%/.:
-	mkdir -p $@
-
-# Everything after this point is evaluated twice, that way we can use
-# as a prerequisite :)
-.SECONDEXPANSION:
-
-dist/index.html: src/index.html css/styles.scss | $$(@D)/.
-	@echo "rebuilding $@..."
-	sed 's/__HASH__/$(shell shasum -a 256 css/styles.scss | cut -c1-8)/g' $< > $@
-
-dist/css/styles.css: css/styles.scss | $$(@D)/.
-	npx sass $< $@ --style=compressed --no-source-map
-
-$(filter-out %/index.html %/styles.css,$(DIST)): dist/%: % | $$(@D)/.
-	cp $< $@
+	$(ESLINT) --fix src/ .config/
