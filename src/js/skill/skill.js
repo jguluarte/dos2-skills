@@ -1,9 +1,9 @@
-import { ALL_TREES, SUMMONING } from './constants.js';
+import { ALL_TREES, SUMMONING } from '@constants';
 import {
     MissingNameError, MissingRequirementsError, MissingEffectError,
     UnknownTreeError, PrerequisiteError, MissingPrimaryTreeError,
     InvalidPrimaryTreeError,
-} from './errors.js';
+} from '@js/errors.js';
 
 export class Skill {
     constructor(raw) {
