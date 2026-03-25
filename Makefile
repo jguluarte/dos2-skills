@@ -22,7 +22,7 @@ npm: .make-timestamp.npm
 start:
 	@echo "Starting SCSS watch and dev server..."
 	@trap 'kill 0' EXIT; \
-		sass css/styles.scss:css/styles.css --watch --style=expanded & \
+		npx sass css/styles.scss:css/styles.css --watch --style=expanded & \
 		python3 -m http.server 8000
 
 kill:
@@ -80,7 +80,7 @@ dist/index.html: src/index.html css/styles.scss | $$(@D)/.
 	sed 's/__HASH__/$(shell shasum -a 256 css/styles.scss | cut -c1-8)/g' $< > $@
 
 dist/css/styles.css: css/styles.scss | $$(@D)/.
-	sass $< $@ --style=compressed --no-source-map
+	npx sass $< $@ --style=compressed --no-source-map
 
 $(filter-out %/index.html %/styles.css,$(DIST)): dist/%: % | $$(@D)/.
 	cp $< $@
