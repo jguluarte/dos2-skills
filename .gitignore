@@ -3,7 +3,6 @@
 Thumbs.db
 
 # Editor Files
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -25,6 +24,7 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+.venv/
 
 # Make target trackers
 .make-timestamp.*
@@ -32,3 +32,4 @@ node_modules/
 # Build artifacts
 css/styles.css
 dist/
+coverage/
