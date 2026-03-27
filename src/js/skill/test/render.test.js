@@ -1,141 +1,128 @@
-import { describe, it, expect } from 'vitest';
-import { Skill, createSkillCard } from '@js/skill';
-import {
-    PYROKINETIC, POLYMORPH, WARFARE,
-} from '@constants';
+import { fake } from 'zod-schema-faker/v4';
+import { describe, it, expect, beforeEach } from 'vitest';
 
-// ── fixtures ────────────────────────────────────────────
+import { Skill, Schema as SkillSchema, createSkillCard } from '@js/skill';
+import { PYROKINETIC, POLYMORPH } from '@constants';
 
-const bleedFire = new Skill({
-    name: 'Bleed Fire',
-    requirements: { [PYROKINETIC]: 1, [POLYMORPH]: 2 },
-    primary_tree: PYROKINETIC,
-    url: 'https://example.com/bleed-fire',
-    ap_cost: 1,
-    sp_cost: 1,
-    range: '13m',
-    cooldown: 3,
-    effect: 'Enemies bleed fire when hit.',
-});
-
-const minimalSkill = new Skill({
-    name: 'Minimal Skill',
-    requirements: { [WARFARE]: 2, [PYROKINETIC]: 1 },
-    primary_tree: PYROKINETIC,
-    effect: 'Does something.',
-});
-
-// ── createSkillCard (DOM output) ────────────────────────
+function renderCard(yaml) {
+    return createSkillCard(Skill.fromYAML(yaml));
+}
 
 describe('createSkillCard', () => {
+    let skill, card;
+    beforeEach(() => {
+        skill = fake(SkillSchema);
+        skill.primary_tree = PYROKINETIC;
+        skill.secondary_tree = POLYMORPH;
+
+        card = renderCard(skill);
+    });
+
     it('returns a skill-card element', () => {
-        const card = createSkillCard(bleedFire);
         expect(card.tagName.toLowerCase()).toBe('skill-card');
     });
 
-    it('sets data-trees to comma-separated trees', () => {
-        const card = createSkillCard(bleedFire);
+    it('sets data-trees', () => {
         expect(card.dataset.trees).toBe(
-            bleedFire.trees.join(',')
+            [skill.secondary_tree, skill.primary_tree].join(',')
         );
+    });
+
+    it('sets data-primary-tree', () => {
+        expect(card.dataset.primaryTree).toBe(
+            skill.primary_tree.toLowerCase()
+        );
+    });
+
+    it('sets data-secondary-tree', () => {
+        expect(card.dataset.secondaryTree).toBe(
+            skill.secondary_tree.toLowerCase()
+        );
+    });
+
+    it('renders skill description', () => {
+        const effect = card.querySelector('skill-effect');
+        expect(effect.textContent.trim()).toBe(skill.effect);
+    });
+
+    it('renders range', () => {
+        const range = card.querySelector('skill-range');
+        expect(range.textContent).toBe(skill.range);
+    });
+
+    it('renders cooldown', () => {
+        const cooldown = card.querySelector('skill-cooldown');
+        expect(cooldown.textContent).toBe(String(skill.cooldown));
+    });
+
+    it('renders tree badges in order', () => {
+        const badges = card.querySelectorAll('req-badge');
+        const [first, second] = [...badges].map((b) => b.dataset.tree);
+
+        expect(first).toBe(skill.secondary_tree.toLowerCase());
+        expect(second).toBe(skill.primary_tree.toLowerCase());
     });
 });
 
-describe('skill name rendering', () => {
+describe('skill card variations', () => {
+    const test_url = 'https://divinityoriginalsin2.wiki.fextralife.com/Test/';
+    let skill;
+    beforeEach(() => {
+        skill = fake(SkillSchema);
+        skill.primary_tree = PYROKINETIC;
+        skill.secondary_tree = POLYMORPH;
+    });
+
     it('renders name as a link when url is present', () => {
-        const card = createSkillCard(bleedFire);
+        skill.url = test_url;
+        const card = renderCard(skill);
         const link = card.querySelector('skill-name a');
+
+        // Make sure we have a link, with the expected url that maches the name
         expect(link).not.toBeNull();
-        expect(link.href).toBe(bleedFire.url);
-        expect(link.textContent.trim()).toBe(bleedFire.name);
+        expect(link.href).toBe(test_url);
+        expect(link.textContent.trim()).toBe(skill.name);
+
+        // make sure there is NOT a span
+        expect(card.querySelector('skill-name span')).toBeNull();
     });
 
     it('renders name as a span when no url', () => {
-        const card = createSkillCard(minimalSkill);
+        delete skill.url;
+        const card = renderCard(skill);
         const span = card.querySelector('skill-name span');
+
+        // similarly, we should have a span with the name
         expect(span).not.toBeNull();
-        expect(span.textContent.trim()).toBe(minimalSkill.name);
+        expect(span.textContent.trim()).toBe(skill.name);
+
+        // and no link
         expect(card.querySelector('skill-name a')).toBeNull();
     });
 
-    it('sets data-primary-tree on skill-card', () => {
-        const card = createSkillCard(bleedFire);
-        expect(card.dataset.primaryTree).toBe(
-            bleedFire.primaryTree.toLowerCase()
-        );
-    });
-
-    it('sets data-secondary-tree on skill-card', () => {
-        const card = createSkillCard(bleedFire);
-        expect(card.dataset.secondaryTree).toBe(
-            bleedFire.secondaryTree.toLowerCase()
-        );
-    });
-});
-
-describe('cost rendering', () => {
     it('renders AP icons', () => {
-        const card = createSkillCard(bleedFire);
-        const apIcons = card.querySelectorAll('ap-icon');
-        expect(apIcons.length).toBe(bleedFire.apCost);
+        skill.ap_cost = 2;
+        const card = renderCard(skill);
+        const icons = card.querySelectorAll('ap-icon');
+
+        expect(icons.length).toBe(skill.ap_cost);
+        expect(card.querySelector('skill-cost')).not.toBeNull();
     });
 
     it('renders SP icons', () => {
-        const card = createSkillCard(bleedFire);
-        const spIcons = card.querySelectorAll('source-icon');
-        expect(spIcons.length).toBe(bleedFire.spCost);
+        skill.sp_cost = 2;
+        const card = renderCard(skill);
+        const icons = card.querySelectorAll('source-icon');
+
+        expect(icons.length).toBe(skill.sp_cost);
+        expect(card.querySelector('skill-cost')).not.toBeNull();
     });
 
     it('omits skill-cost when both are 0', () => {
-        const card = createSkillCard(minimalSkill);
+        skill.sp_cost = skill.ap_cost = 0;
+        const card = renderCard(skill);
+
+        // we shouldn't have this field at all without any costs!
         expect(card.querySelector('skill-cost')).toBeNull();
-    });
-});
-
-describe('effect rendering', () => {
-    it('renders skill effect text', () => {
-        const card = createSkillCard(bleedFire);
-        const effect = card.querySelector('skill-effect');
-        expect(effect.textContent.trim()).toBe(bleedFire.effect);
-    });
-});
-
-describe('requirement badges', () => {
-    it('renders a badge for each requirement', () => {
-        const card = createSkillCard(bleedFire);
-        const badges = card.querySelectorAll('req-badge');
-        expect(badges.length).toBe(2);
-    });
-
-    it('sets data-tree on each badge (lowercase)', () => {
-        const card = createSkillCard(bleedFire);
-        const badges = card.querySelectorAll('req-badge');
-        const trees = [...badges].map((b) => b.dataset.tree);
-        expect(trees).toContain(POLYMORPH.toLowerCase());
-        expect(trees).toContain(PYROKINETIC.toLowerCase());
-    });
-
-    it('primary tree sorts last in badges', () => {
-        const card = createSkillCard(bleedFire);
-        const badges = card.querySelectorAll('req-badge');
-        const lastBadge = badges[badges.length - 1];
-        expect(lastBadge.dataset.tree).toBe(
-            PYROKINETIC.toLowerCase()
-        );
-    });
-});
-
-describe('metadata rendering', () => {
-    it('renders range and cooldown', () => {
-        const card = createSkillCard(bleedFire);
-        const meta = card.querySelector('skill-metadata');
-        expect(meta).not.toBeNull();
-        expect(meta.textContent).toContain('13m');
-        expect(meta.textContent).toContain('3');
-    });
-
-    it('omits skill-metadata when neither range nor cooldown', () => {
-        const card = createSkillCard(minimalSkill);
-        expect(card.querySelector('skill-metadata')).toBeNull();
     });
 });

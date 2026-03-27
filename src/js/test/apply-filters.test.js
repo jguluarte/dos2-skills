@@ -19,12 +19,12 @@ function getVisibleSkills(skills, primary, secondary = []) {
 // ── filter matching ─────────────────────────────────────
 
 describe('filters behave as expected', () => {
-    const pyroNecro = makeSkill('Pyro+Necro', [PYROKINETIC, NECROMANCER]);
-    const aeroNecro = makeSkill('Aero+Necro', [AEROTHEURGE, NECROMANCER]);
-    const pyroWar = makeSkill('Pyro+Warfare', [PYROKINETIC, WARFARE]);
-    const hydroWar = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
-    const sumPyro = makeSkill('Summon+Pyro', [SUMMONING, PYROKINETIC]);
-    const sumNecro = makeSkill('Summon+Necro', [SUMMONING, NECROMANCER]);
+    const pyroNecro = makeSkill('Pyro+Necro',    [PYROKINETIC, NECROMANCER]);
+    const aeroNecro = makeSkill('Aero+Necro',    [AEROTHEURGE, NECROMANCER]);
+    const pyroWar   = makeSkill('Pyro+Warfare',  [PYROKINETIC, WARFARE]);
+    const hydroWar  = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
+    const sumPyro   = makeSkill('Summon+Pyro',   [SUMMONING, PYROKINETIC]);
+    const sumNecro  = makeSkill('Summon+Necro',  [SUMMONING, NECROMANCER]);
 
     const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
     const allNames = skills.map((s) => s.name).sort();

@@ -1,8 +1,7 @@
 - name: Bleed Fire
-  requirements:
-    Pyrokinetic: 1
-    Polymorph: 1
   primary_tree: Pyrokinetic
+  secondary_tree: Polymorph
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Bleed+Fire
   ap_cost: 1
   sp_cost: 0
@@ -13,10 +12,9 @@
     beneath each target and ignites surfaces in the area.
 
 - name: Corpse Explosion
-  requirements:
-    Pyrokinetic: 1
-    Necromancer: 1
   primary_tree: Pyrokinetic
+  secondary_tree: Necromancer
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Corpse+Explosion
   ap_cost: 1
   sp_cost: 0
@@ -25,10 +23,9 @@
   effect: Explode the target corpse, dealing physical damage in the area
 
 - name: Sabotage
-  requirements:
-    Pyrokinetic: 1
-    Scoundrel: 1
   primary_tree: Pyrokinetic
+  secondary_tree: Scoundrel
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Sabotage
   ap_cost: 1
   sp_cost: 0
@@ -39,10 +36,9 @@
     explodes in their inventory.
 
 - name: Sparking Swings
-  requirements:
-    Pyrokinetic: 1
-    Warfare: 1
   primary_tree: Pyrokinetic
+  secondary_tree: Warfare
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Sparking+Swings
   ap_cost: 1
   sp_cost: 0
@@ -54,10 +50,9 @@
     to hit the closest enemy.
 
 - name: Mass Corpse Explosion
-  requirements:
-    Pyrokinetic: 2
-    Necromancer: 2
   primary_tree: Pyrokinetic
+  secondary_tree: Necromancer
+  investment: 2
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mass+Corpse+Explosion
   ap_cost: 1
@@ -67,10 +62,9 @@
   effect: Explode all corpses around you, dealing physical damage in the area
 
 - name: Master of Sparks
-  requirements:
-    Pyrokinetic: 2
-    Warfare: 2
   primary_tree: Pyrokinetic
+  secondary_tree: Warfare
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Master+of+Sparks
   ap_cost: 1
   sp_cost: 1
@@ -82,10 +76,9 @@
     melee attacks.
 
 - name: Mass Sabotage
-  requirements:
-    Pyrokinetic: 2
-    Scoundrel: 2
   primary_tree: Pyrokinetic
+  secondary_tree: Scoundrel
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Sabotage
   ap_cost: 2
   sp_cost: 1
@@ -96,10 +89,9 @@
     target circle.
 
 - name: Corrosive Touch
-  requirements:
-    Geomancer: 1
-    Necromancer: 1
   primary_tree: Geomancer
+  secondary_tree: Necromancer
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Touch
   ap_cost: 1
   sp_cost: 0
@@ -110,10 +102,9 @@
     <status>Acid</status> status.
 
 - name: Oily Carapace
-  requirements:
-    Geomancer: 1
-    Warfare: 1
   primary_tree: Geomancer
+  secondary_tree: Warfare
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Oily+Carapace
   ap_cost: 1
   sp_cost: 0
@@ -124,10 +115,9 @@
     Removes <status>Slowed</status>.
 
 - name: Turn to Oil
-  requirements:
-    Geomancer: 1
-    Polymorph: 1
   primary_tree: Geomancer
+  secondary_tree: Polymorph
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Turn+to+Oil
   ap_cost: 1
   sp_cost: 0
@@ -138,10 +128,9 @@
     <status>Shocked</status> from characters.
 
 - name: Venom Coating
-  requirements:
-    Geomancer: 1
-    Scoundrel: 1
   primary_tree: Geomancer
+  secondary_tree: Scoundrel
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Venom+Coating
   ap_cost: 1
   sp_cost: 0
@@ -152,10 +141,9 @@
     your weapon skills and attacks.
 
 - name: Corrosive Spray
-  requirements:
-    Geomancer: 2
-    Necromancer: 2
   primary_tree: Geomancer
+  secondary_tree: Necromancer
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Corrosive+Spray
   ap_cost: 2
   sp_cost: 1
@@ -166,10 +154,9 @@
     <status>Acid</status> and <status>Atrophy</status>.
 
 - name: Mass Oily Carapace
-  requirements:
-    Geomancer: 2
-    Warfare: 2
   primary_tree: Geomancer
+  secondary_tree: Warfare
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Oily+Carapace
   ap_cost: 2
   sp_cost: 0
@@ -180,10 +167,9 @@
     to Physical Armour.
 
 - name: Venomous Aura
-  requirements:
-    Geomancer: 2
-    Scoundrel: 2
   primary_tree: Geomancer
+  secondary_tree: Scoundrel
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Venomous+Aura
   ap_cost: 2
   sp_cost: 1
@@ -194,10 +180,9 @@
     Damage</poison> to weapon skills and attacks.
 
 - name: Healing Tears
-  requirements:
-    Hydrosophist: 1
-    Polymorph: 1
   primary_tree: Hydrosophist
+  secondary_tree: Polymorph
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Healing+Tears
   ap_cost: 1
   sp_cost: 0
@@ -208,10 +193,9 @@
     range near you, a healing tear bathes them.
 
 - name: Vampiric Hunger
-  requirements:
-    Hydrosophist: 1
-    Scoundrel: 1
   primary_tree: Hydrosophist
+  secondary_tree: Scoundrel
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger
   ap_cost: 1
   sp_cost: 0
@@ -223,10 +207,9 @@
     Vitality.
 
 - name: Cleanse Wounds
-  requirements:
-    Hydrosophist: 1
-    Warfare: 1
   primary_tree: Hydrosophist
+  secondary_tree: Warfare
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Cleanse+Wounds
   ap_cost: 2
   sp_cost: 0
@@ -239,10 +222,9 @@
     <status>Suffocation</status>, and <status>Acid</status>.
 
 - name: Mass Cleanse Wounds
-  requirements:
-    Hydrosophist: 2
-    Warfare: 2
   primary_tree: Hydrosophist
+  secondary_tree: Warfare
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cleanse+Wounds
   ap_cost: 1
   sp_cost: 1
@@ -256,10 +238,9 @@
     <status>Suffocation</status>, and <status>Acid</status>.
 
 - name: Vampiric Hunger Aura
-  requirements:
-    Hydrosophist: 2
-    Scoundrel: 2
   primary_tree: Hydrosophist
+  secondary_tree: Scoundrel
+  investment: 2
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Vampiric+Hunger+Aura
   ap_cost: 1
@@ -272,10 +253,9 @@
     Vitality.
 
 - name: Breathing Bubble
-  requirements:
-    Aerotheurge: 1
-    Warfare: 1
   primary_tree: Aerotheurge
+  secondary_tree: Warfare
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Breathing+Bubble
   ap_cost: 1
   sp_cost: 0
@@ -287,10 +267,9 @@
     <status>Silence</status>.
 
 - name: Vacuum Touch
-  requirements:
-    Aerotheurge: 1
-    Necromancer: 1
   primary_tree: Aerotheurge
+  secondary_tree: Necromancer
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Touch
   ap_cost: 1
   sp_cost: 0
@@ -301,10 +280,9 @@
     <status>Silence</status> on target
 
 - name: Vaporize
-  requirements:
-    Aerotheurge: 1
-    Polymorph: 1
   primary_tree: Aerotheurge
+  secondary_tree: Polymorph
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Vaporize
   ap_cost: 1
   sp_cost: 0
@@ -316,10 +294,9 @@
     Ice, or Lava surfaces
 
 - name: Smoke Cover
-  requirements:
-    Aerotheurge: 1
-    Scoundrel: 1
   primary_tree: Aerotheurge
+  secondary_tree: Scoundrel
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Smoke+Cover
   ap_cost: 1
   sp_cost: 0
@@ -328,10 +305,9 @@
   effect: Create a smoke cloud around you, hiding from sight.
 
 - name: Vacuum Aura
-  requirements:
-    Aerotheurge: 2
-    Necromancer: 2
   primary_tree: Aerotheurge
+  secondary_tree: Necromancer
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Vacuum+Aura
   ap_cost: 2
   sp_cost: 1
@@ -343,10 +319,9 @@
     on enemies
 
 - name: Mass Breathing Bubbles
-  requirements:
-    Aerotheurge: 2
-    Warfare: 2
   primary_tree: Aerotheurge
+  secondary_tree: Warfare
+  investment: 2
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mass+Breathing+Bubbles
   ap_cost: 1
@@ -359,10 +334,9 @@
     <status>Suffocation</status> and <status>Silence</status>.
 
 - name: Blessed Smoke Cloud
-  requirements:
-    Aerotheurge: 2
-    Scoundrel: 2
   primary_tree: Aerotheurge
+  secondary_tree: Scoundrel
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Blessed+Smoke+Cloud
   ap_cost: 1
   sp_cost: 2
@@ -372,10 +346,9 @@
     Conjure a cloud of thick blessed smoke that makes characters invisible.
 
 - name: Flaming Skin
-  requirements:
-    Polymorph: 2
-    Pyrokinetic: 2
   primary_tree: Pyrokinetic
+  secondary_tree: Polymorph
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
   ap_cost: 1
   sp_cost: 1
@@ -385,10 +358,9 @@
     You get immunity to fire, but lowered resistance to water. You bleed fire.
 
 - name: Icy Skin
-  requirements:
-    Polymorph: 2
-    Hydrosophist: 2
   primary_tree: Hydrosophist
+  secondary_tree: Polymorph
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
   ap_cost: 1
   sp_cost: 1
@@ -398,10 +370,9 @@
     You get immunity to water, but lowered resistance to fire. You bleed ice.
 
 - name: Poisonous Skin
-  requirements:
-    Polymorph: 2
-    Geomancer: 2
   primary_tree: Geomancer
+  secondary_tree: Polymorph
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
   ap_cost: 1
   sp_cost: 1
@@ -412,10 +383,9 @@
     bleed poison.
 
 - name: Jellyfish Skin
-  requirements:
-    Polymorph: 2
-    Aerotheurge: 2
   primary_tree: Aerotheurge
+  secondary_tree: Polymorph
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
   ap_cost: 1
   sp_cost: 1
@@ -426,10 +396,9 @@
     resistance to poison and earth damage.
 
 - name: Electric Infusion
-  requirements:
-    Summoning: 1
-    Aerotheurge: 1
   primary_tree: Summoning
+  secondary_tree: Aerotheurge
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Electric+Infusion
   ap_cost: 1
   sp_cost: 0
@@ -440,10 +409,9 @@
     Discharge</aerotheurge>.
 
 - name: Fire Infusion
-  requirements:
-    Summoning: 1
-    Pyrokinetic: 1
   primary_tree: Summoning
+  secondary_tree: Pyrokinetic
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Fire+Infusion
   ap_cost: 1
   sp_cost: 0
@@ -452,10 +420,9 @@
   effect: Change Incarnate's element to fire, unlocking <pyro>Fireball</pyro>.
 
 - name: Poison Infusion
-  requirements:
-    Summoning: 1
-    Geomancer: 1
   primary_tree: Summoning
+  secondary_tree: Geomancer
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Poison+Infusion
   ap_cost: 1
   sp_cost: 0
@@ -466,10 +433,9 @@
     Dart</geo-poison>.
 
 - name: Water Infusion
-  requirements:
-    Summoning: 1
-    Hydrosophist: 1
   primary_tree: Summoning
+  secondary_tree: Hydrosophist
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Water+Infusion
   ap_cost: 1
   sp_cost: 0
@@ -480,10 +446,9 @@
     <hydro>Restoration</hydro>.
 
 - name: Blood Infusion
-  requirements:
-    Summoning: 1
-    Necromancer: 1
   primary_tree: Summoning
+  secondary_tree: Necromancer
+  investment: 1
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -493,10 +458,9 @@
     Swarm</necro>.
 
 - name: Oil Infusion
-  requirements:
-    Summoning: 2
-    Geomancer: 2
   primary_tree: Summoning
+  secondary_tree: Geomancer
+  investment: 2
   ap_cost: 1
   sp_cost: 0
   range: 13m
@@ -505,10 +469,9 @@
     Change Incarnate's element to oil, unlocking <geo>Fossil Strike</geo>.
 
 - name: Acid Infusion
-  requirements:
-    Summoning: 2
-    Geomancer: 2
   primary_tree: Summoning
+  secondary_tree: Geomancer
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Acid+Infusion
   ap_cost: 1
   sp_cost: 2
@@ -519,10 +482,9 @@
     Dart</geo-poison> and <geo-poison>Acid Spores</geo-poison>.
 
 - name: Cursed Electric Infusion
-  requirements:
-    Summoning: 2
-    Aerotheurge: 2
   primary_tree: Summoning
+  secondary_tree: Aerotheurge
+  investment: 2
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Electric+Infusion
   ap_cost: 1
@@ -535,10 +497,9 @@
     <aerotheurge>Closed Circuit</aerotheurge>.
 
 - name: Ice Infusion
-  requirements:
-    Summoning: 2
-    Hydrosophist: 2
   primary_tree: Summoning
+  secondary_tree: Hydrosophist
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Ice+Infusion
   ap_cost: 1
   sp_cost: 2
@@ -549,10 +510,9 @@
     <hydro>Restoration</hydro> and <hydro>Steam Lance</hydro>.
 
 - name: Necrofire Infusion
-  requirements:
-    Summoning: 2
-    Pyrokinetic: 2
   primary_tree: Summoning
+  secondary_tree: Pyrokinetic
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Necrofire+Infusion
   ap_cost: 1
   sp_cost: 2
@@ -563,10 +523,9 @@
     and <pyro>Epidemic of Fire</pyro>.
 
 - name: Throw Dust
-  requirements:
-    Huntsman: 1
-    Geomancer: 1
   primary_tree: Geomancer
+  secondary_tree: Huntsman
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Throw+Dust
   ap_cost: 2
   sp_cost: 0
@@ -577,10 +536,9 @@
     Damage</earth>. Clears surfaces and clouds in the area.
 
 - name: Throw Explosive Trap
-  requirements:
-    Huntsman: 1
-    Pyrokinetic: 1
   primary_tree: Pyrokinetic
+  secondary_tree: Huntsman
+  investment: 1
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Throw+Explosive+Trap
   ap_cost: 1
@@ -592,10 +550,9 @@
     activate. When active, trap will explode when a character approaches it.
 
 - name: Deploy Mass Traps
-  requirements:
-    Huntsman: 2
-    Pyrokinetic: 2
   primary_tree: Pyrokinetic
+  secondary_tree: Huntsman
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Deploy+Mass+Traps
   ap_cost: 3
   sp_cost: 1
@@ -606,10 +563,9 @@
     activate. When active, trap will explode when a character approaches it.
 
 - name: Cursed Blood Infusion
-  requirements:
-    Summoning: 2
-    Necromancer: 2
   primary_tree: Summoning
+  secondary_tree: Necromancer
+  investment: 2
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Cursed+Blood+Infusion
   ap_cost: 1
@@ -621,10 +577,9 @@
     Swarm</necro> and <necro>Grasp of the Starved</necro>.
 
 - name: Dust Blast
-  requirements:
-    Geomancer: 2
-    Huntsman: 2
   primary_tree: Geomancer
+  secondary_tree: Huntsman
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Dust+Blast
   ap_cost: 3
   sp_cost: 1
@@ -635,10 +590,9 @@
     Earth Damage</earth>.
 
 - name: Cryotherapy
-  requirements:
-    Huntsman: 1
-    Hydrosophist: 1
   primary_tree: Hydrosophist
+  secondary_tree: Huntsman
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Cryotherapy
   ap_cost: 1
   sp_cost: 1
@@ -649,10 +603,9 @@
     Removes <status>Burning</status> and <status>Necrofire</status>.
 
 - name: Mass Cryotherapy
-  requirements:
-    Huntsman: 2
-    Hydrosophist: 2
   primary_tree: Hydrosophist
+  secondary_tree: Huntsman
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cryotherapy
   ap_cost: 2
   sp_cost: 2
@@ -663,10 +616,9 @@
     surfaces to Magic Armour.
 
 - name: Erratic Wisp
-  requirements:
-    Huntsman: 1
-    Aerotheurge: 1
   primary_tree: Aerotheurge
+  secondary_tree: Huntsman
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Erratic+Wisp
   ap_cost: 1
   sp_cost: 0
@@ -677,10 +629,9 @@
     are attacked. Increases Air Resistance by 40%.
 
 - name: Evasive Aura
-  requirements:
-    Huntsman: 2
-    Aerotheurge: 2
   primary_tree: Aerotheurge
+  secondary_tree: Huntsman
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Evasive+Aura
   ap_cost: 2
   sp_cost: 1
@@ -691,10 +642,9 @@
     your Movement Speed is increased by 1m.
 
 - name: Raining Blood
-  requirements:
-    Necromancer: 1
-    Hydrosophist: 1
   primary_tree: Hydrosophist
+  secondary_tree: Necromancer
+  investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ap_cost: 2
   sp_cost: 0
@@ -703,10 +653,9 @@
   effect: Create a blood surface beneath every target in range.
 
 - name: Blood Storm
-  requirements:
-    Necromancer: 2
-    Hydrosophist: 2
   primary_tree: Hydrosophist
+  secondary_tree: Necromancer
+  investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ap_cost: 4
   sp_cost: 3

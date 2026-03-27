@@ -25,7 +25,10 @@ export default [
             "no-console": ["warn", {
                 allow: ["error", "warn"],
             }],
-            "one-var": ["error", "never"],
+            "one-var": ["error", {
+                "var": "never",
+                "const": "never",
+            }],
             "no-nested-ternary": "error",
 
             // === Error Prevention ===
@@ -128,7 +131,7 @@ export default [
 
             // === Warn-only (not dev blockers; caught by CI and pre-merge) ===
             "no-warning-comments": ["warn", {
-                terms: ["todo", "fixme", "hack", "blocker"],
+                terms: ["hack", "blocker"],
             }],
             "no-unreachable": "warn",
             "no-constant-condition": "warn",
@@ -196,12 +199,6 @@ export default [
             "@stylistic/switch-colon-spacing": ["error", {
                 before: false,
                 after: true,
-            }],
-            "@stylistic/no-multi-spaces": ["error", {
-                exceptions: {
-                    "Property": true,
-                    "VariableDeclarator": true,
-                },
             }],
             "@stylistic/no-tabs": "error",
             "@stylistic/no-extra-semi": "error",
