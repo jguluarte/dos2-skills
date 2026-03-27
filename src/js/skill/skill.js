@@ -4,7 +4,8 @@ import { Schema } from './schema.js';
 export class Skill {
     constructor(data) {
         Object.assign(this, data);
-        this.trees = [this.secondaryTree, this.primaryTree];
+        this.trees = [this.secondaryTree, this.primaryTree]
+            .filter(Boolean);
     }
 
     static fromYAML(yaml) {

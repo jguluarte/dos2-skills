@@ -21,78 +21,66 @@ export function getValidSecondaryOptions(primary) {
 // Filter matching
 // ===========================
 
-export function shouldSkillShow(skillTrees, primaryFilter, secondaryFilters) {
-    // If we don't have any filters....SHOW IT :D
-    if (!primaryFilter && secondaryFilters.size === 0) return true;
+export function shouldSkillShow(skill, filters) {
+    const {
+        primary,
+        secondary = null,
+        showSingleTree = true,
+        showCrossClass = true,
+    } = filters;
 
-    // Summoning skills are kept separate: they only appear
-    // when summoning is explicitly selected, and non-summoning
-    // skills are hidden when summoning is selected.
-    const wantsSummoning = primaryFilter === SUMMONING;
-    const isSummoning = skillTrees.includes(SUMMONING);
-    if (wantsSummoning !== isSummoning) {
-        return false;
+    // Nothing shows without a primary filter
+    if (!primary) return false;
+
+    // Skill must have the primary tree
+    if (!skill.trees.includes(primary)) return false;
+
+    // Summoning isolation: only show when explicitly selected
+    const isSummoning = skill.trees.includes(SUMMONING);
+    if (isSummoning && primary !== SUMMONING) return false;
+    if (!isSummoning && primary === SUMMONING) return false;
+
+    // Skill type filtering
+    const isCrossClass = skill.trees.length > 1;
+    if (isCrossClass && !showCrossClass) return false;
+    if (!isCrossClass && !showSingleTree) return false;
+
+    // Secondary narrows cross-class only
+    if (secondary && isCrossClass) {
+        if (!skill.trees.includes(secondary)) return false;
     }
 
-    const primary = !primaryFilter || skillTrees.includes(primaryFilter);
-
-    const secondary = secondaryFilters.size === 0
-        || skillTrees.some((t) => secondaryFilters.has(t));
-
-    return primary && secondary;
-}
-
-/**
- * Clean secondary filters after a primary change: remove any that are
- * no longer valid for the new primary.
- */
-export function cleanSecondaryFilters(primaryFilter, secondaryFilters) {
-    const valid = getValidSecondaryOptions(primaryFilter);
-    return new Set([...secondaryFilters].filter((t) => valid.includes(t)));
+    return true;
 }
 
 // ===========================
 // URL state
 // ===========================
-
-/**
- * Parse filter state from a URL search string.
- * @param {string} searchString - e.g. "?and=Pyrokinetic&or=Warfare,Necromancer"
- * @returns {{ primaryFilter: string|null, secondaryFilters: Set<string> }}
- */
 export function parseFiltersFromURL(searchString) {
     const params = new URLSearchParams(searchString);
-    let primaryFilter = null;
-    let secondaryFilters = new Set();
 
-    const andFilter = params.get('and');
-    if (andFilter && ALL_TREES.includes(andFilter)) {
-        primaryFilter = andFilter;
+    let primary = null;
+    let secondary = null;
+
+    const p = params.get('primary');
+    if (p && ALL_TREES.includes(p)) primary = p;
+
+    const s = params.get('secondary');
+    if (s && ALL_TREES.includes(s)) secondary = s;
+
+    // Validate secondary against primary
+    if (primary && secondary) {
+        const valid = getValidSecondaryOptions(primary);
+        if (!valid.includes(secondary)) secondary = null;
     }
 
-    const orFilter = params.get('or');
-    if (orFilter) {
-        orFilter.split(',').forEach((tree) => {
-            if (ALL_TREES.includes(tree)) secondaryFilters.add(tree);
-        });
-    }
-
-    // Validate secondaries against primary
-    secondaryFilters = cleanSecondaryFilters(primaryFilter, secondaryFilters);
-
-    return { primaryFilter, secondaryFilters };
+    return { primary, secondary };
 }
 
-/**
- * Build a URL search string from filter state.
- * @returns {string} e.g. "?and=Pyrokinetic&or=Warfare" or ""
- */
-export function buildFilterQueryString(primaryFilter, secondaryFilters) {
+export function buildFilterQueryString(filters) {
     const params = new URLSearchParams();
-    if (primaryFilter) params.set('and', primaryFilter);
-    if (secondaryFilters.size > 0) {
-        params.set('or', Array.from(secondaryFilters).sort().join(','));
-    }
+    if (filters.primary) params.set('primary', filters.primary);
+    if (filters.secondary) params.set('secondary', filters.secondary);
     return params.toString() ? `?${params}` : '';
 }
 
@@ -103,36 +91,13 @@ export function buildFilterQueryString(primaryFilter, secondaryFilters) {
 /**
  * Build the filter summary string (pure — no DOM).
  */
-export function buildSummaryText(primaryFilter, secondaryFilters) {
-    if (!primaryFilter && secondaryFilters.size === 0) {
-        return 'Showing all skills';
+export function buildSummaryText(filters) {
+    if (!filters.primary) {
+        return 'Select a skill tree to browse';
     }
 
-    const primaryStr = `Showing all ${primaryFilter} skills`;
-    if (primaryFilter && secondaryFilters.size === 0) {
-        return primaryStr;
-    }
+    const parts = [filters.primary];
+    if (filters.secondary) parts.push(filters.secondary);
 
-    const trees = Array.from(secondaryFilters);
-
-    if (!primaryFilter) {
-        if (trees.length === 1) return `Showing all ${trees[0]} skills`;
-
-        const { before, after } = commaizeList(trees);
-        return `Showing skills with ${before} or ${after}`;
-    }
-
-    if (trees.length === 1) return `${primaryStr}, with ${trees[0]}`;
-
-    const { before, after } = commaizeList(trees);
-    return `${primaryStr}, with ${before} or ${after}`;
-}
-
-function commaizeList(list) {
-    const joined = list.join(', ');
-    const lastComma = joined.lastIndexOf(', ');
-    const before = joined.substring(0, lastComma);
-    const after = joined.substring(lastComma + 2);
-
-    return { before, after };
+    return `Showing ${parts.join(' + ')} skills`;
 }

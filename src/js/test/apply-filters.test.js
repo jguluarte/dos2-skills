@@ -2,106 +2,138 @@ import { describe, it, expect } from 'vitest';
 import { makeSkill } from './helpers.js';
 import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST, NECROMANCER, WARFARE,
+    SCOUNDREL,
 } from '@constants';
 import { shouldSkillShow } from '@js/filter-logic.js';
 
 // ── helpers ──────────────────────────────────────────────
 
-function getVisibleSkills(skills, primary, secondary = []) {
-    const secondarySet = new Set(secondary);
+function visible(skills, filters) {
     return skills
-        .filter((skill) =>
-            shouldSkillShow(skill.trees, primary, secondarySet))
+        .filter((skill) => shouldSkillShow(skill, filters))
         .map((skill) => skill.name)
         .sort();
 }
 
-// ── filter matching ─────────────────────────────────────
+// ── fixtures ─────────────────────────────────────────────
 
-describe('filters behave as expected', () => {
-    const pyroNecro = makeSkill('Pyro+Necro',    [PYROKINETIC, NECROMANCER]);
-    const aeroNecro = makeSkill('Aero+Necro',    [AEROTHEURGE, NECROMANCER]);
-    const pyroWar   = makeSkill('Pyro+Warfare',  [PYROKINETIC, WARFARE]);
-    const hydroWar  = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
-    const sumPyro   = makeSkill('Summon+Pyro',   [SUMMONING, PYROKINETIC]);
-    const sumNecro  = makeSkill('Summon+Necro',  [SUMMONING, NECROMANCER]);
+const pyroNecro = makeSkill('Pyro+Necro',    [PYROKINETIC, NECROMANCER]);
+const aeroNecro = makeSkill('Aero+Necro',    [AEROTHEURGE, NECROMANCER]);
+const pyroWar   = makeSkill('Pyro+Warfare',  [PYROKINETIC, WARFARE]);
+const hydroWar  = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
+const sumPyro   = makeSkill('Summon+Pyro',   [SUMMONING, PYROKINETIC]);
+const sumNecro  = makeSkill('Summon+Necro',  [SUMMONING, NECROMANCER]);
 
-    const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
-    const allNames = skills.map((s) => s.name).sort();
-    const summonNames = [sumNecro, sumPyro].map((s) => s.name).sort();
+const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
 
-    it('An absence of a filter renders all skills', () => {
-        expect(getVisibleSkills(skills, null)).toEqual(allNames);
+// ── no filter = empty ────────────────────────────────────
+
+describe('default state', () => {
+    it('shows nothing without a primary filter', () => {
+        expect(visible(skills, {})).toEqual([]);
     });
 
-    it('Invalid combination results in an empty list', () => {
-        const found = getVisibleSkills(skills, SUMMONING, [WARFARE]);
-        expect(found.length).toBe(0);
+    it('shows nothing with only secondary', () => {
+        expect(visible(skills, { secondary: WARFARE })).toEqual([]);
+    });
+});
+
+// ── primary filter ───────────────────────────────────────
+
+describe('primary filter', () => {
+    it('shows all skills with that tree', () => {
+        const found = visible(skills, { primary: PYROKINETIC });
+        expect(found).toContain(pyroNecro.name);
+        expect(found).toContain(pyroWar.name);
     });
 
-    describe(`${SUMMONING} skills behave differently...`, () => {
-        const nonSummonFilters = [
-            PYROKINETIC, AEROTHEURGE, NECROMANCER, WARFARE,
-        ];
+    it('does not show skills without that tree', () => {
+        const found = visible(skills, { primary: PYROKINETIC });
+        expect(found).not.toContain(hydroWar.name);
+        expect(found).not.toContain(aeroNecro.name);
+    });
 
-        for (const tree of nonSummonFilters) {
-            describe(`${tree} as the primary filter...`, () => {
-                const found = getVisibleSkills(skills, tree);
+    it('matches regardless of primary/secondary position in data', () => {
+        // NECROMANCER is secondary_tree in pyroNecro and aeroNecro
+        const found = visible(skills, { primary: NECROMANCER });
+        expect(found).toContain(pyroNecro.name);
+        expect(found).toContain(aeroNecro.name);
+    });
+});
 
-                it('finds skills', () => {
-                    expect(found.length).toBeGreaterThan(0);
-                });
+// ── secondary filter (narrows cross-class) ───────────────
 
-                it('does not include summoning skills', () => {
-                    expect(
-                        summonNames.every((n) => !found.includes(n))
-                    ).toBe(true);
-                });
-            });
-        }
-
-        describe('Summoning as the primary filter...', () => {
-            it('all summoning skills can be found', () => {
-                const found = getVisibleSkills(skills, SUMMONING);
-                expect(found).toEqual(summonNames);
-            });
-
-            for (const skill of [sumNecro, sumPyro]) {
-                const found = getVisibleSkills(
-                    skills, SUMMONING, [skill.secondaryTree]);
-
-                it(`finds ${skill.name} by ${skill.secondaryTree}`, () => {
-                    expect(found.length).toBe(1);
-                    expect(found[0]).toBe(skill.name);
-                });
-            }
+describe('secondary filter', () => {
+    it('narrows to specific pairing', () => {
+        const found = visible(skills, {
+            primary: PYROKINETIC,
+            secondary: NECROMANCER,
         });
+        expect(found).toEqual([pyroNecro.name]);
     });
 
-    describe(`Primary filter --> ${NECROMANCER}`, () => {
-        it('finds two skills', () => {
-            const found = getVisibleSkills(skills, NECROMANCER);
-            expect(found.length).toBe(2);
+    it('invalid pairing shows nothing', () => {
+        const found = visible(skills, {
+            primary: SUMMONING,
+            secondary: WARFARE,
         });
+        expect(found).toEqual([]);
+    });
+});
 
-        for (const skill of [pyroNecro, aeroNecro]) {
-            const found = getVisibleSkills(
-                skills, NECROMANCER, [skill.primaryTree]);
+// ── summoning isolation ──────────────────────────────────
 
-            it(`finds ${skill.name} by ${skill.primaryTree}`, () => {
-                expect(found.length).toBe(1);
-                expect(found[0]).toBe(skill.name);
-            });
-        }
+describe('summoning', () => {
+    it('only shows when explicitly selected', () => {
+        const found = visible(skills, { primary: SUMMONING });
+        expect(found).toContain(sumPyro.name);
+        expect(found).toContain(sumNecro.name);
+        expect(found.length).toBe(2);
     });
 
-    describe('secondary filters only', () => {
-        it('finds four skills', () => {
-            const expected = [pyroNecro, aeroNecro, pyroWar, hydroWar];
+    it('excluded from non-summoning primary', () => {
+        const found = visible(skills, { primary: PYROKINETIC });
+        expect(found).not.toContain(sumPyro.name);
+    });
 
-            expect(
-                getVisibleSkills(skills, null, [NECROMANCER, WARFARE])
-            ).toEqual(expected.map((s) => s.name).sort());
+    it('narrows by secondary', () => {
+        const found = visible(skills, {
+            primary: SUMMONING,
+            secondary: NECROMANCER,
         });
+        expect(found).toEqual([sumNecro.name]);
+    });
+});
+
+// ── skill type toggles ──────────────────────────────────
+
+describe('skill type toggles', () => {
+    // NOTE: all current fixtures are cross-class (two trees).
+    // When single-tree skills exist, these tests expand.
+
+    it('cross-class OFF hides dual-tree skills', () => {
+        const found = visible(skills, {
+            primary: PYROKINETIC,
+            showCrossClass: false,
+        });
+        expect(found).toEqual([]);
+    });
+
+    it('single-tree OFF has no effect on dual-tree skills', () => {
+        const found = visible(skills, {
+            primary: PYROKINETIC,
+            showSingleTree: false,
+        });
+        // all pyro skills are cross-class, so they still show
+        expect(found.length).toBeGreaterThan(0);
+    });
+
+    it('both OFF shows nothing', () => {
+        const found = visible(skills, {
+            primary: PYROKINETIC,
+            showCrossClass: false,
+            showSingleTree: false,
+        });
+        expect(found).toEqual([]);
     });
 });
