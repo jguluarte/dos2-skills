@@ -4,6 +4,7 @@ import { aliases } from './vite.aliases.js';
 
 export default defineConfig({
     root: 'src',
+    base: '/dos2-skills/',
     resolve: { alias: aliases },
     build: {
         outDir: aliases['@dist'],
