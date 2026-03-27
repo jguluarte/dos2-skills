@@ -48,3 +48,6 @@ export const VALID_SKILL_COMBINATION = {
     [POLYMORPH]:   ELEMENTAL_TREES,
     [NECROMANCER]: ELEMENTAL_TREES,
 };
+
+export const SP_MAX = 3;
+export const AP_MAX = 4;

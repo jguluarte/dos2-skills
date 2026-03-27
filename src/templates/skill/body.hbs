@@ -9,15 +9,15 @@
 
     {{#if hasCost}}
         <skill-cost>
-            {{#if spIcons}}
+            {{#if spCost}}
                 <span>
-                    {{#each spIcons}}<source-icon></source-icon>{{/each}}
+                    {{#repeat spCost}}<source-icon></source-icon>{{/repeat}}
                 </span>
             {{/if}}
 
-            {{#if apIcons}}
+            {{#if apCost}}
                 <span>
-                    {{#each apIcons}}<ap-icon></ap-icon>{{/each}}
+                    {{#repeat apCost}}<ap-icon></ap-icon>{{/repeat}}
                 </span>
             {{/if}}
         </skill-cost>
@@ -36,9 +36,7 @@
     </req-badge>
 </skill-requirements>
 
-{{#if hasMetadata}}
-    <skill-metadata>
-        {{#if range}}<div>Range: {{range}}</div>{{/if}}
-        {{#if cooldown}}<div>Cooldown: {{cooldown}}</div>{{/if}}
-    </skill-metadata>
-{{/if}}
+<skill-metadata>
+    <skill-range>{{range}}</skill-range>
+    <skill-cooldown>{{cooldown}}</skill-cooldown>
+</skill-metadata>

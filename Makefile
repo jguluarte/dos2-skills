@@ -18,7 +18,7 @@ npm: .make-timestamp.npm
 	@touch $@
 
 start:
-	npx vite --config .config/vite.config.js
+	npx vite --config .config/vite.config.js --port 8000
 
 kill:
 	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \
@@ -51,7 +51,8 @@ lint-js:
 	$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) src/ .config/
 
 lint-fix:
-	$(ESLINT_DIFF) --fix src/ .config/
+	ESLINT_PLUGIN_DIFF_COMMIT=$$(git merge-base HEAD @{upstream}) \
+		$(ESLINT_DIFF) --fix src/ .config/
 
 lint-fix-all:
 	$(ESLINT) --fix src/ .config/

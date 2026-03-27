@@ -1,5 +1,6 @@
 import { SUMMONING, ELEMENTAL_TREES } from '@constants';
 import { Skill, createSkillCard } from '@js/skill';
+import skillsYaml from '@data/skills.yaml?raw';
 import {
     PRIMARY_FILTER_TREES,
     getValidSecondaryOptions,
@@ -250,14 +251,12 @@ function initializeFilterBar() {
 // Initialization
 // ===========================
 
-async function initialize() {
+function initialize() {
     try {
-        const response = await fetch('data/skills.yaml');
-        const yamlText = await response.text();
         skillsByCategory = { [SUMMONING]: [] };
         ELEMENTAL_TREES.forEach((t) => { skillsByCategory[t] = []; });
-        for (const raw of jsyaml.load(yamlText)) {
-            const skill = new Skill(raw);
+        for (const raw of jsyaml.load(skillsYaml)) {
+            const skill = Skill.fromYAML(raw);
             skillsByCategory[skill.primaryTree].push(skill);
         }
 
