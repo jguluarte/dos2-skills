@@ -439,6 +439,14 @@ skill-metadata {
   font-style: italic;
 }
 
+skill-range::before {
+  content: 'Range: ';
+}
+
+skill-cooldown::before {
+  content: 'Cooldown: ';
+}
+
 // ===========================
 // No Results Message
 // ===========================

@@ -1,4 +1,5 @@
 export { Skill } from './skill.js';
+export { Schema } from './schema.js';
 
 import mainTemplate from '@templates/skill/card.hbs?raw';
 import bodyPartial from '@templates/skill/body.hbs?raw';
@@ -9,6 +10,6 @@ const _compiled = Handlebars.compile(mainTemplate);
 
 export function createSkillCard(skill) {
     const t = document.createElement('template');
-    t.innerHTML = _compiled(skill.toJSON());
+    t.innerHTML = _compiled(skill);
     return t.content.firstElementChild;
 }
