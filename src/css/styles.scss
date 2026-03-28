@@ -485,13 +485,6 @@ status {
 // Responsive Design
 // ===========================
 
-// Desktop
-@media (width >= 769px) {
-    .filter-overlay {
-        display: none;
-    }
-}
-
 // Mobile
 @media (width <= 768px) {
     .filter-groups {

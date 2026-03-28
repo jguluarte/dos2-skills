@@ -281,6 +281,191 @@
     25 fireballs come crashing from the sky. Each does <fire>20% Fire
     Damage</fire> within a 3m range from impact.
 
+- name: Contamination
+  primary_tree: Geomancer
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Contamination
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  effect: >
+    Deals <poison>55% Poison Damage</poison> to enemies and undead allies
+    around you and can poison them. Turns water, blood surfaces and clouds
+    into poison!
+
+- name: Fortify
+  primary_tree: Geomancer
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fortify
+  ap_cost: 1
+  sp_cost: 0
+  range: 15m
+  cooldown: 4
+  effect: >
+    Provides [100% of total heal value] Physical Armour, and set
+    <status>Fortified</status> for 3 turn(s). While
+    <status>Fortified</status>, the target cannot be teleported. Removes
+    <status>Poisoned</status>, <status>Bleeding</status>,
+    <status>Burning</status>, <status>Acid</status>,
+    <status>Decaying</status>.
+
+- name: Fossil Strike
+  primary_tree: Geomancer
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fossil+Strike
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    A giant rock with sticky oil that deals <earth>85% Earth
+    Damage</earth>. Creates an oil surface where it lands.
+
+- name: Poison Dart
+  primary_tree: Geomancer
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Poison+Dart
+  ap_cost: 2
+  sp_cost: 0
+  range: 15m
+  cooldown: 4
+  effect: >
+    Cast a magical poisonous dart that does <poison>100% Poison
+    Damage</poison>, and creates a puddle of poison.
+
+- name: Earthquake
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Earthquake
+  ap_cost: 3
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 5
+  effect: >
+    Deals <earth>100% Earth Damage</earth> and <status>Knocked
+    Down</status> enemy characters and items around you. Creates 8
+    random oil surfaces within the area.
+
+- name: Impalement
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Impalement
+  ap_cost: 2
+  sp_cost: 0
+  range: 15m
+  cooldown: 4
+  effect: >
+    Spikes impale all characters and items, setting
+    <status>Crippled</status> and dealing <earth>100% Earth
+    Damage</earth>. Also creates an oil puddle.
+
+- name: Poison Wave
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Poison+Wave
+  ap_cost: 2
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 4
+  effect: >
+    Poison erupts from the caster in a circular wave, dealing
+    <poison>100% Poison Damage</poison> and forming poison clouds. Gives
+    <status>immunity to poison and earth damage</status> for 1 turn.
+
+- name: Reactive Armour
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Reactive+Armour
+  ap_cost: 2
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 6
+  effect: >
+    Deal <physical>20% Physical Damage</physical>, based on your current
+    <physical>Physical Armour</physical>, in a wave of metal spikes to
+    everyone in the area (including yourself).
+
+- name: Worm Tremor
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Worm+Tremor
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Deals <earth>50% Earth Damage</earth> to each character in the area.
+    At your command, poisonous worms slither up from the earth, attaching
+    to every character in the area who is not protected by Magical
+    Armour. Set <status>Entangled</status> for 2 turn(s). Affected
+    characters cannot move or teleport, and they receive <poison>30%
+    Poison Damage</poison> each turn.
+
+- name: Acid Spores
+  primary_tree: Geomancer
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Acid+Spores
+  ap_cost: 3
+  sp_cost: 2
+  range: 13m
+  cooldown: 5
+  effect: >
+    Shoot 3 acid spores, dealing <poison>90% Poison Damage</poison>. Set
+    <status>Poisoned</status> for 3 turn(s).
+
+- name: Living Wall
+  primary_tree: Geomancer
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Living+Wall
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Vines sprout from the ground to block the path in the target area,
+    emitting <cloud>poison clouds</cloud> around them. Lasts 3 turns.
+
+- name: Siphon Poison
+  primary_tree: Geomancer
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Siphon+Poison
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 5
+  effect: >
+    Remove <cloud>poison surfaces and clouds</cloud>. Gain
+    <poison>poison damage</poison> bonus to weapon attacks and skills
+    (dependent upon size of <poison>poison</poison> area cleared). Set
+    <status>Siphon Poison</status> for 2 turn(s).
+
+- name: Pyroclastic Eruption
+  primary_tree: Geomancer
+  investment: 5
+  memory: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Pyroclastic+Eruption
+  ap_cost: 3
+  sp_cost: 3
+  range: 13m
+  cooldown: 5
+  effect: >
+    Multiple oil-filled rocks erupt from the caster at all enemies in
+    the area. On impact, they create oil surfaces and deal <earth>300%
+    Earth Damage</earth>.
+
 - name: Corrosive Touch
   primary_tree: Geomancer
   secondary_tree: Necromancer
@@ -371,6 +556,35 @@
   effect: >
     Allies in range receive Venom Coating, which adds <poison>[X] Poison
     Damage</poison> to weapon skills and attacks.
+
+- name: Armour of Frost
+  primary_tree: Hydrosophist
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Armour+of+Frost
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Ice forms a defensive barrier around the target, providing
+    <magical>[100% of total heal value] Magical Armour</magical>. Cures
+    <status>Burning</status>, <status>Poisoned</status>,
+    <status>Stunned</status>, <status>Frozen</status>,
+    <status>Suffocating</status> and <status>Petrified</status>.
+
+- name: Rain
+  primary_tree: Hydrosophist
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Rain
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 6
+  effect: >
+    Create a spreading water surface which douses fires. Set
+    <status>Wet</status> status on characters in the area.
 
 - name: Healing Tears
   primary_tree: Hydrosophist

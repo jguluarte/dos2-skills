@@ -1,0 +1,2209 @@
+# Skill Import Review
+#
+# wiki_detail:      detail page (real %)
+# wiki_status:      status/effect line
+# wiki_notes:       mechanical notes
+# proposed_effect:  for skills.yaml
+#
+# Check for:
+#   - Wrong/missing tags
+#   - Missing duration info
+#   - range: ??? = needs fix
+#   - Incorrect effect text
+
+
+# ========================================
+# Geomancer (2 skills)
+# ========================================
+
+- name: Mend Metal 🎙️
+  primary_tree: Geomancer
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 5m
+  cooldown: 3
+  wiki_detail: Allies near you start slowly regenerating Physical Armour.
+  wiki_status: >
+    Restore [26.5% of total heal value] Physical Armour for 3 turn(s).
+  proposed_effect: >
+    Allies near you start slowly regenerating Physical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
+
+- name: Summon Hungry Flower
+  primary_tree: Geomancer
+  investment: 3
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 6
+  wiki_detail: Plant can lob acidic spores and emit cursed poison clouds.
+  wiki_status: Duration 5 turns.
+  proposed_effect: >
+    Plant can lob acidic spores and emit cursed poison clouds.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Artillery+Plant
+
+
+# ========================================
+# Hydrosophist (13 skills)
+# ========================================
+
+- name: Hail Strike
+  primary_tree: Hydrosophist
+  investment: 1
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Icicles fall from the sky, chilling enemies and dealing <water>40% Water
+    Damage</water>. They create Ice surfaces where they hit the ground.
+  wiki_status: Set Chilled for 2 turn(s).
+  proposed_effect: >
+    Icicles fall from the sky, chilling enemies and dealing <water>40% Water
+    Damage</water>. They create Ice surfaces where they hit the ground.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Hail+Strike
+
+- name: Restoration
+  primary_tree: Hydrosophist
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Restore Vitality of a target character. Restoration also cures Poisoned
+    and Bleeding.
+  wiki_status: Restore [75% of total heal value] Vitality for 2 turn(s).
+  proposed_effect: >
+    Restore <heal>[75% heal] Vitality</heal> of a target character.
+    Restoration also cures <status>Poisoned</status> and
+    <status>Bleeding</status>. Set <status>Restoration</status> for 2 turns,
+    restoring <heal>[75% heal] Vitality</heal> at the start of each turn.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Restoration
+
+- name: Cryogenic Stasis
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Target ally enters Cryogenic Stasis. Though incapacitated, they become
+    immune to all damage, and heal over time. Removes Shackles Of Pain.
+  wiki_status: Set Permafrost for 1 Turn(s)
+  proposed_effect: >
+    Target ally enters Cryogenic Stasis. Though incapacitated, they become
+    immune to all damage, and heal over time. Removes Shackles Of Pain.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Cryogenic+Stasis
+
+- name: Global Cooling
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  wiki_detail: >
+    Set Chilled on enemies around you and deal 50% Water Damage. Freeze all
+    susceptible surfaces.
+  wiki_status: Set Chilled for 3 turn(s).
+  proposed_effect: >
+    Set <status>Chilled</status> on enemies around you and deal <water>50%
+    Water Damage</water>. Freeze all susceptible surfaces.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Global+Cooling
+
+- name: Healing Ritual
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Shoot a bolt of healing energy that will jump to nearby allies.
+  wiki_status: Restore [80% of total heal value] Vitality
+  proposed_effect: >
+    Shoot a bolt of healing energy that will jump to nearby allies.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Healing+Ritual
+
+- name: Ice Fan
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Target 3 positions and shoot an ice shard at each one, dealing 45% Water
+    Damage and making targets Chilled.
+  wiki_status: Set Chilled for 1 turn(s).
+  proposed_effect: >
+    Target 3 positions and shoot an ice shard at each one, dealing <water>45%
+    Water Damage</water> and making targets <status>Chilled</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ice+Fan
+
+- name: Soothing Cold
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  wiki_detail: Regenerate Magical Armour for all allies around caster.
+  wiki_status: Restore [26.5% of total heal value] Magic Armour for 3 turn(s).
+  proposed_effect: Regenerate Magical Armour for all allies around caster.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
+
+- name: Winter Blast
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Deal 110% Water Damage and set Chilled status on enemies in the area.
+    Freeze blood and water surfaces.
+  wiki_status: Set Chilled for 2 turn(s).
+  proposed_effect: >
+    Deal <water>110% Water Damage</water> and set <status>Chilled</status>
+    status on enemies in the area. Freeze blood and water surfaces.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Winter+Blast
+
+- name: Arcane Stitch
+  primary_tree: Hydrosophist
+  investment: 3
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Fully restore target character's Magic Armour. Removes Frozen, Stunned,
+    Petrified, Plague, Suffocating, Poisoned, Burning, Necrofire, Terrified,
+    Silenced, Taunted, Mad.
+  wiki_status: Restore 100% Magic Armour
+  proposed_effect: >
+    Fully restore target character's Magic Armour. Removes
+    <status>Frozen</status>, <status>Stunned</status>,
+    <status>Petrified</status>, <status>Plague</status>,
+    <status>Suffocating</status>, <status>Poisoned</status>,
+    <status>Burning</status>, <status>Necrofire</status>,
+    <status>Terrified</status>, <status>Silenced</status>,
+    <status>Taunted</status>, <status>Mad</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Arcane+Stitch
+
+- name: Deep Freeze
+  primary_tree: Hydrosophist
+  investment: 3
+  ap_cost: 4
+  sp_cost: 0
+  range: 8m
+  cooldown: 6
+  wiki_detail: >
+    Targets in the cone that are frozen and under 10% Vitality shatter and
+    instantly die. Otherwise they receive 150% Water Damage and become Frozen.
+  wiki_status: >
+    Instantly kill targets with Frozen status below 10% Vitality. Sets Frozen
+    for 1 Turn(s)
+  proposed_effect: >
+    Targets in the cone that are frozen and under 10% Vitality shatter and
+    instantly die. Otherwise they receive <water>150% Water Damage</water> and
+    become <status>Frozen</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Deep+Freeze
+
+- name: Ice Breaker
+  primary_tree: Hydrosophist
+  investment: 3
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  wiki_detail: >
+    Sets off a chain reaction that causes ice areas to explode into water
+    puddles, dealing 250% Water Damage [Attribute-independent] and setting
+    Chilled.
+  proposed_effect: >
+    Sets off a chain reaction that causes ice areas to explode into water
+    puddles, dealing <water>250% Water Damage</water> [Attribute-independent]
+    and setting <status>Chilled</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ice+Breaker
+
+- name: Steam Lance
+  primary_tree: Hydrosophist
+  investment: 3
+  ap_cost: 2
+  sp_cost: 2
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Releases a stream of Blessed Steam that heals characters in its path.
+  wiki_status: Restore [75% of total heal value] Vitality for 3 Turn(s)
+  proposed_effect: >
+    Releases a stream of <status>Blessed</status> Steam that heals characters
+    in its path.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Steam+Lance
+
+- name: Hail Storm
+  primary_tree: Hydrosophist
+  investment: 5
+  ap_cost: 4
+  sp_cost: 3
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    20 ice shards fall from the sky, each dealing 20% Water Damage to
+    characters within 3m range from impact.
+  wiki_status: Set Chilled for 1 turn(s).
+  proposed_effect: >
+    20 ice shards fall from the sky, each dealing <water>20% Water
+    Damage</water> to characters within 3m range from impact.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Hail+Storm
+
+
+# ========================================
+# Warfare (15 skills)
+# ========================================
+
+- name: Battering Ram
+  primary_tree: Warfare
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 12m
+  cooldown: 5
+  wiki_detail: >
+    Rush forward in a straight line, to a designated point, hitting all
+    enemies in your path for 50% damage and setting Knockdown.
+  wiki_status: Set Knocked Down for 1 turn(s).
+  wiki_notes:
+    - Resisted by Physical Armour
+    - ??
+  proposed_effect: >
+    Rush forward in a straight line, to a designated point, hitting all
+    enemies in your path for 50% damage and setting <status>Knocked
+    Down</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Battering+Ram
+
+- name: Battle Stomp
+  primary_tree: Warfare
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 10m
+  cooldown: 4
+  wiki_detail: >
+    Smash your weapon into the ground, knocking down non-allied characters in
+    front of you, and hitting them for 60% damage. Also clears non-cursed
+    surfaces and clouds.
+  wiki_status: Sets Knocked Down for 1 turn(s).
+  wiki_notes:
+    - Resisted by Physical Armour
+  proposed_effect: >
+    Smash your weapon into the ground, knocking down non-allied characters in
+    front of you, and hitting them for 60% damage. Also clears non-cursed
+    surfaces and clouds.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Battle+Stomp
+
+- name: Bouncing Shield
+  primary_tree: Warfare
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    Throw your shield at an enemy dealing 70% Physical Damage. Shield can
+    bounce to another enemy in 5m range.
+  wiki_status: >
+    Damage is based on the 70-77% Physical Armour of your shield. Require
+    Shield.
+  wiki_notes:
+    - >
+      Base damage is equal to 70% of the Physical Armour value of the equipped
+      shield.
+    - Scales with Warfare.
+    - >
+      Adding Masterwork Runes into a Shield (which increases its armor value)
+      will increase the damage of this Skill.
+  proposed_effect: >
+    Throw your shield at an enemy dealing <physical>70% Physical
+    Damage</physical>. Shield can bounce to another enemy in 5m range.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Bouncing+Shield
+
+- name: Crippling Blow
+  primary_tree: Warfare
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 3m
+  cooldown: 3
+  wiki_detail: >
+    Cripple the target with a sweeping blow, and all characters around it.
+    Deals 115% damage.
+  wiki_status: Set Crippled for 1 turn(s).
+  wiki_notes:
+    - >
+      As of v3.0.180.158(March 7th) Crippling blow no longer hits allies.
+      (Unless they are targeted)
+    - Resisted by Physical Armour
+  proposed_effect: >
+    <status>Crippled</status> the target with a sweeping blow, and all
+    characters around it. Deals 115% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow
+
+- name: Blitz Attack
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  wiki_detail: >
+    Jump from one target to another, hitting up to 2 targets, dealing 70%
+    damage to each. Targets are chosen randomly in a 10m radius.
+  wiki_status: Require Melee weapon. Scale depending on main weapon.
+  wiki_notes:
+    - ??
+    - ??
+  proposed_effect: >
+    Jump from one target to another, hitting up to 2 targets, dealing 70%
+    damage to each. Targets are chosen randomly in a 10m radius.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Blitz+Attack
+
+- name: Deflective Barrier
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  wiki_detail: >
+    Projectiles that hit you are reflected back at the caster. This does not
+    prevent the original projectile effects. Provides [X] Physical Armour.
+  wiki_status: Set Deflecting for 3 turn(s).
+  wiki_notes:
+    - >
+      The skill does not work without a shield if it is learned from an item.
+      However, once the Deflecting status is set, unequipping the shield does
+      not cancel the status.
+    - >
+      The skill also deflect projectile from spells ( Fireball, Fossil Strike,
+      etc.)
+    - >
+      The skill can deflect your own projectile if you target your feet. If
+      enemy is in range, you can damage them (and yourself) twice.
+  proposed_effect: >
+    Projectiles that hit you are reflected back at the caster. This does not
+    prevent the original projectile effects. Provides [X] Physical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Deflective+Barrier
+
+- name: Enrage
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 5
+  wiki_detail: >
+    Motivate an allied character with the power of rage. Target allied
+    character is guaranteed to land critical hits with basic attacks and
+    weapon skills, but is muted. Clears Taunted, Terrified, Charmed, Mad and
+    Clear-Minded statuses.
+  wiki_status: Set Enraged for 1 turn(s).
+  wiki_notes:
+    - >
+      Works with any types of Weapon Attacks (Bow, Dagger, Mace, Sword, Spear,
+      Axe or Staff), regardless of damage type.
+    - Works with Elemental Arrows
+    - >
+      Best if cast at the beginning of your turn (if casting on yourself) since
+      you'll get to use it the rest of that turn and the next.
+  proposed_effect: >
+    Motivate an allied character with the power of rage. Target allied
+    character is guaranteed to land critical hits with basic attacks and
+    weapon skills, but is muted. Clears <status>Taunted</status>,
+    <status>Terrified</status>, <status>Charmed</status>, <status>Mad</status>
+    and <status>Clear-Minded</status> statuses.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Enrage
+
+- name: Phoenix Dive
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Leap through the air to a target position, creating a fire surface upon
+    landing.
+  wiki_notes:
+    - >
+      Phoenix Dive can also be learned by completing the quest The Ugly Little
+      Bird and eating the Scaly Phoenix Egg when prompted.
+  proposed_effect: >
+    Leap through the air to a target position, creating a fire surface upon
+    landing.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Phoenix+Dive
+
+- name: Provoke
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 5
+  wiki_detail: >
+    Taunt the enemies around you. Provoke and tease them so that they want to
+    attack you.
+  wiki_status: Set Taunted for 1 turn(s).
+  wiki_notes:
+    - Taunt pierces Physical Armour and costs 2 AP as of Patch v3.0.168.526
+  proposed_effect: >
+    Taunt the enemies around you. Provoke and tease them so that they want to
+    attack you.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Provoke
+
+- name: Whirlwind
+  primary_tree: Warfare
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 4.5m
+  cooldown: 3
+  wiki_detail: >
+    Perform a whirlwind attack, hitting enemies around you for 100% damage.
+  wiki_status: Require Melee weapon. Scale depending on main weapon.
+  wiki_notes:
+    - >
+      If you have poison equipped to the weapon dealing damage, the poison has a
+      chance to apply to all characters affected by the attack. Basically an AOE
+      undead heal.
+    - Resisted by Physical Armour
+  proposed_effect: >
+    Perform a whirlwind attack, hitting enemies around you for 100% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Whirlwind
+
+- name: Challenge
+  primary_tree: Warfare
+  investment: 3
+  ap_cost: 0
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Mark target enemy. If they die in the next 2 turns, you are healed and
+    receive damage and armour bonuses. If target survives, their Vitality is
+    healed to full and caster receives damage.
+  wiki_status: >
+    Apply Challenge to target, betting whether they will be dead in 3 turn(s).
+  wiki_notes:
+    - Challenge cost reduced to 1 AP as of Patch v3.0.168.526
+    - Challenge no longer has an AP cost as of Definitive Edition.
+    - Challenge now heals Undead characters as of Definitive Edition.
+  proposed_effect: >
+    Mark target enemy. If they die in the next 2 turns, you are healed and
+    receive damage and armour bonuses. If target survives, their Vitality is
+    healed to full and caster receives damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Challenge
+
+- name: Guardian Angel
+  primary_tree: Warfare
+  investment: 3
+  ap_cost: 2
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 6
+  wiki_detail: Allies in melee range redirect 50% of received damage to you.
+  wiki_status: Set Guardian Angel Aura for 2 turn(s).
+  wiki_notes:
+    - ??
+    - ??
+  proposed_effect: >
+    Allies in melee range redirect 50% of received damage to you.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Guardian+Angel
+
+- name: Onslaught
+  primary_tree: Warfare
+  investment: 3
+  ap_cost: 4
+  sp_cost: 2
+  range: 2.5m
+  cooldown: 6
+  wiki_detail: >
+    Attack five times with astonishing speed, each hit dealing 60% damage.
+  wiki_status: Scale depending on main weapon.
+  wiki_notes:
+    - >
+      Though the text in the game may say it deals 50% damage per hit, the code
+      in the game indicates that this skill does 60% damage five times instead.
+    - ??
+  proposed_effect: >
+    Attack five times with astonishing speed, each hit dealing 60% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Onslaught
+
+- name: Thick of the Fight
+  primary_tree: Warfare
+  investment: 3
+  ap_cost: 2
+  sp_cost: 1
+  range: Self
+  cooldown: 4
+  wiki_detail: >
+    The more the merrier! Gain a damage boost for every nearby character.
+  wiki_status: Set Thick of the Fight for 2 turn(s).
+  wiki_notes:
+    - >
+      The damage boost is 10% per all nearby characters, this includes yourself,
+      enemies, summons, and totems.
+    - There is no craftable scroll recipe for this skill
+    - >
+      Thick of the Fight is a "misc" bonus, which figures differently into the
+      damage formulas for weapon-based attacks and spells. The misc bonus is
+      additive with attribute and weapon skill bonuses for weapon-based attacks,
+      but it is a standalone multiplier in the damage formula for spells.
+  proposed_effect: >
+    The more the merrier! Gain a damage boost for every nearby character.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Thick+of+the+Fight
+
+- name: Overpower
+  primary_tree: Warfare
+  investment: 5
+  ap_cost: 2
+  sp_cost: 3
+  range: 2m
+  cooldown: 3
+  wiki_detail: >
+    Deals 150% damage. If your Physical Armour is higher than your opponent's,
+    destroy all their Physical Armour. Can set Knocked Down.
+  wiki_status: Set Knocked Down for 1 turn(s).
+  wiki_notes:
+    - Can be used for backstab
+    - Resisted by Physical Armour
+  proposed_effect: >
+    Deals 150% damage. If your Physical Armour is higher than your opponent's,
+    destroy all their Physical Armour. Can set <status>Knocked Down</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Overpower
+
+
+# ========================================
+# Huntsman (15 skills)
+# ========================================
+
+- name: Elemental Arrowheads
+  primary_tree: Huntsman
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 3m
+  cooldown: 4
+  wiki_detail: >
+    Target a surface in melee radius. For two turns, 60% elemental damage
+    matching that surface is added to your ranged weapon attacks and ranged
+    weapon-based skills.
+  proposed_effect: >
+    Target a surface in melee radius. For two turns, 60% elemental damage
+    matching that surface is added to your ranged weapon attacks and ranged
+    weapon-based skills.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Arrowheads
+
+- name: First Aid
+  primary_tree: Huntsman
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 4
+  wiki_detail: >
+    Heals target for [100% of total heal value] Vitality. Cures Crippled,
+    Knocked Down, Blind, Silenced, Suffocating, Bleeding, Burning, Poisoned,
+    Diseased, Plague, Infested
+  wiki_status: Restore [100% of total heal value] Vitality.
+  proposed_effect: >
+    Heals target for [100% of total heal value] Vitality. Cures
+    <status>Crippled</status>, <status>Knocked Down</status>,
+    <status>Blinded</status>, <status>Silenced</status>,
+    <status>Suffocating</status>, <status>Bleeding</status>,
+    <status>Burning</status>, <status>Poisoned</status>,
+    <status>Diseased</status>, <status>Plague</status>,
+    <status>Infested</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/First+Aid
+
+- name: Pin Down
+  primary_tree: Huntsman
+  investment: 1
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: Deals 120% damage and Cripple target character.
+  wiki_status: Set Crippled for 1 turn(s).
+  proposed_effect: >
+    Deals 120% damage and <status>Crippled</status> target character.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Pin+Down
+
+- name: Ricochet
+  primary_tree: Huntsman
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Fire a normal arrow that deals 90% damage and then finds another target
+    within 5m. Forks up to 2 times.
+  wiki_status: >
+    Damage is based on your basic attack and receives a bonus from Finesse.
+  proposed_effect: >
+    Fire a normal arrow that deals 90% damage and then finds another target
+    within 5m. Forks up to 2 times.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ricochet
+
+- name: Ballistic Shot
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    A shot that deals 100% damage and receives 5% bonus damage per 1m distance
+    to target
+  proposed_effect: >
+    A shot that deals 100% damage and receives 5% bonus damage per 1m distance
+    to target.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ballistic+Shot
+
+- name: Barrage
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Fire three arrows at three targets of your choice, each dealing 60%
+    damage.
+  wiki_status: >
+    Damage is based on your basic attack and receive a bonus from Finesse.
+  proposed_effect: >
+    Fire three arrows at three targets of your choice, each dealing 60%
+    damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Barrage
+
+- name: Marksman's Fang
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    Shoot an arrow that goes straight through enemies. Each enemy that's hit
+    takes 100% damage, ignoring armour.
+  proposed_effect: >
+    Shoot an arrow that goes straight through enemies. Each enemy that's hit
+    takes 100% damage, ignoring armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Marksman%27s+Fang
+
+- name: Reactive Shot
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    Target a circular area. Until your next turn, you will reflexively shoot
+    at the first three enemies moving within this area.
+  wiki_status: Set Reactive Shot for 1 Turn(s)
+  proposed_effect: >
+    Target a circular area. Until your next turn, you will reflexively shoot
+    at the first three enemies moving within this area.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Reactive+Shot
+
+- name: Sky Shot
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 20m
+  cooldown: 3
+  wiki_detail: >
+    Leap into the air before shooting, gaining damage bonuses for your
+    superior height. Deals 100% Damage
+  wiki_status: >
+    This skill receives high ground bonuses regardless of elevation.
+  proposed_effect: >
+    Leap into the air before shooting, gaining damage bonuses for your
+    superior height. Deals 100% Damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Sky+Shot
+
+- name: Tactical Retreat
+  primary_tree: Huntsman
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Apply haste to yourself, then teleport away from imminent danger.
+  wiki_status: Set Hasted for 1 Turn(s)
+  proposed_effect: >
+    Apply haste to yourself, then teleport away from imminent danger.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Tactical+Retreat
+
+- name: Arrow Spray
+  primary_tree: Huntsman
+  investment: 3
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
+  proposed_effect: >
+    Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Arrow+Spray
+
+- name: Assassinate
+  primary_tree: Huntsman
+  investment: 3
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Attacking your target with meticulous aim, dealing 140% damage in one
+    shot. When performed from stealth, this attack gains a 50% damage
+    increase.
+  proposed_effect: >
+    Attacking your target with meticulous aim, dealing 140% damage in one
+    shot. When performed from stealth, this attack gains a 50% damage
+    increase.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Assassinate
+
+- name: Farsight
+  primary_tree: Huntsman
+  investment: 3
+  ap_cost: 1
+  sp_cost: 1
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Increase the range of a targeted character's ranged attacks and skills by
+    4m.
+  wiki_status: Set Farsight for 3 Turn(s).
+  proposed_effect: >
+    Increase the range of a targeted character's ranged attacks and skills by
+    4m.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Farsight
+
+- name: Glitter Dust
+  primary_tree: Huntsman
+  investment: 3
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Target is marked, reducing its ability to dodge. Prevents target from
+    going invisible.
+  wiki_status: Set Marked for 3 turn(s).
+  proposed_effect: >
+    Target is marked, reducing its ability to dodge. Prevents target from
+    going invisible.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Glitter+Dust
+
+- name: Arrow Storm
+  primary_tree: Huntsman
+  investment: 5
+  ap_cost: 3
+  sp_cost: 3
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    16 arrows fall from the sky in the target area, each dealing 40% Physical
+    Damage.
+  wiki_status: >
+    Damage is based on your basic attack and receives a bonus from Finesse. 2m
+    Explode Radius
+  proposed_effect: >
+    16 arrows fall from the sky in the target area, each dealing <physical>40%
+    Physical Damage</physical>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Arrow+Storm
+
+
+# ========================================
+# Scoundrel (15 skills)
+# ========================================
+
+- name: Adrenaline
+  primary_tree: Scoundrel
+  investment: 1
+  ap_cost: 0
+  sp_cost: 0
+  range: Self
+  cooldown: 4
+  wiki_detail: >
+    Gain 2 Action Points immediately, but lose 2 Action Points next turn. Any
+    Action Points over your maximum are lost.
+  wiki_status: >
+    Gain 2 Action Points immediately, but lose 2 Action Points next turn. Does
+    not break Invisibility or Sneaking
+  wiki_notes:
+    - >
+      Eating Finn's body part in the first ship area, The Hull, will grant you
+      the Adrenaline Skill. You have to have points in Scoundrel to use it,
+      however.
+    - >
+      Consider using the Haste ability to minimise the AP reduction on the turn
+      following the use of this ability.
+  proposed_effect: >
+    Gain 2 Action Points immediately, but lose 2 Action Points next turn. Any
+    Action Points over your maximum are lost.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Adrenaline
+
+- name: Backlash
+  primary_tree: Scoundrel
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  wiki_detail: >
+    Jump over the enemy, landing behind their back and backstabbing them for
+    85% damage.
+  wiki_status: 100% chance to Backstab. Scale depending on main weapon.
+  wiki_notes:
+    - Requires having a dagger equipped.
+    - >
+      The damage still benefits from backstab bonus even if the teleport
+      mechanic will not place you behind the affected target.
+    - You can use this skill even when Entangled.
+  proposed_effect: >
+    Jump over the enemy, landing behind their back and backstabbing them for
+    85% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Backlash
+
+- name: Chloroform
+  primary_tree: Scoundrel
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: Destroys [X] Magical Armour and then tries to set Sleeping.
+  wiki_status: >
+    Set Sleeping for 1 turn(s). Does not break Invisibility or Sneaking.
+  wiki_notes:
+    - Resisted by Magical Armour
+  proposed_effect: >
+    Destroys [X] Magical Armour and then tries to set
+    <status>Sleeping</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Chloroform
+
+- name: Throwing Knife
+  primary_tree: Scoundrel
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 8m
+  cooldown: 1
+  wiki_detail: >
+    Throw a knife at your opponent, dealing 85% damage. Can backstab!
+  wiki_status: Scale depending on main weapon.
+  wiki_notes:
+    - Resisted by Magical Armour
+    - Can go through multiple enemies
+  proposed_effect: >
+    Throw a knife at your opponent, dealing 85% damage. Can backstab!
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Throwing+Knife
+
+- name: Cloak and Dagger
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: Teleport without breaking sneaking.
+  wiki_status: Does not break Invisibilty or Sneaking.
+  wiki_notes:
+    - ??
+    - ??
+  proposed_effect: Teleport without breaking sneaking.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Cloak+and+Dagger
+
+- name: Corrupted Blade
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  wiki_detail: >
+    Dagger attack that deals 150% damage and sets Decay and Diseased.
+  wiki_status: >
+    Set Decaying for 2 turn(s). Set Diseased for 2 turn(s). Scale depending on
+    main weapon.
+  wiki_notes:
+    - Corrupted Blade damage increased by 30% as of Patch v3.0.168.526
+    - Resisted by Physical Armour
+  proposed_effect: >
+    Dagger attack that deals 150% damage and sets <status>Decaying</status>
+    and <status>Diseased</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Corrupted+Blade
+
+- name: Gag Order
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  wiki_detail: >
+    Destroy [X] Magical Armour on target character. Silence target.
+  wiki_status: Set Silenced for 1 turn
+  wiki_notes:
+    - Reduced to 2 AP and damage increased by 35% as of Patch v3.0.168.526
+    - Resisted by Magical Armour
+  proposed_effect: >
+    Destroy [X] Magical Armour on target character. <status>Silenced</status>
+    target.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Gag+Order
+
+- name: Rupture Tendons
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 5
+  wiki_detail: >
+    Deal 100% damage to target character. When they try to move, they will
+    take piercing damage.
+  wiki_status: >
+    Set Ruptured Tendons for 2 turn(s). Scale depending on main weapon.
+  wiki_notes:
+    - >
+      Apply to enemies that have fixated on a distant target and are least
+      likely to use any gap closing ability. The damage will be devastating.
+    - >
+      Deals damage as they move, similar to how characters take damage for
+      running through fire (but at a more frequent pace).
+    - >
+      Very effective in combination with the Chicken Claw ability, as enemies
+      are highly likely to use their entire turn running around (while in
+      chicken form).
+  proposed_effect: >
+    Deal 100% damage to target character. When they try to move, they will
+    take piercing damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Rupture+Tendons
+
+- name: Sawtooth Knife
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 3
+  wiki_detail: >
+    Pierce the enemy's Physical Armour and directly deals 100% piercing
+    damage. Sets Bleeding if enemy has no Physical Armour.
+  wiki_status: Set Bleeding for 3 turn(s). Scale depending on main weapon.
+  wiki_notes:
+    - Resisted by Physical Armour
+    - ??
+  proposed_effect: >
+    Pierce the enemy's Physical Armour and directly deals 100% piercing
+    damage. Sets <status>Bleeding</status> if enemy has no Physical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Sawtooth+Knife
+
+- name: Sleeping Arms
+  primary_tree: Scoundrel
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 3
+  wiki_detail: >
+    Deal 100% damage and set Atrophy: your target can't use weapons or weapon
+    skills anymore.
+  wiki_status: Set Atrophy for 2 turn(s). Scale depending on main weapon.
+  wiki_notes:
+    - Resisted by Physical Armour
+    - ??
+  proposed_effect: >
+    Deal 100% damage and set <status>Atrophy</status>: your target can't use
+    weapons or weapon skills anymore.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Sleeping+Arms
+
+- name: Daggers Drawn
+  primary_tree: Scoundrel
+  investment: 3
+  ap_cost: 4
+  sp_cost: 2
+  range: 2.5m
+  cooldown: 6
+  wiki_detail: Whirl into a barrage of 5 stabs, each dealing 65% damage.
+  wiki_status: Scale depending on main weapon.
+  wiki_notes:
+    - >
+      Each of the five hits can backstab, dealing significant damage to a single
+      target.
+    - Deals a total of 325% damage if all five hits connect.
+    - >
+      If your weapon has any "on hit" effects (example: 10% chance to poison)
+      this will potentially proc for each of the 5 attacks
+  proposed_effect: Whirl into a barrage of 5 stabs, each dealing 65% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Daggers+Drawn
+
+- name: Fan of Knives
+  primary_tree: Scoundrel
+  investment: 3
+  ap_cost: 3
+  sp_cost: 1
+  range: 8m
+  cooldown: 2
+  wiki_detail: >
+    Fling a dagger at every enemy around you, dealing 125% damage. Can
+    backstab!
+  wiki_status: Scale depending on main weapon.
+  wiki_notes:
+    - Fan of Knives damage increased by 25% as of Patch v3.0.168.526
+    - ??
+  proposed_effect: >
+    Fling a dagger at every enemy around you, dealing 125% damage. Can
+    backstab!
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Fan+of+Knives
+
+- name: Terrifying Cruelty
+  primary_tree: Scoundrel
+  investment: 3
+  ap_cost: 3
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  wiki_detail: >
+    Dagger attack that deals 110% damage and sets Bleeding and Fear on target
+    character.
+  wiki_status: >
+    Set Bleeding for 3 turn(s). Set Terrified for 1 turn(s). Scale depending
+    on main weapon.
+  proposed_effect: >
+    Dagger attack that deals 110% damage and sets <status>Bleeding</status>
+    and <status>Terrified</status> on target character.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Terrifying+Cruelty
+
+- name: Wind-Up Toy
+  primary_tree: Scoundrel
+  investment: 3
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 6
+  wiki_detail: >
+    Summon a mechanical bomber at the target point. The bomber can explode,
+    dealing fire damage and producing a fire surface.
+  wiki_status: >
+    Does not break Invisibility or Sneaking. The stats of the summons will
+    depend on caster level and Summoning ability.
+  wiki_notes:
+    - Bonuses from the Summoning ability will affect it.
+    - {'It has one skill': 'None'}
+    - >
+      Wind Up Toy's Suicide now costs 1 AP, deals 15% more damage as of Patch
+      v3.0.168.526 Suicide Explode, creating fire surfaces and dealing [X-Y]
+      fire damage in a large area around you (except areas blocked by
+      obstacles). Damage is based on your level and receives bonus from
+      Intelligence. AP:
+  proposed_effect: >
+    Summon a mechanical bomber at the target point. The bomber can explode,
+    dealing fire damage and producing a fire surface.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Wind-Up+Toy
+
+- name: Mortal Blow
+  primary_tree: Scoundrel
+  investment: 5
+  ap_cost: 2
+  sp_cost: 3
+  range: 2.5m
+  cooldown: 0
+  wiki_detail: >
+    Deal 140% damage. Damage is doubled if you are sneaking or invisible.
+    Target is killed instantly if below 20% Vitality.
+  wiki_status: >
+    Instantly kill target below 20% Vitality. Scale depending on main weapon.
+  wiki_notes:
+    - >
+      The Mortal Blow health threshold is calculated before the actual attack
+      damage (Possibly false, my own testing showed that leaving the enemy
+      within the threshold after the damage does instantly kill them afterwards)
+    - Deals 280% damage if you're invisible or sneaking
+    - >
+      It is often worth spending 1 AP to go invisible immediately before using
+      this skill to get the double damage
+  proposed_effect: >
+    Deal 140% damage. Damage is doubled if you are sneaking or invisible.
+    Target is killed instantly if below 20% Vitality.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Mortal+Blow
+
+
+# ========================================
+# Polymorph (15 skills)
+# ========================================
+
+- name: Bull Horns
+  primary_tree: Polymorph
+  investment: 1
+  ap_cost: 0
+  sp_cost: 0
+  range: Self
+  cooldown: 6
+  wiki_detail: >
+    Magnificent horns sprout from your forehead, making you see red. You can
+    rush at your enemies and gore them. Increases Retribution ability by 1 for
+    the duration. Incompatible with Medusa Head.
+  wiki_status: Set Bull Horns for 4 turn(s).
+  proposed_effect: >
+    Magnificent horns sprout from your forehead, making you see red. You can
+    rush at your enemies and gore them. Increases Retribution ability by 1 for
+    the duration. Incompatible with <status>Medusa Head</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Bull+Horns
+
+- name: Chameleon Cloak
+  primary_tree: Polymorph
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: Self
+  cooldown: 6
+  wiki_detail: >
+    Grants you the ability to blend in with any environment as if invisible.
+  wiki_status: Set Invisible for 2 turn(s).
+  proposed_effect: >
+    Grants you the ability to blend in with any environment as if invisible.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Chameleon+Cloak
+
+- name: Chicken Claw
+  primary_tree: Polymorph
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 6
+  wiki_detail: Turn the target character into a chicken. Squawk!
+  wiki_status: Set Chicken Form for 2 turn(s).
+  proposed_effect: Turn the target character into a chicken. Squawk!
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Chicken+Claw
+
+- name: Tentacle Lash
+  primary_tree: Polymorph
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  wiki_detail: >
+    Lash out at your opponent dealing 125% physical damage and setting Atrophy
+    on them.
+  wiki_status: Set Atrophy for 1 turn(s).
+  proposed_effect: >
+    Lash out at your opponent dealing <physical>125% Physical
+    Damage</physical> and setting <status>Atrophy</status> on them.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Tentacle+Lash
+
+- name: Heart of Steel
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  wiki_detail: >
+    Your heart pumps liquid metal, creating a robust layer of Physical Armor.
+    This regenerates each turn.
+  wiki_status: Provides [75% heal value] Physical Armour.
+  proposed_effect: >
+    Your heart pumps liquid metal, creating a robust layer of Physical Armor.
+    This regenerates each turn.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Heart+of+Steel
+
+- name: Medusa Head
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  wiki_detail: >
+    Snakes grow out of your head, giving you a petrifying aura and the
+    Petrifying Visage skill. Incompatible with Bull Horns.
+  wiki_status: Set Medusa Head for 2 turn(s).
+  proposed_effect: >
+    Snakes grow out of your head, giving you a petrifying aura and the
+    Petrifying Visage skill. Incompatible with <status>Bull Horns</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Medusa+Head
+
+- name: Spider Legs
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 0
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  wiki_detail: >
+    Spider legs burst from your back. You can create web surfaces in an area
+    to entangle foes. Incompatible with Wings.
+  wiki_status: Set Spider Legs for 3 turn(s).
+  proposed_effect: >
+    Spider legs burst from your back. You can create web surfaces in an area
+    to entangle foes. Incompatible with <status>Wings</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Spider+Legs
+
+- name: Spread Your Wings
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: Self
+  cooldown: 6
+  wiki_detail: >
+    Sprout temporary wings to fly when you move, allowing you to ignore ground
+    surfaces. Incompatible with Spider Legs.
+  wiki_status: Sets wings for 3 turns. Allows use of the ability Fly.
+  proposed_effect: >
+    Sprout temporary wings to fly when you move, allowing you to ignore ground
+    surfaces. Incompatible with <status>Spider Legs</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Spread+Your+Wings
+
+- name: Summon Oily Blob
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 6
+  wiki_detail: >
+    Fling an Oil Blob at a target point, dealing 70% Earth Damage in the area.
+    Oil Blob deals earth damage with melee attacks and leaves an oil puddle on
+    death.
+  wiki_status: 3m Explode Radius
+  proposed_effect: >
+    Fling an Oil Blob at a target point, dealing <earth>70% Earth
+    Damage</earth> in the area. Oil Blob deals earth damage with melee attacks
+    and leaves an oil puddle on death.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Oily+Blob
+
+- name: Terrain Transmutation
+  primary_tree: Polymorph
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: Target two circular areas. Swap surfaces and clouds.
+  proposed_effect: Target two circular areas. Swap surfaces and clouds.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Terrain+Transmutation
+
+- name: Equalise
+  primary_tree: Polymorph
+  investment: 3
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Vitality and Armour percentages of characters in target area are summed up
+    and redistributed equally.
+  proposed_effect: >
+    Vitality and Armour percentages of characters in target area are summed up
+    and redistributed equally.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Equalise
+
+- name: Flay Skin
+  primary_tree: Polymorph
+  investment: 3
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Destroy [100% of total damage value] Magic Armour on target character. Set
+    status that halves resistances.
+  wiki_status: Set Nullified Resistance for 2 turn(s).
+  proposed_effect: >
+    Destroy [100% of total damage value] Magic Armour on target character. Set
+    status that halves resistances.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Flay+Skin
+
+- name: Forced Exchange
+  primary_tree: Polymorph
+  investment: 3
+  ap_cost: 1
+  sp_cost: 2
+  range: 2m
+  cooldown: 1
+  wiki_detail: Exchange Vitality percentages with target character.
+  wiki_status: Exchange vitality percentages with target character.
+  proposed_effect: Exchange Vitality percentages with target character.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Forced+Exchange
+
+- name: Skin Graft
+  primary_tree: Polymorph
+  investment: 3
+  ap_cost: 1
+  sp_cost: 1
+  range: Self
+  cooldown: 0
+  wiki_detail: >
+    Reset all cooldowns. Removes Burning, Necrofire, Poisoned and Bleeding.
+  wiki_status: Set Skin Graft
+  proposed_effect: >
+    Reset all cooldowns. Removes <status>Burning</status>,
+    <status>Necrofire</status>, <status>Poisoned</status> and
+    <status>Bleeding</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Skin+Graft
+
+- name: Apotheosis
+  primary_tree: Polymorph
+  investment: 5
+  ap_cost: 2
+  sp_cost: 3
+  range: Self
+  cooldown: 0
+  wiki_detail: >
+    You take the first step towards godhood. The cost of all Source skills is
+    reduced by -3 Source Point.
+  wiki_status: Set Apotheosis for 2 turn(s).
+  proposed_effect: >
+    You take the first step towards godhood. The cost of all Source skills is
+    reduced by -3 Source Point.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Apotheosis
+
+
+# ========================================
+# Necromancer (15 skills)
+# ========================================
+
+- name: Blood Sucker
+  primary_tree: Necromancer
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Target character consumes blood surfaces around them, restoring Vitality.
+    The more blood, the more they are healed!
+  wiki_status: >
+    Restore up to [200% of total heal value] Vitality, depending on relevant
+    surface area.
+  proposed_effect: >
+    Target character consumes blood surfaces around them, restoring Vitality.
+    The more blood, the more they are healed!
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Blood+Sucker
+
+- name: Decaying Touch
+  primary_tree: Necromancer
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 3
+  wiki_detail: >
+    Deal 100% physical damage to target character. Sets Decay, so the target
+    will take physical damage from healing spells and potions.
+  wiki_status: Set Decaying for 2 turn(s).
+  proposed_effect: >
+    Deal <physical>100% Physical Damage</physical> to target character. Sets
+    <status>Decaying</status>, so the target will take physical damage from
+    healing spells and potions.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Decaying+Touch
+
+- name: Mosquito Swarm
+  primary_tree: Necromancer
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  wiki_detail: >
+    Unleash a swarm of giant mosquitos to suck the blood from your enemies,
+    dealing 100% physical damage and healing yourself.
+  wiki_status: >
+    Restore up to [100% of total heal value] Vitality, depending on the damage
+    dealt. Set Bleeding for 2 turn(s).
+  proposed_effect: >
+    Unleash a swarm of giant mosquitos to suck the blood from your enemies,
+    dealing <physical>100% Physical Damage</physical> and healing yourself.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Mosquito+Swarm
+
+- name: Raise Bloated Corpse
+  primary_tree: Necromancer
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Target a corpse to raise a bloated cadaver that fights for you. It can
+    explode, dealing Physical Damage.
+  wiki_status: >
+    A bloated corpse will be summoned at the location of your target(s). Blows
+    up your target.
+  proposed_effect: >
+    Target a corpse to raise a bloated cadaver that fights for you. It can
+    explode, dealing Physical Damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Raise+Bloated+Corpse
+
+- name: Bone Cage
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  wiki_detail: >
+    Increases Physical Armour by [50% of total heal value] and another [50% of
+    total heal value] Physical Armour for each corpse in the area around you.
+  wiki_status: Set Bone Cage for 3 turn(s).
+  proposed_effect: >
+    Increases Physical Armour by [50% of total heal value] and another [50% of
+    total heal value] Physical Armour for each corpse in the area around you.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Bone+Cage
+
+- name: Death Wish
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Target character receives a damage bonus equal to the percentage of their
+    lost Vitality. For example, a character with 30% Vitality will gain a 70%
+    damage bonus.
+  wiki_status: Set Death Wish for 2 turn(s).
+  proposed_effect: >
+    Target character receives a damage bonus equal to the percentage of their
+    lost Vitality. For example, a character with 30% Vitality will gain a 70%
+    damage bonus.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Death+Wish
+
+- name: Infect
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Deal 155% physical damage. Infect a target with a disease that will spread
+    to other nearby characters. Diseased characters deal reduced damage with
+    all attacks and have lowered Constitution.
+  wiki_status: Set Infectious Disease for 2 turn(s).
+  proposed_effect: >
+    Deal <physical>155% Physical Damage</physical>. Infect a target with a
+    disease that will spread to other nearby characters.
+    <status>Diseased</status> characters deal reduced damage with all attacks
+    and have lowered Constitution.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Infect
+
+- name: Living on the Edge
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    For 2 turns your character's Vitality cannot be reduced below 1 point,
+    keeping them alive against all odds. If the target is a summon, their
+    lifetime will be prolonged for the duration.
+  wiki_status: Set Death Resist for 2 turn(s).
+  proposed_effect: >
+    For 2 turns your character's Vitality cannot be reduced below 1 point,
+    keeping them alive against all odds. If the target is a summon, their
+    lifetime will be prolonged for the duration.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Living+on+the+Edge
+
+- name: Raise Bone Widow
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Raise a walking pile of bones which can consume corpses to restore
+    Vitality and receive a stacking damage buff.
+  wiki_status: >
+    The stats of the summons will depend on caster level and Summoning
+    ability.
+  proposed_effect: >
+    Raise a walking pile of bones which can consume corpses to restore
+    Vitality and receive a stacking damage buff.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Raise+Bone+Widow
+
+- name: Shackles of Pain
+  primary_tree: Necromancer
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Mark a target so that it will receive all of the damage you receive.
+    Damage transferred in this way ignores any resistances the target may
+    have.
+  wiki_status: Set Shackles of Pain for 3 turn(s).
+  proposed_effect: >
+    Mark a target so that it will receive all of the damage you receive.
+    Damage transferred in this way ignores any resistances the target may
+    have.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Shackles+of+Pain
+
+- name: Black Shroud
+  primary_tree: Necromancer
+  investment: 3
+  ap_cost: 1
+  sp_cost: 1
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Create a cloud of cursed smoke in an area, setting Suffocating and Blind
+    on all characters within.
+  proposed_effect: >
+    Create a cloud of cursed smoke in an area, setting
+    <status>Suffocating</status> and <status>Blinded</status> on all
+    characters within.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Black+Shroud
+
+- name: Grasp of the Starved
+  primary_tree: Necromancer
+  investment: 3
+  ap_cost: 2
+  sp_cost: 2
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Undead hands rise from underground, attacking characters that stand in
+    blood surfaces and clouds. Deals 250% physical damage to each character
+    and sets Crippled.
+  wiki_status: Set Crippled for 2 turn(s).
+  proposed_effect: >
+    Undead hands rise from underground, attacking characters that stand in
+    blood surfaces and clouds. Deals <physical>250% Physical Damage</physical>
+    to each character and sets <status>Crippled</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Grasp+of+the+Starved
+
+- name: Last Rites
+  primary_tree: Necromancer
+  investment: 3
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 0
+  wiki_detail: >
+    Sacrifice yourself to bring an ally back to life. Deals [X] piercing
+    damage to you, and resurrects target character with maximum Vitality.
+  wiki_status: Set Potion.
+  proposed_effect: >
+    Sacrifice yourself to bring an ally back to life. Deals [X] piercing
+    damage to you, and resurrects target character with maximum Vitality.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Last+Rites
+
+- name: Silencing Stare
+  primary_tree: Necromancer
+  investment: 3
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    Destroy [100% of total damage value] Magic Armour and Silence all enemies
+    in a cone in front of you.
+  wiki_status: Set Silenced for 1 turn(s).
+  proposed_effect: >
+    Destroy [100% of total damage value] Magic Armour and
+    <status>Silenced</status> all enemies in a cone in front of you.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Silencing+Stare
+
+- name: Totems of the Necromancer
+  primary_tree: Necromancer
+  investment: 5
+  ap_cost: 2
+  sp_cost: 3
+  range: PB AoE
+  cooldown: 5
+  wiki_detail: >
+    Spawn bone totems near every enemy in the area. Bone totems have ranged
+    attacks that deal 100% physical damage.
+  wiki_status: >
+    A Bones Totem will be summoned at the location of your target(s).
+  proposed_effect: >
+    Spawn bone totems near every enemy in the area. Bone totems have ranged
+    attacks that deal <physical>100% Physical Damage</physical>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Totems+of+the+Necromancer
+
+
+# ========================================
+# Summoning (19 skills)
+# ========================================
+
+- name: Conjure Incarnate
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Conjure a personal elemental that matches the ground surface it's summoned
+    onto. Your incarnate can be buffed with Infusions. Once you hit Summoning
+    ability level of 10, a colossal Incarnate Champion will answer your
+    summons!
+  wiki_status: >
+    The stats of the summons will depend on caster level and Summoning
+    ability. Duration 10 turn(s)
+  wiki_notes:
+    - >
+      The cornerstone of the Summoning skill tree, it can be buffed with
+      different Infusions that give new skills — Farsight, Power, Warp, Shadow —
+      or replace its element (see below).
+    - >
+      The potency of its spells are based on its stats, not its owner. Right
+      click it and choose "Examine" for details on its attributes.
+    - >
+      The Incarnate can act the turn it is summoned in battle, shuffling turn
+      order when it does.
+  proposed_effect: >
+    Conjure a personal elemental that matches the ground surface it's summoned
+    onto. Your incarnate can be buffed with Infusions. Once you hit Summoning
+    ability level of 10, a colossal Incarnate Champion will answer your
+    summons!
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Conjure+Incarnate
+
+- name: Dimensional Bolt
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 1
+  wiki_detail: >
+    Shoot a volatile bolt that deals 100% of a random type, and then creates a
+    corresponding surface
+  wiki_notes:
+    - Scroll crafted by combine Sheet of Paper, Tormented Soul, and Pepper
+    - Dimensional Bolt damage increased by 10% as of Patch v3.0.168.526
+  proposed_effect: >
+    Shoot a volatile bolt that deals 100% of a random type, and then creates a
+    corresponding surface.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Dimensional+Bolt
+
+- name: Elemental Totem
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 1
+  wiki_detail: >
+    Target a ground surface and conjure a totem of the corresponding element.
+    Each turn, this totem will fire a projectile at enemies in sight.
+  wiki_status: >
+    The stats of the summons will depend on caster level and Summoning
+    ability.
+  wiki_notes:
+    - Elemental Totem(s) may receive high ground damage benefits.
+    - Blood & Wood (normal surface) elements do physical damage.
+    - Fire, Water/Ice, Lighting, Poison & Oil elements do magical damage.
+  proposed_effect: >
+    Target a ground surface and conjure a totem of the corresponding element.
+    Each turn, this totem will fire a projectile at enemies in sight.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Totem
+
+- name: Farsight Infusion
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Unlock a ranged attack for your Incarnate. Provides [100% of total heal
+    value] Magical Armour
+  wiki_status: Set Farsight Infusion.
+  wiki_notes:
+    - Damage is based on Finesse
+    - >
+      The magic armor provided by this skill is multiplied by the Maximum
+      Magical Armour bonus from Summoning.
+    - Also grants +25% damage
+  proposed_effect: >
+    Unlock a ranged attack for your Incarnate. Provides [100% of total heal
+    value] Magical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Farsight+Infusion
+
+- name: Summon Cat Familiar
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: Summon a black cat by your side.
+  wiki_status: >
+    The stats of the summon will depend on caster level and Summoning
+    ability..
+  wiki_notes:
+    - {'Range': '13m .'}
+    - >
+      The encounter with the black cat when approaching Fort Joy is unavoidable.
+      It will follow the character even in stealth or invisibility.
+    - >
+      Being the first to step into its range does not guarantee the cat will
+      follow you; it will randomly choose among all player characters in the
+      party. The cat seems to have a preference for the Red Prince if you
+      recruited him in the party.
+  proposed_effect: Summon a black cat by your side.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Cat+Familiar
+
+- name: Summon Condor
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 15m
+  cooldown: 6
+  wiki_detail: Summons a condor that will aid you in combat.
+  wiki_status: >
+    The stats of the summons will depend on caster level and Summoning
+    ability.
+  wiki_notes:
+    - {'Range': '15m .'}
+    - >
+      The skill will be given to the character that successfully convinces it to
+      be its new master.
+    - >
+      Condor's base attacks deal piercing damage. It has no talents or
+      immunities.
+  proposed_effect: Summons a condor that will aid you in combat.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Condor
+
+- name: Summon Dragonling
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 6
+  wiki_detail: Summons a newt to help you in combat.
+  wiki_status: >
+    The stats of the summons will depend on caster level and Summoning
+    ability.
+  wiki_notes:
+    - >
+      After confronting Sadha in the dream portal and she lets you leave, have
+      the Red Prince interact with the dragon egg behind her. A chat prompt will
+      allow you to breathe on the egg and let you bond with the dragonling.
+    - >
+      While any lizard character or person wearing Mask of the Shapeshifter can
+      breathe on the egg, Persuasion 4 is necessary to talk the dragonling into
+      joining you regardless of what you do to his mother.
+    - It bleeds Blessed Fire
+  proposed_effect: Summons a newt to help you in combat.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Dragonling
+
+- name: Summon Inner Demon
+  primary_tree: Summoning
+  investment: 1
+  ap_cost: 1
+  sp_cost: 1
+  range: Self
+  cooldown: 6
+  wiki_detail: >
+    Conjure a demon that will share their Intelligence with you and provide
+    [X] Magical Armour. Grants you power to terrify and protect yourself with
+    demonic fists.
+  wiki_status: Set Inner Demon for 3 turn(s).
+  wiki_notes:
+    - >
+      Jahan is one of the Masters of Source players must seek out for the
+      Powerful Awakening quest, as such if his quest is fulfilled before at
+      least two other teachers then he will award a Source point slot instead of
+      the skillbook.
+    - >
+      Despite the name and classification, the skill does not conjure a
+      controllable summon but acts like a buff similar to some Polymorph skills
+      .
+    - The armor damage of "Terrify" scales with your Intelligence and Level.
+  proposed_effect: >
+    Conjure a demon that will share their Intelligence with you and provide
+    [X] Magical Armour. Grants you power to terrify and protect yourself with
+    demonic fists.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Inner+Demon
+
+- name: Dominate Mind
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Charm target non-allied character, causing them to join your side in
+    combat for the duration of the status.
+  wiki_status: Set Charmed for 2 turn(s).
+  wiki_notes:
+    - >
+      Scroll can be crafted by combining a Sheet of Paper, Alien Tormented Soul,
+      and Jar of Honey. Scroll costs 2AP to cast.
+    - Resisted by Magical Armour
+  proposed_effect: >
+    Charm target non-allied character, causing them to join your side in
+    combat for the duration of the status.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Dominate+Mind
+
+- name: Power Infusion
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Unlock Whirlwind and Rush for your Incarnate. Provides [100% of total heal
+    value] Physical Armour.
+  wiki_status: Set Power Infusion.
+  wiki_notes:
+    - Also grants +25% damage
+    - >
+      The physical armor provided by this skill is multiplied by the Maximum
+      Physical Armour bonus from Summoning.
+  proposed_effect: >
+    Unlock Whirlwind and Rush for your Incarnate. Provides [100% of total heal
+    value] Physical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Power+Infusion
+
+- name: Rallying Cry
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Target character regenerates Vitality and Magic Armour according to the
+    number of allied characters and totems in their vicinity.
+  wiki_status: >
+    Restore [50% of total heal value] Vitality and [18% of total heal value]
+    Magic Armour.
+  wiki_notes:
+    - >
+      Scroll can be crafted by combining a Sheet of Paper, Tormented Soul, and
+      Garlic
+    - >
+      If undead enemies outnumbers you, consider using it to damage them!
+      Consequently, do NOT use this on an undead ally like Fane, it will damage
+      and potentially kill them!
+  proposed_effect: >
+    Target character regenerates Vitality and Magic Armour according to the
+    number of allied characters and totems in their vicinity.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Rallying+Cry
+
+- name: Shadow Infusion
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Incarnate learns how to go invisible and strike foes with a corrosive
+    slash.
+  wiki_status: Set Shadow Infusion.
+  wiki_notes:
+    - Grants the Incarnate the abilities Corrupted Blade and Chameleon Cloak
+    - Grants the Fire Slug the abilities Cloak and Dagger and Daggers Drawn .
+    - Grants movement +1
+  proposed_effect: >
+    Incarnate learns how to go invisible and strike foes with a corrosive
+    slash.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Shadow+Infusion
+
+- name: Soul Mate
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  wiki_detail: >
+    Bind yourself to target character, copying any healing and Armour
+    restoration that you receive to them. Clears Frozen, Stunned, Knocked Down
+    and Petrified.
+  wiki_status: Set Soul Mate for 3 turn(s).
+  wiki_notes:
+    - >
+      Scroll crafted by combine Sheet of Paper, High Quality Tormented Soul, and
+      Wheat
+    - >
+      Soul Mate now shares full Vitality and Magic Armour restoration instead of
+      half. Duration increased to 3 turns, cooldown to 5 turns as of Patch
+      v3.0.168.526
+  proposed_effect: >
+    Bind yourself to target character, copying any healing and Armour
+    restoration that you receive to them. Clears <status>Frozen</status>,
+    <status>Stunned</status>, <status>Knocked Down</status> and
+    <status>Petrified</status>.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Soul+Mate
+
+- name: Supercharger
+  primary_tree: Summoning
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Target totem or summon deals 100% more base damage during its next turn,
+    but then it dies.
+  wiki_status: Set Supercharged for 2 turn(s).
+  wiki_notes:
+    - >
+      Supercharger bonus increased to 70% (Was 50%), tooltip now mentions that
+      it can be cast on totems as of Patch v3.0.168.526
+    - >
+      Supercharger is additive with summoning bonus, futhermore both
+      Supercharger and Summoning are additive with the attacks and attack based
+      spells and multiplicative with spells. For example summoned creature with
+      40 STR, 40 INT, 10 Warfare and 10 Aeroteurge will have mutliplier of 3.75
+      for attacks and air spells. Adding 10 Summoning will turn it to 5.25 and
+      7.5 respectively. Adding Supercharger on top of this will increase
+      multipliers to 6.75 and 11.25.
+    - ??
+  proposed_effect: >
+    Target totem or summon deals 100% more base damage during its next turn,
+    but then it dies.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Supercharger
+
+- name: Cannibalise
+  primary_tree: Summoning
+  investment: 3
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  wiki_detail: >
+    Destroy an allied summon or totem. Receive their Vitality, Physical Armour
+    and Magic Armour.
+  wiki_status: >
+    Instantly kills your target Restore up to 100% of target's Vitality,
+    Physical Armour and Magic Armour on caster.
+  wiki_notes:
+    - >
+      Cannibalise now restores Vitality and Armours equal to what the summon has
+      instead of only half. Cooldown to 2 turns as of Patch v3.0.168.526
+    - ??
+  proposed_effect: >
+    Destroy an allied summon or totem. Receive their Vitality, Physical Armour
+    and Magic Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Cannibalise
+
+- name: Door to Eternity
+  primary_tree: Summoning
+  investment: 3
+  ap_cost: 2
+  sp_cost: 2
+  range: PB AoE
+  cooldown: 0
+  wiki_detail: >
+    Give all summons and totems around you a status that prevents them from
+    dying to damage or disappearing when their life runs out.
+  wiki_status: Set Persisting for 3 turn(s).
+  wiki_notes:
+    - Door to Eternity now costs 2AP as of Patch v3.0.168.526
+    - Can only be used once per combat
+  proposed_effect: >
+    Give all summons and totems around you a status that prevents them from
+    dying to damage or disappearing when their life runs out.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Door+to+Eternity
+
+- name: Planar Gateway
+  primary_tree: Summoning
+  investment: 3
+  ap_cost: 0
+  sp_cost: 2
+  range: 13m
+  cooldown: 6
+  wiki_detail: >
+    Conjure two linked gateways that allow any character to instantly travel
+    between them.
+  wiki_status: Duration 10 Turn(s)
+  wiki_notes:
+    - Planar Gateway AP cost reduced to 0 as of Patch v3.0.168.526 (was 6)
+    - Scroll crafted by combine Sheet of Paper , Source Orb , and Grapes
+  proposed_effect: >
+    Conjure two linked gateways that allow any character to instantly travel
+    between them.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Planar+Gateway
+
+- name: Warp Infusion
+  primary_tree: Summoning
+  investment: 3
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  wiki_detail: >
+    Incarnate learns a teleport skill, and a skill to swap places with its
+    master.
+  wiki_status: Set Warp Infusion.
+  wiki_notes:
+    - Grants +25% damage
+    - The incarnate will gain the skill Swap Places and Tactical Retreat .
+  proposed_effect: >
+    Incarnate learns a teleport skill, and a skill to swap places with its
+    master.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Warp+Infusion
+
+- name: Ethereal Storm
+  primary_tree: Summoning
+  investment: 5
+  ap_cost: 4
+  sp_cost: 3
+  range: 17m
+  cooldown: 5
+  wiki_detail: >
+    Unpredictable projectiles from distant planes strike target area, dealing
+    random elemental damage to enemies or healing allies.
+  wiki_status: Duration 2 Turn (s)
+  wiki_notes:
+    - Scroll crafted by combine Sheet of Paper , Source Orb , and Carrot
+    - >
+      This skill is fully capable of using poison damage on undead enemies (thus
+      healing them) and using healing on your undead allies (this damaging
+      them). That also goes for any other elemental immunities or absorptions
+      that enemies might have.
+    - >
+      This skill's healing will specifically target allies, and applies a
+      regenerative healing effect that heals approximately the same amount as
+      First Aid every turn.
+  proposed_effect: >
+    Unpredictable projectiles from distant planes strike target area, dealing
+    random elemental damage to enemies or healing allies.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ethereal+Storm

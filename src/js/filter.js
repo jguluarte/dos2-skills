@@ -20,6 +20,19 @@ export function filterSkills(skills, primary, filters = new Set()) {
         results = results.filter((s) => s.primaryTree !== SUMMONING);
     }
 
+    if (primary) {
+        results.sort((a, b) => {
+            const aTree = a.trees.find((t) => t !== primary) ?? '';
+            const bTree = b.trees.find((t) => t !== primary) ?? '';
+
+            return (
+                aTree.localeCompare(bTree)
+                || a.investment - b.investment
+                || a.name.localeCompare(b.name)
+            );
+        });
+    }
+
     return results;
 }
 
