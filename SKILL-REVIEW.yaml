@@ -12,14 +12,6 @@
 #   - Incorrect effect text
 
 # ========================================
-# Necromancer (0 skills)
-# ========================================
-
-# ========================================
-# Summoning (0 skills)
-# ========================================
-
-# ========================================
 # NEEDS DISCUSSION
 # ========================================
 
@@ -28,98 +20,13 @@
 # Geomancer (2 skills)
 # ========================================
 
-- name: Mend Metal
-  primary_tree: Geomancer
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: 5m
-  cooldown: 3
-  wiki_detail: Allies near you start slowly regenerating Physical Armour.
-  wiki_status: Restore [26.5% heal] Physical Armour for 3 turn(s).
-  proposed_effect: >
-    Allies near you start slowly regenerating Physical Armour. Lasts 3 turns.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
-
-- name: Summon Hungry Flower
-  primary_tree: Geomancer
-  investment: 3
-  ap_cost: 3
-  sp_cost: 1
-  range: 13m
-  cooldown: 6
-  wiki_detail: Plant can lob acidic spores and emit cursed poison clouds.
-  wiki_status: Duration 5 turns.
-  proposed_effect: >
-    Plant can lob acidic spores and emit cursed poison clouds.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Artillery+Plant
-
-
 # ========================================
 # Hydrosophist (1 skills)
 # ========================================
 
-- name: Soothing Cold
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 3
-  wiki_detail: Regenerate Magical Armour for all allies around caster.
-  wiki_status: Restore [26.5% heal] Magic Armour for 3 turn(s).
-  proposed_effect: >
-    Regenerate Magical Armour for all allies around caster. Lasts 3 turns.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
-
-
 # ========================================
 # Warfare (1 skills)
 # ========================================
-
-- name: Crippling Blow
-  primary_tree: Warfare
-  investment: 1
-  ap_cost: 2
-  sp_cost: 0
-  range: 3m
-  cooldown: 3
-  wiki_detail: >
-    Cripple the target with a sweeping blow, and all characters around it.
-    Deals 115% damage.
-  wiki_status: Set Crippled for 1 turn(s).
-  wiki_notes:
-    - >
-      As of v3.0.180.158(March 7th) Crippling blow no longer hits allies.
-      (Unless they are targeted)
-    - Resisted by Physical Armour
-  proposed_effect: >
-    <status>Crippled</status> for 1 turn the target with a sweeping blow, and
-    all characters around it. Deals <physical>115% damage</physical>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow
-
-- name: Elemental Arrowheads # discuss
-  primary_tree: Huntsman
-  investment: 1
-  ap_cost: 1
-  sp_cost: 0
-  range: 3m
-  cooldown: 4
-  wiki_detail: >
-    Target a surface in melee radius. For two turns, 60%
-    elemental damage matching that surface is added to your
-    ranged weapon attacks and ranged weapon-based skills.
-  proposed_effect: >
-    Target a surface in melee radius. For two turns,
-    <status>60% elemental damage</status> matching that
-    surface is added to your ranged weapon attacks and ranged
-    weapon-based skills.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Arrowheads
 
 - name: Medusa Head # discuss — shapeshifting, needs review
   primary_tree: Polymorph

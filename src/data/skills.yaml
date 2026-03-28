@@ -366,6 +366,20 @@
     <status>Crippled</status> and dealing <earth>100% Earth
     Damage</earth>. Also creates an oil puddle.
 
+- name: Mend Metal
+  primary_tree: Geomancer
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
+  ap_cost: 1
+  sp_cost: 0
+  range: 5m
+  cooldown: 3
+  effect: >
+    Allies near you start slowly regenerating <physical>[26.5% heal]
+    Physical Armour</physical> at the start of their turn. Lasts 3
+    turns.
+
 - name: Poison Wave
   primary_tree: Geomancer
   investment: 2
@@ -451,6 +465,19 @@
     <poison>poison damage</poison> bonus to weapon attacks and skills
     (dependent upon size of <poison>poison</poison> area cleared). Set
     <status>Siphon Poison</status> for 2 turn(s).
+
+- name: Summon Hungry Flower
+  primary_tree: Geomancer
+  investment: 3
+  memory: 2
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Artillery+Plant
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 6
+  effect: >
+    Plant can lob acidic spores and emit cursed poison clouds.
 
 - name: Pyroclastic Eruption
   primary_tree: Geomancer
@@ -731,6 +758,20 @@
     water puddles, dealing <water>250% Water Damage
     [Attribute-independent]</water> and setting
     <status>Chilled</status>.
+
+- name: Soothing Cold
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  effect: >
+    Allies near you start slowly regenerating <magical>[26.5% heal]
+    Magical Armour</magical> at the start of their turn. Lasts 3
+    turns.
 
 - name: Steam Lance
   primary_tree: Hydrosophist
@@ -1140,6 +1181,20 @@
     [Based on shield armour]</physical>. Bounces to another enemy within
     5m. Requires a shield.
 
+- name: Crippling Blow
+  primary_tree: Warfare
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow
+  ap_cost: 2
+  sp_cost: 0
+  range: 3m
+  cooldown: 3
+  effect: >
+    <status>Crippled</status> the target with a sweeping blow, and
+    all characters around it. Deals <physical>115% damage</physical>.
+    Set <status>Crippled</status> for 1 turn.
+
 - name: Blitz Attack
   primary_tree: Warfare
   investment: 2
@@ -1291,6 +1346,21 @@
     Deals <physical>150% damage</physical>. If your <physical>Physical
     Armour</physical> is higher than your opponent's, destroy all their
     Physical Armour. Set <status>Knocked Down</status>.
+
+- name: Elemental Arrowheads
+  primary_tree: Huntsman
+  investment: 1
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Arrowheads
+  ap_cost: 1
+  sp_cost: 0
+  range: 3m
+  cooldown: 4
+  effect: >
+    Target a surface in melee radius. For two turns, 60% elemental
+    damage matching that surface is added to your ranged weapon-based
+    attacks and skills.
 
 - name: First Aid
   primary_tree: Huntsman
