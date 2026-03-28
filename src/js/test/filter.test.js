@@ -15,7 +15,7 @@ const hydroWar  = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
 const sumPyro   = makeSkill('Summon+Pyro',   [SUMMONING, PYROKINETIC]);
 const sumNecro  = makeSkill('Summon+Necro',  [SUMMONING, NECROMANCER]);
 
-const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumPyro, sumNecro];
+const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumNecro, sumPyro];
 
 // ── no filters ──────────────────────────────────────────
 

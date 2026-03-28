@@ -28,9 +28,9 @@
     matching that surface is added to your ranged weapon attacks and ranged
     weapon-based skills.
   proposed_effect: >
-    Target a surface in melee radius. For two turns, 60% elemental damage
-    matching that surface is added to your ranged weapon attacks and ranged
-    weapon-based skills.
+    Target a surface in melee radius. For two turns, <status>60% elemental
+    damage</status> matching that surface is added to your ranged weapon
+    attacks and ranged weapon-based skills.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Arrowheads
 
@@ -42,18 +42,18 @@
   range: 8m
   cooldown: 4
   wiki_detail: >
-    Heals target for [100% of total heal value] Vitality. Cures Crippled,
-    Knocked Down, Blind, Silenced, Suffocating, Bleeding, Burning, Poisoned,
-    Diseased, Plague, Infested
-  wiki_status: Restore [100% of total heal value] Vitality.
+    Heals target for [100% heal] Vitality. Cures Crippled, Knocked Down,
+    Blind, Silenced, Suffocating, Bleeding, Burning, Poisoned, Diseased,
+    Plague, Infested
+  wiki_status: Restore [100% heal] Vitality.
   proposed_effect: >
-    Heals target for [100% of total heal value] Vitality. Cures
+    Heals target for <heal>[100% heal] Vitality</heal>. Cures
     <status>Crippled</status>, <status>Knocked Down</status>,
     <status>Blinded</status>, <status>Silenced</status>,
     <status>Suffocating</status>, <status>Bleeding</status>,
     <status>Burning</status>, <status>Poisoned</status>,
-    <status>Diseased</status>, <status>Plague</status>,
-    <status>Infested</status>.
+    <status>Diseased</status>, <status>Plague</status>, and
+    <status>Infested</status> statuses.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/First+Aid
 
@@ -67,7 +67,8 @@
   wiki_detail: Deals 120% damage and Cripple target character.
   wiki_status: Set Crippled for 1 turn(s).
   proposed_effect: >
-    Deals 120% damage and <status>Crippled</status> target character.
+    Deals <physical>120% damage</physical> and set <status>Crippled</status>
+    for 1 turn on target character.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Pin+Down
 
@@ -84,8 +85,8 @@
   wiki_status: >
     Damage is based on your basic attack and receives a bonus from Finesse.
   proposed_effect: >
-    Fire a normal arrow that deals 90% damage and then finds another target
-    within 5m. Forks up to 2 times.
+    Fire a normal arrow that deals <physical>90% damage</physical> and then
+    finds another target within 5m. Bounces up to 2 times.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Ricochet
 
@@ -100,12 +101,12 @@
     A shot that deals 100% damage and receives 5% bonus damage per 1m distance
     to target
   proposed_effect: >
-    A shot that deals 100% damage and receives 5% bonus damage per 1m distance
-    to target.
+    Deal <physical>100% damage</physical> and receive <physical>5% bonus
+    damage</physical> per 1m distance to target.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Ballistic+Shot
 
-- name: Barrage
+- name: Barrage.
   primary_tree: Huntsman
   investment: 2
   ap_cost: 3
@@ -118,8 +119,8 @@
   wiki_status: >
     Damage is based on your basic attack and receive a bonus from Finesse.
   proposed_effect: >
-    Fire three arrows at three targets of your choice, each dealing 60%
-    damage.
+    Fire three arrows at targets of your choice, each dealing <physical>60%
+    damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Barrage
 
@@ -135,7 +136,7 @@
     takes 100% damage, ignoring armour.
   proposed_effect: >
     Shoot an arrow that goes straight through enemies. Each enemy that's hit
-    takes 100% damage, ignoring armour.
+    takes <physical>100% damage</physical>, ignoring armour.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Marksman%27s+Fang
 
@@ -152,7 +153,7 @@
   wiki_status: Set Reactive Shot for 1 Turn(s)
   proposed_effect: >
     Target a circular area. Until your next turn, you will reflexively shoot
-    at the first three enemies moving within this area.
+    at the first three enemies moving within this area. Lasts 1 turn.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Reactive+Shot
 
@@ -170,7 +171,7 @@
     This skill receives high ground bonuses regardless of elevation.
   proposed_effect: >
     Leap into the air before shooting, gaining damage bonuses for your
-    superior height. Deals 100% Damage.
+    superior height. Deals <physical>100% damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Sky+Shot
 
@@ -185,7 +186,8 @@
     Apply haste to yourself, then teleport away from imminent danger.
   wiki_status: Set Hasted for 1 Turn(s)
   proposed_effect: >
-    Apply haste to yourself, then teleport away from imminent danger.
+    Apply haste to yourself, then teleport away from imminent danger. Lasts 1
+    turn.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Tactical+Retreat
 
@@ -199,7 +201,8 @@
   wiki_detail: >
     Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
   proposed_effect: >
-    Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
+    Fire 16 arrows in a 60 degree arc. Each arrow deals <physical>40%
+    damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Arrow+Spray
 
@@ -215,9 +218,9 @@
     shot. When performed from stealth, this attack gains a 50% damage
     increase.
   proposed_effect: >
-    Attacking your target with meticulous aim, dealing 140% damage in one
-    shot. When performed from stealth, this attack gains a 50% damage
-    increase.
+    Attacking your target with meticulous aim, dealing <physical>140%
+    damage</physical> in one shot. When performed from stealth, this attack
+    gains a <physical>50% damage</physical> increase.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Assassinate
 
@@ -234,7 +237,7 @@
   wiki_status: Set Farsight for 3 Turn(s).
   proposed_effect: >
     Increase the range of a targeted character's ranged attacks and skills by
-    4m.
+    4m. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Farsight
 
@@ -251,7 +254,7 @@
   wiki_status: Set Marked for 3 turn(s).
   proposed_effect: >
     Target is marked, reducing its ability to dodge. Prevents target from
-    going invisible.
+    going invisible. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Glitter+Dust
 
@@ -325,7 +328,7 @@
     - You can use this skill even when Entangled.
   proposed_effect: >
     Jump over the enemy, landing behind their back and backstabbing them for
-    85% damage.
+    <physical>85% damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Backlash
 
@@ -343,7 +346,7 @@
     - Resisted by Magical Armour
   proposed_effect: >
     Destroys [X] Magical Armour and then tries to set
-    <status>Sleeping</status>.
+    <status>Sleeping</status> for 1 turn.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Chloroform
 
@@ -361,7 +364,8 @@
     - Resisted by Magical Armour
     - Can go through multiple enemies
   proposed_effect: >
-    Throw a knife at your opponent, dealing 85% damage. Can backstab!
+    Throw a knife at your opponent, dealing <physical>85% damage</physical>.
+    Can backstab!
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Throwing+Knife
 
@@ -397,8 +401,8 @@
     - Corrupted Blade damage increased by 30% as of Patch v3.0.168.526
     - Resisted by Physical Armour
   proposed_effect: >
-    Dagger attack that deals 150% damage and sets <status>Decaying</status>
-    and <status>Diseased</status>.
+    Dagger attack that deals <physical>150% damage</physical> and sets
+    <status>Decaying</status> and <status>Diseased</status> for 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Corrupted+Blade
 
@@ -417,7 +421,7 @@
     - Resisted by Magical Armour
   proposed_effect: >
     Destroy [X] Magical Armour on target character. <status>Silenced</status>
-    target.
+    for 1 turn target.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Gag+Order
 
@@ -445,8 +449,8 @@
       are highly likely to use their entire turn running around (while in
       chicken form).
   proposed_effect: >
-    Deal 100% damage to target character. When they try to move, they will
-    take piercing damage.
+    Deal <physical>100% damage</physical> to target character. When they try
+    to move, they will take piercing damage. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Rupture+Tendons
 
@@ -465,8 +469,9 @@
     - Resisted by Physical Armour
     - ??
   proposed_effect: >
-    Pierce the enemy's Physical Armour and directly deals 100% piercing
-    damage. Sets <status>Bleeding</status> if enemy has no Physical Armour.
+    Pierce the enemy's Physical Armour and directly deals <physical>100%
+    piercing damage</physical>. Sets <status>Bleeding</status> for 3 turns if
+    enemy has no Physical Armour.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Sawtooth+Knife
 
@@ -485,8 +490,8 @@
     - Resisted by Physical Armour
     - ??
   proposed_effect: >
-    Deal 100% damage and set <status>Atrophy</status>: your target can't use
-    weapons or weapon skills anymore.
+    Deal <physical>100% damage</physical> and set <status>Atrophy</status> for
+    2 turns: your target can't use weapons or weapon skills anymore.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Sleeping+Arms
 
@@ -507,7 +512,9 @@
     - >
       If your weapon has any "on hit" effects (example: 10% chance to poison)
       this will potentially proc for each of the 5 attacks
-  proposed_effect: Whirl into a barrage of 5 stabs, each dealing 65% damage.
+  proposed_effect: >
+    Whirl into a barrage of 5 stabs, each dealing <physical>65%
+    damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Daggers+Drawn
 
@@ -526,8 +533,8 @@
     - Fan of Knives damage increased by 25% as of Patch v3.0.168.526
     - ??
   proposed_effect: >
-    Fling a dagger at every enemy around you, dealing 125% damage. Can
-    backstab!
+    Fling a dagger at every enemy around you, dealing <physical>125%
+    damage</physical>. Can backstab!
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Fan+of+Knives
 
@@ -545,8 +552,9 @@
     Set Bleeding for 3 turn(s). Set Terrified for 1 turn(s). Scale depending
     on main weapon.
   proposed_effect: >
-    Dagger attack that deals 110% damage and sets <status>Bleeding</status>
-    and <status>Terrified</status> on target character.
+    Dagger attack that deals <physical>110% damage</physical> and sets
+    <status>Bleeding</status> and <status>Terrified</status> for 3 turns on
+    target character.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Terrifying+Cruelty
 
@@ -600,8 +608,8 @@
       It is often worth spending 1 AP to go invisible immediately before using
       this skill to get the double damage
   proposed_effect: >
-    Deal 140% damage. Damage is doubled if you are sneaking or invisible.
-    Target is killed instantly if below 20% Vitality.
+    Deal <physical>140% damage</physical>. Damage is doubled if you are
+    sneaking or invisible. Target is killed instantly if below 20% Vitality.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mortal+Blow
 
@@ -625,7 +633,7 @@
   proposed_effect: >
     Magnificent horns sprout from your forehead, making you see red. You can
     rush at your enemies and gore them. Increases Retribution ability by 1 for
-    the duration. Incompatible with <status>Medusa Head</status>.
+    the duration. Incompatible with <status>Medusa Head</status> for 4 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Bull+Horns
 
@@ -641,6 +649,7 @@
   wiki_status: Set Invisible for 2 turn(s).
   proposed_effect: >
     Grants you the ability to blend in with any environment as if invisible.
+    Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Chameleon+Cloak
 
@@ -653,7 +662,8 @@
   cooldown: 6
   wiki_detail: Turn the target character into a chicken. Squawk!
   wiki_status: Set Chicken Form for 2 turn(s).
-  proposed_effect: Turn the target character into a chicken. Squawk!
+  proposed_effect: >
+    Turn the target character into a chicken. Squawk!. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Chicken+Claw
 
@@ -670,7 +680,7 @@
   wiki_status: Set Atrophy for 1 turn(s).
   proposed_effect: >
     Lash out at your opponent dealing <physical>125% Physical
-    Damage</physical> and setting <status>Atrophy</status> on them.
+    Damage</physical> and setting <status>Atrophy</status> for 1 turn on them.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Tentacle+Lash
 
@@ -704,7 +714,8 @@
   wiki_status: Set Medusa Head for 2 turn(s).
   proposed_effect: >
     Snakes grow out of your head, giving you a petrifying aura and the
-    Petrifying Visage skill. Incompatible with <status>Bull Horns</status>.
+    Petrifying Visage skill. Incompatible with <status>Bull Horns</status> for
+    2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Medusa+Head
 
@@ -721,7 +732,7 @@
   wiki_status: Set Spider Legs for 3 turn(s).
   proposed_effect: >
     Spider legs burst from your back. You can create web surfaces in an area
-    to entangle foes. Incompatible with <status>Wings</status>.
+    to entangle foes. Incompatible with <status>Wings</status> for 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Spider+Legs
 
@@ -738,7 +749,7 @@
   wiki_status: Sets wings for 3 turns. Allows use of the ability Fly.
   proposed_effect: >
     Sprout temporary wings to fly when you move, allowing you to ignore ground
-    surfaces. Incompatible with <status>Spider Legs</status>.
+    surfaces. Incompatible with <status>Spider Legs</status> for 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Spread+Your+Wings
 
@@ -802,7 +813,7 @@
   wiki_status: Set Nullified Resistance for 2 turn(s).
   proposed_effect: >
     Destroy [100% of total damage value] Magic Armour on target character. Set
-    status that halves resistances.
+    status that halves resistances. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Flay+Skin
 
@@ -849,7 +860,7 @@
   wiki_status: Set Apotheosis for 2 turn(s).
   proposed_effect: >
     You take the first step towards godhood. The cost of all Source skills is
-    reduced by -3 Source Point.
+    reduced by -3 Source Point. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Apotheosis
 
@@ -869,8 +880,7 @@
     Target character consumes blood surfaces around them, restoring Vitality.
     The more blood, the more they are healed!
   wiki_status: >
-    Restore up to [200% of total heal value] Vitality, depending on relevant
-    surface area.
+    Restore up to [200% heal] Vitality, depending on relevant surface area.
   proposed_effect: >
     Target character consumes blood surfaces around them, restoring Vitality.
     The more blood, the more they are healed!
@@ -890,8 +900,8 @@
   wiki_status: Set Decaying for 2 turn(s).
   proposed_effect: >
     Deal <physical>100% Physical Damage</physical> to target character. Sets
-    <status>Decaying</status>, so the target will take physical damage from
-    healing spells and potions.
+    <status>Decaying</status> for 2 turns, so the target will take physical
+    damage from healing spells and potions.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Decaying+Touch
 
@@ -906,11 +916,12 @@
     Unleash a swarm of giant mosquitos to suck the blood from your enemies,
     dealing 100% physical damage and healing yourself.
   wiki_status: >
-    Restore up to [100% of total heal value] Vitality, depending on the damage
-    dealt. Set Bleeding for 2 turn(s).
+    Restore up to [100% heal] Vitality, depending on the damage dealt. Set
+    Bleeding for 2 turn(s).
   proposed_effect: >
     Unleash a swarm of giant mosquitos to suck the blood from your enemies,
     dealing <physical>100% Physical Damage</physical> and healing yourself.
+    Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mosquito+Swarm
 
@@ -941,12 +952,13 @@
   range: Self
   cooldown: 5
   wiki_detail: >
-    Increases Physical Armour by [50% of total heal value] and another [50% of
-    total heal value] Physical Armour for each corpse in the area around you.
+    Increases Physical Armour by [50% heal] and another [50% of total heal
+    value] Physical Armour for each corpse in the area around you.
   wiki_status: Set Bone Cage for 3 turn(s).
   proposed_effect: >
-    Increases Physical Armour by [50% of total heal value] and another [50% of
-    total heal value] Physical Armour for each corpse in the area around you.
+    Increases Physical Armour by [50% heal] and another [50% of total heal
+    value] Physical Armour for each corpse in the area around you. Lasts 3
+    turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Bone+Cage
 
@@ -964,8 +976,8 @@
   wiki_status: Set Death Wish for 2 turn(s).
   proposed_effect: >
     Target character receives a damage bonus equal to the percentage of their
-    lost Vitality. For example, a character with 30% Vitality will gain a 70%
-    damage bonus.
+    lost Vitality. For example, a character with 30% Vitality will gain a
+    <physical>70% damage</physical> bonus. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Death+Wish
 
@@ -984,8 +996,8 @@
   proposed_effect: >
     Deal <physical>155% Physical Damage</physical>. Infect a target with a
     disease that will spread to other nearby characters.
-    <status>Diseased</status> characters deal reduced damage with all attacks
-    and have lowered Constitution.
+    <status>Diseased</status> for 2 turns characters deal reduced damage with
+    all attacks and have lowered Constitution.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Infect
 
@@ -1042,7 +1054,7 @@
   proposed_effect: >
     Mark a target so that it will receive all of the damage you receive.
     Damage transferred in this way ignores any resistances the target may
-    have.
+    have. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Shackles+of+Pain
 
@@ -1078,7 +1090,7 @@
   proposed_effect: >
     Undead hands rise from underground, attacking characters that stand in
     blood surfaces and clouds. Deals <physical>250% Physical Damage</physical>
-    to each character and sets <status>Crippled</status>.
+    to each character and sets <status>Crippled</status> for 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Grasp+of+the+Starved
 
@@ -1112,7 +1124,8 @@
   wiki_status: Set Silenced for 1 turn(s).
   proposed_effect: >
     Destroy [100% of total damage value] Magic Armour and
-    <status>Silenced</status> all enemies in a cone in front of you.
+    <status>Silenced</status> for 1 turn all enemies in a cone in front of
+    you.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Silencing+Stare
 
@@ -1337,7 +1350,7 @@
   proposed_effect: >
     Conjure a demon that will share their Intelligence with you and provide
     [X] Magical Armour. Grants you power to terrify and protect yourself with
-    demonic fists.
+    demonic fists. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Summon+Inner+Demon
 
@@ -1359,7 +1372,7 @@
     - Resisted by Magical Armour
   proposed_effect: >
     Charm target non-allied character, causing them to join your side in
-    combat for the duration of the status.
+    combat for the duration of the status. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Dominate+Mind
 
@@ -1395,9 +1408,7 @@
   wiki_detail: >
     Target character regenerates Vitality and Magic Armour according to the
     number of allied characters and totems in their vicinity.
-  wiki_status: >
-    Restore [50% of total heal value] Vitality and [18% of total heal value]
-    Magic Armour.
+  wiki_status: Restore [50% heal] Vitality and [18% heal] Magic Armour.
   wiki_notes:
     - >
       Scroll can be crafted by combining a Sheet of Paper, Tormented Soul, and
@@ -1457,7 +1468,7 @@
     Bind yourself to target character, copying any healing and Armour
     restoration that you receive to them. Clears <status>Frozen</status>,
     <status>Stunned</status>, <status>Knocked Down</status> and
-    <status>Petrified</status>.
+    <status>Petrified</status> for 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Soul+Mate
 
@@ -1487,7 +1498,7 @@
     - ??
   proposed_effect: >
     Target totem or summon deals 100% more base damage during its next turn,
-    but then it dies.
+    but then it dies. Lasts 2 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Supercharger
 
@@ -1531,7 +1542,7 @@
     - Can only be used once per combat
   proposed_effect: >
     Give all summons and totems around you a status that prevents them from
-    dying to damage or disappearing when their life runs out.
+    dying to damage or disappearing when their life runs out. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Door+to+Eternity
 
@@ -1621,10 +1632,9 @@
   range: 5m
   cooldown: 3
   wiki_detail: Allies near you start slowly regenerating Physical Armour.
-  wiki_status: >
-    Restore [26.5% of total heal value] Physical Armour for 3 turn(s).
+  wiki_status: Restore [26.5% heal] Physical Armour for 3 turn(s).
   proposed_effect: >
-    Allies near you start slowly regenerating Physical Armour.
+    Allies near you start slowly regenerating Physical Armour. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
 
@@ -1655,8 +1665,9 @@
   range: PB AoE
   cooldown: 3
   wiki_detail: Regenerate Magical Armour for all allies around caster.
-  wiki_status: Restore [26.5% of total heal value] Magic Armour for 3 turn(s).
-  proposed_effect: Regenerate Magical Armour for all allies around caster.
+  wiki_status: Restore [26.5% heal] Magic Armour for 3 turn(s).
+  proposed_effect: >
+    Regenerate Magical Armour for all allies around caster. Lasts 3 turns.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
 
@@ -1682,7 +1693,7 @@
       (Unless they are targeted)
     - Resisted by Physical Armour
   proposed_effect: >
-    <status>Crippled</status> the target with a sweeping blow, and all
-    characters around it. Deals 115% damage.
+    <status>Crippled</status> for 1 turn the target with a sweeping blow, and
+    all characters around it. Deals <physical>115% damage</physical>.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow

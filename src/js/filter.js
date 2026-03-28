@@ -1,27 +1,12 @@
 import { SUMMONING } from '@constants';
 
 export function filterSkills(skills, primary, filters = new Set()) {
-    if (!(primary || filters.size)) return skills;
+    if (!(primary || filters?.size)) return skills;
 
     let results = skills;
 
     if (primary) {
-        results = results.filter((s) => s.has(primary));
-    }
-
-    if (filters.size > 0) {
-        results = results.filter(
-            (s) => s.trees.some((t) => filters.has(t))
-        );
-    }
-
-    const wantsSummoning = [primary, ...filters].includes(SUMMONING);
-    if (!wantsSummoning) {
-        results = results.filter((s) => s.primaryTree !== SUMMONING);
-    }
-
-    if (primary) {
-        results.sort((a, b) => {
+        results = results.filter((s) => s.has(primary)).sort((a, b) => {
             const aTree = a.trees.find((t) => t !== primary) ?? '';
             const bTree = b.trees.find((t) => t !== primary) ?? '';
 
@@ -31,6 +16,17 @@ export function filterSkills(skills, primary, filters = new Set()) {
                 || a.name.localeCompare(b.name)
             );
         });
+    }
+
+    if (filters?.size > 0) {
+        results = results.filter(
+            (s) => s.trees.some((t) => filters.has(t))
+        );
+    }
+
+    const wantsSummoning = [primary, ...filters].includes(SUMMONING);
+    if (!wantsSummoning) {
+        results = results.filter((s) => s.primaryTree !== SUMMONING);
     }
 
     return results;
