@@ -1292,6 +1292,199 @@
     Armour</physical> is higher than your opponent's, destroy all their
     Physical Armour. Set <status>Knocked Down</status>.
 
+- name: First Aid
+  primary_tree: Huntsman
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/First+Aid
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 4
+  effect: >
+    Heals target for <heal>[100% heal] Vitality</heal>. Cures
+    <status>Crippled</status>, <status>Knocked Down</status>,
+    <status>Blinded</status>, <status>Silenced</status>,
+    <status>Suffocating</status>, <status>Bleeding</status>,
+    <status>Burning</status>, <status>Poisoned</status>,
+    <status>Diseased</status>, <status>Plague</status>, and
+    <status>Infested</status> statuses.
+
+- name: Pin Down
+  primary_tree: Huntsman
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Pin+Down
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Deals <physical>120% damage</physical> and set
+    <status>Crippled</status> for 1 turn on target character.
+
+- name: Ricochet
+  primary_tree: Huntsman
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ricochet
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Fire a normal arrow that deals <physical>90% damage</physical>
+    and then finds another target within 5m. Bounces up to 2 times.
+
+- name: Ballistic Shot
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ballistic+Shot
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Deal <physical>100% damage</physical> and receive <physical>5%
+    bonus damage</physical> per 1m distance to target.
+
+- name: Barrage
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Barrage
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Fire three arrows at targets of your choice, each dealing
+    <physical>60% damage</physical>.
+
+- name: Marksman's Fang
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Marksman%27s+Fang
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  effect: >
+    Shoot an arrow that goes straight through enemies. Deals
+    <piercing>100% piercing damage</piercing>, ignoring
+    <physical>armour</physical>.
+
+- name: Reactive Shot
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Reactive+Shot
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  effect: >
+    Target a circular area. Until your next turn, you will reflexively
+    shoot at the first three enemies moving within this area. Set
+    <status>Reactive Shot</status> on self for 1 turn.
+
+- name: Sky Shot
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Sky+Shot
+  ap_cost: 2
+  sp_cost: 0
+  range: 20m
+  cooldown: 3
+  effect: >
+    Leap into the air before shooting, gaining damage bonuses for your
+    superior height. Deals <physical>100% damage</physical>.
+
+- name: Tactical Retreat
+  primary_tree: Huntsman
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Tactical+Retreat
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Apply <status>Hasted</status> to yourself for 1 turn, then
+    teleport away from imminent danger.
+
+- name: Arrow Spray
+  primary_tree: Huntsman
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Arrow+Spray
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 5
+  effect: >
+    Fire 16 arrows in a 60 degree arc. Each dealing <physical>40%
+    damage</physical>.
+
+- name: Assassinate
+  primary_tree: Huntsman
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Assassinate
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Attacking your target with meticulous aim, dealing <physical>140%
+    damage</physical> in one shot. When performed from
+    <status>Stealth</status>, this attack gains a <physical>50%
+    damage</physical> increase.
+
+- name: Farsight
+  primary_tree: Huntsman
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Farsight
+  ap_cost: 1
+  sp_cost: 1
+  range: 13m
+  cooldown: 3
+  effect: >
+    Increase the range of a targeted character's ranged attacks and
+    skills by 4m. Set <status>Farsight</status> for 3 turns.
+
+- name: Glitter Dust
+  primary_tree: Huntsman
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Glitter+Dust
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Target is <status>Marked</status>, reducing its ability to dodge.
+    Prevents target from going <status>Invisible</status>. Lasts 3
+    turns.
+
+- name: Arrow Storm
+  primary_tree: Huntsman
+  investment: 5
+  memory: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Arrow+Storm
+  ap_cost: 3
+  sp_cost: 3
+  range: 13m
+  cooldown: 2
+  effect: >
+    16 arrows fall from the sky in the target area, each dealing
+    <physical>40% Physical Damage</physical>.
+
 - name: Flaming Skin
   primary_tree: Polymorph
   secondary_tree: Pyrokinetic

@@ -51,12 +51,12 @@ describe('primary filter only', () => {
 describe('summoning', () => {
     it('shows only summoning skills when primary', () => {
         const result = filterSkills(skills, SUMMONING);
-        expect(result).toStrictEqual([sumPyro, sumNecro]);
+        expect(result).toStrictEqual([sumNecro, sumPyro]);
     });
 
     it('shows only summoning skills when secondary', () => {
         const result = filterSkills(skills, null, set(SUMMONING));
-        expect(result).toStrictEqual([sumPyro, sumNecro]);
+        expect(result).toStrictEqual([sumNecro, sumPyro]);
     });
 
     it('narrows by filter tree', () => {

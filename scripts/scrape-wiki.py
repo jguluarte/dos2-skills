@@ -3,7 +3,7 @@
 Scrape DOS2 skill data from the fextralife wiki.
 
 Hits the 10 school list pages, parses the skill tables, and writes
-YAML to src/data/skills-wiki.yaml.
+YAML to skills-wiki.yaml.
 """
 
 import re
@@ -549,7 +549,7 @@ def write_yaml(skills, output_path):
 
 
 def main():
-    output_path = 'src/data/skills-wiki.yaml'
+    output_path = 'skills-wiki.yaml'
     delay = 1  # seconds between requests (be polite)
 
     print('DOS2 Wiki Skill Scraper')
