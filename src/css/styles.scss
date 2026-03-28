@@ -88,6 +88,7 @@ body {
 
     &.visible {
         background: rgb(10 14 26 / 50%);
+        backdrop-filter: blur(4px);
         pointer-events: auto;
     }
 }
@@ -98,6 +99,7 @@ body {
     z-index: 10;
     background: $bg-overlay;
     box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
+    border-bottom: 1px solid rgb(255 255 255 / 15%);
 }
 
 .filter-header {
@@ -167,6 +169,7 @@ body {
     right: 0;
     background: rgb(20 25 40 / 98%);
     border-top: 1px solid rgb(255 255 255 / 10%);
+    border-bottom: 1px solid rgb(255 255 255 / 15%);
     padding: 12px 15px;
     z-index: 1;
 
@@ -204,7 +207,7 @@ body {
 // Filter Buttons
 .skill-tree-filters {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 6px;
 }
 
@@ -486,27 +489,6 @@ status {
 @media (width >= 769px) {
     .filter-overlay {
         display: none;
-    }
-
-    .filter-content {
-        display: block !important;
-        position: static;
-        border-top: none;
-        padding: 12px 15px;
-        background: transparent;
-    }
-
-    .filter-header {
-        cursor: default;
-        pointer-events: none;
-
-        .clear-btn {
-            pointer-events: auto;
-        }
-    }
-
-    .active-filters-summary {
-        display: none !important;
     }
 }
 

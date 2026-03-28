@@ -18,7 +18,7 @@ npm: .make-timestamp.npm
 	@touch $@
 
 start:
-	npx vite --config .config/vite.config.js --port 8000
+	npx vite --config .config/vite.config.js --port 8000 --host
 
 kill:
 	lsof -ti:8000 | xargs kill -9 2>/dev/null && echo "Port 8000 freed" || \

@@ -5,6 +5,7 @@
         "moduleResolution": "bundler",
         "strict": true,
         "noEmit": true,
+        "allowJs": true,
         "allowImportingTsExtensions": true,
         "baseUrl": ".",
         "paths": {

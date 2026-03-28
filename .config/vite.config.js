@@ -5,7 +5,8 @@ import { aliases } from './vite.aliases.js';
 
 export default defineConfig({
     root: 'src',
-    base: '/dos2-skills/',
+    base: process.env.NODE_ENV === 'production' ? '/dos2-skills/' : '/',
+    server: { allowedHosts: true },
     resolve: { alias: aliases },
     build: {
         outDir: aliases['@dist'],
