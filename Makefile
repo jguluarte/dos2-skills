@@ -10,11 +10,17 @@ clean:
 
 ##########################################################
 # Local dev helpers
-.PHONY: npm start kill test
+.PHONY: npm pip start kill test
 
 npm: .make-timestamp.npm
 .make-timestamp.npm: package.json package-lock.json
 	npm install --silent
+	@touch $@
+
+pip: .make-timestamp.pip
+.make-timestamp.pip: .config/requirements.txt
+	python3 -m venv .venv
+	.venv/bin/pip install -q -r .config/requirements.txt
 	@touch $@
 
 start:
@@ -31,17 +37,8 @@ test:
 # Scraping
 .PHONY: scrape
 
-VENV := scripts/.venv
-PIP := $(VENV)/bin/pip
-PYTHON := $(VENV)/bin/python
-
-$(VENV)/bin/activate: scripts/requirements.txt
-	python3 -m venv $(VENV)
-	$(PIP) install -q -r scripts/requirements.txt
-	@touch $@
-
-scrape: $(VENV)/bin/activate
-	$(PYTHON) scripts/scrape-wiki.py
+scrape: pip
+	.venv/bin/python scripts/scrape-wiki.py
 
 ##########################################################
 # Lint helpers

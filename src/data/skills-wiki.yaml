@@ -241,17 +241,6 @@
   description: Enemies will bleed fire when hit. Also creates a small fire area beneath
     each target and ignites surfaces in the area.
   effect: Set Bleed Fire for 3 turn(s).
-- name: Flaming Skin
-  primary_tree: Pyrokinetic
-  secondary_tree: Polymorph
-  investment: 2
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
-  ap_cost: 1
-  sp_cost: 1
-  cooldown: 5
-  description: You get immunity to fire, but lowered resistance to water. You bleed
-    fire.
-  effect: Set Flaming Skin for 2 turn(s).
 - name: Corpse Explosion
   primary_tree: Pyrokinetic
   secondary_tree: Necromancer
@@ -498,17 +487,6 @@
   cooldown: 4
   description: Remove Petrified and Frozen from target character. Vaporise ground
     surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
-- name: Jellyfish Skin
-  primary_tree: Aerotheurge
-  secondary_tree: Polymorph
-  investment: 2
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
-  ap_cost: 1
-  sp_cost: 1
-  cooldown: 5
-  description: Bleed electrified water. You get immunity to electricity, but lowered
-    resistance to poison and earth damage.
-  effect: Set Jellyfish Skin for 2 turn(s).
 - name: Vacuum Touch
   primary_tree: Aerotheurge
   secondary_tree: Necromancer
@@ -771,17 +749,6 @@
   cooldown: 4
   description: Turn water and blood surfaces into oil. Remove Stun and Shocked from
     characters.
-- name: Poisonous Skin
-  primary_tree: Geomancer
-  secondary_tree: Polymorph
-  investment: 2
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
-  ap_cost: 1
-  sp_cost: 1
-  cooldown: 5
-  description: You get immunity to poison and earth, but lowered resistance to air.
-    You bleed poison.
-  effect: Set Poisonous Skin for 2 turn(s).
 - name: Corrosive Touch
   primary_tree: Geomancer
   secondary_tree: Necromancer
@@ -1048,40 +1015,6 @@
   description: Three healing tears circle around you. Everytime an ally walks into
     melee range near you, a healing tear bathes them.
   effect: Set Healing Tears for 3 Turn(s)
-- name: Icy Skin
-  primary_tree: Hydrosophist
-  secondary_tree: Polymorph
-  investment: 2
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
-  ap_cost: 1
-  sp_cost: 1
-  cooldown: 5
-  description: You get immunity to water, but lowered resistance to fire. You bleed
-    ice.
-  effect: Set Icy Skin for 2 turn(s).
-- name: Raining Blood
-  primary_tree: Hydrosophist
-  secondary_tree: Necromancer
-  investment: 1
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
-  ap_cost: 2
-  sp_cost: 0
-  range: 8m
-  cooldown: 5
-  description: Create blood surfaces. Set Bleeding on enemies. Douse fire surfaces.
-  effect: Set Bleeding for 2 turn(s).
-- name: Blood Storm
-  primary_tree: Hydrosophist
-  secondary_tree: Necromancer
-  investment: 3
-  url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
-  ap_cost: 4
-  sp_cost: 3
-  range: 17m
-  cooldown: 5
-  description: The sky weeps bloody tears. Bolts of coagulated blood fall on enemy
-    characters in the area, dealing 100% damage each and setting Disease and Decaying
-    Touch. Turns all water in the area into blood.
 - name: Battering Ram
   primary_tree: Warfare
   investment: 1
@@ -1717,6 +1650,50 @@
   description: You take the first step towards godhood. The cost of all Source skills
     is reduced by -3 Source Point.
   effect: Set Apotheosis for 2 turn(s).
+- name: Flaming Skin
+  primary_tree: Polymorph
+  secondary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
+  ap_cost: 1
+  sp_cost: 1
+  cooldown: 5
+  description: You get immunity to fire, but lowered resistance to water. You bleed
+    fire.
+  effect: Set Flaming Skin for 2 turn(s).
+- name: Jellyfish Skin
+  primary_tree: Polymorph
+  secondary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
+  ap_cost: 1
+  sp_cost: 1
+  cooldown: 5
+  description: Bleed electrified water. You get immunity to electricity, but lowered
+    resistance to poison and earth damage.
+  effect: Set Jellyfish Skin for 2 turn(s).
+- name: Poisonous Skin
+  primary_tree: Polymorph
+  secondary_tree: Geomancer
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
+  ap_cost: 1
+  sp_cost: 1
+  cooldown: 5
+  description: You get immunity to poison and earth, but lowered resistance to air.
+    You bleed poison.
+  effect: Set Poisonous Skin for 2 turn(s).
+- name: Icy Skin
+  primary_tree: Polymorph
+  secondary_tree: Hydrosophist
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
+  ap_cost: 1
+  sp_cost: 1
+  cooldown: 5
+  description: You get immunity to water, but lowered resistance to fire. You bleed
+    ice.
+  effect: Set Icy Skin for 2 turn(s).
 - name: Blood Sucker
   primary_tree: Necromancer
   investment: 1
@@ -1884,6 +1861,29 @@
   description: Spawn bone totems near every enemy (alive or dead) in the area. Bone
     totems have ranged attacks that deal [X] physical damage.
   effect: A Bones Totem will be summoned at the location of your target(s).
+- name: Raining Blood
+  primary_tree: Necromancer
+  secondary_tree: Hydrosophist
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
+  ap_cost: 2
+  sp_cost: 0
+  range: 8m
+  cooldown: 5
+  description: Create blood surfaces. Set Bleeding on enemies. Douse fire surfaces.
+  effect: Set Bleeding for 2 turn(s).
+- name: Blood Storm
+  primary_tree: Necromancer
+  secondary_tree: Hydrosophist
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
+  ap_cost: 4
+  sp_cost: 3
+  range: 17m
+  cooldown: 5
+  description: The sky weeps bloody tears. Bolts of coagulated blood fall on enemy
+    characters in the area, dealing 100% damage each and setting Disease and Decaying
+    Touch. Turns all water in the area into blood.
 - name: Conjure Incarnate
   primary_tree: Summoning
   investment: 1

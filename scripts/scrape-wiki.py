@@ -191,10 +191,10 @@ def parse_description(cell):
 def determine_primary_secondary(reqs, page_tree):
     """
     Given requirement tuples and the page's tree, determine primary
-    and secondary trees following the project convention:
-    - Elemental trees are primary over non-elemental
-    - Summoning is primary over elemental
-    - For single-school skills, that school is primary
+    and secondary trees.
+
+    Cross-class skills only appear on one school page, so the first
+    icon in the Req column is the primary tree. Trust the page order.
     """
     if len(reqs) == 0:
         return page_tree, None, 1
@@ -203,27 +203,9 @@ def determine_primary_secondary(reqs, page_tree):
         return reqs[0][0], None, reqs[0][1]
 
     tree_a, level_a = reqs[0]
-    tree_b, level_b = reqs[1]
+    tree_b, _level_b = reqs[1]
 
-    # Summoning is always primary
-    if tree_a == 'Summoning':
-        return tree_a, tree_b, level_a
-    if tree_b == 'Summoning':
-        return tree_b, tree_a, level_b
-
-    # Elemental trees are primary over non-elemental
-    a_elemental = tree_a in ELEMENTAL_TREES
-    b_elemental = tree_b in ELEMENTAL_TREES
-
-    if a_elemental and not b_elemental:
-        return tree_a, tree_b, level_a
-    if b_elemental and not a_elemental:
-        return tree_b, tree_a, level_b
-
-    # Both same category — use page tree as primary
-    if tree_a == page_tree:
-        return tree_a, tree_b, level_a
-    return tree_b, tree_a, level_b
+    return tree_a, tree_b, level_a
 
 
 def find_skill_table(soup):
