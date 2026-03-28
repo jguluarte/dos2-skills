@@ -538,6 +538,177 @@
   effect: >
     Conjure a cloud of thick blessed smoke that makes characters invisible.
 
+- name: Blinding Radiance
+  primary_tree: Aerotheurge
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Blinding+Radiance
+  ap_cost: 2
+  sp_cost: 0
+  range: 5m
+  cooldown: 4
+  effect: >
+    Enemies around you receive <air>90% Air Damage</air>. You receive a
+    status that sets <status>Blinded</status> on enemies in a 5m radius
+    for 1 turn.
+
+- name: Electric Discharge
+  primary_tree: Aerotheurge
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Electric+Discharge
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    An electrical jolt deals <air>90% Air Damage</air> to target
+    character. Sets <status>Shocked</status> for 2 turns.
+
+- name: Favourable Wind
+  primary_tree: Aerotheurge
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Favourable+Wind
+  ap_cost: 1
+  sp_cost: 0
+  range: 10m
+  cooldown: 6
+  effect: >
+    An aura that increases your allies' movement speed by 1.5m while
+    they stay close to you. Lasts 4 turns.
+
+- name: Shocking Touch
+  primary_tree: Aerotheurge
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Shocking+Touch
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 3
+  effect: >
+    Sets <status>Shocked</status> on a target within arm's length and
+    deals <air>110% Air Damage</air>.
+
+- name: Apportation
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Apportation
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 2
+  effect: Transport pickupable items in the target area into your inventory.
+
+- name: Dazing Bolt
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Dazing+Bolt
+  ap_cost: 3
+  sp_cost: 0
+  range: 15m
+  cooldown: 4
+  effect: >
+    An electrical bolt falls from the sky, dealing <air>120% Air
+    Damage</air> to characters and items in the area. Sets
+    <status>Shocked</status> for 1 turn.
+
+- name: Nether Swap
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Nether+Swap
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Make two characters switch places. One of the characters can be you.
+
+- name: Pressure Spike
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Pressure+Spike
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Condense all cloud surfaces in the area. Deals <air>70% Air
+    Damage</air> to enemies and douses fire.
+
+- name: Teleportation
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Teleportation
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Teleport a target character or item to a point of your choosing.
+    Deals 100% Physical Damage on landing.
+
+- name: Uncanny Evasion
+  primary_tree: Aerotheurge
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Uncanny+Evasion
+  ap_cost: 1
+  sp_cost: 0
+  range: 15m
+  cooldown: 4
+  effect: >
+    Target character's dodging is increased by 90% and Movement Speed is
+    increased by 20%. Sets <status>Evading</status> for 1 turn.
+
+- name: Chain Lightning
+  primary_tree: Aerotheurge
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Chain+Lightning
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 5
+  effect: >
+    Shoot a stunning bolt of lightning that forks up to 8 times in an 8m
+    radius, dealing <air>150% Air Damage</air> to each target. Sets
+    <status>Shocked</status> for 2 turns.
+
+- name: Closed Circuit
+  primary_tree: Aerotheurge
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Closed+Circuit
+  ap_cost: 2
+  sp_cost: 2
+  range: PB AoE
+  cooldown: 4
+  effect: >
+    Deals <air>220% Air Damage</air> to enemies around you, then
+    creates cursed static clouds on the edges of the spell. Sets
+    <status>Shocked</status> for 2 turns.
+
+- name: Superconductor
+  primary_tree: Aerotheurge
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Superconductor
+  ap_cost: 3
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  effect: >
+    Shoot forking spikes at all enemies within the area, dealing
+    <air>100% Air Damage</air>. Sets <status>Shocked</status> for 1
+    turn.
+
+- name: Thunderstorm
+  primary_tree: Aerotheurge
+  investment: 5
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Thunderstorm
+  ap_cost: 4
+  sp_cost: 3
+  range: 17m
+  cooldown: 5
+  effect: >
+    A storm rages in the target area, hitting enemies with lightning
+    bolts, each dealing <air>100% Air Damage</air>. Duration 2 turns.
+    Sets <status>Stunned</status> for 1 turn.
+
 - name: Flaming Skin
   primary_tree: Polymorph
   secondary_tree: Pyrokinetic
