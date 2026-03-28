@@ -2,6 +2,7 @@
     import jsyaml from 'js-yaml';
     import { Skill } from '@js/skill/skill.js';
     import { SUMMONING } from '@constants';
+    import * as urlState from '@js/url-state';
     import skillsYaml from '@data/skills.yaml?raw';
     import FilterBar from './components/FilterBar.svelte';
     import SkillCard from './components/SkillCard.svelte';
@@ -11,9 +12,11 @@
     const allSkills = (jsyaml.load(skillsYaml) as Record<string, unknown>[])
         .map((raw) => Skill.fromYAML(raw));
 
+    const saved = urlState.load();
+    let primary = $state<string | null>(saved.primary);
+    let secondaryFilters = $state< Set<string> >(saved.filters);
 
-    let primary = $state<string | null>(null);
-    let secondaryFilters = $state<Set<string>>(new Set());
+    $effect( () => urlState.save(primary, secondaryFilters) );
 
     let filteredSkills = $derived.by(() => {
         if (!primary && secondaryFilters.size === 0) return allSkills;
