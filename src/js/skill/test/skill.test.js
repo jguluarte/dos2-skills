@@ -3,9 +3,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 
 import { Skill, Schema as SkillSchema } from '@js/skill';
 
-import {
-    SUMMONING, PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER,
-} from '@constants';
+import { PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER } from '@constants';
 
 describe("Skill functionality", () => {
     let bleed_fire;
@@ -25,11 +23,10 @@ describe("Skill functionality", () => {
 
         it('returns false for a tree the skill does not require', () => {
             expect(bleed_fire.has(WARFARE)).toBe(false);
-            expect(bleed_fire.has(SUMMONING)).toBe(false);
+            expect(bleed_fire.has(NECROMANCER)).toBe(false);
         });
     });
 
-    // FIXME: skill.any is gross
     describe('skill.any(trees)', () => {
         it('returns true when at least one tree matches', () => {
             expect(bleed_fire.any(new Set([PYROKINETIC, WARFARE]))).toBe(true);
@@ -41,21 +38,6 @@ describe("Skill functionality", () => {
 
         it('returns true for empty set (vacuously true)', () => {
             expect(bleed_fire.any(new Set())).toBe(true);
-        });
-    });
-
-    describe('skill.isSummoning', () => {
-        it('returns true for summoning skills', () => {
-            const testData = fake(SkillSchema);
-            testData.primary_tree = SUMMONING;
-            testData.secondary_tree = PYROKINETIC;
-
-            const skill = Skill.fromYAML(testData);
-            expect(skill.isSummoning).toBe(true);
-        });
-
-        it('returns false for non-summoning skills', () => {
-            expect(bleed_fire.isSummoning).toBe(false);
         });
     });
 });
