@@ -346,8 +346,8 @@
     Conjure a cloud of thick blessed smoke that makes characters invisible.
 
 - name: Flaming Skin
-  primary_tree: Pyrokinetic
-  secondary_tree: Polymorph
+  primary_tree: Polymorph
+  secondary_tree: Pyrokinetic
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Skin
   ap_cost: 1
@@ -358,8 +358,8 @@
     You get immunity to fire, but lowered resistance to water. You bleed fire.
 
 - name: Icy Skin
-  primary_tree: Hydrosophist
-  secondary_tree: Polymorph
+  primary_tree: Polymorph
+  secondary_tree: Hydrosophist
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Icy+Skin
   ap_cost: 1
@@ -370,8 +370,8 @@
     You get immunity to water, but lowered resistance to fire. You bleed ice.
 
 - name: Poisonous Skin
-  primary_tree: Geomancer
-  secondary_tree: Polymorph
+  primary_tree: Polymorph
+  secondary_tree: Geomancer
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Poisonous+Skin
   ap_cost: 1
@@ -383,8 +383,8 @@
     bleed poison.
 
 - name: Jellyfish Skin
-  primary_tree: Aerotheurge
-  secondary_tree: Polymorph
+  primary_tree: Polymorph
+  secondary_tree: Aerotheurge
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Jellyfish+Skin
   ap_cost: 1
@@ -642,8 +642,8 @@
     your Movement Speed is increased by 1m.
 
 - name: Raining Blood
-  primary_tree: Hydrosophist
-  secondary_tree: Necromancer
+  primary_tree: Necromancer
+  secondary_tree: Hydrosophist
   investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ap_cost: 2
@@ -653,8 +653,8 @@
   effect: Create a blood surface beneath every target in range.
 
 - name: Blood Storm
-  primary_tree: Hydrosophist
-  secondary_tree: Necromancer
+  primary_tree: Necromancer
+  secondary_tree: Hydrosophist
   investment: 3
   url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ap_cost: 4
