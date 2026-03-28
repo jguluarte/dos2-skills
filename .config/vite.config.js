@@ -1,9 +1,7 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { cpSync } from 'fs';
-import { aliases, config } from './vite.aliases.js';
-
-const svelteConfig = `${config}/svelte.config.js`;
+import { aliases, svelteConfig } from './vite.aliases.js';
 
 export default defineConfig({
     root: 'src',

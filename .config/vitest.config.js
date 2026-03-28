@@ -1,8 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { aliases, config } from './vite.aliases.js';
-
-const svelteConfig = `${config}/svelte.config.js`;
+import { aliases, svelteConfig } from './vite.aliases.js';
 
 export default defineConfig({
     plugins: [svelte({ hot: false, configFile: svelteConfig })],

@@ -1,6 +1,6 @@
 <script>
     import { ALL_TREES, VALID_SKILL_COMBINATION } from '@constants';
-    import { summaryText } from '@js/summary-text.js';
+    import { summarize } from '@js/filter.js';
 
     let {
         primary = $bindable(null),
@@ -39,7 +39,7 @@
     }
 
     let hasFilters = $derived(primary !== null || filters.size > 0);
-    let summary = $derived(summaryText(primary, filters));
+    let summary = $derived(summarize(primary, filters));
 </script>
 
 <div class="filter-overlay" class:visible={expanded}
