@@ -10,7 +10,9 @@ export function filterSkills(skills, primary, filters = new Set()) {
     }
 
     if (filters.size > 0) {
-        results = results.filter((s) => s.any(filters));
+        results = results.filter(
+            (s) => s.trees.some((t) => filters.has(t))
+        );
     }
 
     const wantsSummoning = [primary, ...filters].includes(SUMMONING);

@@ -14,9 +14,4 @@ export class Skill {
         return this.trees.includes(tree);
     }
 
-    any(trees) {
-        if (trees.size === 0) return true;
-        return this.trees.some((t) => trees.has(t));
-    }
-
 }
