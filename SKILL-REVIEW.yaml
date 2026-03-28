@@ -13,346 +13,6 @@
 
 
 # ========================================
-# Warfare (15 skills)
-# ========================================
-
-- name: Battering Ram
-  primary_tree: Warfare
-  investment: 1
-  ap_cost: 2
-  sp_cost: 0
-  range: 12m
-  cooldown: 5
-  wiki_detail: >
-    Rush forward in a straight line, to a designated point, hitting all
-    enemies in your path for 50% damage and setting Knockdown.
-  wiki_status: Set Knocked Down for 1 turn(s).
-  wiki_notes:
-    - Resisted by Physical Armour
-    - ??
-  proposed_effect: >
-    Rush forward in a straight line, to a designated point, hitting all
-    enemies in your path for 50% damage and setting <status>Knocked
-    Down</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Battering+Ram
-
-- name: Battle Stomp
-  primary_tree: Warfare
-  investment: 1
-  ap_cost: 2
-  sp_cost: 0
-  range: 10m
-  cooldown: 4
-  wiki_detail: >
-    Smash your weapon into the ground, knocking down non-allied characters in
-    front of you, and hitting them for 60% damage. Also clears non-cursed
-    surfaces and clouds.
-  wiki_status: Sets Knocked Down for 1 turn(s).
-  wiki_notes:
-    - Resisted by Physical Armour
-  proposed_effect: >
-    Smash your weapon into the ground, knocking down non-allied characters in
-    front of you, and hitting them for 60% damage. Also clears non-cursed
-    surfaces and clouds.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Battle+Stomp
-
-- name: Bouncing Shield
-  primary_tree: Warfare
-  investment: 1
-  ap_cost: 2
-  sp_cost: 0
-  range: 13m
-  cooldown: 2
-  wiki_detail: >
-    Throw your shield at an enemy dealing 70% Physical Damage. Shield can
-    bounce to another enemy in 5m range.
-  wiki_status: >
-    Damage is based on the 70-77% Physical Armour of your shield. Require
-    Shield.
-  wiki_notes:
-    - >
-      Base damage is equal to 70% of the Physical Armour value of the equipped
-      shield.
-    - Scales with Warfare.
-    - >
-      Adding Masterwork Runes into a Shield (which increases its armor value)
-      will increase the damage of this Skill.
-  proposed_effect: >
-    Throw your shield at an enemy dealing <physical>70% Physical
-    Damage</physical>. Shield can bounce to another enemy in 5m range.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Bouncing+Shield
-
-- name: Crippling Blow
-  primary_tree: Warfare
-  investment: 1
-  ap_cost: 2
-  sp_cost: 0
-  range: 3m
-  cooldown: 3
-  wiki_detail: >
-    Cripple the target with a sweeping blow, and all characters around it.
-    Deals 115% damage.
-  wiki_status: Set Crippled for 1 turn(s).
-  wiki_notes:
-    - >
-      As of v3.0.180.158(March 7th) Crippling blow no longer hits allies.
-      (Unless they are targeted)
-    - Resisted by Physical Armour
-  proposed_effect: >
-    <status>Crippled</status> the target with a sweeping blow, and all
-    characters around it. Deals 115% damage.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow
-
-- name: Blitz Attack
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 8m
-  cooldown: 3
-  wiki_detail: >
-    Jump from one target to another, hitting up to 2 targets, dealing 70%
-    damage to each. Targets are chosen randomly in a 10m radius.
-  wiki_status: Require Melee weapon. Scale depending on main weapon.
-  wiki_notes:
-    - ??
-    - ??
-  proposed_effect: >
-    Jump from one target to another, hitting up to 2 targets, dealing 70%
-    damage to each. Targets are chosen randomly in a 10m radius.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Blitz+Attack
-
-- name: Deflective Barrier
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: Self
-  cooldown: 5
-  wiki_detail: >
-    Projectiles that hit you are reflected back at the caster. This does not
-    prevent the original projectile effects. Provides [X] Physical Armour.
-  wiki_status: Set Deflecting for 3 turn(s).
-  wiki_notes:
-    - >
-      The skill does not work without a shield if it is learned from an item.
-      However, once the Deflecting status is set, unequipping the shield does
-      not cancel the status.
-    - >
-      The skill also deflect projectile from spells ( Fireball, Fossil Strike,
-      etc.)
-    - >
-      The skill can deflect your own projectile if you target your feet. If
-      enemy is in range, you can damage them (and yourself) twice.
-  proposed_effect: >
-    Projectiles that hit you are reflected back at the caster. This does not
-    prevent the original projectile effects. Provides [X] Physical Armour.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Deflective+Barrier
-
-- name: Enrage
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 2m
-  cooldown: 5
-  wiki_detail: >
-    Motivate an allied character with the power of rage. Target allied
-    character is guaranteed to land critical hits with basic attacks and
-    weapon skills, but is muted. Clears Taunted, Terrified, Charmed, Mad and
-    Clear-Minded statuses.
-  wiki_status: Set Enraged for 1 turn(s).
-  wiki_notes:
-    - >
-      Works with any types of Weapon Attacks (Bow, Dagger, Mace, Sword, Spear,
-      Axe or Staff), regardless of damage type.
-    - Works with Elemental Arrows
-    - >
-      Best if cast at the beginning of your turn (if casting on yourself) since
-      you'll get to use it the rest of that turn and the next.
-  proposed_effect: >
-    Motivate an allied character with the power of rage. Target allied
-    character is guaranteed to land critical hits with basic attacks and
-    weapon skills, but is muted. Clears <status>Taunted</status>,
-    <status>Terrified</status>, <status>Charmed</status>, <status>Mad</status>
-    and <status>Clear-Minded</status> statuses.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Enrage
-
-- name: Phoenix Dive
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    Leap through the air to a target position, creating a fire surface upon
-    landing.
-  wiki_notes:
-    - >
-      Phoenix Dive can also be learned by completing the quest The Ugly Little
-      Bird and eating the Scaly Phoenix Egg when prompted.
-  proposed_effect: >
-    Leap through the air to a target position, creating a fire surface upon
-    landing.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Phoenix+Dive
-
-- name: Provoke
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 5
-  wiki_detail: >
-    Taunt the enemies around you. Provoke and tease them so that they want to
-    attack you.
-  wiki_status: Set Taunted for 1 turn(s).
-  wiki_notes:
-    - Taunt pierces Physical Armour and costs 2 AP as of Patch v3.0.168.526
-  proposed_effect: >
-    Taunt the enemies around you. Provoke and tease them so that they want to
-    attack you.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Provoke
-
-- name: Whirlwind
-  primary_tree: Warfare
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 4.5m
-  cooldown: 3
-  wiki_detail: >
-    Perform a whirlwind attack, hitting enemies around you for 100% damage.
-  wiki_status: Require Melee weapon. Scale depending on main weapon.
-  wiki_notes:
-    - >
-      If you have poison equipped to the weapon dealing damage, the poison has a
-      chance to apply to all characters affected by the attack. Basically an AOE
-      undead heal.
-    - Resisted by Physical Armour
-  proposed_effect: >
-    Perform a whirlwind attack, hitting enemies around you for 100% damage.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Whirlwind
-
-- name: Challenge
-  primary_tree: Warfare
-  investment: 3
-  ap_cost: 0
-  sp_cost: 0
-  range: 13m
-  cooldown: 5
-  wiki_detail: >
-    Mark target enemy. If they die in the next 2 turns, you are healed and
-    receive damage and armour bonuses. If target survives, their Vitality is
-    healed to full and caster receives damage.
-  wiki_status: >
-    Apply Challenge to target, betting whether they will be dead in 3 turn(s).
-  wiki_notes:
-    - Challenge cost reduced to 1 AP as of Patch v3.0.168.526
-    - Challenge no longer has an AP cost as of Definitive Edition.
-    - Challenge now heals Undead characters as of Definitive Edition.
-  proposed_effect: >
-    Mark target enemy. If they die in the next 2 turns, you are healed and
-    receive damage and armour bonuses. If target survives, their Vitality is
-    healed to full and caster receives damage.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Challenge
-
-- name: Guardian Angel
-  primary_tree: Warfare
-  investment: 3
-  ap_cost: 2
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 6
-  wiki_detail: Allies in melee range redirect 50% of received damage to you.
-  wiki_status: Set Guardian Angel Aura for 2 turn(s).
-  wiki_notes:
-    - ??
-    - ??
-  proposed_effect: >
-    Allies in melee range redirect 50% of received damage to you.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Guardian+Angel
-
-- name: Onslaught
-  primary_tree: Warfare
-  investment: 3
-  ap_cost: 4
-  sp_cost: 2
-  range: 2.5m
-  cooldown: 6
-  wiki_detail: >
-    Attack five times with astonishing speed, each hit dealing 60% damage.
-  wiki_status: Scale depending on main weapon.
-  wiki_notes:
-    - >
-      Though the text in the game may say it deals 50% damage per hit, the code
-      in the game indicates that this skill does 60% damage five times instead.
-    - ??
-  proposed_effect: >
-    Attack five times with astonishing speed, each hit dealing 60% damage.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Onslaught
-
-- name: Thick of the Fight
-  primary_tree: Warfare
-  investment: 3
-  ap_cost: 2
-  sp_cost: 1
-  range: Self
-  cooldown: 4
-  wiki_detail: >
-    The more the merrier! Gain a damage boost for every nearby character.
-  wiki_status: Set Thick of the Fight for 2 turn(s).
-  wiki_notes:
-    - >
-      The damage boost is 10% per all nearby characters, this includes yourself,
-      enemies, summons, and totems.
-    - There is no craftable scroll recipe for this skill
-    - >
-      Thick of the Fight is a "misc" bonus, which figures differently into the
-      damage formulas for weapon-based attacks and spells. The misc bonus is
-      additive with attribute and weapon skill bonuses for weapon-based attacks,
-      but it is a standalone multiplier in the damage formula for spells.
-  proposed_effect: >
-    The more the merrier! Gain a damage boost for every nearby character.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Thick+of+the+Fight
-
-- name: Overpower
-  primary_tree: Warfare
-  investment: 5
-  ap_cost: 2
-  sp_cost: 3
-  range: 2m
-  cooldown: 3
-  wiki_detail: >
-    Deals 150% damage. If your Physical Armour is higher than your opponent's,
-    destroy all their Physical Armour. Can set Knocked Down.
-  wiki_status: Set Knocked Down for 1 turn(s).
-  wiki_notes:
-    - Can be used for backstab
-    - Resisted by Physical Armour
-  proposed_effect: >
-    Deals 150% damage. If your Physical Armour is higher than your opponent's,
-    destroy all their Physical Armour. Can set <status>Knocked Down</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Overpower
-
-
-# ========================================
 # Huntsman (15 skills)
 # ========================================
 
@@ -1999,3 +1659,30 @@
   proposed_effect: Regenerate Magical Armour for all allies around caster.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
+
+
+# ========================================
+# Warfare (1 skills)
+# ========================================
+
+- name: Crippling Blow
+  primary_tree: Warfare
+  investment: 1
+  ap_cost: 2
+  sp_cost: 0
+  range: 3m
+  cooldown: 3
+  wiki_detail: >
+    Cripple the target with a sweeping blow, and all characters around it.
+    Deals 115% damage.
+  wiki_status: Set Crippled for 1 turn(s).
+  wiki_notes:
+    - >
+      As of v3.0.180.158(March 7th) Crippling blow no longer hits allies.
+      (Unless they are targeted)
+    - Resisted by Physical Armour
+  proposed_effect: >
+    <status>Crippled</status> the target with a sweeping blow, and all
+    characters around it. Deals 115% damage.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Crippling+Blow
