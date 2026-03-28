@@ -9,6 +9,11 @@
   description: Sets Hasted on target character. Hasted increases movement speed by
     2m per AP and gives an additional 1 AP per turn. Clears Slowed and Crippled .
   effect: Set Hasted for 2 turn(s).
+  detail_description: Sets Hasted on target character. Hasted increases movement speed
+    by 2m per AP and gives an additional 1 AP per turn. Clears Slowed and Crippled
+    .
+  detail_effect: Set Hasted for 2 turn(s).
+  detail_requirements: Requires Pyrokinetic 1 Costs 1 Memory
 - name: Ignition
   primary_tree: Pyrokinetic
   investment: 1
@@ -19,6 +24,11 @@
   description: Sets enemy characters around you on fire. Deals [X] fire damage to
     each. Ignites all susceptible surfaces.
   effect: Set Burning for 2 turn(s).
+  detail_description: Sets enemy characters around you on fire. Deals 40% Fire Damage
+    to each. Ignites all susceptible surfaces.
+  detail_effect: Set Burning for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 1 Costs 1 Memory
 - name: Peace of Mind
   primary_tree: Pyrokinetic
   investment: 1
@@ -32,6 +42,12 @@
     , Enraged and Mad . *Effect is based on your level. Y is generally 2X or 2X +
     1.
   effect: Set Clear-Minded for 3 turn(s).
+  detail_description: Target gains Clear-Minded , which increases Strength , Finesse
+    , Intelligence by (1 + amount scaled by level), Wits by (2 + amount scaled by
+    level). Removes Blinded , Terrified , Charmed , Taunted , Sleeping , Enraged and
+    Mad .
+  detail_effect: Set Clear-Minded for 3 turn(s).
+  detail_requirements: Requires Pyrokinetic 1 Costs 1 Memory Range 13m
 - name: Searing Daggers
   primary_tree: Pyrokinetic
   investment: 1
@@ -43,6 +59,11 @@
   description: Shoot 3 flaming daggers at targets of your choice, each creating a
     fire surface and dealing [X] fire damage
   effect: Set Burning for two turns. 1m Explode radius
+  detail_description: Shoot three flaming daggers at targets of your choice, each
+    creating a fire surface and dealing 25% fire damage
+  detail_scaling: Set Burning for two turns. Damage is based on your level and receives
+    a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 1 Costs 1 Memory Range 13m
 - name: Fire Whip
   primary_tree: Pyrokinetic
   investment: 2
@@ -54,6 +75,15 @@
   description: Long-range attack that deals [X] Fire Damage to a single target, leaving
     them blind and burning.
   effect: Set Burning for 1 Turn(s). Set Blinded for 1 Turn(s)
+  detail_description: Long-range attack that deals 155% Fire Damage to a single target,
+    leaving them blind and burning.
+  detail_effect: Set Burning for 1 Turn(s). Set Blinded for 1 Turn(s)
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory Range 8m
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper, High Quality Fire Essence,
+    and Voidwoken Spike
+  - Resisted by Magical Armour
 - name: Fireball
   primary_tree: Pyrokinetic
   investment: 2
@@ -64,6 +94,11 @@
   cooldown: 4
   description: Hurl a fiery sphere that will explode, dealing [X] Fire Damage .
   effect: Set Burning for 2 turn(s). 3m Explode Radius
+  detail_description: Hurl a fiery sphere that will explode, dealing 100% Fire Damage
+  detail_effect: Set Burning for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory 3m Explode Radius Range
+    13m
 - name: Flaming Tongues
   primary_tree: Pyrokinetic
   investment: 2
@@ -73,6 +108,13 @@
   cooldown: 5
   description: Flaming tongues protect you, immediately attacking approaching enemies.
   effect: Set Flaming Tongues for 3 turn(s).
+  detail_description: Flaming tongues protect you, immediately attacking approaching
+    enemies, dealing 100% Fire Damage .
+  detail_effect: Set Flaming Tongues for 3 turn(s).
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper , High Quality Fire Essence
+    , and a Cup of Oil.
 - name: Laser Ray
   primary_tree: Pyrokinetic
   investment: 2
@@ -84,6 +126,14 @@
   description: Line of intense heat that deals [X] Fire Damage to characters and leaves
     fire clouds behind.
   effect: Set Burning for 2 turn(s).
+  detail_description: Line of intese heat that deals 150% Fire Damage to characters
+    and leaves fire clouds behind.
+  detail_effect: Set Burning for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory Range 20m
+  detail_notes:
+  - Scroll crafted by combine Sheet of Paper, High Quality Fire Essence, and Nails
+  - Resisted by Magical Armour
 - name: Spontaneous Combustion
   primary_tree: Pyrokinetic
   investment: 2
@@ -95,6 +145,13 @@
   description: Deal [X] Fire Damage to target character. If the character is affected
     by Burning or Necrofire , remove those statuses and deal additional damage for
     each turn of duration remaining.
+  detail_description: Deal 75 % Fire Damage to target character. If the character
+    is affected by Burning or Necrofire , remove those statuses and deal additional
+    damage for each turn of duration remaining.
+  detail_effect: Immediately triggers the damage of each remaining turn of Burning/Necrofire,
+    then that status effect is removed.
+  detail_scaling: Damage is based on your level and receives a bonus from your Intelligence.
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory Range 13m
 - name: Supernova
   primary_tree: Pyrokinetic
   investment: 2
@@ -104,6 +161,14 @@
   cooldown: 6
   description: Explode, creating fire surfaces and dealing [X] Fire Damage in a large
     area around you. (Except areas blocked by obstacles)
+  detail_description: Explode, creating fire surfaces and dealing 175% Fire Damage
+    in a large area around you. (Except areas blocked by obstacles)
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 2 Costs 1 Memory
+  detail_notes:
+  - Supernova deals damage to the caster as well.
+  - Scroll can be crafted by combining a Sheet of Paper , High Quality Fire Essence
+    , and Sharp Tooth
 - name: Epidemic of Fire
   primary_tree: Pyrokinetic
   investment: 3
@@ -115,6 +180,16 @@
   description: Fire a cursed flame that will fork on impact up to 5 times, dealing
     [X] Fire Damage and leaving a cursed fire surface in its wake.
   effect: Set Necrofire for 3 turn(s).
+  detail_description: Fire a cursed flame that will fork on impact up to 5 times,
+    dealing 150% Fire Damage and leaving a cursed fire surface in its wake.
+  detail_effect: Set Necrofire for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 3 Costs 2 Memory Range 13m
+  detail_notes:
+  - Scroll crafted by combine Sheet of Paper , Source Orb , and Large Tusk
+  - Resisted by Magical Armour
+  - Epidemic of Fire Skillbook can be crafted by combining Epidemic of Fire Sroll
+    + High Tier Blank Skillbook
 - name: Firebrand
   primary_tree: Pyrokinetic
   investment: 3
@@ -125,6 +200,19 @@
   description: An aura that adds [X] fire damage to weapon skills and attacks for
     all allies near you.
   effect: 8m Radius
+  detail_description: An aura that adds 50% Fire Damage for weapon skills and attacks
+    for all allies near you.
+  detail_effect: Set Firebrand for 2 turn(s).
+  detail_requirements: Requires Pyrokinetic 3 Costs 1 Memory 8m Radius
+  detail_notes:
+  - Acquired in Act 2
+  - The damage added by this skill is not dependent on weapon damage. At level 16
+    it adds 50% of the base damage of Fireball .
+  - Scroll can be crafted by combining a Sheet of Paper , Alien Fire Essence , and
+    Fang
+  - Does not scale with Intelligence , only Pyrokinetic .
+  - The Pyrokenetic scaling is applied individually. The Pyrokenetic level of the
+    caster only affects the strength of the buff for him/her.
 - name: Flaming Crescendo
   primary_tree: Pyrokinetic
   investment: 3
@@ -135,6 +223,18 @@
   cooldown: 5
   description: Curse the target to explode in 1 turns or on death.
   effect: Set Flaming Crescendo for 1 turn(s). 3m Explode Radius
+  detail_description: Curse the target to explode after one turn or on death, dealing
+    175% Fire Damage in a 3m radius.
+  detail_effect: Set Flaming Crescendo for 3 turn(s).
+  detail_requirements: Requires Pyrokinetic 3 Costs 1 Memory 3m Explode Radius Range
+    13m
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper, Alien Fire Essence, and Needle
+  - Flaming Crescendo can be set ignoring Magic Armour. Cost reduced to 1AP, delay
+    before explosion to 1 turn as of Patch v3.0.168.526
+  - In game the tooltip shows incorrect damage values. The actual damage it does it
+    the same as Supernova .
+  - No longer resisted by Magical Armour
 - name: Summon Fire Slug
   primary_tree: Pyrokinetic
   investment: 3
@@ -147,6 +247,14 @@
     linear fire attacks.
   effect: The stats of the summon will depend on the caster's level and summoning
     ability. Duration 5 turns.
+  detail_description: Summon a Fire Slug. Your Fire Slug can create fire surfaces
+    and launch linear fire attacks.
+  detail_effect: The stats of the summon will depend on the caster's level and summoning
+    ability.
+  detail_requirements: Requires Pyrokinetic 3 Costs 2 Memory Duration 5 turns Range
+    13m
+  detail_notes:
+  - Costs 1 source point
 - name: Meteor Shower
   primary_tree: Pyrokinetic
   investment: 5
@@ -158,6 +266,13 @@
   description: 25 fireballs come crashing from the sky. Each does [X] Fire Damage
     within a 3m range from impact.
   effect: 3m Explode Radius
+  detail_description: 25 fireballs come crashing from the sky. Each does 20% Fire
+    Damage within a 3m range from impact.
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 5 Costs 3 Memory 3m Explode Radius Range
+    13m
+  detail_notes:
+  - Meteor Shower damage reduced by 10% as of Patch v3.0.168.526
 - name: Sparking Swings
   primary_tree: Pyrokinetic
   secondary_tree: Warfare
@@ -169,6 +284,18 @@
   description: Receive Sparkstriker status. This causes your melee attacks to create
     a spark projectile that bounces off the initial target to hit the closest enemy.
   effect: Set Sparkstriker for 3 turn(s).
+  detail_description: Receive Sparkstriker status. This causes your melee attacks
+    to create a 100% Fire Damage spark projectile that bounces off the initial target
+    to hit the closest enemy.
+  detail_effect: Set Sparkstriker for 3 turn(s).
+  detail_requirements: Requires Pyrokinetic 1 Requires Warfare 1 Costs 1 Memory
+  detail_notes:
+  - Works great with Dual Wielding, because each hit shoots a spark.
+  - Sparks will only be generated if there is an enemy within a 10 meter radius, with
+    clear line of sight.
+  - Works with melee attack skills. For example each target hit by Whirlwind creates
+    a spark projectile.
+  - Scales of level, Int and Pyrokinetic.
 - name: Master of Sparks
   primary_tree: Pyrokinetic
   secondary_tree: Warfare
@@ -181,6 +308,20 @@
   description: Target character and surrounding allies receive Sparkmaster status
     that adds a chance of fiery sparks to melee attacks.
   effect: Set Sparkmaster for 2 turn(s). 3m Explode Radius
+  detail_description: Target character and surrounding allies receive Sparkmaster
+    status that adds a chance of fiery sparks to melee attacks.
+  detail_effect: Set Sparkmaster for 3 turn(s).
+  detail_requirements: Requires Pyrokinetic 2 Requires Warfare 2 Costs 2 Memory 3m
+    Explode Radius????? Range 13m
+  detail_notes:
+  - Damage depends on the intellect and skill of pyromancy. The damage of the characters
+    with the Sparkmaster status depends on their personal characteristics, and not
+    on the skill or stats of the caster.
+  - Sparks will only be generated if there is an enemy within a 10 meter radius, with
+    clear line of sight.
+  - Master of Sparks is not an aura skill. It applies Sparkmaster to all allies in
+    range of the target when it is cast, after which staying in range of the target
+    provides no further benefit.
 - name: Throw Explosive Trap
   primary_tree: Pyrokinetic
   secondary_tree: Huntsman
@@ -193,6 +334,22 @@
   description: Throw an explosive trap at target locations. Trap takes a turn to activate.
     When active, trap will explode when a character approaches it.
   effect: 3m Explode Radius
+  detail_description: Throw an explosive trap at target locations. Trap takes a turn
+    to activate. When active, trap will explode when a character approaches it.
+  detail_effect: n/a.
+  detail_requirements: Requires Pyrokinetic 1 Requires Huntsman 1 Costs 1 Memory 3m
+    Explode Radius Range 13m
+  detail_notes:
+  - The trap deals Fire damage and applies Burning.
+  - If the trap is detonated by direct damage or fire surface owned by a character,
+    it will explode for 167% attribute-independent level scaling, alongside all of
+    that character's damage affecting stats except str/int/fin. i.e. pyrokinetic,
+    crit, damage buff, etc.
+  - If the thrown trap simply goes off from proxy detonation, it explodes for the
+    same 167% scaling but without using any character's pyro skill or other stats.
+  - Max. 3 traps can be placed, if you place a 4th trap, the first placed trap will
+    explode.
+  - When out of combat the trap will trigger one minute after being armed.
 - name: Deploy Mass Traps
   primary_tree: Pyrokinetic
   secondary_tree: Huntsman
@@ -205,6 +362,19 @@
   description: Throw 4 explosive traps at target locations. Each trap takes a turn
     to activate. When active, trap will explode when a character approaches it.
   effect: 3m Explode Radius
+  detail_description: Throw 4 explosive traps at target locations. Each trap takes
+    a turn to activate. When active, trap will explode when a character approaches
+    it.
+  detail_effect: n/a.
+  detail_requirements: Requires Pyrokinetic 2 Requires Huntsman 2 Costs 2 Memory 3m
+    Explode Radius Range 13m
+  detail_notes:
+  - The trap deals Fire damage and applies Burning.
+  - If the thrown trap hits, or is hit by, a fire source that is "owned" by a character,
+    it will explode for 167% scaling with the attribute-independent spell level scaling,
+    alongside the owner's pyrokinetic skill and other relevant stats.
+  - If the thrown trap simply goes off from proxy detonation, it explodes for the
+    same 167% scaling but without using any character's pyro skill or other stats.
 - name: Sabotage
   primary_tree: Pyrokinetic
   secondary_tree: Scoundrel
@@ -217,6 +387,22 @@
   description: If target character is carrying grenades or arrows, a random one explodes
     in their inventory.
   effect: Explodes 1 random Arrow(s) or Grenade(s) on target's inventory.
+  detail_description: If target character is carrying grenades or arrows, a random
+    one explodes in their inventory.
+  detail_effect: Explodes 1 random Arrow(s) or Grenade(s) on target's inventory.
+  detail_requirements: Requires Pyrokinetic 1 Requires Scoundrel 1 Costs 1 Memory
+    Range 13m
+  detail_notes:
+  - Sabotage range increased to 13m. Only characters with grenades and arrows are
+    highlighted by Sabotage as of Patch v3.0.168.526
+  - Special arrow sabotaged scales with your damage (as if you shot them). Considering
+    this is only 1 AP, it is good damage / AP ratio if you know beforehand what arrows
+    they have.
+  - You can add arrows or grenades by reverse pickpocket enemies before combat.
+  - 'This can backstab if you are in backstab distance wielding a dagger. The damage
+    scales with the combined damage of both weapons. (Note: off hand will suffer a
+    50% damage penalty. Note2: off hand needs not be dagger but will have your normal
+    crit instead)'
 - name: Mass Sabotage
   primary_tree: Pyrokinetic
   secondary_tree: Scoundrel
@@ -229,6 +415,13 @@
   description: Explode two random grenades or arrows in the inventories of any enemy
     in a target circle.
   effect: Explodes 2 random Arrow(s) or Grenade(s) on target's inventory.
+  detail_description: Explode two random grenades or arrows in the inventories of
+    any enemy in a target circle.
+  detail_effect: Explodes 2 random Arrow(s) or Grenade(s) on target's inventory.
+  detail_requirements: Requires Pyrokinetic 2 Requires Scoundrel 2 Costs 2 Memory
+    Range 13m
+  detail_notes:
+  - ??
 - name: Bleed Fire
   primary_tree: Pyrokinetic
   secondary_tree: Polymorph
@@ -241,6 +434,16 @@
   description: Enemies will bleed fire when hit. Also creates a small fire area beneath
     each target and ignites surfaces in the area.
   effect: Set Bleed Fire for 3 turn(s).
+  detail_description: Enemies will bleed fire when hit. Also creates a small fire
+    area beneath each target and ignites surfaces in the area.
+  detail_effect: Set Bleed Fire for 3 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Pyrokinetic 1 Requires Polymorph 1 Costs 1 Memory
+    Range 13m
+  detail_notes:
+  - Bleeding Fire reduces Fire Resistance of those hit by 20% as of Patch v3.0.168.526
+  - Resisted by Magical Armour
+  - Fire Resistance reduction stacks with burning
 - name: Corpse Explosion
   primary_tree: Pyrokinetic
   secondary_tree: Necromancer
@@ -252,6 +455,16 @@
   cooldown: 4
   description: Explode the target corpse, dealing physical damage in the area
   effect: Blows up your target.
+  detail_description: Explode the target corpse, dealing 250% physical damage in the
+    area
+  detail_effect: Blows up your target.
+  detail_requirements: Requires Pyrokinetic 1 Requires Necromancer 1 Costs 1 Memory
+    Range 13m
+  detail_notes:
+  - Physical damage, scales with intelligence and warfare, not pyrokinetic.
+  - It can be easier to use Teleportation to bring a corpse to a group of enemies
+    before using Corpse Explosion.
+  - It damage allies as well as enemies, do watch for the AOE radius.
 - name: Mass Corpse Explosion
   primary_tree: Pyrokinetic
   secondary_tree: Necromancer
@@ -262,6 +475,14 @@
   cooldown: 2
   description: Explode all corpses around you, dealing physical damage in the area
   effect: Blows up your target.
+  detail_description: Explode all corpses around you, dealing physical damage in the
+    area
+  detail_effect: Blows up your target.
+  detail_requirements: Requires Pyrokinetic 2 Requires Necromancer 2 Costs 2 Memory
+  detail_notes:
+  - Scales from Intelligence and Warfare with Intelligence providing the most damage
+    boost
+  - Can deal damage to allies
 - name: Blinding Radiance
   primary_tree: Aerotheurge
   investment: 1
@@ -273,6 +494,10 @@
   description: Enemies around you receive 90% air damage . You receive a status that
     turns enemies in a 5m radius Blind.
   effect: Sets Blinding Radiance for 1 turn(s)
+  detail_description: Enemies around you receive 90% air damage . You receive a status
+    that turns enemies in the 5m radius Blind.
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 1 Range 5m
 - name: Electric Discharge
   primary_tree: Aerotheurge
   investment: 1
@@ -284,6 +509,11 @@
   description: An electrical jolt deals 90% air damage to target character. Sets status
     Shocked.
   effect: Sets Shocked for 2 turn(s)
+  detail_description: An electrical jolt deals 90% air damage to target character.
+    Sets status Shocked.
+  detail_effect: Sets Shocked for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 1 Costs 1 Memory Range 13m
 - name: Favourable Wind
   primary_tree: Aerotheurge
   investment: 1
@@ -295,6 +525,11 @@
   description: Control the forces of nature , increasing the movement speed of you
     and your allies by 1.5m (as long as your allies stays within 10m of you)
   effect: Sets Favourable Winds Aura for 4 turn(s).
+  detail_description: Control the forces of nature so the wind is literally at your
+    party's back. An aura increases you allies' movement speed by 1.5m while they
+    stay close to you.
+  detail_effect: Sets Favourable Winds Aura for 4 turn(s).
+  detail_requirements: Requires Aerotheurge 1 Costs 1 Memory Range 10m
 - name: Shocking Touch
   primary_tree: Aerotheurge
   investment: 1
@@ -306,6 +541,11 @@
   description: Sets the Shocked status on a target within arm's length and deals 110%
     Air Damage .
   effect: Sets Shocked for 2 turn(s)
+  detail_description: Sets the Shocked status on a target within arm's length and
+    deals 110% air damage .
+  detail_effect: Sets Shocked for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 1 Costs 1 Memory Range 2m
 - name: Apportation
   primary_tree: Aerotheurge
   investment: 2
@@ -315,6 +555,9 @@
   range: 8m Area of Effect4m Radius
   cooldown: 2
   description: Transport pickable items in the target area into your inventory.
+  detail_description: Transport pickupable items in the target area into your inventory.
+  detail_requirements: 'Requires Aerotheurge 2 Range 8m. Area of effect: 4m radius.
+    Ground targettable.'
 - name: Dazing Bolt
   primary_tree: Aerotheurge
   investment: 2
@@ -326,6 +569,12 @@
   description: An electrical bolt falls from the sky, dealing 120% Air Damage to characters
     and items in the area, and setting Shocked status.
   effect: Sets Shocked for 1 turn(s). 3m Explode Radius
+  detail_description: An electrical bolt falls from the sky, dealing 120% Air Damage
+    to characters and items in the area, and setting Shocked status.
+  detail_effect: Sets Shocked for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: 3m Explode Radius Requires Aerotheurge 2 Costs 1 Memory Range
+    13m
 - name: Nether Swap
   primary_tree: Aerotheurge
   investment: 2
@@ -336,6 +585,15 @@
   cooldown: 3
   description: Make two characters switch places. One of the characters can be you.
   effect: Sets Nether Swap for 1 turn(s).
+  detail_description: Make two characters switch places. One of the characters can
+    be you.
+  detail_effect: Sets Nether Swap for 1 turn(s).
+  detail_requirements: Requires Aerotheurge 2 Costs 1 Memory Range 13m
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper , High Quality Air Essence
+    , and Chanterelle mushroom
+  - Able to exchange a living character with a corpse, as a save of own chars or setting
+    up for Raise Bloated Corpse or Corpse Explosion.
 - name: Pressure Spike
   primary_tree: Aerotheurge
   investment: 2
@@ -347,6 +605,10 @@
   description: Condense all cloud surfaces in the area. Deals 70% air damage to enemies
     and douses fire.
   effect: Damage is based on your level and Intelligence
+  detail_description: Condense all cloud surfaces in the area. Deals 70% Air Damage
+    to enemies and douses fire.
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 2 Costs 1 Memory Range 13m
 - name: Teleportation
   primary_tree: Aerotheurge
   investment: 2
@@ -357,6 +619,9 @@
   cooldown: 4
   description: Teleport a target character or item to a point of your choosing
   effect: Damage is based on your level and receive bonus from Intelligence.
+  detail_description: Teleport a target character or item to a point of your choosing
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 2 Costs 1 Memory Range 13m
 - name: Uncanny Evasion
   primary_tree: Aerotheurge
   investment: 2
@@ -368,6 +633,10 @@
   description: Dodging for targeted character is increased by 90% and your Movement
     Speed is increased by 20%.
   effect: Sets Evading for 1 turn(s)
+  detail_description: Target character's dodging is increased by 90% and your Movement
+    Speed is increased by 20%.
+  detail_effect: Sets Evading for 1 turn(s).
+  detail_requirements: Requires Aerotheurge 2 Costs 1 Memory Range 13m
 - name: Chain Lightning
   primary_tree: Aerotheurge
   investment: 3
@@ -379,6 +648,11 @@
   description: Shoot a stunning bolt of lightning that forks up to 8 times in a 8m
     radius and deals 150% Air Damage to each target.
   effect: Sets Shocked for 2 turn(s)
+  detail_description: Shoot a stunning bolt of lightning that forks up to 8 times
+    in a 8m radius and deals 150% Air Damage to each target.
+  detail_effect: Sets Shocked for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence
+  detail_requirements: Requires Aerotheurge 3 Costs 2 Memory Range 13m
 - name: Closed Circuit
   primary_tree: Aerotheurge
   investment: 3
@@ -389,6 +663,11 @@
   description: Deals 220% Air Damage to enemies around you; then creates cursed static
     clouds on the edges of the spell.
   effect: Sets Air Immunity for 1 turn(s). Sets Shocked for 2 turn(s)
+  detail_description: Deals 220% Air Damage to enemies around you; then creates cursed
+    static clouds on the edges of the spell.
+  detail_effect: Sets Air Immunity for 1 turn(s). Sets Shocked for 2 turn(s)
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence
+  detail_requirements: Requires Aerotheurge 3 Costs 2 Memory Range 4m
 - name: Superconductor
   primary_tree: Aerotheurge
   investment: 3
@@ -401,6 +680,11 @@
     Damage and setting Shocked.
   effect: Sets Shocked for 1 turn(s) Damage is based on your level and receive bonus
     from Intelligence
+  detail_description: Shoot forking spikes at all enemies within the area, dealing
+    100% Air Damage and setting Shocked.
+  detail_effect: Sets Shocked for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 3 Costs 1 Memory Range 8m
 - name: Thunderstorm
   primary_tree: Aerotheurge
   investment: 5
@@ -412,6 +696,11 @@
   description: A storm rages in the target area, hitting enemies with lightning bolts,
     each dealing 100% Air Damage.
   effect: Duration 2 turns
+  detail_description: A storm rages in the target area, hitting enemies with lightning
+    bolts, each dealing 100% Air Damage .
+  detail_effect: Sets Stunned for 1 turn
+  detail_requirements: Duration 2 turns Require Aerotheurge 5 Costs 3 Memory Range
+    17m
 - name: Breathing Bubble
   primary_tree: Aerotheurge
   secondary_tree: Warfare
@@ -423,6 +712,9 @@
   description: Creates a bubble of clean air around your head, allowing you to ignore
     effects of cloud surfaces. Immune to suffocation and Silence.
   effect: Sets Breathing Bubble for 5 turn(s).
+  detail_description: Creates a bubble of clean air around your head, allowing you
+    to ignore effects of cloud surfaces. Immune to Suffocation and Silence.
+  detail_requirements: Requires Aerotheurge 1 Requires Warfare 1 Range --
 - name: Mass Breathing Bubbles
   primary_tree: Aerotheurge
   secondary_tree: Warfare
@@ -434,6 +726,11 @@
   description: Set Breathing Bubbles on allies around you, allowing them to ignore
     effects of cloud surfaces and making them immune to suffocation and Silence.
   effect: Sets Mass Breathing Bubbles for 5 turn(s).
+  detail_description: Set Breathing Bubbles on allies around you, allowing them to
+    ignore effects of cloud surfaces and making them immune to Suffocation and Silence.
+  detail_effect: Sets Mass Breathing Bubbles for 5 turn(s).
+  detail_requirements: Requires Aerotheurge 2 Requires Warfare 2 Costs 2 Memory Range
+    13
 - name: Erratic Wisp
   primary_tree: Aerotheurge
   secondary_tree: Huntsman
@@ -446,6 +743,11 @@
   description: Cause target character to teleport in a random direction each time
     they are attacked. Increases Air Resistance by 40%
   effect: Sets Erratic Wisp for 2 turn(s).
+  detail_description: Cause target character to teleport in a random direction each
+    time they are attacked. Increases Air Resistance by 40%
+  detail_effect: Sets Erratic Wisp for 2 turn(s).
+  detail_requirements: Requires Aerotheurge 1 Requires Huntsman 1 Costs 1 Memory Range
+    13m
 - name: Evasive Aura
   primary_tree: Aerotheurge
   secondary_tree: Huntsman
@@ -457,6 +759,11 @@
   description: Your dodging chance and those of allies around you is increased by
     90% and your Movement Speed is increased by 1m.
   effect: Sets Evasive Aura for 1 turn(s).
+  detail_description: Sets Evasive Aura for you and allies around you.
+  detail_effect: Dodging chance is increased by 90% and your Movement Speed is increased
+    by 1m.
+  detail_requirements: Requires Aerotheurge 2 Requires Huntsman 2 Costs 2 Memory Range
+    8m
 - name: Smoke Cover
   primary_tree: Aerotheurge
   secondary_tree: Scoundrel
@@ -466,6 +773,16 @@
   sp_cost: 0
   cooldown: 5
   description: Create a smoke cloud around you, hiding from sight.
+  detail_description: Create a smoke cloud around you, hiding from sight.
+  detail_requirements: Requires Aerotheurge 1 Requires Scoundrel 1 Costs 1 Memory
+    Range --
+  detail_notes:
+  - You can use Smoke Cover to quickly pickpocket people even while everyone is looking
+    (Useful to rid guards of grenades/arrows, or to get a specific item or two).
+  - Bless the Smoke Cover (Grants invisibility) if you want more time stealing.
+  - On solo Lone Wolf play-through, you can use Smoke cover in round one to force
+    enemies to move out of position instead of attacking.
+  - This Skill now costs 1 AP and has a 3m radius as of Patch v3.0.168.526
 - name: Blessed Smoke Cloud
   primary_tree: Aerotheurge
   secondary_tree: Scoundrel
@@ -476,6 +793,21 @@
   range: 13m. Area of Effect:4m radius. Ground-targettable.
   cooldown: 5
   description: Conjure a cloud of thick blessed smoke that makes characters invisible.
+  detail_description: Conjure a cloud of thick blessed smoke that makes characters
+    invisible.
+  detail_requirements: 'Requires Aerotheurge 2 Requires Scoundrel 2 Range 13m . Area
+    of Effect: 4m radius. Ground-targettable.'
+  detail_notes:
+  - Invisibility will be removed by effects (such as Wet from rain) until the turn
+    of the character(s) inside the cloud arrive, in which case Invisibility will be
+    re-applied.
+  - As it is a Blessed environmental effect, Curse will revert it into a normal smoke
+    cloud.
+  - Other ways to get blessed smoke clouds is to first use a smoke grenade or arrow
+    and then bless it, alternatively use Smoke Cloud to spawn it around the character.
+    While these methods cost more AP (and is non-targetable in case of Smoke Cover),
+    they cost one less Source
+  - Area of Effect was increased to 4m (from 3m) as of Patch v3.0.168.526
 - name: Vaporize
   primary_tree: Aerotheurge
   secondary_tree: Polymorph
@@ -487,6 +819,10 @@
   cooldown: 4
   description: Remove Petrified and Frozen from target character. Vaporise ground
     surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
+  detail_description: Remove Petrified and Frozen from target character. Vaporise
+    ground surfaces into clouds. Does not work on Oil, Ice or Lava surfaces
+  detail_requirements: Requires Aerotheurge 1 Requires Polymorph 1 Costs 1 Memory
+    Range 13m
 - name: Vacuum Touch
   primary_tree: Aerotheurge
   secondary_tree: Necromancer
@@ -498,6 +834,11 @@
   cooldown: 5
   description: Deal 80% Air Damage . Set Suffocation and Silence on target
   effect: Sets Suffocating for 1 turn(s). Sets Silenced for 1 turn(s).
+  detail_description: Deal 100 % Air Damage . Set Suffocation and Silence on target
+  detail_effect: Sets Suffocating for 2 turn(s). Sets Silenced for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Aerotheurge 1 Requires Necromancer 1 Costs 1 Memory
+    Range 2m
 - name: Vacuum Aura
   primary_tree: Aerotheurge
   secondary_tree: Necromancer
@@ -509,6 +850,11 @@
   description: Deal 80% Air Damage to enemies in the area. Caster receives an aura
     that sets Silence and Suffocating on enemies
   effect: Sets Vacuum Aura for 3 turn(s).
+  detail_description: Deal 80% Air Damage to enemies in the area. Caster receives
+    an aura that sets Silence and Suffocating on enemies
+  detail_effect: Sets Vacuum Aura for 3 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence
+  detail_requirements: Requires Aerotheurge 2 Requires Necromancer 2 Costs 2 Memory
 - name: Contamination
   primary_tree: Geomancer
   investment: 1
@@ -520,6 +866,12 @@
   description: Deals 55% Poison Damage to enemies and undead allies around you and
     can poison them. Turns water, blood surfaces and clouds into poison!
   effect: Set Poisoned for 2 turn(s). 2m Explode radius
+  detail_description: Deals 55% Poison Damage to enemies and undead allies around
+    you and can poison them. Turns water, blood surfaces and clouds in to poison!
+  detail_effect: Set Poisoned for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 1 Costs 1 Memory Range 8m
 - name: Fortify
   primary_tree: Geomancer
   investment: 1
@@ -531,6 +883,11 @@
   description: Provides [X] Physical Armour. While Fortified, the target cannot be
     teleported. Removes Poisoned , Bleeding , Burning , Acid , Decaying .
   effect: Set Fortified for 3 turn(s).
+  detail_description: Provides [100% of total heal value] Physical Armour . While
+    Fortified, the target cannot be teleported. Removes Poisoned , Bleeding , Burning
+    , Acid , Decaying .
+  detail_effect: Set Fortified for 3 turn(s).
+  detail_requirements: Requires Geomancer 1 Costs 1 Memory to equip Range 13m
 - name: Fossil Strike
   primary_tree: Geomancer
   investment: 1
@@ -542,6 +899,12 @@
   description: A giant rock with sticky oil that deals 85% Earth Damage . Creates
     an oil surface where it lands
   effect: 2m Explode Radius
+  detail_description: A giant rock with sticky oil that deals 85% Earth Damage . Creates
+    an oil surface where it lands.
+  detail_effect: Damage is bases on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 1 Costs 1 Memory 2m Explode radius Range
+    13m
 - name: Poison Dart
   primary_tree: Geomancer
   investment: 1
@@ -553,6 +916,11 @@
   description: Cast a magical poisonous dart that does 100% Poison Damage , and creates
     a puddle of poison.
   effect: Set Poisoned for 3 turn(s). 1m Explode Radius
+  detail_description: Cast a magical poisonous dart that does 100 % Poison Damage
+    , and creates a puddle of poison.
+  detail_effect: Set Poisoned for 3 turn(s).
+  detail_requirements: Requires Geomancer 1 Costs 1 Memory 1m Explode radius Range
+    13m
 - name: Earthquake
   primary_tree: Geomancer
   investment: 2
@@ -563,6 +931,12 @@
   description: Deals 100% Earth Damage and Knockdown enemy characters and items around
     you. Creates 8 random oil surfaces within the area
   effect: Set Knocked Down for 1 turn(s)
+  detail_description: Deals 100% Earth Damage and Knockdown enemy characters and items
+    around you. Creates 8 random oil surfaces within the area
+  detail_effect: Set Knocked Down for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory Range 13m
 - name: Impalement
   primary_tree: Geomancer
   investment: 2
@@ -574,6 +948,12 @@
   description: Spikes impale all characters and items, setting Crippled and dealing
     100% Earth Damage . Also creates an oil puddle.
   effect: Set Crippled for 1 turn(s). 3m explode radius
+  detail_description: Spikes impale all characters and items, setting Crippled and
+    dealing 100% Earth Damage . Also creates an oil puddle.
+  detail_effect: Set Crippled for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory Range 13m
 - name: Mend Metal
   primary_tree: Geomancer
   investment: 2
@@ -584,6 +964,9 @@
   cooldown: 3
   description: Allies near you start slowly regenerating Physical Armour.
   effect: Restore [X] Physical Armour for 3 turn(s).
+  detail_description: Allies near you start slowly regenerating Physical Armour .
+  detail_effect: Restore [26.5% of total heal value] Physical Armour for 3 turn(s).
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory Range 5m
 - name: Poison Wave
   primary_tree: Geomancer
   investment: 2
@@ -595,6 +978,13 @@
     Damage and forming poison clouds. Gives immunity to poison and earth damage for
     1 turn
   effect: Set Earth Immunity for 1 turn(s).
+  detail_description: Poison erupts from the caster in a circular wave, dealing 100%
+    Poison Damage and forming poison clouds. Gives immunity to poison and earth damage
+    for 1 turn
+  detail_effect: Set Earth Immunity for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory Range --
 - name: Reactive Armour
   primary_tree: Geomancer
   investment: 2
@@ -605,6 +995,10 @@
   description: Deal [X] Physical Damage, based on your current Physical Armour, in
     a wave of metal spikes to everyone in the area (Including Yourself)
   effect: Damage is based on your current Physical Armour.
+  detail_description: Deal 20% physical damage, based on your current Physical Armour
+    , in a wave of metal spikes to everyone in the area (including yourself).
+  detail_scaling: Damage is based on your current Physical Armour.
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory Range 3m
 - name: Worm Tremor
   primary_tree: Geomancer
   investment: 2
@@ -618,6 +1012,15 @@
     area who is not protected by Magic Armour. Affected characters cannot move or
     teleport, and they receive [X] Poison Damage each turn.
   effect: Set Entangled for 2 turn(s). 2m Explode Radius
+  detail_description: Deals 50% Earth Damage to each character in the area. At your
+    command, poisonous worms slither up from the earth, attaching to every character
+    in the area who is not protected by Magical Armour . Affected characters cannot
+    move or teleport, and they receive 30% Poison Damage each turn.
+  detail_effect: Set Entangled for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Costs 1 Memory 4m Explode radius Range
+    13m
 - name: Acid Spores
   primary_tree: Geomancer
   investment: 3
@@ -628,6 +1031,12 @@
   cooldown: 5
   description: Shoot spores of corrosive acid, dealing 90% Poison Damage.
   effect: Set Poisoned for 3 turn(s).
+  detail_description: Shoot spores of corrosive acid, dealing 90% Poison Damage .
+  detail_effect: Set Poisoned for 3 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 3 Costs 2 Memory 2m Explode radius Range
+    13m
 - name: Living Wall
   primary_tree: Geomancer
   investment: 3
@@ -639,6 +1048,10 @@
   description: Vines sprout from the ground to block the path in the target area,
     emitting poison clouds around them.
   effect: Duration 3 Turns
+  detail_description: Vines sprout from the ground to block the path in the target
+    area, emitting poison clouds around them.
+  detail_requirements: Requires Geomancer 3 Costs 1 Memory Duration 2 Turns Range
+    13m
 - name: Siphon Poison
   primary_tree: Geomancer
   investment: 3
@@ -649,6 +1062,11 @@
   description: Remove poison surfaces and clouds. Gain poison damage bonus to weapon
     attacks and weapon-based skills (dependent upon size of poison area cleared)
   effect: Set Siphon Poison for 2 turn(s).
+  detail_description: Remove poison surfaces and clouds. Gain poison damage bonus
+    to weapon attacks and weapon-based skills (dependent upon size of poison area
+    cleared)
+  detail_effect: Set Siphon Poison for 2 turn(s).
+  detail_requirements: Requires Geomancer 3 Costs 1 Memory Range 8m
 - name: Summon Artillery Plant
   primary_tree: Geomancer
   investment: 3
@@ -659,6 +1077,8 @@
   cooldown: 6
   description: Plant can lob acidic spores and emit cursed poison clouds.
   effect: Duration 5 turns.
+  detail_description: Plant can lob acidic spores and emit cursed poison clouds.
+  detail_requirements: Requires Geomancer 3 Duration 5 Turns Range 13m
 - name: Pyroclastic Eruption
   primary_tree: Geomancer
   investment: 5
@@ -670,6 +1090,12 @@
   description: Multiple oil-filled rocks erupt from the caster at all enemies in the
     area. On impact, they create oil surfaces and deal 300% Earth Damage .
   effect: 3m Explode radius
+  detail_description: Multiple oil-filled rocks erupt from the caster at all enemies
+    in the area. On impact, they create oil surfaces and deal 300% Earth Damage .
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 5 Costs 3 Memory 3m Explode radius Range
+    13m
 - name: Oily Carapace
   primary_tree: Geomancer
   secondary_tree: Warfare
@@ -681,6 +1107,11 @@
   description: Consume oil surfaces around you and convert them to Physical Armour.
     Removes Slowed.
   effect: Restore up to [X] Physical Armour, depending on relevant surface area
+  detail_description: Consume oil surfaces around you and convert them to Physical
+    Armour . Removes Slowed.
+  detail_effect: Restore up to [400% of total heal value] Physical Armour, depending
+    on relevant surface area.
+  detail_requirements: Requires Geomancer 1 Requires Warfare 1 Costs 1 Memory
 - name: Mass Oily Carapace
   primary_tree: Geomancer
   secondary_tree: Warfare
@@ -692,6 +1123,12 @@
   description: Each ally consumes oil surfaces around them, converting the oil surfaces
     to Physical Armour.
   effect: Restore up to [x] Physical Armour, depending on relevant surface area.
+  detail_description: Each ally consumes oil surfaces around them, converting the
+    oil surfaces to Physical Armour . Removed Slowed.
+  detail_effect: Restore up to [400% of total heal value] Physical Armour, depending
+    on relevant surface area.
+  detail_requirements: Requires Geomancer 2 Requires Warfare 2 Costs 2 Memory Range
+    13m
 - name: Throw Dust
   primary_tree: Geomancer
   secondary_tree: Huntsman
@@ -704,6 +1141,13 @@
   description: Throw dust at a character, blinding them and dealing 75% Earth Damage
     . Clears surfaces and clouds in the area.
   effect: Set Blinded for 1 turn(s). 2m Explode Radius
+  detail_description: Throw dust at a character, blinding them and dealing 75% Earth
+    Damage . Clears surfaces and clouds in the area.
+  detail_effect: Set Blinded for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 1 Requires Huntsman 1 Costs 1 Memory 2m
+    Explode radius Range 13m
 - name: Dust Blast
   primary_tree: Geomancer
   secondary_tree: Huntsman
@@ -716,6 +1160,13 @@
   description: Throw dust at all enemies in range, blinding them and dealing 100%
     Earth Damage .
   effect: Set Blinded for 2 turn(s). 2m Explode Radius
+  detail_description: Throw dust at all enemies in range, blinding them and dealing
+    100% Earth Damage .
+  detail_effect: Set Blinded for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Requires Huntsman 2 Costs 2 Memory 2m
+    Explode radius Range 13m
 - name: Venom Coating
   primary_tree: Geomancer
   secondary_tree: Scoundrel
@@ -727,6 +1178,11 @@
   description: Coat your weapon with poison, adding [X] Poison Damage to your weapon
     skills and attacks.
   effect: Set Venom Coating for 2 turn(s).
+  detail_description: Coat your weapon with poison, adding 60% Poison Damage to your
+    weapon skills and attacks.
+  detail_effect: Set Venom Coating for 2 turn(s).
+  detail_requirements: Requires Geomancer 1 Requires Scoundrel 1 Costs 1 Memory Range
+    --
 - name: Venomous Aura
   primary_tree: Geomancer
   secondary_tree: Scoundrel
@@ -738,6 +1194,11 @@
   description: Allies in range receive Venom Coating, which adds [X] Poison Damage
     to weapon skills and attacks.
   effect: Set Venomous Aura for 2 turn(s).
+  detail_description: Allies in range receive Venom Coating, which adds 60% Poison
+    Damage to weapon skills and attacks.
+  detail_effect: Set Venomous Aura for 4 turn(s).
+  detail_requirements: Requires Geomancer 2 Requires Scoundrel 2 Costs 2 Memory Range
+    13m
 - name: Turn to Oil
   primary_tree: Geomancer
   secondary_tree: Polymorph
@@ -749,6 +1210,10 @@
   cooldown: 4
   description: Turn water and blood surfaces into oil. Remove Stun and Shocked from
     characters.
+  detail_description: Turn water and blood surfaces into oil. Remove Stun and Shocked
+    from characters.
+  detail_requirements: Requires Geomancer 1 Requires Polymorph 1 Costs 1 Memory Range
+    13m
 - name: Corrosive Touch
   primary_tree: Geomancer
   secondary_tree: Necromancer
@@ -761,6 +1226,13 @@
   description: Destroy [110% Int] Physical Armour on target character, and set Acid
     status.
   effect: Set Acid for 2 turn(s).
+  detail_description: Destroy [110% of total damage value] Physical Armour on target
+    character, and set Acid status.
+  detail_effect: Set Acid for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 1 Requires Necromancer 1 Costs 1 Memory
+    Range 2m
 - name: Corrosive Spray
   primary_tree: Geomancer
   secondary_tree: Necromancer
@@ -773,6 +1245,13 @@
   description: Destroy [100% Int] Physical Armour on targets in a cone, and set Acid
     and Atrophy.
   effect: Set Acid for 2 turn(s). Set Atrophy for 1 turn(s).
+  detail_description: Destroy [100% of total damage value] Physical Armour on targets
+    in a cone, and set Acid and Atrophy.
+  detail_effect: Set Acid for 2 turn(s). Set Atrophy for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from your Intelligence
+    .
+  detail_requirements: Requires Geomancer 2 Requires Necromancer 2 Costs 2 Memory
+    Range 7m
 - name: Armour of Frost
   primary_tree: Hydrosophist
   investment: 1
@@ -785,6 +1264,11 @@
     Armour. Cures Burning , Poisoned , Stunned , Frozen , Suffocating and Petrified
     .
   effect: Set Magic Shell for 3 turn(s).
+  detail_description: Ice forms a defensive barrier around the target, providing [100%
+    of total heal value] Magical Armour . Cures Burning , Poisoned , Stunned , Frozen
+    , Suffocating and Petrified .
+  detail_effect: Set Magic Shell for 3 turn(s).
+  detail_requirements: Requires Hydrosophist 1 Costs 1 Memory Range 13m
 - name: Hail Strike
   primary_tree: Hydrosophist
   investment: 1
@@ -796,6 +1280,12 @@
   description: Icicles fall from the sky, chilling enemies and dealing water damage.
     They create ice surfaces where they hit the ground.
   effect: Set Chilled for 2 turn(s). Strikes 3 circles with 1m Explode Radius each
+  detail_description: Icicles fall from the sky, chilling enemies and dealing 40%
+    water damage . They create Ice surfaces where they hit the ground.
+  detail_effect: Set Chilled for 2 turn(s).
+  detail_scaling: Damages is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 1 Costs 1 Memory 1m Explode Radius Range
+    13m
 - name: Rain
   primary_tree: Hydrosophist
   investment: 1
@@ -807,6 +1297,10 @@
   description: Create a spreading water surface which douses fires. Set Wet status
     on characters in the area.
   effect: Set Wet for 1 turn(s). 10m radius
+  detail_description: Create a spreading water surface which douses fires. Set Wet
+    status on characters in the area.
+  detail_effect: Set Wet for 1 turn(s).
+  detail_requirements: Requires Hydrosophist 1 Costs 1 Memory Range 8m
 - name: Restoration
   primary_tree: Hydrosophist
   investment: 1
@@ -818,6 +1312,10 @@
   description: Restore Vitality of a target character. Restoration also cures Poisoned
     and Bleeding .
   effect: Restore [X] Vitality for 2 turn(s).
+  detail_description: Restore Vitality of a target character. Restoration also cures
+    Poisoned and Bleeding .
+  detail_effect: Restore [75% of total heal value] Vitality for 2 turn(s).
+  detail_requirements: Requires Hydrosophist 1 Costs 1 Memory Range 13m
 - name: Cryogenic Stasis
   primary_tree: Hydrosophist
   investment: 2
@@ -829,6 +1327,10 @@
   description: Target ally becomes immune to all damage, and heals over time. Removes
     Shackles of Pain.
   effect: Set Permafrost for 1 Turn(s)
+  detail_description: Target ally enters Cryogenic Stasis. Though incapacitated, they
+    become immune to all damage, and heal over time. Removes Shackles Of Pain.
+  detail_effect: Set Permafrost for 1 Turn(s)
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory Range 13m
 - name: Global Cooling
   primary_tree: Hydrosophist
   investment: 2
@@ -839,6 +1341,11 @@
   description: Set Chilled on enemies around you and deal [X] Water Damage . Freeze
     all succeptible surfaces.
   effect: Set Chilled for 3 turn(s).
+  detail_description: Set Chilled on enemies around you and deal 50% Water Damage
+    . Freeze all susceptible surfaces.
+  detail_effect: Set Chilled for 3 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory
 - name: Healing Ritual
   primary_tree: Hydrosophist
   investment: 2
@@ -849,6 +1356,9 @@
   cooldown: 5
   description: Shoot a bolt of healing energy that will jump to nearby allies.
   effect: Restore [X] Vitality
+  detail_description: Shoot a bolt of healing energy that will jump to nearby allies.
+  detail_effect: Restore [80% of total heal value] Vitality
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory Range 13m
 - name: Ice Fan
   primary_tree: Hydrosophist
   investment: 2
@@ -860,6 +1370,11 @@
   description: Target 3 positions and shoot an ice shard at each one, dealing [X]
     Water Damage and making targets Chilled .
   effect: Set Chilled for 1 turn(s).
+  detail_description: Target 3 positions and shoot an ice shard at each one, dealing
+    45% Water Damage and making targets Chilled .
+  detail_effect: Set Chilled for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory Range 13m
 - name: Soothing Cold
   primary_tree: Hydrosophist
   investment: 2
@@ -869,6 +1384,9 @@
   cooldown: 3
   description: Regenerate Magic Armour for all allies around caster.
   effect: Restore [X] Magic Armour for 3 turn(s).
+  detail_description: Regenerate Magical Armour for all allies around caster.
+  detail_effect: Restore [26.5% of total heal value] Magic Armour for 3 turn(s).
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory
 - name: Winter Blast
   primary_tree: Hydrosophist
   investment: 2
@@ -880,6 +1398,11 @@
   description: Deal [X] Water Damage and set Chilled status on characters in the area.
     Freeze blood and water surfaces.
   effect: Set Chilled for 2 Turn(s)
+  detail_description: Deal 110% Water Damage and set Chilled status on enemies in
+    the area. Freeze blood and water surfaces.
+  detail_effect: Set Chilled for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 2 Costs 1 Memory Range 13m
 - name: Arcane Stitch
   primary_tree: Hydrosophist
   investment: 3
@@ -892,6 +1415,11 @@
     Petrified, Plague, Suffocating, Poisoned, Burning, Necrofire, Terrified, Silenced,
     Taunted, Mad.
   effect: Restore [X] Magic Armour
+  detail_description: Fully restore target character's Magic Armour. Removes Frozen,
+    Stunned, Petrified, Plague, Suffocating, Poisoned, Burning, Necrofire, Terrified,
+    Silenced, Taunted, Mad.
+  detail_effect: Restore 100% Magic Armour
+  detail_requirements: Requires Hydrosophist 3 Costs 2 Memory Range 13m
 - name: Deep Freeze
   primary_tree: Hydrosophist
   investment: 3
@@ -904,6 +1432,13 @@
     and instantly die. Otherwise they receive [X] Water Damage and become Frozen .
   effect: Instantly kill targets with Frozen status below 10% Vitality. Set Frozen
     for 1 Turn(s)
+  detail_description: Targets in the cone that are frozen and under 10% Vitality shatter
+    and instantly die. Otherwise they receive 150% Water Damage and become Frozen
+    .
+  detail_effect: Instantly kill targets with Frozen status below 10% Vitality. Sets
+    Frozen for 1 Turn(s)
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 3 Costs 1 Memory Range 8m
 - name: Ice Breaker
   primary_tree: Hydrosophist
   investment: 3
@@ -913,6 +1448,10 @@
   cooldown: 3
   description: Sets off a chain reaction that causes ice areas to explode into water
     puddles, dealing water damage and setting Chilled.
+  detail_description: Sets off a chain reaction that causes ice areas to explode into
+    water puddles, dealing 250% Water Damage [Attribute-independent] and setting Chilled
+    .
+  detail_requirements: Requires Hydrosophist 3
 - name: Steam Lance
   primary_tree: Hydrosophist
   investment: 3
@@ -923,6 +1462,10 @@
   cooldown: 3
   description: Releases a stream of Blessed Steam that heals characters in its path.
   effect: Restore [X] Vitality for 3 Turn(s)
+  detail_description: Releases a stream of Blessed Steam that heals characters in
+    its path.
+  detail_effect: Restore [75% of total heal value] Vitality for 3 Turn(s)
+  detail_requirements: Requires Hydrosophist 3 Costs 2 Memory Range 13m
 - name: Hail Storm
   primary_tree: Hydrosophist
   investment: 5
@@ -934,6 +1477,12 @@
   description: 20 ice shards fall from the sky, each dealing [X] Water Damage to characters
     within 13m range from impact.
   effect: Set Chilled for 1 turn(s). 4m Explode Radius
+  detail_description: 20 ice shards fall from the sky, each dealing 20 % Water Damage
+    to characters within 3m range from impact.
+  detail_effect: Set Chilled for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives a bonus from Intelligence.
+  detail_requirements: Requires Hydrosophist 5 Costs 3 Memory 3m Explode Radius Range
+    13m
 - name: Cleanse Wounds
   primary_tree: Hydrosophist
   secondary_tree: Warfare
@@ -946,6 +1495,11 @@
   description: Heal target and create a water puddle beneath them. Remove Burning
     , Diseased , Decaying Touch , Poisoned , Bleeding , Suffocation and Acid .
   effect: Restore [X] Vitality
+  detail_description: Heal target and create a water puddle beneath them. Remove Burning
+    , Diseased , Decaying , Poisoned and Bleeding .
+  detail_effect: Restore [150% of total heal value] Vitality
+  detail_requirements: Requires Hydrosophist 1 Requires Warfare 1 Costs 1 Memory Range
+    2m
 - name: Mass Cleanse Wounds
   primary_tree: Hydrosophist
   secondary_tree: Warfare
@@ -958,6 +1512,11 @@
     every target. Remove Necrofire , Burning , Diseased , Decaying Touch , Poisoned
     , Bleeding , Suffocation and Acid .
   effect: Restore [X] Vitality
+  detail_description: Heal yourself and allies around you. Create a water puddle beneath
+    every target. Remove Necrofire , Burning , Diseased , Decaying , Poisoned , Bleeding
+    , Suffocation and Acid .
+  detail_effect: Restore [150% of total heal value] Vitality
+  detail_requirements: Requires Hydrosophist 2 Requires Warfare 2 Costs 2 Memory
 - name: Cryotherapy
   primary_tree: Hydrosophist
   secondary_tree: Huntsman
@@ -969,6 +1528,11 @@
   description: Consume Frozen surfaces around you and convert them to Magic Armour.
     Removes Burning and Necrofire.
   effect: Restore up to [X] Magic Armour depending on relevant surface area.
+  detail_description: Consume Frozen surfaces around you and convert them to Magic
+    Armour. Removes Burning and Necrofire.
+  detail_effect: Restore up to [400% of total heal value] Magic Armour depending on
+    relevant surface area.
+  detail_requirements: Requires Hydrosophist 1 Requires Huntsman 1 Costs 1 Memory
 - name: Mass Cryotherapy
   primary_tree: Hydrosophist
   secondary_tree: Huntsman
@@ -980,6 +1544,11 @@
   description: Each ally consumes Frozen surfaces around them, converting the frozen
     surfaces to Magic Armour.
   effect: Restore up to [X] Magic Armour depending on relevant surface area.
+  detail_description: Each ally consumes Frozen surfaces around them, converting the
+    frozen surfaces to Magic Armour. Removes Burning and Necrofire.
+  detail_effect: Restore up to [400% of total heal value] Magic Armour depending on
+    relevant surface area.
+  detail_requirements: Requires Hydrosophist 2 Requires Huntsman 2 Costs 2 Memory
 - name: Vampiric Hunger
   primary_tree: Hydrosophist
   secondary_tree: Scoundrel
@@ -992,6 +1561,11 @@
   description: Set Vampiric Hunger on target character, adding 50% Life Steal for
     2 turns. Life Steal heals you in proportion to the damage you deal to Vitality.
   effect: Set Vampiric Hunger for 2 Turn(s)
+  detail_description: Set Vampiric Hunger on target character, adding 50% Life Steal
+    for 2 turns. Life Steal heals you in proportion to the damage you deal to Vitality.
+  detail_effect: Set Vampiric Hunger for 2 Turn(s)
+  detail_requirements: Requires Hydrosophist 1 Requires Scoundrel 1 Costs 1 Memory
+    Range 2m
 - name: Vampiric Hunger Aura
   primary_tree: Hydrosophist
   secondary_tree: Scoundrel
@@ -1004,6 +1578,11 @@
     Steal for 2 turns. Life Steal heals you in proportion to the damage you deal to
     Vitality.
   effect: Set Vampiric Hunger Aura for 2 Turn(s)
+  detail_description: Set Vampiric Hunger Aura on every ally around you, adding 50%
+    Life Steal for 2 turns. Life Steal heals you in proportion to the damage you deal
+    to Vitality.
+  detail_effect: Set Vampiric Hunger Aura for 2 Turn(s)
+  detail_requirements: Requires Hydrosophist 2 Requires Scoundrel 2 Costs 2 Memory
 - name: Healing Tears
   primary_tree: Hydrosophist
   secondary_tree: Polymorph
@@ -1015,6 +1594,10 @@
   description: Three healing tears circle around you. Everytime an ally walks into
     melee range near you, a healing tear bathes them.
   effect: Set Healing Tears for 3 Turn(s)
+  detail_description: Three healing tears circle around you. Everytime an ally walks
+    into melee range near you, a healing tear bathes them.
+  detail_effect: Set Healing Tears for 3 Turn(s)
+  detail_requirements: Requires Hydrosophist 1 Requires Polymorph 1 Costs 1 Memory
 - name: Battering Ram
   primary_tree: Warfare
   investment: 1
@@ -1026,6 +1609,16 @@
   description: Rush forward in a straight line, to a designated point, hitting all
     enemies in your path for 50% weapon damage and setting Knockdown.
   effect: Set Knocked Down for 1 turn(s). Scale depending on main weapon.
+  detail_description: Rush forward in a straight line, to a designated point, hitting
+    all enemies in your path for 50% damage and setting Knockdown.
+  detail_effect: Set Knocked Down for 1 turn(s).
+  detail_scaling: Damage is based on your basic attack and receives a bonus from [Weapon
+    Attribute].
+  detail_requirements: Requires Warfare 1 Costs 1 Memory Requires a Melee Weapon Range
+    12m
+  detail_notes:
+  - Resisted by Physical Armour
+  - ??
 - name: Battle Stomp
   primary_tree: Warfare
   investment: 1
@@ -1039,6 +1632,16 @@
     surfaces and clouds.
   effect: Set Knocked Down for 1 turn(s). 4m wide cone. Require Melee weapon. Scale
     depending on main weapon.
+  detail_description: Smash your weapon into the ground, knocking down non-allied
+    characters in front of you, and hitting them for 60% damage. Also clears non-cursed
+    surfaces and clouds.
+  detail_effect: Sets Knocked Down for 1 turn(s).
+  detail_scaling: Damage is based on your basic attack and receives a bonus from [Weapon
+    Attribute].
+  detail_requirements: Requires Warfare 1 Cost 1 Memory Requires a Melee Weapon Range
+    10m
+  detail_notes:
+  - Resisted by Physical Armour
 - name: Bouncing Shield
   primary_tree: Warfare
   investment: 1
@@ -1050,6 +1653,20 @@
   description: Throw your shield at an enemy dealing 75% physical damage. Shield can
     bounce to another enemy in 5m range.
   effect: Damage is based on the 70-77% Physical Armour of your shield. Require Shield.
+  detail_description: Throw your shield at an enemy dealing 70% Physical Damage. Shield
+    can bounce to another enemy in 5m range.
+  detail_scaling: Damage is based on the Physical Armour of your shield.
+  detail_requirements: Requires Warfare 1 Costs 1 Memory Requires a Shield Range 13m
+  detail_notes:
+  - Base damage is equal to 70% of the Physical Armour value of the equipped shield.
+  - Scales with Warfare.
+  - Adding Masterwork Runes into a Shield (which increases its armor value) will increase
+    the damage of this Skill.
+  - This Skill counts as a "Spell" and is affected by Silence. It can only Critically
+    Hit if you have the Savage Sortilege Talent.
+  - Because misc Damage bonuses (e.g. Flesh Sacrifice, Challenge, Death Wish) are
+    multiplicative for spells, Bouncing Shield benefits more from these than other
+    Warfare skills.
 - name: Crippling Blow
   primary_tree: Warfare
   investment: 1
@@ -1062,6 +1679,17 @@
     it. Deals 115% weapon damage.
   effect: Set Crippled for 1 turn(s). Require Melee weapon. Scale depending on main
     weapon.
+  detail_description: Cripple the target with a sweeping blow, and all characters
+    around it. Deals 115% damage.
+  detail_effect: Set Crippled for 1 turn(s).
+  detail_scaling: Damage is based on your basic attack and receives a bonus from [Weapon
+    Attribute].
+  detail_requirements: Requires Warfare 1 Cost 1 Memory Requires a Melee Weapon Range
+    3m
+  detail_notes:
+  - As of v3.0.180.158(March 7th) Crippling blow no longer hits allies. (Unless they
+    are targeted)
+  - Resisted by Physical Armour
 - name: Blitz Attack
   primary_tree: Warfare
   investment: 2
@@ -1073,6 +1701,15 @@
   description: Jump from one target to another, hitting up to 2 targets, dealing 70%
     weapon damage to each. Targets are chosen randomly in a 10m radius.
   effect: Require Melee weapon. Scale depending on main weapon.
+  detail_description: Jump from one target to another, hitting up to 2 targets, dealing
+    70% damage to each. Targets are chosen randomly in a 10m radius.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from [Weapon
+    Attribute].
+  detail_requirements: Requires Warfare 2 Costs 1 Memory Requires a Melee Weapon Range
+    8m
+  detail_notes:
+  - ??
+  - ??
 - name: Deflective Barrier
   primary_tree: Warfare
   investment: 2
@@ -1084,6 +1721,18 @@
     not prevent the original projectile effects. Provides [X] Physical Armour. Requires
     a shield.
   effect: Set Deflecting for 3 turn(s).
+  detail_description: Projectiles that hit you are reflected back at the caster. This
+    does not prevent the original projectile effects. Provides [X] Physical Armour
+    .
+  detail_effect: Set Deflecting for 3 turn(s).
+  detail_requirements: Requires Warfare 2 Costs 1 Memory Requires a Shield
+  detail_notes:
+  - The skill does not work without a shield if it is learned from an item. However,
+    once the Deflecting status is set, unequipping the shield does not cancel the
+    status.
+  - The skill also deflect projectile from spells ( Fireball , Fossil Strike , etc.)
+  - The skill can deflect your own projectile if you target your feet. If enemy is
+    in range, you can damage them (and yourself) twice.
 - name: Enrage
   primary_tree: Warfare
   investment: 2
@@ -1096,6 +1745,21 @@
     character is guaranteed to land critical hits with basic attacks and weapon skills,
     but is muted. Clears Taunted, Terrified, Charmed, Mad and Clear-Minded statuses.
   effect: Set Enraged for 1 turn(s).
+  detail_description: Motivate an allied character with the power of rage. Target
+    allied character is guaranteed to land critical hits with basic attacks and weapon
+    skills, but is muted. Clears Taunted , Terrified , Charmed , Mad and Clear-Minded
+    statuses.
+  detail_effect: Set Enraged for 1 turn(s).
+  detail_requirements: Requires Warfare 2 Costs 1 Memory Range 2m
+  detail_notes:
+  - Works with any types of Weapon Attacks (Bow, Dagger, Mace, Sword, Spear, Axe or
+    Staff), regardless of damage type.
+  - Works with Elemental Arrows
+  - Best if cast at the beginning of your turn (if casting on yourself) since you'll
+    get to use it the rest of that turn and the next.
+  - Will have no effect on characters that are immune to the Silenced status effect.
+  - Best used along with Fane's Time Warp to use up Enrage in one go without getting
+    silenced next round.
 - name: Phoenix Dive
   primary_tree: Warfare
   investment: 2
@@ -1106,6 +1770,12 @@
   cooldown: 4
   description: Leap through the air to a target position, creating a fire surface
     upon landing.
+  detail_description: Leap through the air to a target position, creating a fire surface
+    upon landing.
+  detail_requirements: Requires Warfare 2 Costs 1 Memory Range 13m
+  detail_notes:
+  - Phoenix Dive can also be learned by completing the quest The Ugly Little Bird
+    and eating the Scaly Phoenix Egg when prompted.
 - name: Provoke
   primary_tree: Warfare
   investment: 2
@@ -1116,6 +1786,12 @@
   description: Taunt the enemies around you. Provoke and tease them so that they want
     to attack you.
   effect: Set Taunted for 1 turn(s).
+  detail_description: Taunt the enemies around you. Provoke and tease them so that
+    they want to attack you.
+  detail_effect: Set Taunted for 1 turn(s).
+  detail_requirements: Requires Warfare 2 Costs 1 Memory
+  detail_notes:
+  - Taunt pierces Physical Armour and costs 2 AP as of Patch v3.0.168.526
 - name: Whirlwind
   primary_tree: Warfare
   investment: 2
@@ -1127,6 +1803,16 @@
   description: Perform a whirlwind attack, hitting enemies around you for 100% weapon
     damage.
   effect: Require Melee weapon. Scale depending on main weapon.
+  detail_description: Perform a whirlwind attack, hitting enemies around you for 100%
+    damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from stat
+    of equipped weapon.
+  detail_requirements: Requires Warfare 2 Cost 1 Memory Requires a Melee Weapon Range
+    4.5m
+  detail_notes:
+  - If you have poison equipped to the weapon dealing damage, the poison has a chance
+    to apply to all characters affected by the attack. Basically an AOE undead heal.
+  - Resisted by Physical Armour
 - name: Challenge
   primary_tree: Warfare
   investment: 3
@@ -1139,6 +1825,18 @@
     and receive damage and armour bonuses. If target survives, their Vitality is healed
     to full and caster receives damage.
   effect: Apply Challenge to target, betting whether they will be dead in 3 turn(s).
+  detail_description: Mark target enemy. If they die in the next 2 turns, you are
+    healed and receive damage and armour bonuses. If target survives, their Vitality
+    is healed to full and caster receives damage.
+  detail_effect: Apply Challenge to target, betting whether they will be dead in 3
+    turn(s).
+  detail_requirements: Requires Warfare 3 Costs 1 Memory Range 13m
+  detail_notes:
+  - Challenge cost reduced to 1 AP as of Patch v3.0.168.526
+  - Challenge no longer has an AP cost as of Definitive Edition.
+  - Challenge now heals Undead characters as of Definitive Edition.
+  - Additional casts after the first on the same enemy have no effect, meaning that
+    only the first caster will receive the reward when the enemy dies.
 - name: Guardian Angel
   primary_tree: Warfare
   investment: 3
@@ -1148,6 +1846,12 @@
   cooldown: 6
   description: Allies in melee range redirect 50% of received damage to you.
   effect: Set Guardian Angel Aura for 2 turn(s).
+  detail_description: Allies in melee range redirect 50% of received damage to you.
+  detail_effect: Set Guardian Angel Aura for 2 turn(s).
+  detail_requirements: Requires Warfare 3 Costs 1 Memory
+  detail_notes:
+  - ??
+  - ??
 - name: Onslaught
   primary_tree: Warfare
   investment: 3
@@ -1159,6 +1863,15 @@
   description: Attack five times with astonishing speed, each hit dealing 60% weapon
     damage.
   effect: Scale depending on main weapon.
+  detail_description: Attack five times with astonishing speed, each hit dealing 60%
+    damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Strength.
+  detail_requirements: Requires Warfare 3 Costs 2 Memory Requires a Melee Weapon Range
+    2.5m
+  detail_notes:
+  - Though the text in the game may say it deals 50% damage per hit, the code in the
+    game indicates that this skill does 60% damage five times instead.
+  - ??
 - name: Thick of the Fight
   primary_tree: Warfare
   investment: 3
@@ -1168,6 +1881,21 @@
   cooldown: 4
   description: The more the merrier! Gain a damage boost for every nearby characte
   effect: Set Thick of the Fight for 2 turn(s).
+  detail_description: The more the merrier! Gain a damage boost for every nearby character.
+  detail_effect: Set Thick of the Fight for 2 turn(s).
+  detail_requirements: Requires Warfare 3 Costs 2 Memory
+  detail_notes:
+  - The damage boost is 10% per all nearby characters, this includes yourself, enemies,
+    summons, and totems.
+  - There is no craftable scroll recipe for this skill
+  - Thick of the Fight is a "misc" bonus, which figures differently into the damage
+    formulas for weapon-based attacks and spells. The misc bonus is additive with
+    attribute and weapon skill bonuses for weapon-based attacks, but it is a standalone
+    multiplier in the damage formula for spells.
+  - This means that Thick of the Fight is quite strong for spells throughout the game,
+    but it becomes increasingly mediocre for weapon-based attacks. At level 20, a
+    +50% bonus from Thick of the Fight would likely only increase weapon damage by
+    about 15% multiplicatively.
 - name: Overpower
   primary_tree: Warfare
   investment: 5
@@ -1178,6 +1906,14 @@
   description: Deals 150% weapon damage. If your Physical Armour is higher than your
     opponent's, destroy all their Physical Armour. Can set Knocked Down.
   effect: Set Knocked Down for 1 turn(s). Scale depending on main weapon.
+  detail_description: Deals 150% damage. If your Physical Armour is higher than your
+    opponent's, destroy all their Physical Armour. Can set Knocked Down.
+  detail_effect: Set Knocked Down for 1 turn(s).
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Strength.
+  detail_requirements: Requires Warfare 5 Costs 3 Memory Requires a Melee Weapon
+  detail_notes:
+  - Can be used for backstab
+  - Resisted by Physical Armour
 - name: Elemental Arrowheads
   primary_tree: Huntsman
   investment: 1
@@ -1188,6 +1924,10 @@
   cooldown: 4
   description: Target a surface in melee radius. For two turns, elemental damage matching
     that surface is added to your ranged weapon attacks and ranged weapon-based skills.
+  detail_description: Target a surface in melee radius. For two turns, 60% elemental
+    damage matching that surface is added to your ranged weapon attacks and ranged
+    weapon-based skills.
+  detail_requirements: Requires Huntsman 1 Costs 1 Memory Range 3m
 - name: First Aid
   primary_tree: Huntsman
   investment: 1
@@ -1199,6 +1939,11 @@
   description: Heals target for [X] Vitality. Cures Crippled , Knocked Down , Blind
     , Silenced , Bleeding , Burning , Poisoned , Diseased .
   effect: Restore [X] Vitality. Set Rested for 1 turn(s).
+  detail_description: Heals target for [100% of total heal value] Vitality . Cures
+    Crippled , Knocked Down , Blind , Silenced , Suffocating , Bleeding , Burning
+    , Poisoned , Diseased , Plague , Infested
+  detail_effect: Restore [100% of total heal value] Vitality.
+  detail_requirements: Requires Huntsman 1 Costs 1 Range 8m
 - name: Pin Down
   primary_tree: Huntsman
   investment: 1
@@ -1209,6 +1954,10 @@
   cooldown: 3
   description: Deals 120% damage and Cripple target character.
   effect: Set Crippled for 1 turn(s).
+  detail_description: Deals 120% damage and Cripple target character.
+  detail_effect: Set Crippled for 1 turn(s).
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 1 Costs 1 Range 13m
 - name: Ricochet
   primary_tree: Huntsman
   investment: 1
@@ -1220,6 +1969,10 @@
   description: Fire a normal arrow that deals 90% Physical Damage and then finds another
     target within 5m. Forks up to 2 times.
   effect: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_description: Fire a normal arrow that deals 90% damage and then finds another
+    target within 5m. Forks up to 2 times.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 1 Costs 1 Range 13m
 - name: Ballistic Shot
   primary_tree: Huntsman
   investment: 2
@@ -1230,6 +1983,10 @@
   cooldown: 4
   description: A shot that deals 100% physical damage and receives 5% bonus damage
     per 1m distance to target
+  detail_description: A shot that deals 100% damage and receives 5% bonus damage per
+    1m distance to target
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 2 Costs 1 Memory Range 13m
 - name: Barrage
   primary_tree: Huntsman
   investment: 2
@@ -1241,6 +1998,10 @@
   description: Fire three arrows at three targets of your choice, each dealing 60%
     damage.
   effect: Damage is based on your basic attack and receive a bonus from Finesse.
+  detail_description: Fire three arrows at three targets of your choice, each dealing
+    60% damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 2 Costs 1 Memory Range 13m
 - name: Marksman's Fang
   primary_tree: Huntsman
   investment: 2
@@ -1251,6 +2012,10 @@
   cooldown: 2
   description: Shoot an arrow that goes straight through enemies. Each enemy that's
     hit takes [x] damage, ignoring armour.
+  detail_description: Shoot an arrow that goes straight through enemies. Each enemy
+    that's hit takes 100% damage, ignoring armour.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 2 Costs 1 Memory Range 13m
 - name: Reactive Shot
   primary_tree: Huntsman
   investment: 2
@@ -1262,6 +2027,10 @@
   description: Target a circular area. Until your next turn, you will reflexively
     shoot at the first three enemies moving within this area.
   effect: Set Reactive Shot for 1 Turn(s)
+  detail_description: Target a circular area. Until your next turn, you will reflexively
+    shoot at the first three enemies moving within this area.
+  detail_effect: Set Reactive Shot for 1 Turn(s)
+  detail_requirements: Requires Huntsman 2 Costs 1 Memory Range 13m
 - name: Sky Shot
   primary_tree: Huntsman
   investment: 2
@@ -1273,6 +2042,11 @@
   description: Leap into the air before shooting, gaining damage bonuses for your
     superior height. Deals 100% Physical Damage
   effect: This skill receives high ground bonuses regardless of elevation.
+  detail_description: Leap into the air before shooting, gaining damage bonuses for
+    your superior height. Deals 100% Damage
+  detail_scaling: This skill receives high ground bonuses regardless of elevation.
+    Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 1 Costs 1 Memory Range 20m
 - name: Tactical Retreat
   primary_tree: Huntsman
   investment: 2
@@ -1283,6 +2057,9 @@
   cooldown: 4
   description: Apply haste to yourself, then teleport away from imminent danger.
   effect: Set Hasted for 1 Turn(s)
+  detail_description: Apply haste to yourself, then teleport away from imminent danger.
+  detail_effect: Set Hasted for 1 Turn(s)
+  detail_requirements: Requires Huntsman 2 Costs 1 Memory Range 13m
 - name: Arrow Spray
   primary_tree: Huntsman
   investment: 3
@@ -1292,6 +2069,9 @@
   range: 13m
   cooldown: 5
   description: Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
+  detail_description: Fire 16 arrows in a 60 degree arc. Each arrow deals 40% damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 3 Costs 2 Range 13m
 - name: Assassinate
   primary_tree: Huntsman
   investment: 3
@@ -1302,6 +2082,10 @@
   cooldown: 5
   description: Attacking your target with meticulous aim, dealing 115% damage in one
     shot. When performed from stealth, this attack gains a 50% damage increase.
+  detail_description: Attacking your target with meticulous aim, dealing 140% damage
+    in one shot. When performed from stealth, this attack gains a 50% damage increase.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 3 Costs 1 Memory Range 13m
 - name: Farsight
   primary_tree: Huntsman
   investment: 3
@@ -1313,6 +2097,10 @@
   description: Increase the range of a targeted character's ranged attacks and skills
     by 4m.
   effect: Set Farsight for 3 Turn(s).
+  detail_description: Increase the range of a targeted character's ranged attacks
+    and skills by 4m.
+  detail_effect: Set Farsight for 3 Turn(s).
+  detail_requirements: Requires Huntsman 3 Costs 2 Memory Range 13m
 - name: Glitter Dust
   primary_tree: Huntsman
   investment: 3
@@ -1324,6 +2112,10 @@
   description: Target is marked, reducing its ability to dodge. Prevents target from
     going invisible.
   effect: Set Marked for 3 turn(s)
+  detail_description: Target is marked, reducing its ability to dodge. Prevents target
+    from going invisible.
+  detail_effect: Set Marked for 3 turn(s).
+  detail_requirements: Requires Huntsman 3 Costs 1 Memory Range 13m
 - name: Arrow Storm
   primary_tree: Huntsman
   investment: 5
@@ -1335,6 +2127,11 @@
   description: 16 arrows fall from the sky in the target area, each dealing 50% damage.
   effect: Damage is based on your basic attack and receives a bonus from Finesse.
     2m Explode Radius
+  detail_description: 16 arrows fall from the sky in the target area, each dealing
+    40% Physical Damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Huntsman 5 Costs 3 Memory 2m Explode radius Range
+    13m
 - name: Adrenaline
   primary_tree: Scoundrel
   investment: 1
@@ -1346,6 +2143,16 @@
     Any Action Points over your maximum are lost.
   effect: Gain 2 Action Points immediately, but lose 2 Action Points next turn. Does
     not break Invisibility or Sneaking
+  detail_description: Gain 2 Action Points immediately, but lose 2 Action Points next
+    turn. Any Action Points over your maximum are lost.
+  detail_effect: Gain 2 Action Points immediately, but lose 2 Action Points next turn.
+    Does not break Invisibility or Sneaking
+  detail_requirements: Requires Scoundrel 1 Costs 1 Memory
+  detail_notes:
+  - Eating Finn's body part in the first ship area, The Hull, will grant you the Adrenaline
+    Skill. You have to have points in Scoundrel to use it, however.
+  - Consider using the Haste ability to minimise the AP reduction on the turn following
+    the use of this ability.
 - name: Backlash
   primary_tree: Scoundrel
   investment: 1
@@ -1357,6 +2164,17 @@
   description: Jump over the enemy, landing behind their back and backstabbing them
     for 70% physical damage.
   effect: 100% chance to Backstab . Scale depending on main weapon.
+  detail_description: Jump over the enemy, landing behind their back and backstabbing
+    them for 85% damage.
+  detail_scaling: 100% chance to Backstab Damage is based on your basic attack and
+    receives a bonus from Finesse
+  detail_requirements: Requires Scoundrel 1 Requires a Dagger Costs 1 Memory Range
+    8m
+  detail_notes:
+  - Requires having a dagger equipped.
+  - The damage still benefits from backstab bonus even if the teleport mechanic will
+    not place you behind the affected target.
+  - You can use this skill even when Entangled.
 - name: Chloroform
   primary_tree: Scoundrel
   investment: 1
@@ -1367,6 +2185,12 @@
   cooldown: 3
   description: Destroys [X] Magic Armour and then tries to set Sleeping.
   effect: Set Sleeping for 1 turn(s). Does not break Invisibility or Sneaking .
+  detail_description: Destroys [X] Magical Armour and then tries to set Sleeping.
+  detail_effect: Set Sleeping for 1 turn(s). Does not break Invisibility or Sneaking.
+  detail_scaling: Damage is based on your level and receives bonus from Finesse.
+  detail_requirements: Requires Scoundrel 1 Costs 1 Memory Range 13m
+  detail_notes:
+  - Resisted by Magical Armour
 - name: Throwing Knife
   primary_tree: Scoundrel
   investment: 1
@@ -1377,6 +2201,12 @@
   cooldown: 1
   description: Throw a knife at your opponent, dealing 85% damage. Can backstab!
   effect: Scale depending on main weapon.
+  detail_description: Throw a knife at your opponent, dealing 85% damage. Can backstab!
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse
+  detail_requirements: Requires Scoundrel 1 Costs 1 Memory Range 8m
+  detail_notes:
+  - Resisted by Magical Armour
+  - Can go through multiple enemies
 - name: Cloak and Dagger
   primary_tree: Scoundrel
   investment: 2
@@ -1387,6 +2217,12 @@
   cooldown: 4
   description: Teleport without breaking sneaking.
   effect: Does not break Invisibilty or Sneaking .
+  detail_description: Teleport without breaking sneaking.
+  detail_effect: Does not break Invisibilty or Sneaking.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Range 13m
+  detail_notes:
+  - ??
+  - ??
 - name: Corrupted Blade
   primary_tree: Scoundrel
   investment: 2
@@ -1398,6 +2234,14 @@
   description: Dagger attack that deals 150% damage and sets Decay and Diseased.
   effect: Set Decaying for 2 turn(s). Set Diseased for 2 turn(s). Scale depending
     on main weapon.
+  detail_description: Dagger attack that deals 150% damage and sets Decay and Diseased.
+  detail_scaling: Set Decaying for 2 turn(s). Set Diseased for 2 turn(s). Damage is
+    based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - Corrupted Blade damage increased by 30% as of Patch v3.0.168.526
+  - Resisted by Physical Armour
 - name: Gag Order
   primary_tree: Scoundrel
   investment: 2
@@ -1408,6 +2252,14 @@
   cooldown: 4
   description: Destroy [X] Magic Armour on target character. Silence target.
   effect: Set Silenced for 1 turn
+  detail_description: Destroy [X] Magical Armour on target character. Silence target.
+  detail_scaling: Set Silenced for 1 turn Damage is based on your basic attack and
+    receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - Reduced to 2 AP and damage increased by 35% as of Patch v3.0.168.526
+  - Resisted by Magical Armour
 - name: Rupture Tendons
   primary_tree: Scoundrel
   investment: 2
@@ -1419,6 +2271,23 @@
   description: Deal 100% damage to target character. When they try to move, they will
     take piercing damage.
   effect: Set Ruptured Tendons for 2 turn(s). Scale depending on main weapon.
+  detail_description: Deal 100% damage to target character. When they try to move,
+    they will take piercing damage.
+  detail_scaling: Set Ruptured Tendons for 2 turn(s). Damage is based on your basic
+    attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Requires a Dagger Range
+    2m
+  detail_notes:
+  - Apply to enemies that have fixated on a distant target and are least likely to
+    use any gap closing ability. The damage will be devastating.
+  - Deals damage as they move, similar to how characters take damage for running through
+    fire (but at a more frequent pace).
+  - Very effective in combination with the Chicken Claw ability, as enemies are highly
+    likely to use their entire turn running around (while in chicken form).
+  - Since the ability deals damage based on the range traveled, adding Haste to the
+    Chicken Claw ability will increase its damage even further (while in chicken form).
+  - Can be cast on party member. Useful when you need to him to proc a bleed effect
+    (i.e Jellyfish skin) or damage his enemies through Shackle of Pain.
 - name: Sawtooth Knife
   primary_tree: Scoundrel
   investment: 2
@@ -1430,6 +2299,15 @@
   description: Pierce the enemy's Physical Armour and directly deals 100% piercing
     damage. Sets Bleeding if enemy has no Physical Armour.
   effect: Set Bleeding for 3 turn(s). Scale depending on main weapon.
+  detail_description: Pierce the enemy's Physical Armour and directly deals 100% piercing
+    damage. Sets Bleeding if enemy has no Physical Armour.
+  detail_scaling: Set Bleeding for 3 turn(s). Damage is based on your basic attack
+    and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - Resisted by Physical Armour
+  - ??
 - name: Sleeping Arms
   primary_tree: Scoundrel
   investment: 2
@@ -1441,6 +2319,15 @@
   description: 'Deal 100% damage and set Atrophy: your target can''t use weapons or
     weapon skills anymore.'
   effect: Set Atrophy for 2 turn(s). Scale depending on main weapon.
+  detail_description: 'Deal 100% damage and set Atrophy: your target can''t use weapons
+    or weapon skills anymore.'
+  detail_scaling: Set Atrophy for 2 turn(s). Damage is based on your basic attack
+    and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 2 Costs 1 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - Resisted by Physical Armour
+  - ??
 - name: Daggers Drawn
   primary_tree: Scoundrel
   investment: 3
@@ -1451,6 +2338,15 @@
   cooldown: 6
   description: Whirl into a barrage of 5 stabs, each dealing 65% damage.
   effect: Scale depending on main weapon.
+  detail_description: Whirl into a barrage of 5 stabs, each dealing 65% damage.
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 3 Costs 2 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - Each of the five hits can backstab, dealing significant damage to a single target.
+  - Deals a total of 325% damage if all five hits connect.
+  - 'If your weapon has any "on hit" effects (example: 10% chance to poison) this
+    will potentially proc for each of the 5 attacks'
 - name: Fan of Knives
   primary_tree: Scoundrel
   investment: 3
@@ -1462,6 +2358,14 @@
   description: Fling a dagger at every enemy around you, dealing 125% physical damage.
     Can backstab!
   effect: Scale depending on main weapon.
+  detail_description: Fling a dagger at every enemy around you, dealing 125% damage.
+    Can backstab!
+  detail_scaling: Damage is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 3 Costs 2 Memory Requires a Dagger Range
+    8m
+  detail_notes:
+  - Fan of Knives damage increased by 25% as of Patch v3.0.168.526
+  - ??
 - name: Terrifying Cruelty
   primary_tree: Scoundrel
   investment: 3
@@ -1474,6 +2378,12 @@
     target character.
   effect: Set Bleeding for 3 turn(s). Set Terrified for 1 turn(s). Scale depending
     on main weapon.
+  detail_description: Dagger attack that deals 110% damage and sets Bleeding and Fear
+    on target character.
+  detail_scaling: Set Bleeding for 3 turn(s). Set Terrified for 1 turn(s). Damage
+    is based on your basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 3 Costs 1 Memory Requires a Dagger Range
+    2.5m
 - name: Wind-Up Toy
   primary_tree: Scoundrel
   investment: 3
@@ -1486,6 +2396,19 @@
     dealing fire damage and producing a fire surface.
   effect: Does not break Invisibility or Sneaking . The stats of the summons will
     depend on caster level and Summoning ability.
+  detail_description: Summon a mechanical bomber at the target point. The bomber can
+    explode, dealing fire damage and producing a fire surface.
+  detail_effect: Does not break Invisibility or Sneaking. The stats of the summons
+    will depend on caster level and Summoning ability.
+  detail_requirements: Requires Scoundrel 3 Costs 1 Memory 1m Explode radius Range
+    13m
+  detail_notes:
+  - Bonuses from the Summoning ability will affect it.
+  - 'It has one skill:'
+  - 'Wind Up Toy''s Suicide now costs 1 AP, deals 15% more damage as of Patch v3.0.168.526
+    Suicide Explode, creating fire surfaces and dealing [X-Y] fire damage in a large
+    area around you (except areas blocked by obstacles). Damage is based on your level
+    and receives bonus from Intelligence. AP:'
 - name: Mortal Blow
   primary_tree: Scoundrel
   investment: 5
@@ -1497,6 +2420,23 @@
   description: Deal 140% damage. Damage is doubled if you are sneaking or invisible.
     Target is killed instantly if below 20% Vitality.
   effect: Instantly kill target below 20% Vitality . Scale depending on main weapon.
+  detail_description: Deal 140% damage. Damage is doubled if you are sneaking or invisible.
+    Target is killed instantly if below 20% Vitality.
+  detail_scaling: Instantly kill target below 20% Vitality. Damage is based on your
+    basic attack and receives a bonus from Finesse.
+  detail_requirements: Requires Scoundrel 5 Costs 3 Memory Requires a Dagger Range
+    2.5m
+  detail_notes:
+  - The Mortal Blow health threshold is calculated before the actual attack damage
+    (Possibly false, my own testing showed that leaving the enemy within the threshold
+    after the damage does instantly kill them afterwards)
+  - Deals 280% damage if you're invisible or sneaking
+  - It is often worth spending 1 AP to go invisible immediately before using this
+    skill to get the double damage
+  - Can backstab
+  - Can only be used once per combat
+  - With proper setup, this skill has the highest per-AP damage of any single-target
+    skill in the game
 - name: Bull Horns
   primary_tree: Polymorph
   investment: 1
@@ -1508,6 +2448,11 @@
     can rush at your enemies and gore them. Increases Retribution ability by 1 for
     the duration. Incompatible with Medusa Head .
   effect: Set Bull Horns for 4 turn(s).
+  detail_description: Magnificent horns sprout from your forehead, making you see
+    red. You can rush at your enemies and gore them. Increases Retribution ability
+    by 1 for the duration. Incompatible with Medusa Head .
+  detail_effect: Set Bull Horns for 4 turn(s).
+  detail_requirements: Requires Polymorph 1 Costs 1 Memory
 - name: Chameleon Cloak
   primary_tree: Polymorph
   investment: 1
@@ -1517,6 +2462,10 @@
   cooldown: 6
   description: Grants you the ability to blend in with any enviroment as if invisible.
   effect: Set Invisible for 2 turn(s).
+  detail_description: Grants you the ability to blend in with any environment as if
+    invisible.
+  detail_effect: Set Invisible for 2 turn(s).
+  detail_requirements: Requires Polymorph 1 Costs 1 Memory
 - name: Chicken Claw
   primary_tree: Polymorph
   investment: 1
@@ -1527,6 +2476,9 @@
   cooldown: 6
   description: Turn the target character into a chicken. Squawk!
   effect: Set Chicken Form for 2 turn(s).
+  detail_description: Turn the target character into a chicken. Squawk!
+  detail_effect: Set Chicken Form for 2 turn(s).
+  detail_requirements: Requires Polymorph 1 Costs 1 Memory Range 2m
 - name: Tentacle Lash
   primary_tree: Polymorph
   investment: 1
@@ -1538,6 +2490,11 @@
   description: Lash out at your opponent dealing, physical damage and setting Atrophy
     on them.
   effect: Set Atrophy for 1 turn(s).
+  detail_description: Lash out at your opponent dealing 125% physical damage and setting
+    Atrophy on them.
+  detail_effect: Set Atrophy for 1 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Strength.
+  detail_requirements: Requires Polymorph 1 Costs 1 Memory Range 8m
 - name: Heart of Steel
   primary_tree: Polymorph
   investment: 2
@@ -1548,6 +2505,10 @@
   description: Your heart pumps liquid metal, creating a robust layer of Physical
     Armor. This regenerates each turn.
   effect: Restore [X] Physical Armour for 4 turn(s).
+  detail_description: Your heart pumps liquid metal, creating a robust layer of Physical
+    Armor. This regenerates each turn.
+  detail_effect: Provides [75% heal value] Physical Armour.
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory
 - name: Medusa Head
   primary_tree: Polymorph
   investment: 2
@@ -1558,6 +2519,10 @@
   description: Snakes grow out of your head, giving you a petrifying aura and the
     Petrifying Visage skill. Incompatible with Bull Horns .
   effect: Set Medusa Head for 2 turn(s).
+  detail_description: Snakes grow out of your head, giving you a petrifying aura and
+    the Petrifying Visage skill. Incompatible with Bull Horns .
+  detail_effect: Set Medusa Head for 2 turn(s).
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory
 - name: Spider Legs
   primary_tree: Polymorph
   investment: 2
@@ -1568,6 +2533,10 @@
   description: Spider legs burst from your back. You can create web surfaces in an
     area to entangle foes. Incompatible with Wings .
   effect: Set Spider Legs for 3 turn(s).
+  detail_description: Spider legs burst from your back. You can create web surfaces
+    in an area to entangle foes. Incompatible with Wings .
+  detail_effect: Set Spider Legs for 3 turn(s).
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory
 - name: Spread Your Wings
   primary_tree: Polymorph
   investment: 2
@@ -1578,6 +2547,10 @@
   description: Sprout temporary wings to fly when you move, allowing you to ignore
     ground surfaces. Incompatible with Spider Legs .
   effect: Sets wings for 3 turns. Allows use of the ability Fly.
+  detail_description: Sprout temporary wings to fly when you move, allowing you to
+    ignore ground surfaces. Incompatible with Spider Legs .
+  detail_effect: Sets wings for 3 turns. Allows use of the ability Fly.
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory
 - name: Summon Oily Blob
   primary_tree: Polymorph
   investment: 2
@@ -1590,6 +2563,13 @@
     area. Oil Blob deals earth damage with melee attacks and leaves an oil puddle
     on death.
   effect: 3m Explode Radius
+  detail_description: Fling an Oil Blob at a target point, dealing 70% Earth Damage
+    in the area. Oil Blob deals earth damage with melee attacks and leaves an oil
+    puddle on death.
+  detail_scaling: Damage is based on your level and receives bonus from Strength.
+    The stats of the summons will depend on caster level and Summoning ability.
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory 3m Explode Radius Range
+    13m
 - name: Terrain Transmutation
   primary_tree: Polymorph
   investment: 2
@@ -1599,6 +2579,8 @@
   range: 13m
   cooldown: 2
   description: Target two circular areas. Swap surfaces and clouds.
+  detail_description: Target two circular areas. Swap surfaces and clouds.
+  detail_requirements: Requires Polymorph 2 Costs 1 Memory Range 13m
 - name: Equalise
   primary_tree: Polymorph
   investment: 3
@@ -1609,6 +2591,9 @@
   cooldown: 5
   description: Vitality and Armour percentages of characters in target area are summed
     up and redistributed equally.
+  detail_description: Vitality and Armour percentages of characters in target area
+    are summed up and redistributed equally.
+  detail_requirements: Requires Polymorph 3 Costs 1 Memory Range 13m
 - name: Flay Skin
   primary_tree: Polymorph
   investment: 3
@@ -1620,6 +2605,11 @@
   description: Destroy [X] Magic Armour on target character. Set status that halves
     resistances.
   effect: Set Nullified Resistance for 3 turn(s).
+  detail_description: Destroy [100% of total damage value] Magic Armour on target
+    character. Set status that halves resistances.
+  detail_effect: Set Nullified Resistance for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Strength.
+  detail_requirements: Requires Polymorph 3 Costs 1 Memory Range 13m
 - name: Forced Exchange
   primary_tree: Polymorph
   investment: 3
@@ -1630,6 +2620,9 @@
   cooldown: 1
   description: Exchange Vitality percentages with target character.
   effect: Exchange vitality percentages with target character
+  detail_description: Exchange Vitality percentages with target character.
+  detail_effect: Exchange vitality percentages with target character.
+  detail_requirements: Requires Polymorph 3 Costs 2 Memory Range 2m
 - name: Skin Graft
   primary_tree: Polymorph
   investment: 3
@@ -1640,6 +2633,10 @@
   description: Reset all cooldowns. Removes Burning , Necrofire , Poisoned and Bleeding
     .
   effect: Set Skin Graft
+  detail_description: Reset all cooldowns. Removes Burning , Necrofire , Poisoned
+    and Bleeding .
+  detail_effect: Set Skin Graft
+  detail_requirements: Requires Polymorph 3 Costs 2 Memory
 - name: Apotheosis
   primary_tree: Polymorph
   investment: 5
@@ -1650,6 +2647,10 @@
   description: You take the first step towards godhood. The cost of all Source skills
     is reduced by -3 Source Point.
   effect: Set Apotheosis for 2 turn(s).
+  detail_description: You take the first step towards godhood. The cost of all Source
+    skills is reduced by -3 Source Point.
+  detail_effect: Set Apotheosis for 2 turn(s).
+  detail_requirements: Requires Polymorph 5 Costs 3 Memory
 - name: Flaming Skin
   primary_tree: Polymorph
   secondary_tree: Pyrokinetic
@@ -1661,6 +2662,10 @@
   description: You get immunity to fire, but lowered resistance to water. You bleed
     fire.
   effect: Set Flaming Skin for 2 turn(s).
+  detail_description: You get immunity to fire, but lowered resistance to water. You
+    bleed fire.
+  detail_effect: Set Flaming Skin for 2 turn(s).
+  detail_requirements: Requires Polymorph 2 Requires Pyrokinetic 2 Costs 2 Memory
 - name: Jellyfish Skin
   primary_tree: Polymorph
   secondary_tree: Aerotheurge
@@ -1672,6 +2677,10 @@
   description: Bleed electrified water. You get immunity to electricity, but lowered
     resistance to poison and earth damage.
   effect: Set Jellyfish Skin for 2 turn(s).
+  detail_description: Bleed electrified water. You get immunity to electricity, but
+    lowered resistance to poison and earth damage.
+  detail_effect: Set Jellyfish Skin for 2 turn(s).
+  detail_requirements: Requires Polymorph 2 Requires Aerotheurge 2 Costs 2 Memory
 - name: Poisonous Skin
   primary_tree: Polymorph
   secondary_tree: Geomancer
@@ -1683,6 +2692,10 @@
   description: You get immunity to poison and earth, but lowered resistance to air.
     You bleed poison.
   effect: Set Poisonous Skin for 2 turn(s).
+  detail_description: You get immunity to poison and earth, but lowered resistance
+    to air. You bleed poison.
+  detail_effect: Set Poisonous Skin for 2 turn(s).
+  detail_requirements: Requires Polymorph 2 Requires Geomancer 2 Costs 2 Memory
 - name: Icy Skin
   primary_tree: Polymorph
   secondary_tree: Hydrosophist
@@ -1694,6 +2707,10 @@
   description: You get immunity to water, but lowered resistance to fire. You bleed
     ice.
   effect: Set Icy Skin for 2 turn(s).
+  detail_description: You get immunity to water, but lowered resistance to fire. You
+    bleed ice.
+  detail_effect: Set Icy Skin for 2 turn(s).
+  detail_requirements: Requires Polymorph 2 Requires Hydrosophist 2 Costs 1 Memory
 - name: Blood Sucker
   primary_tree: Necromancer
   investment: 1
@@ -1705,6 +2722,11 @@
   description: Target character consumes blood surfaces around them, restoring Vitality.
     The more blood, the more they are healed!
   effect: Restore up to [X] Vitality, depending on relevant surface area.
+  detail_description: Target character consumes blood surfaces around them, restoring
+    Vitality. The more blood, the more they are healed!
+  detail_effect: Restore up to [200% of total heal value] Vitality, depending on relevant
+    surface area.
+  detail_requirements: Requires Necromancer 1 Costs 1 Memory
 - name: Decaying Touch
   primary_tree: Necromancer
   investment: 1
@@ -1716,6 +2738,11 @@
   description: Deal 100% physical damage to target character. Sets Decay, so the target
     will take physical damage from healing spells and potions.
   effect: Set Decaying for 2 turn(s).
+  detail_description: Deal 100% physical damage to target character. Sets Decay, so
+    the target will take physical damage from healing spells and potions.
+  detail_effect: Set Decaying for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Necromancer 1 Costs 1 Memory
 - name: Mosquito Swarm
   primary_tree: Necromancer
   investment: 1
@@ -1728,6 +2755,12 @@
     dealing 100% physical damage and healing yourself.
   effect: Restore up to [X] Vitality, depending on the damage dealt. Set Bleeding
     for 2 turn(s).
+  detail_description: Unleash a swarm of giant mosquitos to suck the blood from your
+    enemies, dealing 100% physical damage and healing yourself.
+  detail_effect: Restore up to [100% of total heal value] Vitality, depending on the
+    damage dealt. Set Bleeding for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Necromancer 1 Costs 1 Memory
 - name: Raise Bloated Corpse
   primary_tree: Necromancer
   investment: 1
@@ -1740,6 +2773,11 @@
     can explode, dealing Physical Damage.
   effect: A bloated corpse will be summoned at the location of your target(s). Blows
     up your target.
+  detail_description: Target a corpse to raise a bloated cadaver that fights for you.
+    It can explode, dealing Physical Damage.
+  detail_effect: A bloated corpse will be summoned at the location of your target(s).
+    Blows up your target.
+  detail_requirements: Requires Necromancer 1 Costs 1 Memory
 - name: Bone Cage
   primary_tree: Necromancer
   investment: 2
@@ -1750,6 +2788,10 @@
   description: Increases Physical Armour by [X] and another [X] Physical Armour for
     each corpse within 13m radius around you.
   effect: Set Bone Cage for 3 turn(s).
+  detail_description: Increases Physical Armour by [50% of total heal value] and another
+    [50% of total heal value] Physical Armour for each corpse in the area around you.
+  detail_effect: Set Bone Cage for 3 turn(s).
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory
 - name: Death Wish
   primary_tree: Necromancer
   investment: 2
@@ -1762,6 +2804,11 @@
     their lost Vitality. For example, a character with 30% Vitality will gain a 70%
     damage bonus.
   effect: Set Death Wish for 2 turn(s).
+  detail_description: Target character receives a damage bonus equal to the percentage
+    of their lost Vitality. For example, a character with 30% Vitality will gain a
+    70% damage bonus.
+  detail_effect: Set Death Wish for 2 turn(s).
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory
 - name: Infect
   primary_tree: Necromancer
   investment: 2
@@ -1774,6 +2821,12 @@
     spread to other nearby characters. Diseased characters deal reduced damage with
     all attacks and have lowered Constitution.
   effect: Set Infected for 2 turn(s).
+  detail_description: Deal 155% physical damage. Infect a target with a disease that
+    will spread to other nearby characters. Diseased characters deal reduced damage
+    with all attacks and have lowered Constitution.
+  detail_effect: Set Infectious Disease for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory
 - name: Living on the Edge
   primary_tree: Necromancer
   investment: 2
@@ -1786,6 +2839,11 @@
     keeping them alive against all odds. If the target is a summon, their lifetime
     will be prolonged for the duration.
   effect: Set Death Resist for 2 turn(s).
+  detail_description: For 2 turns your character's Vitality cannot be reduced below
+    1 point, keeping them alive against all odds. If the target is a summon, their
+    lifetime will be prolonged for the duration.
+  detail_effect: Set Death Resist for 2 turn(s).
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory
 - name: Raise Bone Widow
   primary_tree: Necromancer
   investment: 2
@@ -1797,6 +2855,11 @@
   description: Raise a walking pile of bones which can consume corpses to restore
     Vitality and receive a stacking damage buff.
   effect: The stats of the summons will depend on caster level and Summoning ability.
+  detail_description: Raise a walking pile of bones which can consume corpses to restore
+    Vitality and receive a stacking damage buff.
+  detail_effect: The stats of the summons will depend on caster level and Summoning
+    ability.
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory Duration 5 turn(s)
 - name: Shackles of Pain
   primary_tree: Necromancer
   investment: 2
@@ -1807,6 +2870,11 @@
   cooldown: 5
   description: Mark a target so that it will receive all of the damage you receive.
   effect: Set Shackles of Pain for 3 turn(s).
+  detail_description: Mark a target so that it will receive all of the damage you
+    receive. Damage transferred in this way ignores any resistances the target may
+    have.
+  detail_effect: Set Shackles of Pain for 3 turn(s).
+  detail_requirements: Requires Necromancer 2 Costs 1 Memory
 - name: Black Shroud
   primary_tree: Necromancer
   investment: 3
@@ -1817,6 +2885,9 @@
   cooldown: 5
   description: Create a cloud of cursed smoke in an area, setting Suffocating and
     Blind on all characters within.
+  detail_description: Create a cloud of cursed smoke in an area, setting Suffocating
+    and Blind on all characters within.
+  detail_requirements: Requires Necromancer 3 Costs 2 Memory
 - name: Grasp of the Starved
   primary_tree: Necromancer
   investment: 3
@@ -1829,6 +2900,12 @@
     in blood surfaces and clouds. Deals 250% physical damage to each character and
     sets Crippled.
   effect: Set Crippled for 2 turn(s).
+  detail_description: Undead hands rise from underground, attacking characters that
+    stand in blood surfaces and clouds. Deals 250% physical damage to each character
+    and sets Crippled.
+  detail_effect: Set Crippled for 2 turn(s).
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Necromancer 3 Costs 2 Memory
 - name: Last Rites
   primary_tree: Necromancer
   investment: 3
@@ -1840,6 +2917,10 @@
   description: Sacrifice yourself to bring an ally back to life. Deals [X] piercing
     damage to you, and resurrects target character with maximum Vitality.
   effect: Set Potion.
+  detail_description: Sacrifice yourself to bring an ally back to life. Deals [X]
+    piercing damage to you, and resurrects target character with maximum Vitality.
+  detail_effect: Set Potion.
+  detail_requirements: Requires Necromancer 3 Costs 1 Memory
 - name: Silencing Stare
   primary_tree: Necromancer
   investment: 3
@@ -1851,6 +2932,10 @@
   description: Destroy [X] Magic Armour and Silence all enemies in a cone in front
     of you.
   effect: Set Silenced for 1 turn(s).
+  detail_description: Destroy [100% of total damage value] Magic Armour and Silence
+    all enemies in a cone in front of you.
+  detail_effect: Set Silenced for 1 turn(s).
+  detail_requirements: Requires Necromancer 3 Costs 1 Memory
 - name: Totems of the Necromancer
   primary_tree: Necromancer
   investment: 5
@@ -1861,6 +2946,10 @@
   description: Spawn bone totems near every enemy (alive or dead) in the area. Bone
     totems have ranged attacks that deal [X] physical damage.
   effect: A Bones Totem will be summoned at the location of your target(s).
+  detail_description: Spawn bone totems near every enemy in the area. Bone totems
+    have ranged attacks that deal 100% physical damage.
+  detail_effect: A Bones Totem will be summoned at the location of your target(s).
+  detail_requirements: Requires Necromancer 5 Costs 3 Memory
 - name: Raining Blood
   primary_tree: Necromancer
   secondary_tree: Hydrosophist
@@ -1872,6 +2961,10 @@
   cooldown: 5
   description: Create blood surfaces. Set Bleeding on enemies. Douse fire surfaces.
   effect: Set Bleeding for 2 turn(s).
+  detail_description: Create blood surfaces. Set Bleeding on enemies. Douse fire surfaces.
+  detail_effect: Set Bleeding for 2 turn(s).
+  detail_requirements: Requires Necromancer 1 Requires Hydrosophist 1 Costs 1 Memory
+    Duration 1 turn(s)
 - name: Blood Storm
   primary_tree: Necromancer
   secondary_tree: Hydrosophist
@@ -1884,6 +2977,11 @@
   description: The sky weeps bloody tears. Bolts of coagulated blood fall on enemy
     characters in the area, dealing 100% damage each and setting Disease and Decaying
     Touch. Turns all water in the area into blood.
+  detail_description: The sky weeps bloody tears. Bolts of coagulated blood fall on
+    enemy characters in the area, setting Disease and Decaying . Does 100% physical
+    damage. Turns all water in the area into blood.
+  detail_requirements: Requires Necromancer 3 Requires Hydrosophist 3 Costs 3 Memory
+    Duration 2 turn(s)
 - name: Conjure Incarnate
   primary_tree: Summoning
   investment: 1
@@ -1897,6 +2995,49 @@
     level of 10, a colossal Incarnate Champion will answer your summons!
   effect: The stats of the summons will depend on caster level and Summoning ability.
     Duration 10 turn(s)
+  detail_description: Conjure a personal elemental that matches the ground surface
+    it's summoned onto. Your incarnate can be buffed with Infusions. Once you hit
+    Summoning ability level of 10, a colossal Incarnate Champion will answer your
+    summons!
+  detail_requirements: Requires Summoning 1 Duration 10 turns Range 13m
+  detail_notes:
+  - The cornerstone of the Summoning skill tree, it can be buffed with different Infusions
+    that give new skills — Farsight , Power , Warp , Shadow — or replace its element
+    (see below).
+  - The potency of its spells are based on its stats, not its owner. Right click it
+    and choose "Examine" for details on its attributes.
+  - The Incarnate can act the turn it is summoned in battle, shuffling turn order
+    when it does.
+  - Incarnate innately has the Opportunist talent. Provoke was removed as of Patch
+    v3.0.168.526
+  - Summoning the Incarnate either before or in the middle of battle has their own
+    advantages; the Incarnate in most cases will behave like another player character.
+  - The only time the Incarnate's form changes is once Summoning reaches level 10;
+    nothing changes if it goes beyond that. Its color also corresponds to its imbued
+    element.
+  - The Incarnate Champion is significantly larger than a regular Incarnate and spawns
+    with double the Physical Armour and Magical Armour as well as almost double the
+    Vitality, and deals approx. 50% more damage.
+  - The environment the Incarnate is spawned in imbues it with an element, granting
+    different abilities and skills. It can be also imbued with a different element
+    by casting specific Summoning skills. Some elements can only be obtained by only
+    one of either method.
+  - Infusing the Incarnate also determines the element of its basic attack. Be wary
+    when confronting groups of enemies with different resistances. It matches the
+    element of the skill that comes with it, e.g, Blood infusion bestows normal physical
+    attacks.
+  - Summoning bonus is multilpicative for armor, health and spell damage but additive
+    for attacks and attack based spells. Also summoning itself is additive with Supercharger
+    .
+  - As of patch 3.6.36.1643 air, fire, water and poison infusions will give 5 points
+    of corresponding ability, while oil, acid, cursed air and necrofire will give
+    10 points. It seems that this bonus does not depend on the character level or
+    summoning ability.
+  - 'There seems to be a bug (probably due to a recent patch) that affects how this
+    spell react to electrified surfaces : while outside of combat, it is currently
+    working as intended, during combat, the incarnate will be infused with the basic
+    surface despite the electricity (creating a blood/water incarnate instead of an
+    electric one). Totems seem to be unaffected by this bug.'
 - name: Dimensional Bolt
   primary_tree: Summoning
   investment: 1
@@ -1907,6 +3048,13 @@
   cooldown: 1
   description: Shoot a volatile bolt that deals 100% damage of a random type, and
     then creates a corresponding surface
+  detail_description: Shoot a volatile bolt that deals 100% of a random type, and
+    then creates a corresponding surface
+  detail_scaling: Damage is based on your level and receives bonus from Intelligence.
+  detail_requirements: Requires Summoning 1 Cost 1 Memory Range 13m
+  detail_notes:
+  - Scroll crafted by combine Sheet of Paper, Tormented Soul, and Pepper
+  - Dimensional Bolt damage increased by 10% as of Patch v3.0.168.526
 - name: Elemental Totem
   primary_tree: Summoning
   investment: 1
@@ -1919,6 +3067,19 @@
     Each turn, this totem will fire a projectile at enemies in sight.
   effect: The stats of the summons will depend on caster level and Summoning ability.
     Duration 3 turn(s)
+  detail_description: Target a ground surface and conjure a totem of the corresponding
+    element. Each turn, this totem will fire a projectile at enemies in sight.
+  detail_effect: The stats of the summons will depend on caster level and Summoning
+    ability.
+  detail_requirements: Requires Summoning 1 Cost 1 Memory Duration 3 turns Range 13m
+  detail_notes:
+  - Elemental Totem(s) may receive high ground damage benefits.
+  - Blood & Wood (normal surface) elements do physical damage.
+  - Fire, Water/Ice, Lighting, Poison & Oil elements do magical damage.
+  - You can have more than one Elemental Totem up at a time; you are only constrained
+    by their lifetime and the cooldown of the skill.
+  - Scroll crafted by combine Sheet of Paper, Tormented Soul, and Wooden Figurine
+  - Some totems apply status effects, as described by the table below
 - name: Farsight Infusion
   primary_tree: Summoning
   investment: 1
@@ -1930,6 +3091,16 @@
   description: Unlock a ranged attack for your Incarnate. Provides [X] Magic Armour
     (amount depends on your level)
   effect: Set Farsight Infusion .
+  detail_description: Unlock a ranged attack for your Incarnate. Provides [100% of
+    total heal value] Magical Armour
+  detail_effect: Set Farsight Infusion.
+  detail_requirements: Requires Summoning 1 Cost 1 Memory Range 13m
+  detail_notes:
+  - Damage is based on Finesse
+  - The magic armor provided by this skill is multiplied by the Maximum Magical Armour
+    bonus from Summoning.
+  - Also grants +25% damage
+  - There is no craftable scroll for this skill
 - name: Summon Cat Familiar
   primary_tree: Summoning
   investment: 1
@@ -1942,6 +3113,31 @@
     with it's summoner.
   effect: The stats of the summons will depend on caster level and Summoning ability.
     Duration 10 turn(s)
+  detail_description: Summon a black cat by your side.
+  detail_effect: The stats of the summon will depend on caster level and Summoning
+    ability. .
+  detail_requirements: Duration 10 turns Cost 1 Memory Range 13m
+  detail_notes:
+  - 'Range: 13m .'
+  - The encounter with the black cat when approaching Fort Joy is unavoidable. It
+    will follow the character even in stealth or invisibility.
+  - Being the first to step into its range does not guarantee the cat will follow
+    you; it will randomly choose among all player characters in the party. The cat
+    seems to have a preference for the Red Prince if you recruited him in the party.
+  - The skill will only be given to the character the cat is following.
+  - The skill will be given once the cat speaks to the players while outside Fort
+    Joy.
+  - Cats default attacks deal physical damage and it has no skill in any of the skill
+    schools.
+  - 'With "Pet Power" gift bag enabled, Cat can be infused with different infusions:'
+  - Infusions --- Cats skills Power --- Crippling Blow, Battering Ram; Farsight ---
+    Ranged Attack (projectile that deals physical damage); Shadow --- Chameleon, Terrifying
+    Cruelty; Warp --- Accelerating Leap (similar to Tactical Retreat); Fire --- Sabotage;
+    Necrofire --- Sabotage, Epidemic of Fire; Water --- Cleanse Wounds; Ice --- Cleanse
+    Wounds, Steam Lance; Electric --- Uncanny Evasion; Cursed Electric --- Uncanny
+    Evasion, Closed Circuit; Poison --- Venom Coating; Acid --- Venom Coating, Acid
+    Spores; Oil --- Throw Dust; Cursed Oil --- Throw Dust, Dust Blast; Blood --- Infect;
+    Cursed Blood --- Infect, Grasp of the Starved.
 - name: Summon Condor
   primary_tree: Summoning
   investment: 1
@@ -1952,6 +3148,26 @@
   cooldown: 6
   description: Summons a condor that will aid you in combat.
   effect: The stats of the summons will depend on caster level and Summoning ability.
+  detail_description: Summons a condor that will aid you in combat.
+  detail_effect: The stats of the summons will depend on caster level and Summoning
+    ability.
+  detail_requirements: No Summoning required Cost 1 Memory Duration 10 turn(s) Range
+    15m
+  detail_notes:
+  - 'Range: 15m .'
+  - The skill will be given to the character that successfully convinces it to be
+    its new master.
+  - Condor's base attacks deal piercing damage. It has no talents or immunities.
+  - By default Condor has some skill in Aerothurge based on a level of a summoner.
+  - 'With "Pet Power" gift bag enabled, Condor can be infused with different infusions:'
+  - Infusions --- Condors skills Power --- Blitz, Battering Ram; Farsight --- Ranged
+    Attack (projectile that deals piercing damage); Shadow --- Chameleon, Rupture
+    Tendons; Warp --- Trading Places; Fire --- Sabotage; Necrofire --- Sabotage, Epidemic
+    of Fire; Water --- Rain; Ice --- Rain, Steam Lance; Electric --- Favourable Wind;
+    Cursed Electric --- Favourable Wind, Closed Circuit; Poison --- Poison Wave; Acid
+    --- Poison Wave, Acid Spores; Oil --- Worm tremor; Cursed Oil --- Worm Tremor,
+    Dust Blast; Blood --- Bloody Spittle (3 projectiles dealing physical damage and
+    creating blood surfaces); Cursed Blood - Bloody Spittle, Grasp of the Starved.
 - name: Summon Dragonling
   primary_tree: Summoning
   investment: 1
@@ -1961,6 +3177,28 @@
   cooldown: 6
   description: Summons a newt to help you in combat.
   effect: The stats of the summons will depend on caster level and Summoning ability.
+  detail_description: Summons a newt to help you in combat.
+  detail_effect: The stats of the summons will depend on caster level and Summoning
+    ability.
+  detail_requirements: Requires Summoning 0 Cost 2 Memory Duration 5 turn(s)
+  detail_notes:
+  - After confronting Sadha in the dream portal and she lets you leave, have the Red
+    Prince interact with the dragon egg behind her. A chat prompt will allow you to
+    breathe on the egg and let you bond with the dragonling.
+  - While any lizard character or person wearing Mask of the Shapeshifter can breathe
+    on the egg, Persuasion 4 is necessary to talk the dragonling into joining you
+    regardless of what you do to his mother.
+  - It bleeds Blessed Fire
+  - 'It has 5 spells: Spitfire Hurl a fiery sphere that will explode, dealing [X -
+    Y] fire damage . Set burning for 2 turn (s). Damage is based on your level and
+    receives bonus from Intelligence. Resisted by Magic Armour 1m Explode radius AP:
+    Firebrand An aura that adds [X - Y] fire damage for weapon skills and attacks
+    for all allies near you. Set Firebrand for 2 turn(s). AP: Flaming Tongues Flaming
+    tongues protect you, immediately attacking approaching enemies. Set Flaming Tongues
+    for 3 turn(s). AP: Ignition Sets enemy characters around you on fire. Deals [X
+    - Y] fire damage to each. Ignites all susceptible surfaces. Set Buring for 2 turn(s).
+    Damage is based on your level and receives bonus from Intelligence. Resisted by
+    Magic Armour AP: Flight Fly to a nearby point. AP:'
 - name: Summon Inner Demon
   primary_tree: Summoning
   investment: 1
@@ -1972,6 +3210,30 @@
     [X] Magic Armour. Grants you power to terrify and protect yourself with demonic
     fists.
   effect: Set Inner Demon for 3 turn(s).
+  detail_description: Conjure a demon that will share their Intelligence with you
+    and provide [X] Magical Armour . Grants you power to terrify and protect yourself
+    with demonic fists.
+  detail_effect: Set Inner Demon for 3 turn(s).
+  detail_requirements: Requires Summoning 0 Cost 2 Memory
+  detail_notes:
+  - Jahan is one of the Masters of Source players must seek out for the Powerful Awakening
+    quest, as such if his quest is fulfilled before at least two other teachers then
+    he will award a Source point slot instead of the skillbook.
+  - Despite the name and classification, the skill does not conjure a controllable
+    summon but acts like a buff similar to some Polymorph skills .
+  - The armor damage of "Terrify" scales with your Intelligence and Level.
+  - The physical damage of "Demonic Tutelage" scales with your Warfare, Intelligence,
+    and Level. It will also trigger the vampiric effects of Necromancy.
+  - In addition to its skills, the buff will give your character a substantial Magic
+    Armor boost, +6 Intelligence, and immunity to Terrified. The amount of Magic Armor
+    boost scales with the Hydrosophist skill.
+  - 'It gives the character two skills: Demonic Tutelage Your inner demon actively
+    watches over you. When an enemy approaches melee range, they will be pummelled
+    by a demonic fist dealing physical damage. Set Demonic Tutelage for 3 turn(s).
+    1 AP Cost 3 Turn Cooldown Terrify Destroy [ X] Magic Armour on target enemy. They
+    are Terrified for 2 turn(s). Set Terrified for 2 turn(s). Damage is based on your
+    level and receives bonus from Intelligence. Resisted by Magic Armor 2 AP Cost
+    1 Turn Cooldown'
 - name: Dominate Mind
   primary_tree: Summoning
   investment: 2
@@ -1983,6 +3245,14 @@
   description: Charm target non-allied character, causing them to join your side in
     combat for the duration of the status.
   effect: Set Charmed for 2 turn(s).
+  detail_description: Charm target non-allied character, causing them to join your
+    side in combat for the duration of the status.
+  detail_effect: Set Charmed for 2 turn(s).
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper , Alien Tormented Soul, and
+    Jar of Honey . Scroll costs 2AP to cast.
+  - Resisted by Magical Armour
 - name: Power Infusion
   primary_tree: Summoning
   investment: 2
@@ -1994,6 +3264,14 @@
   description: Unlock Whirlwind and Rush for your Incarnate. Provides [X] Physical
     Armour (amount depends on your level).
   effect: Set Power Infusion .
+  detail_description: Unlock Whirlwind and Rush for your Incarnate. Provides [100%
+    of total heal value] Physical Armour .
+  detail_effect: Set Power Infusion.
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Also grants +25% damage
+  - The physical armor provided by this skill is multiplied by the Maximum Physical
+    Armour bonus from Summoning.
 - name: Rallying Cry
   primary_tree: Summoning
   investment: 2
@@ -2005,6 +3283,16 @@
   description: Target character regenerates Vitality and Magic Armour according to
     the number of allied characters and totems in their vicinity.
   effect: Restore [X] Vitality. Restore [Y] Magic Armour
+  detail_description: Target character regenerates Vitality and Magic Armour according
+    to the number of allied characters and totems in their vicinity.
+  detail_effect: Restore [50% of total heal value] Vitality and [18% of total heal
+    value] Magic Armour.
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Scroll can be crafted by combining a Sheet of Paper , Tormented Soul, and Garlic
+  - If undead enemies outnumbers you, consider using it to damage them! Consequently,
+    do NOT use this on an undead ally like Fane , it will damage and potentially kill
+    them!
 - name: Shadow Infusion
   primary_tree: Summoning
   investment: 2
@@ -2016,6 +3304,15 @@
   description: Incarnate learns how to go invisible and strike foes with a corrosive
     slash. Unlocks skills equal in effect to Chameleon Cloak and Corrupted Blade.
   effect: Set Shadow Infusion .
+  detail_description: Incarnate learns how to go invisible and strike foes with a
+    corrosive slash.
+  detail_effect: Set Shadow Infusion.
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Grants the Incarnate the abilities Corrupted Blade and Chameleon Cloak
+  - Grants the Fire Slug the abilities Cloak and Dagger and Daggers Drawn .
+  - Grants movement +1
+  - Grants +25% damage
 - name: Soul Mate
   primary_tree: Summoning
   investment: 2
@@ -2027,6 +3324,15 @@
   description: Bind yourself to target character, copying any healing and Armour restoration
     that you receive to them. Clears Frozen, Stunned, Knocked Down and Petrified.
   effect: Set Soul Mate for 3 turn(s).
+  detail_description: Bind yourself to target character, copying any healing and Armour
+    restoration that you receive to them. Clears Frozen, Stunned, Knocked Down and
+    Petrified.
+  detail_effect: Set Soul Mate for 3 turn(s).
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Scroll crafted by combine Sheet of Paper , High Quality Tormented Soul, and Wheat
+  - Soul Mate now shares full Vitality and Magic Armour restoration instead of half.
+    Duration increased to 3 turns, cooldown to 5 turns as of Patch v3.0.168.526
 - name: Supercharger
   primary_tree: Summoning
   investment: 2
@@ -2038,6 +3344,20 @@
   description: Target totem or summon deals 100% more base damage during its next
     turn, but then it dies.
   effect: Set Supercharged for 2 turn(s).
+  detail_description: Target totem or summon deals 100% more base damage during its
+    next turn, but then it dies.
+  detail_effect: Set Supercharged for 2 turn(s).
+  detail_requirements: Requires Summoning 2 Cost 1 Memory Range 13m
+  detail_notes:
+  - Supercharger bonus increased to 70% (Was 50%), tooltip now mentions that it can
+    be cast on totems as of Patch v3.0.168.526
+  - Supercharger is additive with summoning bonus, futhermore both Supercharger and
+    Summoning are additive with the attacks and attack based spells and multiplicative
+    with spells. For example summoned creature with 40 STR, 40 INT, 10 Warfare and
+    10 Aeroteurge will have mutliplier of 3.75 for attacks and air spells. Adding
+    10 Summoning will turn it to 5.25 and 7.5 respectively. Adding Supercharger on
+    top of this will increase multipliers to 6.75 and 11.25.
+  - ??
 - name: Cannibalise
   primary_tree: Summoning
   investment: 3
@@ -2048,6 +3368,15 @@
   cooldown: 2
   description: Destroy an allied summon or totem. Receive their Vitality, Physical
     Armour and Magic Armour.
+  detail_description: Destroy an allied summon or totem. Receive their Vitality, Physical
+    Armour and Magic Armour.
+  detail_effect: Instantly kills your target Restore up to 100% of target's Vitality,
+    Physical Armour and Magic Armour on caster.
+  detail_requirements: Requires Summoning 3 Cost 1 Memory Range 13m
+  detail_notes:
+  - Cannibalise now restores Vitality and Armours equal to what the summon has instead
+    of only half. Cooldown to 2 turns as of Patch v3.0.168.526
+  - ??
 - name: Door to Eternity
   primary_tree: Summoning
   investment: 3
@@ -2058,6 +3387,13 @@
   description: Give all summons around you a status that prevents them from dying
     to damage or disappearing when their life runs out.
   effect: Set Persisting for 2 turn(s).
+  detail_description: Give all summons and totems around you a status that prevents
+    them from dying to damage or disappearing when their life runs out.
+  detail_effect: Set Persisting for 3 turn(s).
+  detail_requirements: Requires Summoning 3 Cost 2 Memory
+  detail_notes:
+  - Door to Eternity now costs 2AP as of Patch v3.0.168.526
+  - Can only be used once per combat
 - name: Planar Gateway
   primary_tree: Summoning
   investment: 3
@@ -2069,6 +3405,13 @@
   description: Conjure two linked gateways that allow any character to instantly travel
     between them.
   effect: Duration 10 Turn(s)
+  detail_description: Conjure two linked gateways that allow any character to instantly
+    travel between them.
+  detail_requirements: Requires Summoning 3 Cost 2 Memory Duration 10 turn(s) Range
+    13m
+  detail_notes:
+  - Planar Gateway AP cost reduced to 0 as of Patch v3.0.168.526 (was 6)
+  - Scroll crafted by combine Sheet of Paper , Source Orb , and Grapes
 - name: Warp Infusion
   primary_tree: Summoning
   investment: 3
@@ -2081,6 +3424,13 @@
     its master. These skills are equivalent in effect to Tactical Retreat and the
     Black Cat summon's swap skill.
   effect: Set Warp Infusion .
+  detail_description: Incarnate learns a teleport skill, and a skill to swap places
+    with its master.
+  detail_effect: Set Warp Infusion.
+  detail_requirements: Requires Summoning 3 Cost 1 Memory Range 13m
+  detail_notes:
+  - Grants +25% damage
+  - The incarnate will gain the skill Swap Places and Tactical Retreat .
 - name: Ethereal Storm
   primary_tree: Summoning
   investment: 5
@@ -2092,6 +3442,20 @@
   description: Unpredictable projectiles from distant planes strike target area, dealing
     random elemental damage to enemies or healing allies.
   effect: Duration 2 Turn (s)
+  detail_description: Unpredictable projectiles from distant planes strike target
+    area, dealing random elemental damage to enemies or healing allies.
+  detail_requirements: Requires Summoning 5 Cost 3 Memory Duration 2 turn(s) Range
+    15m
+  detail_notes:
+  - Scroll crafted by combine Sheet of Paper , Source Orb , and Carrot
+  - This skill is fully capable of using poison damage on undead enemies (thus healing
+    them) and using healing on your undead allies (this damaging them). That also
+    goes for any other elemental immunities or absorptions that enemies might have.
+  - This skill's healing will specifically target allies, and applies a regenerative
+    healing effect that heals approximately the same amount as First Aid every turn.
+  - Mechanically similar to Blood Storm . Deal about 85% of damage but actual numbers
+    will be much lower because it's unlikely that caster will have maxed abilities
+    for each damage type that has been used.
 - name: Fire Infusion
   primary_tree: Summoning
   secondary_tree: Pyrokinetic
@@ -2102,6 +3466,16 @@
   range: 13m
   cooldown: 3
   description: Change Incarnate's element to fire, unlocking Fireball .
+  detail_description: Change Incarnate's element to fire, unlocking Fireball .
+  detail_requirements: Requires Summoning 1 Requires Pyrokinetic 1 Cost 1 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +5 Pyrokenetic +100% Fire Resistance -20% Water
+    Resistance'
+  - +5 Pyrokenetic
+  - +100% Fire Resistance
+  - -20% Water Resistance
+  - The incarnate will gain the skill Fireball when fire-infused.
 - name: Necrofire Infusion
   primary_tree: Summoning
   secondary_tree: Pyrokinetic
@@ -2113,6 +3487,31 @@
   cooldown: 3
   description: Change Incarnate's element to necrofire, unlocking Fireball and Epidemic
     of Fire .
+  detail_description: Change Incarnate's element to necrofire, unlocking Fireball
+    and Epidemic Of Fire .
+  detail_requirements: Requires Summoning 2 Requires Pyrokinetic 2 Cost 2 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +10 Pyrokenetic +120% Fire Resistance -20% Water
+    Resistance +2 Source Points (to cast Epidemic Of Fire )'
+  - +10 Pyrokenetic
+  - +120% Fire Resistance
+  - -20% Water Resistance
+  - +2 Source Points (to cast Epidemic Of Fire )
+  - 'Pet Power Summons gain the same stat boosts, and Epidemic of Fire , in addition
+    to: Black Cat and Condor - Sabotage Bloated Corpse - Corpse Explosion Bone Widow
+    - Flaming Crescendo Oily Blob - Haste Ifan''s Soul Wolf - Sparking Swings Hungry
+    Flower - Fire Whip Fire Slug - Supernova Dragonling - Spontaneous Combustion'
+  - Black Cat and Condor - Sabotage
+  - Bloated Corpse - Corpse Explosion
+  - Bone Widow - Flaming Crescendo
+  - Oily Blob - Haste
+  - Ifan's Soul Wolf - Sparking Swings
+  - Hungry Flower - Fire Whip
+  - Fire Slug - Supernova
+  - Dragonling - Spontaneous Combustion
+  - Any summons that leave surfaces behind whilst moving/attacking will leave behind
+    Cursed Fire while affected by this infusion.
 - name: Electric Infusion
   primary_tree: Summoning
   secondary_tree: Aerotheurge
@@ -2124,6 +3523,18 @@
   cooldown: 3
   description: Change Incarnate's element to electricity, unlocking Electric Discharge
     .
+  detail_description: Change Incarnate's element to electricity, unlocking Electric
+    Discharge .
+  detail_requirements: Requires Summoning 1 Requires Aerotheurge 1 Cost 1 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +5 Aerotheurge +100% Air Resistance -20% Earth Resistance
+    -20% Poison Resistance'
+  - +5 Aerotheurge
+  - +100% Air Resistance
+  - -20% Earth Resistance
+  - -20% Poison Resistance
+  - Grants the Incarnate the Electric Discharge spell.
 - name: Cursed Electric Infusion
   primary_tree: Summoning
   secondary_tree: Aerotheurge
@@ -2135,6 +3546,18 @@
   cooldown: 3
   description: Change Incarnate's element to cursed electricity, unlocking Electric
     Discharge and Closed Circuit .
+  detail_description: Change Incarnate's element to cursed electricity, unlocking
+    Electric Discharge and Closed Circuit .
+  detail_requirements: Requires Summoning 2 Requires Aerotheurge 2 Cost 2 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +10 Aerotheurge +120% Air Resistance -20% Earth
+    Resistance -20% Poison Resistance +2 Source Points (to cast Closed Circuit )'
+  - +10 Aerotheurge
+  - +120% Air Resistance
+  - -20% Earth Resistance
+  - -20% Poison Resistance
+  - +2 Source Points (to cast Closed Circuit )
 - name: Poison Infusion
   primary_tree: Summoning
   secondary_tree: Geomancer
@@ -2145,6 +3568,15 @@
   range: 13m
   cooldown: 3
   description: Change Incarnate's element to poison, unlocking Poison Dart .
+  detail_description: Change Incarnate's element to poison, unlocking Poison Dart
+    .
+  detail_requirements: Requires Summoning 1 Requires Geomancer 1 Cost 1 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +5 Geomancer +100% Poison Resistance -20% Air Resistance'
+  - +5 Geomancer
+  - +100% Poison Resistance
+  - -20% Air Resistance
 - name: Acid Infusion
   primary_tree: Summoning
   secondary_tree: Geomancer
@@ -2156,6 +3588,19 @@
   cooldown: 3
   description: Change Incarnate's element to acid, unlocking Poison Dart and Acid
     Spores .
+  detail_description: Change Incarnate's element to acid, unlocking Poison Dart and
+    Acid Spores .
+  detail_requirements: Requires Summoning 2 Requires Geomancer 2 Cost 2 Memory Range
+    13m
+  detail_notes:
+  - 'The infused Incarnate gains: +10 Geomancer +120% Poison Resistance -20% Air Resistance
+    +2 Source Points (to cast Acid Spores )'
+  - +10 Geomancer
+  - +120% Poison Resistance
+  - -20% Air Resistance
+  - +2 Source Points (to cast Acid Spores )
+  - Like other source infusion you can refund any unused source point by vampirizing
+    them back from your incarnate and it wouldn't resist it.
 - name: Oil Infusion
   primary_tree: Summoning
   secondary_tree: Geomancer
@@ -2175,6 +3620,16 @@
   range: 13m
   cooldown: 3
   description: Change Incarnate's element to water, unlocking Restoration .
+  detail_description: Change Incarnate's element to water, unlocking Restoration .
+  detail_requirements: Requires Summoning 1 Requires Hydrosophist 1 Cost 1 Memory
+    Range 13m
+  detail_notes:
+  - 'The infused Incarnate gains: +5 Hydrosophist +100% Water Resistance -20% Fire
+    Resistance'
+  - +5 Hydrosophist
+  - +100% Water Resistance
+  - -20% Fire Resistance
+  - Grants the Incarnate the Restoration spell.
 - name: Ice Infusion
   primary_tree: Summoning
   secondary_tree: Hydrosophist
@@ -2186,6 +3641,17 @@
   cooldown: 3
   description: Change Incarnate's element to blessed ice, unlocking Restoration and
     Steam Lance .
+  detail_description: Change Incarnate's element to blessed ice, unlocking Restoration
+    and Steam Lance .
+  detail_requirements: Requires Summoning 2 Requires Hydrosophist 2 Cost 2 Memory
+    Range 13m
+  detail_notes:
+  - 'The infused Incarnate gains: +10 Hydrosophist +120% Water Resistance -20% Fire
+    Resistance +2 Source Points (to cast Steam Lance )'
+  - +10 Hydrosophist
+  - +120% Water Resistance
+  - -20% Fire Resistance
+  - +2 Source Points (to cast Steam Lance )
 - name: Blood Infusion
   primary_tree: Summoning
   secondary_tree: Necromancer

@@ -382,6 +382,81 @@ def scrape_school_page(page):
     return skills
 
 
+def scrape_detail_page(url):
+    """
+    Scrape a skill's detail page for all available data.
+
+    Returns a dict with:
+      - detail_description: main description with real damage percentages
+      - detail_effect: status/effect line from infobox
+      - detail_scaling: scaling info (e.g. "Damage is based on your level...")
+      - detail_notes: notes and tips section content
+      - detail_requirements: requirements section (for cross-checking)
+    """
+    try:
+        soup = fetch_page(url.replace(BASE_URL + '/', ''))
+    except Exception as e:
+        print(f'    WARNING: Failed to fetch {url}: {e}')
+        return None
+
+    result = {}
+
+    # Parse infobox paragraphs
+    infobox = soup.find('div', class_='infobox')
+    if infobox:
+        table = infobox.find('table')
+        if table:
+            rows = table.find_all('tr')
+            if len(rows) >= 2:
+                cell = rows[1].find('td')
+                if cell:
+                    paragraphs = cell.find_all('p')
+                    for i, p in enumerate(paragraphs):
+                        text = re.sub(r'\s+', ' ',
+                                      p.get_text(separator=' ', strip=True))
+                        if not text:
+                            continue
+                        if i == 0:
+                            result['detail_description'] = text
+                        elif text.startswith('Requires') or 'Memory' in text:
+                            result['detail_requirements'] = text
+                        elif 'Damage is based' in text or 'based on' in text:
+                            result['detail_scaling'] = text
+                        elif i == 1:
+                            result['detail_effect'] = text
+
+    # Parse "Notes and Tips" section
+    for h3 in soup.find_all('h3', class_='bonfire'):
+        title = h3.get_text(strip=True)
+        if 'Notes and Tips' in title:
+            notes = []
+            sib = h3.find_next_sibling()
+            while sib and sib.name != 'h3':
+                if sib.name in ('ul', 'p'):
+                    items = sib.find_all('li')
+                    if items:
+                        for li in items:
+                            text = re.sub(
+                                r'\s+', ' ',
+                                li.get_text(separator=' ', strip=True),
+                            )
+                            if text:
+                                notes.append(text)
+                    else:
+                        text = re.sub(
+                            r'\s+', ' ',
+                            sib.get_text(separator=' ', strip=True),
+                        )
+                        if text:
+                            notes.append(text)
+                sib = sib.find_next_sibling()
+            if notes:
+                result['detail_notes'] = notes
+            break
+
+    return result if result else None
+
+
 def deduplicate(skills):
     """
     Deduplicate skills by name, keeping the first occurrence.
@@ -408,6 +483,8 @@ def yaml_field_order():
         'name', 'primary_tree', 'secondary_tree', 'investment',
         'url', 'ap_cost', 'sp_cost', 'range', 'cooldown',
         'description', 'effect',
+        'detail_description', 'detail_effect', 'detail_scaling',
+        'detail_requirements', 'detail_notes',
     ]
 
 
@@ -495,6 +572,31 @@ def main():
 
     skills, dupes = deduplicate(all_skills)
     print(f'After dedup:   {len(skills)} (removed {dupes} duplicates)')
+
+    # Phase 2: scrape detail pages for effect descriptions
+    print(f'\n{"=" * 50}')
+    print('Phase 2: Scraping detail pages for effect text')
+    print('=' * 50)
+
+    fetched = 0
+    failed = 0
+    for i, skill in enumerate(skills):
+        url = skill.get('url')
+        if not url:
+            failed += 1
+            continue
+
+        print(f'  [{i + 1}/{len(skills)}] {skill["name"]}')
+        detail = scrape_detail_page(url)
+        if detail:
+            skill.update(detail)
+            fetched += 1
+        else:
+            failed += 1
+
+        time.sleep(delay)
+
+    print(f'\nDetail pages: {fetched} fetched, {failed} failed')
 
     skills = sort_skills(skills)
     write_yaml(skills, output_path)
