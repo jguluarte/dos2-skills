@@ -129,6 +129,10 @@ export default [
             "grouped-accessor-pairs": "error",
             "accessor-pairs": "error",
 
+            // === Complexity ===
+            "complexity": ["error", 10],
+            "max-statements": ["error", 15],
+
             // === Warn-only (not dev blockers; caught by CI and pre-merge) ===
             "no-warning-comments": ["warn", {
                 terms: ["hack", "blocker"],
