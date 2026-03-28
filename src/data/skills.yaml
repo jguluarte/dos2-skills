@@ -88,6 +88,199 @@
     Explode two random grenades or arrows in the inventories of any enemy in a
     target circle.
 
+- name: Haste
+  primary_tree: Pyrokinetic
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Haste
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Sets <status>Hasted</status> on target character for 2 turns.
+    <status>Hasted</status> increases movement speed by 2m per AP and
+    gives an additional 1 AP per turn. Clears <status>Slowed</status>
+    and <status>Crippled</status>.
+
+- name: Ignition
+  primary_tree: Pyrokinetic
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ignition
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 2
+  effect: >
+    Sets enemy characters around you on fire, dealing <fire>40% Fire
+    Damage</fire> to each. Sets <status>Burning</status> for 2 turns.
+    Ignites all susceptible surfaces.
+
+- name: Peace of Mind
+  primary_tree: Pyrokinetic
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Peace+of+Mind
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Target gains <status>Clear-Minded</status> for 3 turns, which
+    increases Strength, Finesse, Intelligence and Wits. Removes
+    <status>Blinded</status>, <status>Terrified</status>,
+    <status>Charmed</status>, <status>Taunted</status>,
+    <status>Sleeping</status>, <status>Enraged</status> and
+    <status>Mad</status>.
+
+- name: Searing Daggers
+  primary_tree: Pyrokinetic
+  investment: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Searing+Daggers
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Shoot three flaming daggers at targets of your choice, each creating
+    a fire surface and dealing <fire>25% Fire Damage</fire>. Sets
+    <status>Burning</status> for 2 turns.
+
+- name: Fire Whip
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fire+Whip
+  ap_cost: 3
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  effect: >
+    Long-range attack that deals <fire>155% Fire Damage</fire> to a
+    single target. Sets <status>Blinded</status> and
+    <status>Burning</status> for 1 turn.
+
+- name: Fireball
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fireball
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Hurl a fiery sphere that will explode, dealing <fire>100% Fire
+    Damage</fire>. Sets <status>Burning</status> for 2 turns.
+
+- name: Flaming Tongues
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Tongues
+  ap_cost: 1
+  sp_cost: 0
+  range: Self
+  cooldown: 5
+  effect: >
+    Flaming tongues protect you, immediately attacking approaching
+    enemies for <fire>100% Fire Damage</fire>. Lasts 3 turns.
+
+- name: Laser Ray
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Laser+Ray
+  ap_cost: 3
+  sp_cost: 0
+  range: 20m
+  cooldown: 3
+  effect: >
+    Line of intense heat that deals <fire>150% Fire Damage</fire> to
+    characters and leaves fire clouds behind. Sets
+    <status>Burning</status> for 2 turns.
+
+- name: Spontaneous Combustion
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Spontaneous+Combustion
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Deal <fire>75% Fire Damage</fire> to target character. If the
+    character is affected by <status>Burning</status> or
+    <status>Necrofire</status>, remove those statuses and deal
+    additional damage for each turn of duration remaining.
+
+- name: Supernova
+  primary_tree: Pyrokinetic
+  investment: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Supernova
+  ap_cost: 3
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 6
+  effect: >
+    Explode, creating fire surfaces and dealing <fire>175% Fire
+    Damage</fire> in a large area around you.
+
+- name: Epidemic of Fire
+  primary_tree: Pyrokinetic
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Epidemic+of+Fire
+  ap_cost: 3
+  sp_cost: 2
+  range: 13m
+  cooldown: 6
+  effect: >
+    Fire a cursed flame that will fork on impact up to 5 times, dealing
+    <fire>150% Fire Damage</fire> and leaving a cursed fire surface in
+    its wake. Sets <status>Necrofire</status> for 3 turns.
+
+- name: Firebrand
+  primary_tree: Pyrokinetic
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Firebrand
+  ap_cost: 1
+  sp_cost: 0
+  range: Self
+  cooldown: 3
+  effect: >
+    An aura that adds <fire>50% Fire Damage</fire> to weapon skills and
+    attacks for all allies near you.
+
+- name: Flaming Crescendo
+  primary_tree: Pyrokinetic
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Flaming+Crescendo
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Curse the target to explode after one turn or on death, dealing
+    <fire>175% Fire Damage</fire> in a 3m radius.
+
+- name: Summon Fire Slug
+  primary_tree: Pyrokinetic
+  investment: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Summon+Fire+Slug
+  ap_cost: 1
+  sp_cost: 1
+  range: 13m
+  cooldown: 6
+  effect: >
+    Summon a Fire Slug. Your Fire Slug can create fire surfaces and
+    launch linear fire attacks. Duration 5 turns.
+
+- name: Meteor Shower
+  primary_tree: Pyrokinetic
+  investment: 5
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Meteor+Shower
+  ap_cost: 4
+  sp_cost: 3
+  range: 13m
+  cooldown: 4
+  effect: >
+    25 fireballs come crashing from the sky. Each does <fire>20% Fire
+    Damage</fire> within a 3m range from impact.
+
 - name: Corrosive Touch
   primary_tree: Geomancer
   secondary_tree: Necromancer
