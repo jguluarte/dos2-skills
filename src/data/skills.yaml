@@ -586,6 +586,181 @@
     Create a spreading water surface which douses fires. Set
     <status>Wet</status> status on characters in the area.
 
+- name: Hail Strike
+  primary_tree: Hydrosophist
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Hail+Strike
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Icicles fall from the sky, chilling enemies and dealing <water>40%
+    Water Damage</water>. They create Ice surfaces where they hit the
+    ground.
+
+- name: Restoration
+  primary_tree: Hydrosophist
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Restoration
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Restore <heal>[75% heal] Vitality</heal> of a target character.
+    Restoration also cures <status>Poisoned</status> and
+    <status>Bleeding</status>. Set <status>Restoration</status> for 2
+    turns, restoring <heal>[75% heal] Vitality</heal> at the start of
+    each turn.
+
+- name: Cryogenic Stasis
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Cryogenic+Stasis
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Target ally enters <status>Cryogenic Stasis</status>. Though
+    incapacitated, they become immune to all damage, and <heal>heal over
+    time</heal>. Removes <status>Shackles Of Pain</status>. Set
+    <status>Permafrost</status> for 1 turn.
+
+- name: Global Cooling
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Global+Cooling
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  effect: >
+    Set <status>Chilled</status> on enemies around you for 3 turns, and
+    deal <water>50% Water Damage</water>. Freeze all susceptible
+    surfaces, and douse fire surfaces.
+
+- name: Healing Ritual
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Healing+Ritual
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Shoot a bolt of healing energy that will jump to nearby allies.
+    Restore <heal>[80% heal]</heal> Vitality.
+
+- name: Ice Fan
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ice+Fan
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Shoot 3 ice shards, each dealing <water>45% Water Damage</water>
+    and set <status>Chilled</status> for 1 turn.
+
+- name: Winter Blast
+  primary_tree: Hydrosophist
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Winter+Blast
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Deal <water>110% Water Damage</water> and set
+    <status>Chilled</status> on enemies in the area for 2 turns. Freeze
+    blood and water surfaces.
+
+- name: Arcane Stitch
+  primary_tree: Hydrosophist
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Arcane+Stitch
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 4
+  effect: >
+    Fully restore target character's <magical>Magic Armour</magical>.
+    Removes <status>Frozen</status>, <status>Stunned</status>,
+    <status>Petrified</status>, <status>Plague</status>,
+    <status>Suffocating</status>, <status>Poisoned</status>,
+    <status>Burning</status>, <status>Necrofire</status>,
+    <status>Terrified</status>, <status>Silenced</status>,
+    <status>Taunted</status>, <status>Mad</status>.
+
+- name: Deep Freeze
+  primary_tree: Hydrosophist
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Deep+Freeze
+  ap_cost: 4
+  sp_cost: 0
+  range: 8m
+  cooldown: 6
+  effect: >
+    Targets in the cone that are frozen and under 10% Vitality shatter
+    and instantly die. Otherwise they receive <water>150% Water
+    Damage</water> and become <status>Frozen</status>.
+
+- name: Ice Breaker
+  primary_tree: Hydrosophist
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Ice+Breaker
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  effect: >
+    Sets off a chain reaction that causes ice areas to explode into
+    water puddles, dealing <water>250% Water Damage
+    [Attribute-independent]</water> and setting
+    <status>Chilled</status>.
+
+- name: Steam Lance
+  primary_tree: Hydrosophist
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Steam+Lance
+  ap_cost: 2
+  sp_cost: 2
+  range: 13m
+  cooldown: 3
+  effect: >
+    Releases a conal stream of Blessed Steam that heals all characters
+    in its path, restoring <heal>[75% heal] Vitality</heal>. Set
+    <status>Restoration</status> for 2 turns, restoring <heal>[75%
+    heal] Vitality</heal> at the start of each turn.
+
+- name: Hail Storm
+  primary_tree: Hydrosophist
+  investment: 5
+  memory: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Hail+Storm
+  ap_cost: 4
+  sp_cost: 3
+  range: 13m
+  cooldown: 4
+  effect: >
+    20 ice shards fall from the sky, each dealing <water>20% Water
+    Damage</water> to characters within 3m range from impact. Set
+    <status>Chilled</status> for 1 turn.
+
 - name: Healing Tears
   primary_tree: Hydrosophist
   secondary_tree: Polymorph

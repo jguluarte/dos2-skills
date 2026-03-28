@@ -13,271 +13,6 @@
 
 
 # ========================================
-# Geomancer (2 skills)
-# ========================================
-
-- name: Mend Metal 🎙️
-  primary_tree: Geomancer
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: 5m
-  cooldown: 3
-  wiki_detail: Allies near you start slowly regenerating Physical Armour.
-  wiki_status: >
-    Restore [26.5% of total heal value] Physical Armour for 3 turn(s).
-  proposed_effect: >
-    Allies near you start slowly regenerating Physical Armour.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
-
-- name: Summon Hungry Flower
-  primary_tree: Geomancer
-  investment: 3
-  ap_cost: 3
-  sp_cost: 1
-  range: 13m
-  cooldown: 6
-  wiki_detail: Plant can lob acidic spores and emit cursed poison clouds.
-  wiki_status: Duration 5 turns.
-  proposed_effect: >
-    Plant can lob acidic spores and emit cursed poison clouds.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Artillery+Plant
-
-
-# ========================================
-# Hydrosophist (13 skills)
-# ========================================
-
-- name: Hail Strike
-  primary_tree: Hydrosophist
-  investment: 1
-  ap_cost: 3
-  sp_cost: 0
-  range: 13m
-  cooldown: 3
-  wiki_detail: >
-    Icicles fall from the sky, chilling enemies and dealing <water>40% Water
-    Damage</water>. They create Ice surfaces where they hit the ground.
-  wiki_status: Set Chilled for 2 turn(s).
-  proposed_effect: >
-    Icicles fall from the sky, chilling enemies and dealing <water>40% Water
-    Damage</water>. They create Ice surfaces where they hit the ground.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Hail+Strike
-
-- name: Restoration
-  primary_tree: Hydrosophist
-  investment: 1
-  ap_cost: 1
-  sp_cost: 0
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    Restore Vitality of a target character. Restoration also cures Poisoned
-    and Bleeding.
-  wiki_status: Restore [75% of total heal value] Vitality for 2 turn(s).
-  proposed_effect: >
-    Restore <heal>[75% heal] Vitality</heal> of a target character.
-    Restoration also cures <status>Poisoned</status> and
-    <status>Bleeding</status>. Set <status>Restoration</status> for 2 turns,
-    restoring <heal>[75% heal] Vitality</heal> at the start of each turn.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Restoration
-
-- name: Cryogenic Stasis
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    Target ally enters Cryogenic Stasis. Though incapacitated, they become
-    immune to all damage, and heal over time. Removes Shackles Of Pain.
-  wiki_status: Set Permafrost for 1 Turn(s)
-  proposed_effect: >
-    Target ally enters Cryogenic Stasis. Though incapacitated, they become
-    immune to all damage, and heal over time. Removes Shackles Of Pain.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Cryogenic+Stasis
-
-- name: Global Cooling
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 3
-  wiki_detail: >
-    Set Chilled on enemies around you and deal 50% Water Damage. Freeze all
-    susceptible surfaces.
-  wiki_status: Set Chilled for 3 turn(s).
-  proposed_effect: >
-    Set <status>Chilled</status> on enemies around you and deal <water>50%
-    Water Damage</water>. Freeze all susceptible surfaces.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Global+Cooling
-
-- name: Healing Ritual
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 13m
-  cooldown: 5
-  wiki_detail: >
-    Shoot a bolt of healing energy that will jump to nearby allies.
-  wiki_status: Restore [80% of total heal value] Vitality
-  proposed_effect: >
-    Shoot a bolt of healing energy that will jump to nearby allies.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Healing+Ritual
-
-- name: Ice Fan
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 3
-  sp_cost: 0
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    Target 3 positions and shoot an ice shard at each one, dealing 45% Water
-    Damage and making targets Chilled.
-  wiki_status: Set Chilled for 1 turn(s).
-  proposed_effect: >
-    Target 3 positions and shoot an ice shard at each one, dealing <water>45%
-    Water Damage</water> and making targets <status>Chilled</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Ice+Fan
-
-- name: Soothing Cold
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 1
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 3
-  wiki_detail: Regenerate Magical Armour for all allies around caster.
-  wiki_status: Restore [26.5% of total heal value] Magic Armour for 3 turn(s).
-  proposed_effect: Regenerate Magical Armour for all allies around caster.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
-
-- name: Winter Blast
-  primary_tree: Hydrosophist
-  investment: 2
-  ap_cost: 2
-  sp_cost: 0
-  range: 13m
-  cooldown: 3
-  wiki_detail: >
-    Deal 110% Water Damage and set Chilled status on enemies in the area.
-    Freeze blood and water surfaces.
-  wiki_status: Set Chilled for 2 turn(s).
-  proposed_effect: >
-    Deal <water>110% Water Damage</water> and set <status>Chilled</status>
-    status on enemies in the area. Freeze blood and water surfaces.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Winter+Blast
-
-- name: Arcane Stitch
-  primary_tree: Hydrosophist
-  investment: 3
-  ap_cost: 3
-  sp_cost: 1
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    Fully restore target character's Magic Armour. Removes Frozen, Stunned,
-    Petrified, Plague, Suffocating, Poisoned, Burning, Necrofire, Terrified,
-    Silenced, Taunted, Mad.
-  wiki_status: Restore 100% Magic Armour
-  proposed_effect: >
-    Fully restore target character's Magic Armour. Removes
-    <status>Frozen</status>, <status>Stunned</status>,
-    <status>Petrified</status>, <status>Plague</status>,
-    <status>Suffocating</status>, <status>Poisoned</status>,
-    <status>Burning</status>, <status>Necrofire</status>,
-    <status>Terrified</status>, <status>Silenced</status>,
-    <status>Taunted</status>, <status>Mad</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Arcane+Stitch
-
-- name: Deep Freeze
-  primary_tree: Hydrosophist
-  investment: 3
-  ap_cost: 4
-  sp_cost: 0
-  range: 8m
-  cooldown: 6
-  wiki_detail: >
-    Targets in the cone that are frozen and under 10% Vitality shatter and
-    instantly die. Otherwise they receive 150% Water Damage and become Frozen.
-  wiki_status: >
-    Instantly kill targets with Frozen status below 10% Vitality. Sets Frozen
-    for 1 Turn(s)
-  proposed_effect: >
-    Targets in the cone that are frozen and under 10% Vitality shatter and
-    instantly die. Otherwise they receive <water>150% Water Damage</water> and
-    become <status>Frozen</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Deep+Freeze
-
-- name: Ice Breaker
-  primary_tree: Hydrosophist
-  investment: 3
-  ap_cost: 1
-  sp_cost: 0
-  range: PB AoE
-  cooldown: 3
-  wiki_detail: >
-    Sets off a chain reaction that causes ice areas to explode into water
-    puddles, dealing 250% Water Damage [Attribute-independent] and setting
-    Chilled.
-  proposed_effect: >
-    Sets off a chain reaction that causes ice areas to explode into water
-    puddles, dealing <water>250% Water Damage</water> [Attribute-independent]
-    and setting <status>Chilled</status>.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Ice+Breaker
-
-- name: Steam Lance
-  primary_tree: Hydrosophist
-  investment: 3
-  ap_cost: 2
-  sp_cost: 2
-  range: 13m
-  cooldown: 3
-  wiki_detail: >
-    Releases a stream of Blessed Steam that heals characters in its path.
-  wiki_status: Restore [75% of total heal value] Vitality for 3 Turn(s)
-  proposed_effect: >
-    Releases a stream of <status>Blessed</status> Steam that heals characters
-    in its path.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Steam+Lance
-
-- name: Hail Storm
-  primary_tree: Hydrosophist
-  investment: 5
-  ap_cost: 4
-  sp_cost: 3
-  range: 13m
-  cooldown: 4
-  wiki_detail: >
-    20 ice shards fall from the sky, each dealing 20% Water Damage to
-    characters within 3m range from impact.
-  wiki_status: Set Chilled for 1 turn(s).
-  proposed_effect: >
-    20 ice shards fall from the sky, each dealing <water>20% Water
-    Damage</water> to characters within 3m range from impact.
-  url:
-    https://divinityoriginalsin2.wiki.fextralife.com/Hail+Storm
-
-
-# ========================================
 # Warfare (15 skills)
 # ========================================
 
@@ -2207,3 +1942,60 @@
     random elemental damage to enemies or healing allies.
   url:
     https://divinityoriginalsin2.wiki.fextralife.com/Ethereal+Storm
+
+
+# ========================================
+# NEEDS DISCUSSION
+# ========================================
+
+
+# ========================================
+# Geomancer (2 skills)
+# ========================================
+
+- name: Mend Metal
+  primary_tree: Geomancer
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: 5m
+  cooldown: 3
+  wiki_detail: Allies near you start slowly regenerating Physical Armour.
+  wiki_status: >
+    Restore [26.5% of total heal value] Physical Armour for 3 turn(s).
+  proposed_effect: >
+    Allies near you start slowly regenerating Physical Armour.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Mend+Metal
+
+- name: Summon Hungry Flower
+  primary_tree: Geomancer
+  investment: 3
+  ap_cost: 3
+  sp_cost: 1
+  range: 13m
+  cooldown: 6
+  wiki_detail: Plant can lob acidic spores and emit cursed poison clouds.
+  wiki_status: Duration 5 turns.
+  proposed_effect: >
+    Plant can lob acidic spores and emit cursed poison clouds.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Artillery+Plant
+
+
+# ========================================
+# Hydrosophist (1 skills)
+# ========================================
+
+- name: Soothing Cold
+  primary_tree: Hydrosophist
+  investment: 2
+  ap_cost: 1
+  sp_cost: 0
+  range: PB AoE
+  cooldown: 3
+  wiki_detail: Regenerate Magical Armour for all allies around caster.
+  wiki_status: Restore [26.5% of total heal value] Magic Armour for 3 turn(s).
+  proposed_effect: Regenerate Magical Armour for all allies around caster.
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Soothing+Cold
