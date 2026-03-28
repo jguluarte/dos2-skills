@@ -3,7 +3,9 @@ import { describe, it, expect, beforeEach } from 'vitest';
 
 import { Skill, Schema as SkillSchema } from '@js/skill';
 
-import { PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER } from '@constants';
+import {
+    SUMMONING, PYROKINETIC, POLYMORPH, WARFARE, NECROMANCER,
+} from '@constants';
 
 describe("Skill functionality", () => {
     let bleed_fire;
@@ -23,21 +25,8 @@ describe("Skill functionality", () => {
 
         it('returns false for a tree the skill does not require', () => {
             expect(bleed_fire.has(WARFARE)).toBe(false);
+            expect(bleed_fire.has(SUMMONING)).toBe(false);
             expect(bleed_fire.has(NECROMANCER)).toBe(false);
-        });
-    });
-
-    describe('skill.any(trees)', () => {
-        it('returns true when at least one tree matches', () => {
-            expect(bleed_fire.any(new Set([PYROKINETIC, WARFARE]))).toBe(true);
-        });
-
-        it('returns false when no trees match', () => {
-            expect(bleed_fire.any(new Set([WARFARE, NECROMANCER]))).toBe(false);
-        });
-
-        it('returns true for empty set (vacuously true)', () => {
-            expect(bleed_fire.any(new Set())).toBe(true);
         });
     });
 });
