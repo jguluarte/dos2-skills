@@ -12,7 +12,7 @@ export function load() {
     };
 }
 
-export function save(primary: string | null, filters: Set<string>) {
+export function save(primary, filters) {
     const params = new URLSearchParams();
     if (primary) params.set('p', primary);
     if (filters.size > 0) {

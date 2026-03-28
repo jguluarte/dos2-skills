@@ -1,7 +1,5 @@
-<script lang="ts">
-    import type { Skill } from '@js/skill/skill.js';
-
-    let { skill }: { skill: Skill } = $props();
+<script>
+    let { skill } = $props();
 </script>
 
 <skill-card

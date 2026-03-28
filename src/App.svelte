@@ -1,20 +1,25 @@
-<script lang="ts">
+<script>
     import jsyaml from 'js-yaml';
     import { Skill } from '@js/skill/skill.js';
     import { SUMMONING } from '@constants';
-    import * as urlState from '@js/url-state';
+    import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
     import FilterBar from './components/FilterBar.svelte';
     import SkillCard from './components/SkillCard.svelte';
 
     const wantsSummoning = (p, s) => [p, ...s].includes(SUMMONING);
 
-    const allSkills = (jsyaml.load(skillsYaml) as Record<string, unknown>[])
-        .map((raw) => Skill.fromYAML(raw));
+    const allSkills = jsyaml.load(skillsYaml)
+        .map(Skill.fromYAML)
+        .sort((a, b) =>
+            a.primaryTree.localeCompare(b.primaryTree)
+            || a.investment - b.investment
+            || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
+        );
 
     const saved = urlState.load();
-    let primary = $state<string | null>(saved.primary);
-    let secondaryFilters = $state< Set<string> >(saved.filters);
+    let primary = $state(saved.primary);
+    let secondaryFilters = $state(saved.filters);
 
     $effect( () => urlState.save(primary, secondaryFilters) );
 

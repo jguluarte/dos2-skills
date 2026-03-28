@@ -1,14 +1,11 @@
-<script lang="ts">
+<script>
     import {
         ALL_TREES, VALID_SKILL_COMBINATION, NON_SUMMONING_TREES,
     } from '@constants';
 
     let {
-        primary = $bindable<string | null>(null),
-        secondaryFilters = $bindable<Set<string>>(new Set()),
-    }: {
-        primary: string | null;
-        secondaryFilters: Set<string>;
+        primary = $bindable(null),
+        secondaryFilters = $bindable(new Set()),
     } = $props();
 
     let expanded = $state(false);
@@ -21,7 +18,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function togglePrimary(tree: string) {
+    function togglePrimary(tree) {
         primary = primary === tree ? null : tree;
         secondaryFilters = new Set(
             [...secondaryFilters].filter((t) => validSecondary.includes(t))
@@ -29,7 +26,7 @@
         scrollToTop();
     }
 
-    function toggleSecondary(tree: string) {
+    function toggleSecondary(tree) {
         const next = new Set(secondaryFilters);
         next.has(tree) ? next.delete(tree) : next.add(tree);
         secondaryFilters = next;
@@ -70,7 +67,7 @@
         role="button"
         tabindex="0"
         onclick={(e) => {
-            if ((e.target as HTMLElement).closest('.clear-btn')) return;
+            if (e.target.closest('.clear-btn')) return;
             expanded = !expanded;
         }}
         onkeydown={(e) => {
