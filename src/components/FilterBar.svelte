@@ -2,6 +2,7 @@
     import {
         ALL_TREES, VALID_SKILL_COMBINATION, NON_SUMMONING_TREES,
     } from '@constants';
+    import { summaryText } from '@js/summary-text.js';
 
     let {
         primary = $bindable(null),
@@ -40,21 +41,7 @@
     }
 
     let hasFilters = $derived(primary !== null || secondaryFilters.size > 0);
-
-    let summaryText = $derived.by(() => {
-        if (!hasFilters) return 'Showing all skills, tap to filter';
-        if (primary && secondaryFilters.size === 0) {
-            return `Showing all ${primary} skills`;
-        }
-        const trees = [...secondaryFilters];
-        if (primary && trees.length === 1) {
-            return `Showing ${primary} + ${trees[0]} skills`;
-        }
-        if (primary) {
-            return `Showing ${primary} + ${trees.join(', ')} skills`;
-        }
-        return 'Showing all skills';
-    });
+    let summary = $derived(summaryText(primary, secondaryFilters));
 </script>
 
 <div class="filter-overlay" class:visible={expanded}
@@ -75,7 +62,7 @@
         }}
     >
         <div class="filter-icon">⚙</div>
-        <div class="active-filters-summary">{summaryText}</div>
+        <div class="active-filters-summary">{summary}</div>
         <div class="filter-header-buttons">
             {#if hasFilters}
                 <button class="clear-btn" onclick={clear}>Reset</button>
