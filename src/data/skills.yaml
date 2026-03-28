@@ -159,7 +159,7 @@
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Oily+Carapace
   ap_cost: 2
-  sp_cost: 0
+  sp_cost: 1
   range: Self
   cooldown: 5
   effect: >
@@ -584,7 +584,7 @@
   ap_cost: 3
   sp_cost: 1
   range: 13m
-  cooldown: 0
+  cooldown: 3
   effect: >
     Throws dust at all enemies in range, blinding them and dealing <earth>100%
     Earth Damage</earth>.
@@ -595,7 +595,7 @@
   investment: 1
   url: https://divinityoriginalsin2.wiki.fextralife.com/Cryotherapy
   ap_cost: 1
-  sp_cost: 1
+  sp_cost: 0
   range: Self
   cooldown: 3
   effect: >
@@ -608,7 +608,7 @@
   investment: 2
   url: https://divinityoriginalsin2.wiki.fextralife.com/Mass+Cryotherapy
   ap_cost: 2
-  sp_cost: 2
+  sp_cost: 1
   range: All allies
   cooldown: 5
   effect: >
@@ -648,19 +648,19 @@
   url: https://divinityoriginalsin2.wiki.fextralife.com/Raining+Blood
   ap_cost: 2
   sp_cost: 0
-  range: 13m
-  cooldown: 4
+  range: 8m
+  cooldown: 5
   effect: Create a blood surface beneath every target in range.
 
 - name: Blood Storm
   primary_tree: Hydrosophist
   secondary_tree: Necromancer
-  investment: 2
+  investment: 3
   url: https://divinityoriginalsin2.wiki.fextralife.com/Blood+Storm
   ap_cost: 4
   sp_cost: 3
-  range: 13m
-  cooldown: 6
+  range: 17m
+  cooldown: 5
   effect: >
     Create a massive storm of blood over all targets. Deal physical damage and
     create blood surfaces.
