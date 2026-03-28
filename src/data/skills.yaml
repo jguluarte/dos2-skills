@@ -1485,6 +1485,218 @@
     16 arrows fall from the sky in the target area, each dealing
     <physical>40% Physical Damage</physical>.
 
+- name: Adrenaline
+  primary_tree: Scoundrel
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Adrenaline
+  ap_cost: 0
+  sp_cost: 0
+  range: Self
+  cooldown: 4
+  effect: >
+    Gain <status>2 Action Points</status> immediately, but lose
+    <status>2 Action Points</status> next turn.
+
+- name: Backlash
+  primary_tree: Scoundrel
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Backlash
+  ap_cost: 1
+  sp_cost: 0
+  range: 8m
+  cooldown: 3
+  effect: >
+    Teleport to target enemy, landing behind them. Backstab for
+    <physical>85% damage</physical>.
+
+- name: Chloroform
+  primary_tree: Scoundrel
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Chloroform
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Destroys <magical>[X] Magical Armour</magical> and then tries to
+    set <status>Sleeping</status> for 1 turn (resisted by
+    <magical>Magical Armour</magical>). Does not break
+    <status>Invisibility</status> or <status>Sneaking</status>.
+    Scales with weapon and Finesse.
+
+- name: Throwing Knife
+  primary_tree: Scoundrel
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Throwing+Knife
+  ap_cost: 2
+  sp_cost: 0
+  range: 8m
+  cooldown: 1
+  effect: >
+    Throw a knife at your opponent, dealing <physical>85%
+    damage</physical>. Can backstab!
+
+- name: Cloak and Dagger
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Cloak+and+Dagger
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 4
+  effect: >
+    Teleport to target location. Does not break
+    <status>Invisibility</status> or <status>Sneaking</status>.
+
+- name: Corrupted Blade
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Corrupted+Blade
+  ap_cost: 3
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  effect: >
+    Dagger attack that deals <physical>150% damage</physical> and sets
+    <status>Decaying</status> and <status>Diseased</status> for 2
+    turns. Both statuses are resisted by <physical>Physical
+    Armour</physical>.
+
+- name: Gag Order
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Gag+Order
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  effect: >
+    Destroy <magical>[X] Magical Armour</magical> on target character.
+    Set <status>Silenced</status> for 1 turn. Scales with weapon and
+    Finesse.
+
+- name: Rupture Tendons
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Rupture+Tendons
+  ap_cost: 2
+  sp_cost: 0
+  range: 2m
+  cooldown: 5
+  effect: >
+    Deal <piercing>100% damage</piercing> to target character. When
+    they move, they will take <piercing>piercing damage</piercing>.
+    Set <status>Ruptured Tendons</status> for 2 turns.
+
+- name: Sawtooth Knife
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Sawtooth+Knife
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 3
+  effect: >
+    Pierce the enemy's Physical Armour and directly deals
+    <physical>100% piercing damage</physical>. Sets
+    <status>Bleeding</status> for 3 turns, resisted by
+    <physical>Physical Armour</physical>.
+
+- name: Sleeping Arms
+  primary_tree: Scoundrel
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Sleeping+Arms
+  ap_cost: 2
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 3
+  effect: >
+    Deal <physical>100% damage</physical> and set
+    <status>Atrophy</status> for 2 turns, preventing your target from
+    using their weapon. Resisted by <physical>Physical
+    Armour</physical>.
+
+- name: Daggers Drawn
+  primary_tree: Scoundrel
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Daggers+Drawn
+  ap_cost: 4
+  sp_cost: 2
+  range: 2.5m
+  cooldown: 6
+  effect: >
+    Whirl into a barrage of 5 stabs, each dealing <physical>65%
+    damage</physical>. Can backstab.
+
+- name: Fan of Knives
+  primary_tree: Scoundrel
+  investment: 3
+  memory: 2
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Fan+of+Knives
+  ap_cost: 3
+  sp_cost: 1
+  range: 8m
+  cooldown: 2
+  effect: >
+    Fling a dagger at every enemy around you, dealing <physical>125%
+    damage</physical>. Can backstab!
+
+- name: Terrifying Cruelty
+  primary_tree: Scoundrel
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Terrifying+Cruelty
+  ap_cost: 3
+  sp_cost: 0
+  range: 2.5m
+  cooldown: 4
+  effect: >
+    Dagger attack that deals <physical>110% damage</physical> and sets
+    <status>Bleeding</status> and <status>Terrified</status> for 3
+    turns on target. <status>Bleeding</status> is resisted by
+    <physical>Physical Armour</physical>,
+    <status>Terrified</status> is resisted by <magical>Magical
+    Armour</magical>.
+
+- name: Wind-Up Toy
+  primary_tree: Scoundrel
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Wind-Up+Toy
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 6
+  effect: >
+    Summon a mechanical bomber at the target point. The bomber can
+    explode, dealing <fire>fire damage</fire> and producing a
+    <fire>fire surface</fire>.
+
+- name: Mortal Blow
+  primary_tree: Scoundrel
+  investment: 5
+  memory: 3
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Mortal+Blow
+  ap_cost: 2
+  sp_cost: 3
+  range: 2.5m
+  cooldown: 0
+  effect: >
+    Deal <physical>140% damage</physical>. Damage is doubled if you
+    are <status>Sneaking</status> or <status>Invisible</status>.
+    Target is killed instantly if below 20% Vitality.
+
 - name: Flaming Skin
   primary_tree: Polymorph
   secondary_tree: Pyrokinetic
