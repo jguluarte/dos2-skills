@@ -1,7 +1,7 @@
 import { SUMMONING } from '@constants';
 
 export function summarize(primary, filters) {
-    if (!primary && !filters?.size) {
+    if (!(primary || filters?.size)) {
         return 'Showing all skills, tap to filter';
     }
 
@@ -26,7 +26,7 @@ export function summarize(primary, filters) {
 }
 
 export function filterSkills(skills, primary, filters = new Set()) {
-    if (!primary && filters.size === 0) return skills;
+    if (!(primary || filters.size)) return skills;
 
     let results = skills;
 
