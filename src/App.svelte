@@ -11,9 +11,8 @@
         .map(Skill.fromYAML)
         .sort((a, b) =>
             a.primaryTree.localeCompare(b.primaryTree)
-            || a.investment - b.investment
             || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
-            || a.name.localeCompare(b.name)
+            || a.investment - b.investment
         );
 
     const saved = urlState.load();
