@@ -28,6 +28,22 @@ test:
 	npx vitest run --config .config/vitest.config.js
 
 ##########################################################
+# Scraping
+.PHONY: scrape
+
+VENV := scripts/.venv
+PIP := $(VENV)/bin/pip
+PYTHON := $(VENV)/bin/python
+
+$(VENV)/bin/activate: scripts/requirements.txt
+	python3 -m venv $(VENV)
+	$(PIP) install -q -r scripts/requirements.txt
+	@touch $@
+
+scrape: $(VENV)/bin/activate
+	$(PYTHON) scripts/scrape-wiki.py
+
+##########################################################
 # Lint helpers
 #
 # If these change, also update `.github/workflows/ci.yml

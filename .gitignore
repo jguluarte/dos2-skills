@@ -24,7 +24,7 @@ Thumbs.db
 
 # Dependencies
 node_modules/
-.venv/
+**/.venv/
 
 # Make target trackers
 .make-timestamp.*
