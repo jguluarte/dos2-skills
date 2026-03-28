@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-    SUMMONING, PYROKINETIC, AEROTHEURGE,
-    WARFARE, NECROMANCER, ALL_TREES,
-} from '@constants';
+import { PYROKINETIC, WARFARE, NECROMANCER, ALL_TREES } from '@constants';
 import { load, serialize } from '@js/url-state.js';
 
 // ── load ────────────────────────────────────────────────
