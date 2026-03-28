@@ -5,6 +5,8 @@ const root = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)), '..'
 );
 
+export const svelteConfig = path.resolve(root, '.config/svelte.config.js');
+
 export const aliases = {
     '@': path.resolve(root, 'src'),
     '@js': path.resolve(root, 'src/js'),
