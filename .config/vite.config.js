@@ -13,7 +13,7 @@ export default defineConfig({
         emptyOutDir: true,
     },
     plugins: [
-        svelte(),
+        svelte({ configFile: '../.config/svelte.config.js' }),
         {
             name: 'copy-runtime-assets',
             closeBundle() {
