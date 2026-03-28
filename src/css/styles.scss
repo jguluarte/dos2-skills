@@ -9,16 +9,30 @@ $color-water: #1e90ff;
 $color-poison: #9c0;
 
 // Skill tree colors
-$color-pyrokinetic: $color-fire;
-$color-aerotheurge: $color-air;
-$color-geomancer: $color-earth;
+$color-pyrokinetic:  $color-fire;
+$color-aerotheurge:  $color-air;
+$color-geomancer:    $color-earth;
 $color-hydrosophist: $color-water;
-$color-summoning: #be4bd3;
-$color-necromancer: #a61e4d;
-$color-warfare: #be590d;
-$color-huntsman: #82c91e;
-$color-scoundrel: #868e96;
-$color-polymorph: #ffd43b;
+$color-summoning:    #be4bd3;
+$color-necromancer:  #a61e4d;
+$color-warfare:      #be590d;
+$color-huntsman:     #82c91e;
+$color-scoundrel:    #868e96;
+$color-polymorph:    #ffd43b;
+
+// Skill tree → color mapping (names match JS enum values)
+$tree-colors: (
+    'Pyrokinetic':  $color-pyrokinetic,
+    'Aerotheurge':  $color-aerotheurge,
+    'Geomancer':    $color-geomancer,
+    'Hydrosophist': $color-hydrosophist,
+    'Summoning':    $color-summoning,
+    'Necromancer':  $color-necromancer,
+    'Warfare':      $color-warfare,
+    'Huntsman':     $color-huntsman,
+    'Scoundrel':    $color-scoundrel,
+    'Polymorph':    $color-polymorph,
+);
 
 // UI colors
 $bg-primary: #111628;
@@ -32,27 +46,27 @@ $bg-overlay: rgb(15 20 35 / 95%);
 // ===========================
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  height: 100%;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background-color: $bg-secondary;
-  background-image: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
-  background-attachment: fixed;
+    height: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background-color: $bg-secondary;
+    background-image: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
+    background-attachment: fixed;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background-color: transparent;
-  color: $text-primary;
-  padding-bottom: env(safe-area-inset-bottom, 20px);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background-color: transparent;
+    color: $text-primary;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 // ===========================
@@ -60,162 +74,165 @@ body {
 // ===========================
 
 .filter-overlay {
-  position: absolute;
-  inset: 0;
-  min-height: 100vh;
+    position: absolute;
+    inset: 0;
+    min-height: 100vh;
 
-  // min-height: -webkit-fill-available;
-  bottom: -100vh;
-  padding-bottom: calc(100vh);
-  background: transparent;
-  pointer-events: none;
-  transition: background-color 0.2s;
-  z-index: 5;
+    // min-height: -webkit-fill-available;
+    bottom: -100vh;
+    padding-bottom: calc(100vh);
+    background: transparent;
+    pointer-events: none;
+    transition: background-color 0.2s;
+    z-index: 5;
 
-  &.visible {
-    background: rgb(10 14 26 / 50%);
-    pointer-events: auto;
-  }
+    &.visible {
+        background: rgb(10 14 26 / 50%);
+        backdrop-filter: blur(4px);
+        pointer-events: auto;
+    }
 }
 
 .filter-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: $bg-overlay;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: $bg-overlay;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
+    border-bottom: 1px solid rgb(255 255 255 / 15%);
 }
 
 .filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
 
-  &:active {
-    background: rgb(255 255 255 / 5%);
-  }
+    &:active {
+        background: rgb(255 255 255 / 5%);
+    }
 }
 
 .filter-icon {
-  font-size: 1.2em;
-  opacity: 0.7;
-  flex-shrink: 0;
+    font-size: 1.2em;
+    opacity: 0.7;
+    flex-shrink: 0;
 }
 
 .active-filters-summary {
-  font-size: 0.7em;
-  color: $text-secondary;
-  font-style: italic;
-  flex: 1;
-  min-width: 0;
+    font-size: 0.7em;
+    color: $text-secondary;
+    font-style: italic;
+    flex: 1;
+    min-width: 0;
 
-  &.hidden {
-    display: none;
-  }
+    &.hidden {
+        display: none;
+    }
 }
 
 .filter-header-buttons {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .clear-btn {
-  padding: 4px 10px;
-  background: rgb(255 255 255 / 15%);
-  border: 1px solid rgb(255 255 255 / 30%);
-  border-radius: 4px;
-  color: #fff;
-  font-size: 0.75em;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  white-space: nowrap;
+    padding: 4px 10px;
+    background: rgb(255 255 255 / 15%);
+    border: 1px solid rgb(255 255 255 / 30%);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
 
-  &:hover { background: rgb(255 255 255 / 25%); }
-  &:active { transform: scale(0.95); }
-  &.hidden { display: none; }
+    &:hover { background: rgb(255 255 255 / 25%); }
+    &:active { transform: scale(0.95); }
+    &.hidden { display: none; }
 }
 
 // Filter Content
 .filter-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: rgb(20 25 40 / 98%);
-  border-top: 1px solid rgb(255 255 255 / 10%);
-  padding: 12px 15px;
-  z-index: 1;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgb(20 25 40 / 98%);
+    border-top: 1px solid rgb(255 255 255 / 10%);
+    border-bottom: 1px solid rgb(255 255 255 / 15%);
+    padding: 12px 15px;
+    z-index: 1;
 
-  &.expanded {
-    display: block;
-  }
+    &.expanded {
+        display: block;
+    }
 }
 
 .filter-groups {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .filter-label {
-  font-weight: 600;
-  font-size: 0.85em;
+    font-weight: 600;
+    font-size: 0.85em;
 }
 
 .filter-label-hint {
-  font-size: 0.75em;
-  font-weight: 400;
-  opacity: 0.7;
-  margin-left: 4px;
+    font-size: 0.75em;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 4px;
 }
 
 // Filter Buttons
 .skill-tree-filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 6px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 6px;
 }
 
 .tree-filter-btn {
-  padding: 6px 12px;
-  border: 2px solid rgb(255 255 255 / 30%);
-  border-radius: 16px;
-  background: rgb(255 255 255 / 10%);
-  color: #fff;
-  font-size: 0.8em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-  white-space: nowrap;
+    padding: 6px 12px;
+    border: 2px solid rgb(255 255 255 / 30%);
+    border-radius: 16px;
+    background: rgb(255 255 255 / 10%);
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
 
-  &.active {
-    border-color: #fff;
-    background: rgb(255 255 255 / 30%);
-    transform: scale(1.05);
-  }
+    &.active {
+        border-color: #fff;
+        background: rgb(255 255 255 / 30%);
+        transform: scale(1.05);
+    }
 
-  &:active {
-    transform: scale(0.95);
-  }
+    &:active {
+        transform: scale(0.95);
+    }
 }
 
 // ===========================
@@ -223,11 +240,11 @@ body {
 // ===========================
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
-  padding-top: 20px;
-  min-height: calc(100vh - 60px);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    padding-top: 20px;
+    min-height: calc(100vh - 60px);
 }
 
 // ===========================
@@ -235,216 +252,182 @@ body {
 // ===========================
 
 skill-tree {
-  display: block;
-  margin-bottom: 20px;
+    display: block;
+    margin-bottom: 20px;
 
-  &.hidden {
-    display: none;
-  }
+    &.hidden {
+        display: none;
+    }
 }
 
 tree-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.2em;
-  font-weight: 700;
-  padding: 12px 15px;
-  background: rgb(255 255 255 / 8%);
-  border-radius: 12px;
-  margin-bottom: 10px;
-  border-left: 4px solid;
-  color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 12px 15px;
+    background: rgb(255 255 255 / 8%);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+    color: inherit;
 }
 
 element-icon {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: currentcolor;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: currentcolor;
 }
 
-// Tree-specific colors
-@mixin tree-color($type, $color) {
-  skill-tree[type="#{$type}"] {
-    --primary-color: #{$color};
+// Tree-specific colors (generated from $tree-colors map)
+@each $tree, $color in $tree-colors {
+    skill-card[data-primary-tree="#{$tree}"] {
+        --primary-color: #{$color};
 
-    color: $color;
-  }
+        color: $color;
+    }
+
+    skill-card[data-secondary-tree="#{$tree}"] {
+        --secondary-color: #{$color};
+    }
+
+    req-badge[data-tree="#{$tree}"] {
+        color: $color;
+    }
 }
-
-@include tree-color('pyrokinetic', $color-pyrokinetic);
-@include tree-color('aerotheurge', $color-aerotheurge);
-@include tree-color('geomancer', $color-geomancer);
-@include tree-color('hydrosophist', $color-hydrosophist);
-@include tree-color('summoning', $color-summoning);
 
 // ===========================
 // Skill Cards
 // ===========================
 
 skill-card {
-  display: block;
-  background: rgb(255 255 255 / 5%);
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-left: 4px solid currentcolor;
+    display: block;
+    background: rgb(255 255 255 / 5%);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid currentcolor;
 
-  &.hidden {
-    display: none;
-  }
+    &.hidden {
+        display: none;
+    }
 }
 
 skill-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-  flex-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: nowrap;
 }
 
 skill-name {
-  display: block;
-  font-size: 1.05em;
-  font-weight: 600;
-  flex: 1;
-  min-width: 0;
+    display: block;
+    font-size: 1.05em;
+    font-weight: 600;
+    flex: 1;
+    min-width: 0;
 
-  > * {
-    color: var(--secondary-color, var(--primary-color));
-  }
-
-  a {
-    text-decoration: underline solid;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--primary-color);
-
-    &:hover {
-      opacity: 0.8;
+    > * {
+        color: var(--secondary-color, var(--primary-color));
     }
-  }
 
-  span {
-    text-decoration: underline dotted;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--primary-color);
-  }
+    a {
+        text-decoration: underline solid;
+        text-decoration-thickness: 2px;
+        text-decoration-color: var(--primary-color);
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    span {
+        text-decoration: underline dotted;
+        text-decoration-thickness: 2px;
+        text-decoration-color: var(--primary-color);
+    }
 }
-
-// Skill name secondary tree colors
-@mixin secondary-tree-color($tree, $color) {
-  skill-card[data-secondary-tree="#{$tree}"] {
-    --secondary-color: #{$color};
-  }
-}
-
-@include secondary-tree-color('pyrokinetic', $color-pyrokinetic);
-@include secondary-tree-color('aerotheurge', $color-aerotheurge);
-@include secondary-tree-color('geomancer', $color-geomancer);
-@include secondary-tree-color('hydrosophist', $color-hydrosophist);
-@include secondary-tree-color('summoning', $color-summoning);
-@include secondary-tree-color('necromancer', $color-necromancer);
-@include secondary-tree-color('warfare', $color-warfare);
-@include secondary-tree-color('huntsman', $color-huntsman);
-@include secondary-tree-color('scoundrel', $color-scoundrel);
-@include secondary-tree-color('polymorph', $color-polymorph);
 
 // Skill Costs
 skill-cost {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  span {
     display: flex;
-    gap: 1px;
+    align-items: center;
+    gap: 5px;
 
-    &:has(source-icon) {
-      gap: 2px;
+    span {
+        display: flex;
+        gap: 1px;
+
+        &:has(source-icon) {
+            gap: 2px;
+        }
     }
-  }
 }
 
 ap-icon {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #2ecc71;
-  border-radius: 50%;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #2ecc71;
+    border-radius: 50%;
 }
 
 source-icon {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #3498db;
-  transform: rotate(45deg);
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+    transform: rotate(45deg);
 }
 
 // Skill Details
 skill-effect {
-  display: block;
-  font-size: 0.9em;
-  line-height: 1.4;
-  margin-bottom: 8px;
-  opacity: 0.9;
-  color: rgb(173 216 230 / 95%);
+    display: block;
+    font-size: 0.9em;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    color: rgb(173 216 230 / 95%);
 
 }
 
 skill-requirements {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
 }
 
 req-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.85em;
-  font-weight: 600;
-  font-family: 'Courier New', Consolas, monospace;
-  background: rgb(255 255 255 / 8%);
-  border: 1px solid rgb(255 255 255 / 15%);
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    font-family: 'Courier New', Consolas, monospace;
+    background: rgb(255 255 255 / 8%);
+    border: 1px solid rgb(255 255 255 / 15%);
 }
-
-// Requirement badge colors by tree
-@mixin req-badge-color($tree, $color) {
-  req-badge[data-tree="#{$tree}"] {
-    color: $color;
-  }
-}
-
-@include req-badge-color('pyrokinetic', $color-fire);
-@include req-badge-color('aerotheurge', $color-air);
-@include req-badge-color('geomancer', $color-earth);
-@include req-badge-color('hydrosophist', $color-water);
-@include req-badge-color('summoning', $color-summoning);
-@include req-badge-color('necromancer', $color-necromancer);
-@include req-badge-color('warfare', $color-warfare);
-@include req-badge-color('huntsman', $color-huntsman);
-@include req-badge-color('scoundrel', $color-scoundrel);
-@include req-badge-color('polymorph', $color-polymorph);
 
 skill-metadata {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85em;
-  color: $text-secondary;
-  font-style: italic;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85em;
+    color: $text-secondary;
+    font-style: italic;
 }
 
 skill-range::before {
-  content: 'Range: ';
+    content: 'Range: ';
 }
 
 skill-cooldown::before {
-  content: 'Cooldown: ';
+    content: 'Cooldown: ';
 }
 
 // ===========================
@@ -452,14 +435,14 @@ skill-cooldown::before {
 // ===========================
 
 .no-results {
-  text-align: center;
-  padding: 40px 20px;
-  font-size: 1.1em;
-  opacity: 0.7;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 1.1em;
+    opacity: 0.7;
 
-  &.hidden {
-    display: none;
-  }
+    &.hidden {
+        display: none;
+    }
 }
 
 // ===========================
@@ -481,7 +464,7 @@ aerotheurge,
 geo, geomancer, geo-poison,
 hydro, hydrosophist,
 necro, necromancer {
-  text-decoration: underline dotted;
+    text-decoration: underline dotted;
 }
 
 // Layer 3: Bold (abilities only)
@@ -490,12 +473,12 @@ aerotheurge,
 geo, geomancer, geo-poison,
 hydro, hydrosophist,
 necro, necromancer {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 // Layer 4: Italics (statuses only)
 status {
-  font-style: italic;
+    font-style: italic;
 }
 
 // ===========================
@@ -504,47 +487,26 @@ status {
 
 // Desktop
 @media (width >= 769px) {
-  .filter-overlay {
-    display: none;
-  }
-
-  .filter-content {
-    display: block !important;
-    position: static;
-    border-top: none;
-    padding: 12px 15px;
-    background: transparent;
-  }
-
-  .filter-header {
-    cursor: default;
-    pointer-events: none;
-
-    .clear-btn {
-      pointer-events: auto;
+    .filter-overlay {
+        display: none;
     }
-  }
-
-  .active-filters-summary {
-    display: none !important;
-  }
 }
 
 // Mobile
 @media (width <= 768px) {
-  .filter-groups {
-    flex-direction: column;
-    gap: 15px;
-    align-items: stretch;
-  }
+    .filter-groups {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
 
-  .tree-filter-btn {
-    padding: 8px 14px;
-    font-size: 0.85em;
-  }
+    .tree-filter-btn {
+        padding: 8px 14px;
+        font-size: 0.85em;
+    }
 
-  .container {
-    position: relative;
-    z-index: 1;
-  }
+    .container {
+        position: relative;
+        z-index: 1;
+    }
 }

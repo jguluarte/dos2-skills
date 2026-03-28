@@ -2,6 +2,7 @@
     "extends": "stylelint-config-standard-scss",
     "rules": {
         "selector-type-no-unknown": null,
-        "no-descending-specificity": null
+        "no-descending-specificity": null,
+        "scss/dollar-variable-colon-space-after": null
     }
 }
