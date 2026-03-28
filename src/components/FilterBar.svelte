@@ -1,18 +1,18 @@
 <script>
     import {
-        ALL_TREES, VALID_SKILL_COMBINATION, NON_SUMMONING_TREES,
+        ALL_TREES, VALID_SKILL_COMBINATION,
     } from '@constants';
     import { summaryText } from '@js/summary-text.js';
 
     let {
         primary = $bindable(null),
-        secondaryFilters = $bindable(new Set()),
+        filters = $bindable(new Set()),
     } = $props();
 
     let expanded = $state(false);
 
-    let validSecondary = $derived(
-        primary ? VALID_SKILL_COMBINATION[primary] : NON_SUMMONING_TREES
+    let validFilters = $derived(
+        primary ? VALID_SKILL_COMBINATION[primary] : ALL_TREES
     );
 
     function scrollToTop() {
@@ -21,27 +21,27 @@
 
     function togglePrimary(tree) {
         primary = primary === tree ? null : tree;
-        secondaryFilters = new Set(
-            [...secondaryFilters].filter((t) => validSecondary.includes(t))
+        filters = new Set(
+            [...filters].filter((t) => validFilters.includes(t))
         );
         scrollToTop();
     }
 
-    function toggleSecondary(tree) {
-        const next = new Set(secondaryFilters);
+    function toggleFilter(tree) {
+        const next = new Set(filters);
         next.has(tree) ? next.delete(tree) : next.add(tree);
-        secondaryFilters = next;
+        filters = next;
         scrollToTop();
     }
 
     function clear() {
         primary = null;
-        secondaryFilters = new Set();
+        filters = new Set();
         scrollToTop();
     }
 
-    let hasFilters = $derived(primary !== null || secondaryFilters.size > 0);
-    let summary = $derived(summaryText(primary, secondaryFilters));
+    let hasFilters = $derived(primary !== null || filters.size > 0);
+    let summary = $derived(summaryText(primary, filters));
 </script>
 
 <div class="filter-overlay" class:visible={expanded}
@@ -100,11 +100,11 @@
                     </span>
                 </div>
                 <div class="skill-tree-filters">
-                    {#each validSecondary as tree}
+                    {#each validFilters as tree}
                         <button
                             class="tree-filter-btn"
-                            class:active={secondaryFilters.has(tree)}
-                            onclick={() => toggleSecondary(tree)}
+                            class:active={filters.has(tree)}
+                            onclick={() => toggleFilter(tree)}
                         >
                             {tree}
                         </button>

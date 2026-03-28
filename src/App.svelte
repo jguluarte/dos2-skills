@@ -1,13 +1,11 @@
 <script>
     import jsyaml from 'js-yaml';
     import { Skill } from '@js/skill/skill.js';
-    import { SUMMONING } from '@constants';
+    import { filterSkills } from '@js/filter.js';
     import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
     import FilterBar from './components/FilterBar.svelte';
     import SkillCard from './components/SkillCard.svelte';
-
-    const wantsSummoning = (p, s) => [p, ...s].includes(SUMMONING);
 
     const allSkills = jsyaml.load(skillsYaml)
         .map(Skill.fromYAML)
@@ -19,32 +17,16 @@
 
     const saved = urlState.load();
     let primary = $state(saved.primary);
-    let secondaryFilters = $state(saved.filters);
+    let filters = $state(saved.filters);
 
-    $effect( () => urlState.save(primary, secondaryFilters) );
+    $effect( () => urlState.save(primary, filters) );
 
-    let filteredSkills = $derived.by(() => {
-        if (!primary && secondaryFilters.size === 0) return allSkills;
-
-        let results = allSkills;
-
-        if (primary) {
-            results = results.filter((s) => s.has(primary));
-        }
-
-        if (secondaryFilters.size > 0) {
-            results = results.filter((s) => s.any(secondaryFilters));
-        }
-
-        if (!wantsSummoning(primary, secondaryFilters)) {
-            results = results.filter((s) => s.primaryTree !== SUMMONING);
-        }
-
-        return results;
-    });
+    let filteredSkills = $derived(
+        filterSkills(allSkills, primary, filters)
+    );
 </script>
 
-<FilterBar bind:primary bind:secondaryFilters />
+<FilterBar bind:primary bind:filters />
 
 <div class="container">
     <div id="skills-container">

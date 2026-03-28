@@ -13,3 +13,7 @@ export function makeSkill(name, trees) {
 
     return Skill.fromYAML(skill);
 }
+
+export function set(...items) {
+    return new Set(items);
+}
