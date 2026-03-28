@@ -1964,6 +1964,288 @@
     Bleed electrified water. You get immunity to electricity, but lowered
     resistance to poison and earth damage.
 
+- name: Conjure Incarnate
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Conjure+Incarnate
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Conjure a personal elemental that matches the ground surface it's
+    summoned onto. Your incarnate can be buffed with Infusions. Once
+    you hit Summoning ability level of 10, a colossal Incarnate
+    Champion will answer your summons!
+
+- name: Dimensional Bolt
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Dimensional+Bolt
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 1
+  effect: >
+    Shoot a volatile bolt that deals <status>100% of a random
+    type</status>, and then creates a corresponding surface.
+
+- name: Elemental Totem
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Elemental+Totem
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 1
+  effect: >
+    Target a ground surface and conjure a totem of the corresponding
+    element. Each turn, this totem will fire a projectile at enemies
+    in sight.
+
+- name: Farsight Infusion
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Farsight+Infusion
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Unlock a ranged attack for your Incarnate. Provides
+    <magical>[100% heal] Magical Armour</magical>.
+
+- name: Summon Cat Familiar
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Cat+Familiar
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: Summon a black cat by your side. Quest reward.
+
+- name: Summon Condor
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Summon+Condor
+  ap_cost: 2
+  sp_cost: 0
+  range: 15m
+  cooldown: 6
+  effect: Summons a condor that will aid you in combat. Quest reward.
+
+- name: Summon Dragonling
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Dragonling
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 6
+  effect: Summons a newt to help you in combat. Quest reward.
+
+- name: Summon Inner Demon
+  primary_tree: Summoning
+  investment: 1
+  memory: 2
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Summon+Inner+Demon
+  ap_cost: 1
+  sp_cost: 1
+  range: Self
+  cooldown: 6
+  effect: >
+    Conjure a demon that will share their Intelligence with you and
+    provide <magical>[X] Magical Armour</magical>. Grants you power to
+    terrify and protect yourself with demonic fists. Set
+    <status>Inner Demon</status> on self for 3 turns. <br><br>
+    <b><i>See wiki for details on how to acquire!</i></b>
+
+- name: Dominate Mind
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Dominate+Mind
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    <status>Charm</status> target non-allied character, causing them
+    to join your side in combat for the duration of the status. Set
+    <status>Charmed</status> for 2 turns. Resisted by
+    <magical>Magical Armour</magical>.
+
+- name: Charm Voidwoken
+  primary_tree: Summoning
+  investment: 1
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Charm+Voidwoken
+  ap_cost: 3
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    <status>Charm</status> target Voidwoken, causing them to join your
+    side for 2 turns. Set <status>Charmed</status> for 2 turns.
+    Resisted by <magical>Magical Armour</magical>. Quest reward.
+
+- name: Power Infusion
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Power+Infusion
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Unlock <warfare>Whirlwind</warfare> and <warfare>Battering
+    Ram</warfare> for your Incarnate. Provides <physical>[100% heal]
+    Physical Armour</physical>.
+
+- name: Rallying Cry
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Rallying+Cry
+  ap_cost: 2
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Target character restores <heal>[50% heal] Vitality</heal> and
+    <magical>[18% heal] Magic Armour</magical> per allied character
+    and totem in their vicinity.
+
+- name: Shadow Infusion
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Shadow+Infusion
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Incarnate learns <scoundrel>Corrupted Blade</scoundrel> and
+    <poly>Chameleon Cloak</poly>.
+
+- name: Soul Mate
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Soul+Mate
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 5
+  effect: >
+    Bind yourself to target character, copying any
+    <heal>healing</heal> and <physical>Armour restoration</physical>
+    that you receive to them. Clears <status>Frozen</status>,
+    <status>Stunned</status>, <status>Knocked Down</status> and
+    <status>Petrified</status>. Set <status>Soul Mate</status> for 3
+    turns.
+
+- name: Supercharger
+  primary_tree: Summoning
+  investment: 2
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Supercharger
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Target totem or summon deals 100% more base damage during its next
+    turn, but then it dies. Set <status>Supercharged</status> for 2
+    turns.
+
+- name: Cannibalise
+  primary_tree: Summoning
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Cannibalise
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 2
+  effect: >
+    Destroy an allied summon or totem. Receive their
+    <heal>Vitality</heal>, <physical>Physical Armour</physical>, and
+    <magical>Magic Armour</magical>.
+
+- name: Door to Eternity
+  primary_tree: Summoning
+  investment: 3
+  memory: 2
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Door+to+Eternity
+  ap_cost: 2
+  sp_cost: 2
+  range: PB AoE
+  cooldown: 0
+  effect: >
+    Give all summons and totems around you a status that prevents them
+    from dying to damage or disappearing when their life runs out. Set
+    <status>Persisting</status> for 3 turns.
+
+- name: Planar Gateway
+  primary_tree: Summoning
+  investment: 3
+  memory: 2
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Planar+Gateway
+  ap_cost: 0
+  sp_cost: 2
+  range: 13m
+  cooldown: 6
+  effect: >
+    Conjure two linked gateways that allow any character to instantly
+    travel between them.
+
+- name: Warp Infusion
+  primary_tree: Summoning
+  investment: 3
+  memory: 1
+  url: https://divinityoriginalsin2.wiki.fextralife.com/Warp+Infusion
+  ap_cost: 1
+  sp_cost: 0
+  range: 13m
+  cooldown: 3
+  effect: >
+    Incarnate learns <huntsman>Tactical Retreat</huntsman>, and a
+    skill to swap places with its master.
+
+- name: Ethereal Storm
+  primary_tree: Summoning
+  investment: 5
+  memory: 3
+  url:
+    https://divinityoriginalsin2.wiki.fextralife.com/Ethereal+Storm
+  ap_cost: 4
+  sp_cost: 3
+  range: 17m
+  cooldown: 5
+  effect: >
+    Unpredictable projectiles from distant planes strike target area,
+    dealing random elemental damage to enemies or healing allies.
+    Lasts 2 turns.
+
 - name: Electric Infusion
   primary_tree: Summoning
   secondary_tree: Aerotheurge
