@@ -5,6 +5,8 @@ const root = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)), '..'
 );
 
+export const config = path.resolve(root, '.config');
+
 export const aliases = {
     '@': path.resolve(root, 'src'),
     '@js': path.resolve(root, 'src/js'),

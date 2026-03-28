@@ -4,8 +4,8 @@
     import { filterSkills } from '@js/filter.js';
     import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
-    import FilterBar from './components/FilterBar.svelte';
     import SkillCard from './components/SkillCard.svelte';
+    import FilterBar from './components/FilterBar.svelte';
 
     const allSkills = jsyaml.load(skillsYaml)
         .map(Skill.fromYAML)
@@ -13,6 +13,7 @@
             a.primaryTree.localeCompare(b.primaryTree)
             || a.investment - b.investment
             || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
+            || a.name.localeCompare(b.name)
         );
 
     const saved = urlState.load();

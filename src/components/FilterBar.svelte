@@ -1,7 +1,5 @@
 <script>
-    import {
-        ALL_TREES, VALID_SKILL_COMBINATION,
-    } from '@constants';
+    import { ALL_TREES, VALID_SKILL_COMBINATION } from '@constants';
     import { summaryText } from '@js/summary-text.js';
 
     let {

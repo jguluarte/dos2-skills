@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitest/config';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { aliases } from './vite.aliases.js';
+import { aliases, config } from './vite.aliases.js';
+
+const svelteConfig = `${config}/svelte.config.js`;
 
 export default defineConfig({
-    plugins: [svelte({ hot: false, configFile: '.config/svelte.config.js' })],
+    plugins: [svelte({ hot: false, configFile: svelteConfig })],
     resolve: {
         alias: aliases,
         conditions: ['browser'],

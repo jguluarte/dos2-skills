@@ -1,4 +1,4 @@
-export function summaryText(primary, filters) {
+export function summaryText(primary, filters = new Set()) {
     if (!primary && filters.size === 0) {
         return 'Showing all skills, tap to filter';
     }

@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { cpSync } from 'fs';
-import { aliases } from './vite.aliases.js';
+import { aliases, config } from './vite.aliases.js';
+
+const svelteConfig = `${config}/svelte.config.js`;
 
 export default defineConfig({
     root: 'src',
@@ -13,7 +15,7 @@ export default defineConfig({
         emptyOutDir: true,
     },
     plugins: [
-        svelte({ configFile: '../.config/svelte.config.js' }),
+        svelte({ configFile: svelteConfig }),
         {
             name: 'copy-runtime-assets',
             closeBundle() {
