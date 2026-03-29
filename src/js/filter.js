@@ -1,37 +1,26 @@
 import { SUMMONING } from '@constants';
 
-function sortKey(skill, primary) {
-    return {
-        tree: primary
-            ? (skill.trees.find((t) => t !== primary) ?? '')
-            : skill.primaryTree,
-        cross: skill.secondaryTree ? 1 : 0,
-        other: primary ? '' : (skill.secondaryTree ?? ''),
-    };
-}
-
 export function defaultSort(skills, primary) {
     return [...skills].sort((a, b) => {
-        const ak = sortKey(a, primary);
-        const bk = sortKey(b, primary);
+        const aCross = a.secondaryTree ? 1 : 0;
+        const bCross = b.secondaryTree ? 1 : 0;
+        const aTree = primary
+            ? (a.trees.find((t) => t !== primary) ?? '')
+            : a.primaryTree;
+        const bTree = primary
+            ? (b.trees.find((t) => t !== primary) ?? '')
+            : b.primaryTree;
+        const aOther = primary ? '' : (a.secondaryTree ?? '');
+        const bOther = primary ? '' : (b.secondaryTree ?? '');
 
         return (
-            ak.tree.localeCompare(bk.tree)
-            || ak.cross - bk.cross
-            || ak.other.localeCompare(bk.other)
+            aTree.localeCompare(bTree)
+            || aCross - bCross
+            || aOther.localeCompare(bOther)
             || a.investment - b.investment
             || a.name.localeCompare(b.name)
         );
     });
-}
-
-function excludeSummoning(results, primary, filters) {
-    if (!primary && !filters?.size) return results;
-
-    const wanted = primary === SUMMONING || filters?.has(SUMMONING);
-    if (wanted) return results;
-
-    return results.filter((s) => s.primaryTree !== SUMMONING);
 }
 
 export function filterSkills(skills, primary, filters = new Set()) {
@@ -47,7 +36,15 @@ export function filterSkills(skills, primary, filters = new Set()) {
         );
     }
 
-    results = excludeSummoning(results, primary, filters);
+    if (primary || filters?.size) {
+        const wantsSummoning = primary === SUMMONING
+            || filters?.has(SUMMONING);
+        if (!wantsSummoning) {
+            results = results.filter(
+                (s) => s.primaryTree !== SUMMONING,
+            );
+        }
+    }
 
     return defaultSort(results, primary);
 }
