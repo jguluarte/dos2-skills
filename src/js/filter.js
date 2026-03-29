@@ -23,7 +23,9 @@ export function filterSkills(skills, primary, filters = new Set()) {
         : skills;
 
     results = reduceBy(results, ...filters);
-    return summoningFilter(results, primary, ...filters);
+    return summoningFilter(results, primary, ...filters).sort((a, b) => {
+        return Number(!!a.secondaryTree) - Number(!!b.secondaryTree);
+    });
 }
 
 function filterless(primary, filters) {
