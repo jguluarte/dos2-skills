@@ -17,7 +17,7 @@ $color-summoning:    #be4bd3;
 $color-necromancer:  #a61e4d;
 $color-warfare:      #be590d;
 $color-huntsman:     #82c91e;
-$color-scoundrel:    #868e96;
+$color-scoundrel:    #6e9aab;
 $color-polymorph:    #ffd43b;
 
 // Skill tree → color mapping (names match JS enum values)
@@ -449,48 +449,53 @@ skill-cooldown::before {
 // Custom HTML Tags (styled via CSS)
 // ===========================
 
-// Layer 1: Colors (damage types + abilities + skill trees)
-fire, pyro, pyrokinetic { color: $color-fire; }
-air, aerotheurge { color: $color-air; }
-earth, geo, geomancer { color: $color-earth; }
+// Layer 1: Colors (damage types + skill name references)
+fire, pyro, pyrokinetic   { color: $color-fire; }
+air, aerotheurge          { color: $color-air; }
+earth, geo, geomancer     { color: $color-earth; }
 water, hydro, hydrosophist { color: $color-water; }
-poison, geo-poison { color: $color-poison; }
-necro, necromancer { color: $color-necromancer; }
+poison, geo-poison        { color: $color-poison; }
+necro, necromancer        { color: $color-necromancer; }
+warfare                   { color: $color-warfare; }
+huntsman                  { color: $color-huntsman; }
+scoundrel                 { color: $color-scoundrel; }
+poly, polymorph           { color: $color-polymorph; }
+physical                  { color: #adb5bd; }
+piercing                  { color: #9b1d20; }
+magical                   { color: #9775fa; }
+heal                      { color: #51cf66; }
 
-// Layer 2: Underline (statuses + abilities)
-status,
+// Layer 2: Underline (statuses + clouds + skill references)
+status, cloud,
 pyro, pyrokinetic,
 aerotheurge,
 geo, geomancer, geo-poison,
 hydro, hydrosophist,
-necro, necromancer {
+necro, necromancer,
+warfare, huntsman, scoundrel,
+poly, polymorph {
     text-decoration: underline dotted;
 }
 
-// Layer 3: Bold (abilities only)
+// Layer 3: Bold (skill references only)
 pyro, pyrokinetic,
 aerotheurge,
-geo, geomancer, geo-poison,
+geo, geomancer,
 hydro, hydrosophist,
-necro, necromancer {
+necro, necromancer,
+warfare, huntsman, scoundrel,
+poly, polymorph {
     font-weight: 600;
 }
 
-// Layer 4: Italics (statuses only)
-status {
+// Layer 4: Italics (statuses + clouds + abilities)
+status, cloud, ability {
     font-style: italic;
 }
 
 // ===========================
 // Responsive Design
 // ===========================
-
-// Desktop
-@media (width >= 769px) {
-    .filter-overlay {
-        display: none;
-    }
-}
 
 // Mobile
 @media (width <= 768px) {
