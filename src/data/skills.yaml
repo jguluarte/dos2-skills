@@ -305,7 +305,7 @@
   range: 15m
   cooldown: 4
   effect: >
-    Provides [100% of total heal value] Physical Armour, and set
+    Provides [100% heal] Physical Armour, and set
     <status>Fortified</status> for 3 turn(s). While
     <status>Fortified</status>, the target cannot be teleported. Removes
     <status>Poisoned</status>, <status>Bleeding</status>,
@@ -595,7 +595,7 @@
   cooldown: 4
   effect: >
     Ice forms a defensive barrier around the target, providing
-    <magical>[100% of total heal value] Magical Armour</magical>. Cures
+    <magical>[100% heal] Magical Armour</magical>. Cures
     <status>Burning</status>, <status>Poisoned</status>,
     <status>Stunned</status>, <status>Frozen</status>,
     <status>Suffocating</status> and <status>Petrified</status>.
