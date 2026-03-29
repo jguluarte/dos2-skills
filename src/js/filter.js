@@ -1,21 +1,58 @@
 import { SUMMONING } from '@constants';
 
-export function filterSkills(skills, primary, filters = new Set()) {
-    if (!(primary || filters?.size)) return skills;
+export function defaultSort(skills) {
+    return [...skills].sort((a, b) => {
+        const aCross = a.secondaryTree ? 1 : 0;
+        const bCross = b.secondaryTree ? 1 : 0;
 
+        return (
+            a.primaryTree.localeCompare(b.primaryTree)
+            || aCross - bCross
+            || a.investment - b.investment
+            || a.name.localeCompare(b.name)
+        );
+    });
+}
+
+function sortKey(skill, primary) {
+    return {
+        tree: primary
+            ? (skill.trees.find((t) => t !== primary) ?? '')
+            : skill.primaryTree,
+        cross: skill.secondaryTree ? 1 : 0,
+        other: primary ? '' : (skill.secondaryTree ?? ''),
+    };
+}
+
+function filteredSort(primary) {
+    return (a, b) => {
+        const ak = sortKey(a, primary);
+        const bk = sortKey(b, primary);
+
+        return (
+            ak.tree.localeCompare(bk.tree)
+            || ak.cross - bk.cross
+            || ak.other.localeCompare(bk.other)
+            || a.investment - b.investment
+            || a.name.localeCompare(b.name)
+        );
+    };
+}
+
+function excludeSummoning(results, primary, filters) {
+    if (!primary && !filters?.size) return results;
+
+    const wanted = primary === SUMMONING || filters?.has(SUMMONING);
+    if (wanted) return results;
+
+    return results.filter((s) => s.primaryTree !== SUMMONING);
+}
+
+export function filterSkills(skills, primary, filters = new Set()) {
     let results = skills;
 
     if (primary) {
-        results = results.filter((s) => s.has(primary)).sort((a, b) => {
-            const aTree = a.trees.find((t) => t !== primary) ?? '';
-            const bTree = b.trees.find((t) => t !== primary) ?? '';
-
-            return (
-                aTree.localeCompare(bTree)
-                || a.investment - b.investment
-                || a.name.localeCompare(b.name)
-            );
-        });
+        results = results.filter((s) => s.has(primary));
     }
 
     if (filters?.size > 0) {
@@ -24,12 +61,9 @@ export function filterSkills(skills, primary, filters = new Set()) {
         );
     }
 
-    const wantsSummoning = [primary, ...filters].includes(SUMMONING);
-    if (!wantsSummoning) {
-        results = results.filter((s) => s.primaryTree !== SUMMONING);
-    }
+    results = excludeSummoning(results, primary, filters);
 
-    return results;
+    return results.sort(filteredSort(primary));
 }
 
 export function summarize(primary, filters) {

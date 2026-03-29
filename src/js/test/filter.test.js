@@ -4,7 +4,7 @@ import {
     SUMMONING, PYROKINETIC, AEROTHEURGE, HYDROSOPHIST,
     NECROMANCER, WARFARE,
 } from '@constants';
-import { filterSkills, summarize } from '@js/filter.js';
+import { defaultSort, filterSkills, summarize } from '@js/filter.js';
 
 // ── fixtures ────────────────────────────────────────────
 
@@ -22,7 +22,8 @@ const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumNecro, sumPyro];
 describe('no filters', () => {
     it('returns all skills', () => {
         const result = filterSkills(skills);
-        expect(result).toEqual(skills);
+        expect(result).toHaveLength(skills.length);
+        expect(new Set(result)).toEqual(new Set(skills));
     });
 });
 
@@ -32,7 +33,9 @@ describe('primary filter only', () => {
     const result = filterSkills(skills, PYROKINETIC);
 
     it('includes skills with that tree', () => {
-        expect(result).toStrictEqual([pyroNecro, pyroWar]);
+        expect(result).toContain(pyroNecro);
+        expect(result).toContain(pyroWar);
+        expect(result).toHaveLength(2);
     });
 
     it.each(
@@ -51,12 +54,16 @@ describe('primary filter only', () => {
 describe('summoning', () => {
     it('shows only summoning skills when primary', () => {
         const result = filterSkills(skills, SUMMONING);
-        expect(result).toStrictEqual([sumNecro, sumPyro]);
+        expect(result).toHaveLength(2);
+        expect(result).toContain(sumNecro);
+        expect(result).toContain(sumPyro);
     });
 
     it('shows only summoning skills when secondary', () => {
         const result = filterSkills(skills, null, set(SUMMONING));
-        expect(result).toStrictEqual([sumNecro, sumPyro]);
+        expect(result).toHaveLength(2);
+        expect(result).toContain(sumPyro);
+        expect(result).toContain(sumNecro);
     });
 
     it('narrows by filter tree', () => {
@@ -82,7 +89,71 @@ describe('filters', () => {
         const filters = set(NECROMANCER, WARFARE);
         const result = filterSkills(skills, PYROKINETIC, filters);
 
-        expect(result).toStrictEqual([pyroNecro, pyroWar]);
+        expect(result).toContain(pyroNecro);
+        expect(result).toContain(pyroWar);
+        expect(result).toHaveLength(2);
+    });
+});
+
+// ── sorting ─────────────────────────────────────────────
+
+describe('sorting', () => {
+    // Controlled fixtures with explicit investment
+    const inv = { investment: 1 };
+    const pyroSingle = makeSkill('Haste', [PYROKINETIC], inv);
+    const aeroSingle = makeSkill('Blinding', [AEROTHEURGE], inv);
+    const pyroCross = makeSkill(
+        'Bleed Fire', [PYROKINETIC, NECROMANCER], inv,
+    );
+    const aeroCross = makeSkill(
+        'Vacuum Touch', [AEROTHEURGE, NECROMANCER], inv,
+    );
+    const sumCrossN = makeSkill(
+        'Blood Infusion', [SUMMONING, NECROMANCER], inv,
+    );
+    const sumCrossP = makeSkill(
+        'Fire Infusion', [SUMMONING, PYROKINETIC], inv,
+    );
+
+    it('defaultSort groups by primaryTree, single before cross', () => {
+        const input = [pyroCross, aeroCross, pyroSingle, aeroSingle];
+        const result = defaultSort(input);
+
+        expect(result).toStrictEqual([
+            aeroSingle, aeroCross,
+            pyroSingle, pyroCross,
+        ]);
+    });
+
+    it('primary filter sorts single before cross, then by other tree', () => {
+        const input = [pyroCross, pyroSingle];
+        const result = filterSkills(input, PYROKINETIC);
+
+        expect(result).toStrictEqual([pyroSingle, pyroCross]);
+    });
+
+    it('secondary filter sorts by primaryTree then secondaryTree', () => {
+        const input = [sumCrossP, sumCrossN];
+        const result = filterSkills(input, null, set(SUMMONING));
+
+        expect(result).toStrictEqual([sumCrossN, sumCrossP]);
+    });
+
+    it('sorts by investment within same tree group', () => {
+        const inv1 = makeSkill('Haste',    [PYROKINETIC], { investment: 1 });
+        const inv2 = makeSkill('Fireball',  [PYROKINETIC], { investment: 2 });
+        const inv3 = makeSkill('Firebrand', [PYROKINETIC], { investment: 3 });
+        const result = filterSkills([inv3, inv1, inv2], PYROKINETIC);
+
+        expect(result).toStrictEqual([inv1, inv2, inv3]);
+    });
+
+    it('sorts by name as tiebreaker', () => {
+        const a = makeSkill('Alpha', [PYROKINETIC], { investment: 1 });
+        const b = makeSkill('Beta',  [PYROKINETIC], { investment: 1 });
+        const result = filterSkills([b, a], PYROKINETIC);
+
+        expect(result).toStrictEqual([a, b]);
     });
 });
 
