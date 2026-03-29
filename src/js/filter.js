@@ -16,33 +16,38 @@ export function defaultSort(skills) {
 }
 
 export function filterSkills(skills, primary, filters = new Set()) {
-    let results = skills;
+    if ( filterless(primary, filters) ) return skills;
 
-    if (primary) {
-        results = results.filter((s) => s.has(primary));
-    }
+    let results = primary
+        ? reduceBy(skills, primary)
+        : skills;
 
-    if (filters?.size > 0) {
-        results = results.filter(
-            (s) => s.trees.some((t) => filters.has(t))
+    results = reduceBy(results, ...filters);
+    return summoningFilter(results, primary, ...filters);
+}
+
+function filterless(primary, filters) {
+    return !(primary || filters?.size);
+}
+
+function reduceBy(skills, ...filters) {
+    if (filters?.length) {
+        return skills.filter(
+            (s) => s.trees.some( (t) => filters.includes(t) )
         );
     }
 
-    if (primary || filters?.size) {
-        const wantsSummoning = primary === SUMMONING
-            || filters?.has(SUMMONING);
-        if (!wantsSummoning) {
-            results = results.filter(
-                (s) => s.primaryTree !== SUMMONING,
-            );
-        }
-    }
-
-    return results;
+    return skills;
 }
 
-export function summarize(primary, filters) {
-    if (!(primary || filters?.size)) {
+function summoningFilter(skills, ...filters) {
+    return filters.includes(SUMMONING)
+        ? skills
+        : skills.filter( (s) => !s.has(SUMMONING) );
+}
+
+export function summarize(primary, filters = []) {
+    if ( filterless(primary, filters) ) {
         return 'Showing all skills, tap to filter';
     }
 
