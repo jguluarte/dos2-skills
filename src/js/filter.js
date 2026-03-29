@@ -1,19 +1,5 @@
 import { SUMMONING } from '@constants';
 
-export function defaultSort(skills) {
-    return [...skills].sort((a, b) => {
-        const aCross = a.secondaryTree ? 1 : 0;
-        const bCross = b.secondaryTree ? 1 : 0;
-
-        return (
-            a.primaryTree.localeCompare(b.primaryTree)
-            || aCross - bCross
-            || a.investment - b.investment
-            || a.name.localeCompare(b.name)
-        );
-    });
-}
-
 function sortKey(skill, primary) {
     return {
         tree: primary
@@ -24,8 +10,8 @@ function sortKey(skill, primary) {
     };
 }
 
-function filteredSort(primary) {
-    return (a, b) => {
+export function defaultSort(skills, primary) {
+    return [...skills].sort((a, b) => {
         const ak = sortKey(a, primary);
         const bk = sortKey(b, primary);
 
@@ -36,7 +22,7 @@ function filteredSort(primary) {
             || a.investment - b.investment
             || a.name.localeCompare(b.name)
         );
-    };
+    });
 }
 
 function excludeSummoning(results, primary, filters) {
@@ -63,7 +49,7 @@ export function filterSkills(skills, primary, filters = new Set()) {
 
     results = excludeSummoning(results, primary, filters);
 
-    return results.sort(filteredSort(primary));
+    return defaultSort(results, primary);
 }
 
 export function summarize(primary, filters) {
