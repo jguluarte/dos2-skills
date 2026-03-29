@@ -14,8 +14,9 @@ const pyroWar   = makeSkill('Pyro+Warfare',  [PYROKINETIC, WARFARE]);
 const hydroWar  = makeSkill('Hydro+Warfare', [HYDROSOPHIST, WARFARE]);
 const sumPyro   = makeSkill('Summon+Pyro',   [SUMMONING, PYROKINETIC]);
 const sumNecro  = makeSkill('Summon+Necro',  [SUMMONING, NECROMANCER]);
+const pyroOnly  = makeSkill('Haste',         [PYROKINETIC]);
 
-const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumNecro, sumPyro];
+const skills = [pyroNecro, aeroNecro, pyroWar, hydroWar, sumNecro, sumPyro, pyroOnly];
 
 // ── no filters ──────────────────────────────────────────
 
@@ -33,9 +34,10 @@ describe('primary filter only', () => {
     const result = filterSkills(skills, PYROKINETIC);
 
     it('includes skills with that tree', () => {
+        expect(result).toContain(pyroOnly);
         expect(result).toContain(pyroNecro);
         expect(result).toContain(pyroWar);
-        expect(result).toHaveLength(2);
+        expect(result).toHaveLength(3);
     });
 
     it.each(
@@ -92,6 +94,28 @@ describe('filters', () => {
         expect(result).toContain(pyroNecro);
         expect(result).toContain(pyroWar);
         expect(result).toHaveLength(2);
+    });
+});
+
+// ── filterSkills ordering ───────────────────────────────
+
+describe('filterSkills ordering', () => {
+    it('single-tree skills come before cross-class', () => {
+        const result = filterSkills(skills, PYROKINETIC);
+        expect(result).toStrictEqual([pyroOnly, pyroNecro, pyroWar]);
+    });
+
+    it('all single-tree when no cross-class matches', () => {
+        const allSingle = [pyroOnly, makeSkill('Fireball', [PYROKINETIC])];
+        const result = filterSkills(allSingle, PYROKINETIC);
+        expect(result.every((s) => !s.secondaryTree)).toBe(true);
+    });
+
+    it('all cross-class when no single-tree matches', () => {
+        const allCross = [pyroNecro, pyroWar];
+        const result = filterSkills(allCross, PYROKINETIC);
+        expect(result).toHaveLength(2);
+        expect(result.every((s) => !!s.secondaryTree)).toBe(true);
     });
 });
 
