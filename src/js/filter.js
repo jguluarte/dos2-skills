@@ -1,7 +1,5 @@
 import { SUMMONING } from '@constants';
 
-// Sort for the unfiltered or secondary-filter view:
-// primary tree → single before cross → secondary tree → investment → name
 export function defaultSort(skills) {
     return [...skills].sort((a, b) => {
         const aCross = a.secondaryTree ? 1 : 0;
@@ -11,24 +9,6 @@ export function defaultSort(skills) {
             a.primaryTree.localeCompare(b.primaryTree)
             || aCross - bCross
             || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
-            || a.investment - b.investment
-            || a.name.localeCompare(b.name)
-        );
-    });
-}
-
-// Sort when filtering by a primary tree:
-// single before cross → other tree → investment → name
-function primarySort(skills, primary) {
-    return [...skills].sort((a, b) => {
-        const aCross = a.secondaryTree ? 1 : 0;
-        const bCross = b.secondaryTree ? 1 : 0;
-        const aOther = a.trees.find((t) => t !== primary) ?? '';
-        const bOther = b.trees.find((t) => t !== primary) ?? '';
-
-        return (
-            aCross - bCross
-            || aOther.localeCompare(bOther)
             || a.investment - b.investment
             || a.name.localeCompare(b.name)
         );
@@ -58,9 +38,7 @@ export function filterSkills(skills, primary, filters = new Set()) {
         }
     }
 
-    return primary
-        ? primarySort(results, primary)
-        : defaultSort(results);
+    return results;
 }
 
 export function summarize(primary, filters) {

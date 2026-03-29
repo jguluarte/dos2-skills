@@ -125,33 +125,33 @@ describe('sorting', () => {
         ]);
     });
 
-    it('primary filter sorts single before cross, then by other tree', () => {
+    it('single before cross within same primary tree', () => {
         const input = [pyroCross, pyroSingle];
-        const result = filterSkills(input, PYROKINETIC);
+        const result = defaultSort(input);
 
         expect(result).toStrictEqual([pyroSingle, pyroCross]);
     });
 
-    it('secondary filter sorts by primaryTree then secondaryTree', () => {
+    it('sorts by secondaryTree within cross-class', () => {
         const input = [sumCrossP, sumCrossN];
-        const result = filterSkills(input, null, set(SUMMONING));
+        const result = defaultSort(input);
 
         expect(result).toStrictEqual([sumCrossN, sumCrossP]);
     });
 
     it('sorts by investment within same tree group', () => {
-        const inv1 = makeSkill('Haste',    [PYROKINETIC], { investment: 1 });
-        const inv2 = makeSkill('Fireball',  [PYROKINETIC], { investment: 2 });
+        const inv1 = makeSkill('Haste', [PYROKINETIC], { investment: 1 });
+        const inv2 = makeSkill('Fireball', [PYROKINETIC], { investment: 2 });
         const inv3 = makeSkill('Firebrand', [PYROKINETIC], { investment: 3 });
-        const result = filterSkills([inv3, inv1, inv2], PYROKINETIC);
+        const result = defaultSort([inv3, inv1, inv2]);
 
         expect(result).toStrictEqual([inv1, inv2, inv3]);
     });
 
     it('sorts by name as tiebreaker', () => {
         const a = makeSkill('Alpha', [PYROKINETIC], { investment: 1 });
-        const b = makeSkill('Beta',  [PYROKINETIC], { investment: 1 });
-        const result = filterSkills([b, a], PYROKINETIC);
+        const b = makeSkill('Beta', [PYROKINETIC], { investment: 1 });
+        const result = defaultSort([b, a]);
 
         expect(result).toStrictEqual([a, b]);
     });

@@ -14,4 +14,7 @@ export class Skill {
         return this.trees.includes(tree);
     }
 
+    // compare(other) {
+
+    // }
 }
