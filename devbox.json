@@ -3,6 +3,7 @@
   "packages": [
     "dart-sass@latest",
     "python312@latest",
+    "python312Packages.pip@latest",
     "pre-commit@latest",
     "nodejs@latest",
     "nodePackages.prettier@latest",

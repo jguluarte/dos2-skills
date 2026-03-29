@@ -27,7 +27,7 @@ export const Schema = z.object({
     sp_cost: cost(SP_MAX),
 
     cooldown: z.int().min(0),
-    range: z.string().regex(/^(Self|PB AoE|All allies|\d+m)$/),
+    range: z.string().regex(/^(Self|PB AoE|All allies|\d+(\.\d+)?m)$/),
 
 }).refine((skill) => validateSkillTrees(skill), {
     error: `'primary_tree' is incompatible with 'secondary_tree'`,

@@ -1,19 +1,15 @@
 <script>
     import jsyaml from 'js-yaml';
     import { Skill } from '@js/skill/skill.js';
-    import { filterSkills } from '@js/filter.js';
+    import { defaultSort, filterSkills } from '@js/filter.js';
     import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
     import SkillCard from './components/SkillCard.svelte';
     import FilterBar from './components/FilterBar.svelte';
 
-    const allSkills = jsyaml.load(skillsYaml)
-        .map(Skill.fromYAML)
-        .sort((a, b) =>
-            a.primaryTree.localeCompare(b.primaryTree)
-            || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
-            || a.investment - b.investment
-        );
+    const allSkills = defaultSort(
+        jsyaml.load(skillsYaml).map(Skill.fromYAML)
+    );
 
     const saved = urlState.load();
     let primary = $state(saved.primary);

@@ -15,9 +15,11 @@ export function load(search = window.location.search) {
 export function serialize(primary, filters) {
     const parts = [];
     if (primary) parts.push(`p=${primary}`);
-    if (filters.size > 0) {
+
+    if (filters?.size > 0) {
         parts.push(`f=${[...filters].sort().join(',')}`);
     }
+
     return parts.length ? `?${parts.join('&')}` : '';
 }
 
