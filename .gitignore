@@ -29,6 +29,9 @@ node_modules/
 # Make target trackers
 .make-timestamp.*
 
+# Scraper output
+skills-wiki.yaml
+
 # Build artifacts
 css/styles.css
 dist/

@@ -37,7 +37,7 @@ test:
 # Scraping
 .PHONY: scrape
 
-scrape: pip
+scrape: | pip
 	.venv/bin/python scripts/scrape-wiki.py
 
 ##########################################################
