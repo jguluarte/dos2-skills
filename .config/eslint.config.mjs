@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import svelte from "eslint-plugin-svelte";
 import stylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
 
@@ -10,9 +11,12 @@ export default [
             "node_modules/",
             ".devbox/",
             ".venv/",
+            "**/*.svelte",
+            "**/*.svelte.js",
         ],
     },
     js.configs.recommended,
+    ...svelte.configs["flat/recommended"],
     {
         plugins: {
             "@stylistic": stylistic,
@@ -252,6 +256,22 @@ export default [
         },
         rules: {
             "max-nested-callbacks": ["error", 5],
+        },
+    },
+    {
+        files: ["**/*.svelte"],
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+            },
+        },
+        rules: {
+            "prefer-const": "off",
+            "no-unused-vars": ["error", {
+                varsIgnorePattern: "^_",
+            }],
+            "no-return-assign": "off",
+            "no-unused-expressions": "off",
         },
     },
     {
