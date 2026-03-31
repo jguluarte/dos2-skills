@@ -93,7 +93,8 @@ body {
     }
 }
 
-.filter-bar {
+action-bar, .filter-bar {
+    display: block;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -102,7 +103,7 @@ body {
     border-bottom: 1px solid rgb(255 255 255 / 15%);
 }
 
-.filter-header {
+header, .filter-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,13 +117,15 @@ body {
     }
 }
 
-.filter-icon {
-    font-size: 1.2em;
+icon, .filter-icon {
+    display: block;
+    font-size: 2em;
     opacity: 0.7;
     flex-shrink: 0;
 }
 
-.active-filters-summary {
+filter-summary, .active-filters-summary {
+    display: block;
     font-size: 0.7em;
     color: $text-secondary;
     font-style: italic;
@@ -140,7 +143,7 @@ body {
     align-items: center;
 }
 
-.clear-btn {
+button.reset, .clear-btn {
     padding: 4px 10px;
     background: rgb(255 255 255 / 15%);
     border: 1px solid rgb(255 255 255 / 30%);
