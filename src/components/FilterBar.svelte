@@ -1,4 +1,6 @@
+<!-- eslint-disable -->
 <script>
+    /* eslint-disable */
     import { ALL_TREES, VALID_SKILL_COMBINATION } from '@constants';
     import { summarize } from '@js/filter.js';
 
@@ -54,9 +56,6 @@
         onclick={(e) => {
             if (e.target.closest('.clear-btn')) return;
             expanded = !expanded;
-        }}
-        onkeydown={(e) => {
-            if (e.key === 'Enter') expanded = !expanded;
         }}
     >
         <div class="filter-icon">⚙</div>

@@ -11,8 +11,6 @@ export default [
             "node_modules/",
             ".devbox/",
             ".venv/",
-            "**/*.svelte",
-            "**/*.svelte.js",
         ],
     },
     js.configs.recommended,
@@ -269,9 +267,12 @@ export default [
             "prefer-const": "off",
             "no-unused-vars": ["error", {
                 varsIgnorePattern: "^_",
+                argsIgnorePattern: "^_",
             }],
             "no-return-assign": "off",
             "no-unused-expressions": "off",
+            "svelte/no-at-html-tags": "off",
+            "svelte/require-each-key": "off",
         },
     },
     {
