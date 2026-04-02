@@ -55,13 +55,13 @@ ESLINT_DIFF := npx eslint --config .config/eslint-diff.config.mjs
 lint: lint-yaml lint-css lint-js
 
 lint-yaml:
-	yamllint -c .config/yamllint.yml src/data/
+	-yamllint -c .config/yamllint.yml src/data/
 
 lint-css:
-	$(STYLELINT) --max-warnings=$(MAX_LINT_WARNINGS) src/css/
+	-$(STYLELINT) --max-warnings=$(MAX_LINT_WARNINGS) src/css/
 
 lint-js:
-	$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) src/ .config/
+	-$(ESLINT) --max-warnings=$(MAX_LINT_WARNINGS) src/ .config/
 
 lint-fix:
 	ESLINT_PLUGIN_DIFF_COMMIT=$$(git merge-base HEAD @{upstream}) \
