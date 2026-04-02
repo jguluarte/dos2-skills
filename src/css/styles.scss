@@ -1,15 +1,20 @@
 // ===========================
-// Color Variables
+// Design Tokens
 // ===========================
 
-// Element colors (damage types)
+// --- White glass overlays (used for borders, backgrounds, highlights) ---
+@function glass($opacity) {
+    @return rgb(255 255 255 / #{$opacity});
+}
+
+// --- Element colors (damage types) ---
 $color-fire:   #f60;
 $color-air:    #66d9ff;
 $color-earth:  #a0785a;
 $color-water:  #1e90ff;
 $color-poison: #9c0;
 
-// Skill tree colors (unique trees get their own color)
+// --- Skill tree colors (trees with unique colors) ---
 $color-summoning:   #be4bd3;
 $color-necromancer: #a61e4d;
 $color-warfare:     #be590d;
@@ -17,7 +22,41 @@ $color-huntsman:    #82c91e;
 $color-scoundrel:   #6e9aab;
 $color-polymorph:   #ffd43b;
 
-// Skill tree → color mapping (names match JS enum values)
+// --- Semantic colors ---
+$color-ap:       #2ecc71;
+$color-source:   #3498db;
+$color-physical: #adb5bd;
+$color-piercing: #9b1d20;
+$color-magical:  #9775fa;
+$color-heal:     #51cf66;
+$color-effect:   rgb(173 216 230 / 95%);
+
+// --- UI colors ---
+$bg-primary:   #111628;
+$bg-secondary: #1a1f35;
+$bg-overlay:   rgb(15 20 35 / 95%);
+$text-primary:   #e9ecef;
+$text-secondary: #aaa;
+
+// --- Spacing ---
+$pad-section: 12px 15px;
+$gap-sm: 6px;
+$gap-md: 8px;
+$gap-lg: 10px;
+
+// --- Border radius scale ---
+$radius-sm:   4px;
+$radius-md:   8px;
+$radius-lg:  12px;
+$radius-pill: 16px;
+
+// --- Borders ---
+$border-subtle: 1px solid glass(15%);
+
+// --- Transitions ---
+$transition-fast: all 0.2s;
+
+// --- Skill tree → color mapping (names match JS enum values) ---
 $tree-colors: (
     'Pyrokinetic':  $color-fire,
     'Aerotheurge':  $color-air,
@@ -30,13 +69,6 @@ $tree-colors: (
     'Scoundrel':    $color-scoundrel,
     'Polymorph':    $color-polymorph,
 );
-
-// UI colors
-$bg-primary: #111628;
-$bg-secondary: #1a1f35;
-$text-primary: #e9ecef;
-$text-secondary: #aaa;
-$bg-overlay: rgb(15 20 35 / 95%);
 
 // ===========================
 // Base Reset & Layout
@@ -67,6 +99,16 @@ body {
 }
 
 // ===========================
+// Shared States
+// ===========================
+
+.hidden,
+skill-tree.hidden,
+skill-card.hidden {
+    display: none;
+}
+
+// ===========================
 // Filter Bar
 // ===========================
 
@@ -74,8 +116,6 @@ body {
     position: absolute;
     inset: 0;
     min-height: 100vh;
-
-    // min-height: -webkit-fill-available;
     bottom: -100vh;
     padding-bottom: calc(100vh);
     background: transparent;
@@ -96,20 +136,20 @@ body {
     z-index: 10;
     background: $bg-overlay;
     box-shadow: 0 2px 10px rgb(0 0 0 / 50%);
-    border-bottom: 1px solid rgb(255 255 255 / 15%);
+    border-bottom: $border-subtle;
 }
 
 .filter-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: $pad-section;
     gap: 12px;
     cursor: pointer;
     user-select: none;
 
     &:active {
-        background: rgb(255 255 255 / 5%);
+        background: glass(5%);
     }
 }
 
@@ -129,26 +169,26 @@ body {
 
 .filter-header-buttons {
     display: flex;
-    gap: 8px;
+    gap: $gap-md;
     align-items: center;
 }
 
 .clear-btn {
     padding: 4px 10px;
-    background: rgb(255 255 255 / 15%);
-    border: 1px solid rgb(255 255 255 / 30%);
-    border-radius: 4px;
+    background: glass(15%);
+    border: 1px solid glass(30%);
+    border-radius: $radius-sm;
     color: #fff;
     font-size: 0.75em;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: $transition-fast;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     white-space: nowrap;
 
-    &:hover { background: rgb(255 255 255 / 25%); }
+    &:hover { background: glass(25%); }
     &:active { transform: scale(0.95); }
 }
 
@@ -160,9 +200,9 @@ body {
     left: 0;
     right: 0;
     background: rgb(20 25 40 / 98%);
-    border-top: 1px solid rgb(255 255 255 / 10%);
-    border-bottom: 1px solid rgb(255 255 255 / 15%);
-    padding: 12px 15px;
+    border-top: 1px solid glass(10%);
+    border-bottom: $border-subtle;
+    padding: $pad-section;
     z-index: 1;
 
     &.expanded {
@@ -181,7 +221,7 @@ body {
 .filter-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: $gap-md;
 }
 
 .filter-label {
@@ -200,25 +240,25 @@ body {
 .skill-tree-filters {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 6px;
+    gap: $gap-sm;
 }
 
 .tree-filter-btn {
     padding: 6px 12px;
-    border: 2px solid rgb(255 255 255 / 30%);
-    border-radius: 16px;
-    background: rgb(255 255 255 / 10%);
+    border: 2px solid glass(30%);
+    border-radius: $radius-pill;
+    background: glass(10%);
     color: #fff;
     font-size: 0.8em;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: $transition-fast;
     text-align: center;
     white-space: nowrap;
 
     &.active {
         border-color: #fff;
-        background: rgb(255 255 255 / 30%);
+        background: glass(30%);
         transform: scale(1.05);
     }
 
@@ -243,13 +283,6 @@ body {
 // Skill Trees
 // ===========================
 
-// Shared hidden state
-.hidden,
-skill-tree.hidden,
-skill-card.hidden {
-    display: none;
-}
-
 skill-tree {
     display: block;
     margin-bottom: 20px;
@@ -258,12 +291,12 @@ skill-tree {
 tree-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: $gap-lg;
     font-size: 1.2em;
     font-weight: 700;
-    padding: 12px 15px;
-    background: rgb(255 255 255 / 8%);
-    border-radius: 12px;
+    padding: $pad-section;
+    background: glass(8%);
+    border-radius: $radius-lg;
     margin-bottom: 10px;
     border-left: 4px solid;
     color: inherit;
@@ -300,8 +333,8 @@ element-icon {
 
 skill-card {
     display: block;
-    background: rgb(255 255 255 / 5%);
-    border-radius: 8px;
+    background: glass(5%);
+    border-radius: $radius-md;
     padding: 12px;
     margin-bottom: 10px;
     border-left: 4px solid currentcolor;
@@ -310,8 +343,8 @@ skill-card {
 skill-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
+    gap: $gap-lg;
+    margin-bottom: $gap-md;
     flex-wrap: nowrap;
 }
 
@@ -326,10 +359,13 @@ skill-name {
         color: var(--secondary-color, var(--primary-color));
     }
 
-    a {
-        text-decoration: underline solid;
+    a, span {
         text-decoration-thickness: 2px;
         text-decoration-color: var(--primary-color);
+    }
+
+    a {
+        text-decoration: underline solid;
 
         &:hover {
             opacity: 0.8;
@@ -338,8 +374,6 @@ skill-name {
 
     span {
         text-decoration: underline dotted;
-        text-decoration-thickness: 2px;
-        text-decoration-color: var(--primary-color);
     }
 }
 
@@ -367,12 +401,12 @@ source-icon {
 }
 
 ap-icon {
-    background: #2ecc71;
+    background: $color-ap;
     border-radius: 50%;
 }
 
 source-icon {
-    background: #3498db;
+    background: $color-source;
     transform: rotate(45deg);
 }
 
@@ -381,27 +415,27 @@ skill-effect {
     display: block;
     font-size: 0.9em;
     line-height: 1.4;
-    margin-bottom: 8px;
+    margin-bottom: $gap-md;
     opacity: 0.9;
-    color: rgb(173 216 230 / 95%);
+    color: $color-effect;
 }
 
 skill-requirements {
     display: flex;
-    gap: 8px;
+    gap: $gap-md;
     flex-wrap: wrap;
-    margin-bottom: 6px;
+    margin-bottom: $gap-sm;
 }
 
 req-badge {
     display: inline-block;
     padding: 4px 10px;
-    border-radius: 4px;
+    border-radius: $radius-sm;
     font-size: 0.85em;
     font-weight: 600;
     font-family: 'Courier New', Consolas, monospace;
-    background: rgb(255 255 255 / 8%);
-    border: 1px solid rgb(255 255 255 / 15%);
+    background: glass(8%);
+    border: $border-subtle;
 }
 
 skill-metadata {
@@ -437,7 +471,6 @@ skill-cooldown::before {
 // ===========================
 
 // Skill reference tags: colored + underline + bold
-// Each tag maps to a skill tree and gets all three decorations
 $skill-ref-tags: (
     ('pyro', 'pyrokinetic'):   $color-fire,
     ('aerotheurge',):          $color-air,
@@ -466,16 +499,16 @@ $skill-ref-tags: (
     }
 }
 
-// Damage-type-only tags (color only, no underline/bold)
+// Damage-type-only tags (color only)
 fire       { color: $color-fire; }
 air        { color: $color-air; }
 earth      { color: $color-earth; }
 water      { color: $color-water; }
 poison     { color: $color-poison; }
-physical   { color: #adb5bd; }
-piercing   { color: #9b1d20; }
-magical    { color: #9775fa; }
-heal       { color: #51cf66; }
+physical   { color: $color-physical; }
+piercing   { color: $color-piercing; }
+magical    { color: $color-magical; }
+heal       { color: $color-heal; }
 
 // Special case: geo-poison gets color + underline (not bold)
 geo-poison {
@@ -498,7 +531,6 @@ ability {
 // Responsive Design
 // ===========================
 
-// Mobile
 @media (width <= 768px) {
     .filter-groups {
         gap: 15px;
