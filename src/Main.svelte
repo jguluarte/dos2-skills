@@ -1,31 +1,40 @@
 <script>
     import jsyaml from 'js-yaml';
     import { Skill } from '@js/skill/skill.js';
-    import { defaultSort, filterSkills } from '@js/filter.js';
+    import {
+        defaultSort,
+        // filterSkills,
+    } from '@js/filter.js';
     // import * as urlState from '@js/url-state.js';
-    // import { Settings } from '@js/settings.svelte.js';
     import skillsYaml from '@data/skills.yaml?raw';
     import SkillCard from './components/SkillCard.svelte';
 
+    // ////////////////
+    // EVERYTHING BELOW IS FOR SURE IN USE
+    // ////////////////
+
+    import { Filter } from '@js/settings.svelte.js';
+
     import Heading from './components/Heading.svelte';
     import SettingsPanel from './components/Settings.svelte';
+
+    const filter = new Filter();
 
     const filteredSkills = defaultSort(
         jsyaml.load(skillsYaml).map(Skill.fromYAML)
     );
 
-
-     function open_settings() {
-        console.log("we gonna open settings nao");
-     }
+    let open = $state(false);
+    const toggle = () => open = !open;
 
 </script>
 
 <action-bar>
-    <Heading onclick={open_settings} />
-
-    <!-- <SettingsPanel /> -->
+    <Heading onclick={toggle} {filter}/>
+    <SettingsPanel bind:open {filter} />
 </action-bar>
+
+<overlay class:open role="presentation" onclick={toggle}></overlay>
 
 <div class="container">
     <div id="skills-container">

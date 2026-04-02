@@ -1,19 +1,16 @@
 <script>
-    let props = $props();
+    let { filter, onclick: click } = $props();
 
     function onclick(e) {
         if (e.target.closest('button.reset')) return;
-        props.onclick();
+        click();
     }
 
-    function clear() {
-        console.log("button pushed");
-    }
-
+    let disabled = $derived(!filter.isActive());
 </script>
 
 <header role="button" tabindex="0" onclick={onclick}>
     <icon>⚙</icon>
     <filter-summary>summary will go here</filter-summary>
-    <button class="reset" onclick={clear}>Reset</button>
+    <button class="reset" {disabled} onclick={filter.clear}>Reset</button>
 </header>
