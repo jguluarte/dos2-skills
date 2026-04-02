@@ -2,30 +2,27 @@
 // Color Variables
 // ===========================
 
-$color-fire: #f60;
-$color-air: #66d9ff;
-$color-earth: #a0785a;
-$color-water: #1e90ff;
+// Element colors (damage types)
+$color-fire:   #f60;
+$color-air:    #66d9ff;
+$color-earth:  #a0785a;
+$color-water:  #1e90ff;
 $color-poison: #9c0;
 
-// Skill tree colors
-$color-pyrokinetic:  $color-fire;
-$color-aerotheurge:  $color-air;
-$color-geomancer:    $color-earth;
-$color-hydrosophist: $color-water;
-$color-summoning:    #be4bd3;
-$color-necromancer:  #a61e4d;
-$color-warfare:      #be590d;
-$color-huntsman:     #82c91e;
-$color-scoundrel:    #6e9aab;
-$color-polymorph:    #ffd43b;
+// Skill tree colors (unique trees get their own color)
+$color-summoning:   #be4bd3;
+$color-necromancer: #a61e4d;
+$color-warfare:     #be590d;
+$color-huntsman:    #82c91e;
+$color-scoundrel:   #6e9aab;
+$color-polymorph:   #ffd43b;
 
 // Skill tree → color mapping (names match JS enum values)
 $tree-colors: (
-    'Pyrokinetic':  $color-pyrokinetic,
-    'Aerotheurge':  $color-aerotheurge,
-    'Geomancer':    $color-geomancer,
-    'Hydrosophist': $color-hydrosophist,
+    'Pyrokinetic':  $color-fire,
+    'Aerotheurge':  $color-air,
+    'Geomancer':    $color-earth,
+    'Hydrosophist': $color-water,
     'Summoning':    $color-summoning,
     'Necromancer':  $color-necromancer,
     'Warfare':      $color-warfare,
@@ -128,10 +125,6 @@ body {
     font-style: italic;
     flex: 1;
     min-width: 0;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 .filter-header-buttons {
@@ -157,7 +150,6 @@ body {
 
     &:hover { background: rgb(255 255 255 / 25%); }
     &:active { transform: scale(0.95); }
-    &.hidden { display: none; }
 }
 
 // Filter Content
@@ -251,13 +243,16 @@ body {
 // Skill Trees
 // ===========================
 
+// Shared hidden state
+.hidden,
+skill-tree.hidden,
+skill-card.hidden {
+    display: none;
+}
+
 skill-tree {
     display: block;
     margin-bottom: 20px;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 tree-header {
@@ -310,10 +305,6 @@ skill-card {
     padding: 12px;
     margin-bottom: 10px;
     border-left: 4px solid currentcolor;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 skill-header {
@@ -368,18 +359,19 @@ skill-cost {
     }
 }
 
-ap-icon {
+ap-icon,
+source-icon {
     display: inline-block;
     width: 8px;
     height: 8px;
+}
+
+ap-icon {
     background: #2ecc71;
     border-radius: 50%;
 }
 
 source-icon {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
     background: #3498db;
     transform: rotate(45deg);
 }
@@ -392,7 +384,6 @@ skill-effect {
     margin-bottom: 8px;
     opacity: 0.9;
     color: rgb(173 216 230 / 95%);
-
 }
 
 skill-requirements {
@@ -439,57 +430,67 @@ skill-cooldown::before {
     padding: 40px 20px;
     font-size: 1.1em;
     opacity: 0.7;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 // ===========================
 // Custom HTML Tags (styled via CSS)
 // ===========================
 
-// Layer 1: Colors (damage types + skill name references)
-fire, pyro, pyrokinetic   { color: $color-fire; }
-air, aerotheurge          { color: $color-air; }
-earth, geo, geomancer     { color: $color-earth; }
-water, hydro, hydrosophist { color: $color-water; }
-poison, geo-poison        { color: $color-poison; }
-necro, necromancer        { color: $color-necromancer; }
-warfare                   { color: $color-warfare; }
-huntsman                  { color: $color-huntsman; }
-scoundrel                 { color: $color-scoundrel; }
-poly, polymorph           { color: $color-polymorph; }
-physical                  { color: #adb5bd; }
-piercing                  { color: #9b1d20; }
-magical                   { color: #9775fa; }
-heal                      { color: #51cf66; }
+// Skill reference tags: colored + underline + bold
+// Each tag maps to a skill tree and gets all three decorations
+$skill-ref-tags: (
+    ('pyro', 'pyrokinetic'):   $color-fire,
+    ('aerotheurge',):          $color-air,
+    ('geo', 'geomancer'):      $color-earth,
+    ('hydro', 'hydrosophist'): $color-water,
+    ('necro', 'necromancer'):  $color-necromancer,
+    ('warfare',):              $color-warfare,
+    ('huntsman',):             $color-huntsman,
+    ('scoundrel',):            $color-scoundrel,
+    ('poly', 'polymorph'):     $color-polymorph,
+);
 
-// Layer 2: Underline (statuses + clouds + skill references)
-status, cloud,
-pyro, pyrokinetic,
-aerotheurge,
-geo, geomancer, geo-poison,
-hydro, hydrosophist,
-necro, necromancer,
-warfare, huntsman, scoundrel,
-poly, polymorph {
+@each $tags, $color in $skill-ref-tags {
+    $selector: '';
+    @each $tag in $tags {
+        @if $selector == '' {
+            $selector: #{$tag};
+        } @else {
+            $selector: #{$selector}, #{$tag};
+        }
+    }
+    #{$selector} {
+        color: $color;
+        text-decoration: underline dotted;
+        font-weight: 600;
+    }
+}
+
+// Damage-type-only tags (color only, no underline/bold)
+fire       { color: $color-fire; }
+air        { color: $color-air; }
+earth      { color: $color-earth; }
+water      { color: $color-water; }
+poison     { color: $color-poison; }
+physical   { color: #adb5bd; }
+piercing   { color: #9b1d20; }
+magical    { color: #9775fa; }
+heal       { color: #51cf66; }
+
+// Special case: geo-poison gets color + underline (not bold)
+geo-poison {
+    color: $color-poison;
     text-decoration: underline dotted;
 }
 
-// Layer 3: Bold (skill references only)
-pyro, pyrokinetic,
-aerotheurge,
-geo, geomancer,
-hydro, hydrosophist,
-necro, necromancer,
-warfare, huntsman, scoundrel,
-poly, polymorph {
-    font-weight: 600;
+// Statuses & clouds: underline + italic
+status, cloud {
+    text-decoration: underline dotted;
+    font-style: italic;
 }
 
-// Layer 4: Italics (statuses + clouds + abilities)
-status, cloud, ability {
+// Abilities: italic only
+ability {
     font-style: italic;
 }
 
@@ -500,9 +501,7 @@ status, cloud, ability {
 // Mobile
 @media (width <= 768px) {
     .filter-groups {
-        flex-direction: column;
         gap: 15px;
-        align-items: stretch;
     }
 
     .tree-filter-btn {
