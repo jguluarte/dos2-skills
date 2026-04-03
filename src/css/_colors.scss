@@ -1,0 +1,74 @@
+// Element colors (shared between damage types and skill trees)
+$color-fire:   #f60;
+$color-air:    #66d9ff;
+$color-earth:  #a0785a;
+$color-water:  #1e90ff;
+$color-poison: #9c0;
+
+// Skill tree colors
+$color-pyrokinetic:  $color-fire;
+$color-aerotheurge:  $color-air;
+$color-geomancer:    $color-earth;
+$color-hydrosophist: $color-water;
+$color-summoning:    #be4bd3;
+$color-necromancer:  #a61e4d;
+$color-warfare:      #be590d;
+$color-huntsman:     #82c91e;
+$color-scoundrel:    #6e9aab;
+$color-polymorph:    #ffd43b;
+
+// Damage/effect type colors (not tied to a skill tree)
+$color-physical: #adb5bd;
+$color-piercing: #9b1d20;
+$color-magical:  #9775fa;
+$color-heal:     #51cf66;
+
+// UI colors
+$bg-primary:     #111628;
+$bg-secondary:   #1a1f35;
+$text-primary:   #e9ecef;
+$text-secondary: #aaa;
+$bg-overlay:     rgb(15 20 35 / 95%);
+
+// Damage types — color only
+fire, pyro   { color: $color-fire; }
+earth, geo   { color: $color-earth; }
+water, hydro { color: $color-water; }
+air          { color: $color-air; }
+poison       { color: $color-poison; }
+heal         { color: $color-heal; }
+magical      { color: $color-magical; }
+physical     { color: $color-physical; }
+piercing     { color: $color-piercing; }
+necro        { color: $color-necromancer; }
+warfare      { color: $color-warfare; }
+huntsman     { color: $color-huntsman; }
+scoundrel    { color: $color-scoundrel; }
+poly         { color: $color-polymorph; }
+
+// Skill tree → color mapping (names match JS enum values)
+$tree-colors: (
+    'Pyrokinetic':  $color-pyrokinetic,
+    'Aerotheurge':  $color-aerotheurge,
+    'Geomancer':    $color-geomancer,
+    'Hydrosophist': $color-hydrosophist,
+    'Summoning':    $color-summoning,
+    'Necromancer':  $color-necromancer,
+    'Warfare':      $color-warfare,
+    'Huntsman':     $color-huntsman,
+    'Scoundrel':    $color-scoundrel,
+    'Polymorph':    $color-polymorph,
+);
+
+@each $tree, $color in $tree-colors {
+    skill-card[data-primary-tree="#{$tree}"] {
+        color:           $color;
+        --primary-color: #{$color};
+    }
+    skill-card[data-secondary-tree="#{$tree}"] {
+        --secondary-color: #{$color};
+    }
+    req-badge[data-tree="#{$tree}"] {
+        color: $color;
+    }
+}

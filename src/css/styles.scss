@@ -1,45 +1,4 @@
-// ===========================
-// Color Variables
-// ===========================
-
-$color-fire: #f60;
-$color-air: #66d9ff;
-$color-earth: #a0785a;
-$color-water: #1e90ff;
-$color-poison: #9c0;
-
-// Skill tree colors
-$color-pyrokinetic:  $color-fire;
-$color-aerotheurge:  $color-air;
-$color-geomancer:    $color-earth;
-$color-hydrosophist: $color-water;
-$color-summoning:    #be4bd3;
-$color-necromancer:  #a61e4d;
-$color-warfare:      #be590d;
-$color-huntsman:     #82c91e;
-$color-scoundrel:    #6e9aab;
-$color-polymorph:    #ffd43b;
-
-// Skill tree → color mapping (names match JS enum values)
-$tree-colors: (
-    'Pyrokinetic':  $color-pyrokinetic,
-    'Aerotheurge':  $color-aerotheurge,
-    'Geomancer':    $color-geomancer,
-    'Hydrosophist': $color-hydrosophist,
-    'Summoning':    $color-summoning,
-    'Necromancer':  $color-necromancer,
-    'Warfare':      $color-warfare,
-    'Huntsman':     $color-huntsman,
-    'Scoundrel':    $color-scoundrel,
-    'Polymorph':    $color-polymorph,
-);
-
-// UI colors
-$bg-primary: #111628;
-$bg-secondary: #1a1f35;
-$text-primary: #e9ecef;
-$text-secondary: #aaa;
-$bg-overlay: rgb(15 20 35 / 95%);
+@use 'colors' as *;
 
 // ===========================
 // Base Reset & Layout
@@ -70,10 +29,10 @@ body {
 }
 
 // ===========================
-// Filter Bar
+// Action Bar & Settings
 // ===========================
 
-overlay, .filter-overlay {
+overlay {
     position: absolute;
     inset: 0;
     min-height: 100vh;
@@ -85,14 +44,14 @@ overlay, .filter-overlay {
     transition: background-color 0.2s;
     z-index: 5;
 
-    &.visible, &.open {
+    &.open {
         background: rgb(10 14 26 / 50%);
         backdrop-filter: blur(4px);
         pointer-events: auto;
     }
 }
 
-action-bar, .filter-bar {
+action-bar {
     display: block;
     position: sticky;
     top: 0;
@@ -102,7 +61,7 @@ action-bar, .filter-bar {
     border-bottom: 1px solid rgb(255 255 255 / 15%);
 }
 
-header, .filter-header {
+header {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
@@ -118,33 +77,23 @@ header, .filter-header {
     }
 }
 
-icon, .filter-icon {
+icon {
     display: block;
     font-size: 2em;
     opacity: 0.7;
     flex-shrink: 0;
 }
 
-filter-summary, .active-filters-summary {
+filter-summary {
     display: block;
     font-size: 0.7em;
     color: $text-secondary;
     font-style: italic;
     flex: 1;
     min-width: 0;
-
-    &.hidden {
-        display: none;
-    }
 }
 
-.filter-header-buttons {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-button.reset, .clear-btn {
+button.reset {
     padding: 4px 10px;
     background: rgb(255 255 255 / 15%);
     border: 1px solid rgb(255 255 255 / 30%);
@@ -159,7 +108,6 @@ button.reset, .clear-btn {
     flex-shrink: 0;
     white-space: nowrap;
 
-    &.hidden { display: none; }
     &:active { transform: scale(0.95); }
     &:hover { background: rgb(255 255 255 / 25%); }
 
@@ -170,8 +118,7 @@ button.reset, .clear-btn {
     }
 }
 
-// Filter Content
-settings, .filter-content {
+settings {
     display: none;
     position: absolute;
     top: 100%;
@@ -183,7 +130,7 @@ settings, .filter-content {
     padding: 12px 15px;
     z-index: 1;
 
-    &.expanded, &.open {
+    &.open {
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -214,48 +161,10 @@ settings, .filter-content {
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 6px;
         }
-
     }
 }
 
-// new --> panel
-.filter-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-// new --> panel > * {...}
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-// new --> panel span
-.filter-label {
-    font-weight: 600;
-    font-size: 0.85em;
-}
-
-// new --> panel span hint
-.filter-label-hint {
-    font-size: 0.75em;
-    font-weight: 400;
-    opacity: 0.7;
-    margin-left: 4px;
-}
-
-// Filter Buttons
-.skill-tree-filters {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 6px;
-}
-
-button.tree, .tree-filter-btn {
+button.tree {
     padding: 6px 12px;
     border: 2px solid rgb(255 255 255 / 30%);
     border-radius: 16px;
@@ -284,63 +193,13 @@ button.tree, .tree-filter-btn {
 // ===========================
 
 .container {
+    position: relative;
+    z-index: 1;
     max-width: 800px;
     margin: 0 auto;
     padding: 10px;
     padding-top: 20px;
     min-height: calc(100vh - 60px);
-}
-
-// ===========================
-// Skill Trees
-// ===========================
-
-skill-tree {
-    display: block;
-    margin-bottom: 20px;
-
-    &.hidden {
-        display: none;
-    }
-}
-
-tree-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.2em;
-    font-weight: 700;
-    padding: 12px 15px;
-    background: rgb(255 255 255 / 8%);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border-left: 4px solid;
-    color: inherit;
-}
-
-element-icon {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: currentcolor;
-}
-
-// Tree-specific colors (generated from $tree-colors map)
-@each $tree, $color in $tree-colors {
-    skill-card[data-primary-tree="#{$tree}"] {
-        --primary-color: #{$color};
-
-        color: $color;
-    }
-
-    skill-card[data-secondary-tree="#{$tree}"] {
-        --secondary-color: #{$color};
-    }
-
-    req-badge[data-tree="#{$tree}"] {
-        color: $color;
-    }
 }
 
 // ===========================
@@ -354,10 +213,6 @@ skill-card {
     padding: 12px;
     margin-bottom: 10px;
     border-left: 4px solid currentcolor;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 skill-header {
@@ -365,7 +220,6 @@ skill-header {
     align-items: center;
     gap: 10px;
     margin-bottom: 8px;
-    flex-wrap: nowrap;
 }
 
 skill-name {
@@ -396,7 +250,6 @@ skill-name {
     }
 }
 
-// Skill Costs
 skill-cost {
     display: flex;
     align-items: center;
@@ -428,7 +281,6 @@ source-icon {
     transform: rotate(45deg);
 }
 
-// Skill Details
 skill-effect {
     display: block;
     font-size: 0.9em;
@@ -436,7 +288,6 @@ skill-effect {
     margin-bottom: 8px;
     opacity: 0.9;
     color: rgb(173 216 230 / 95%);
-
 }
 
 skill-requirements {
@@ -475,7 +326,7 @@ skill-cooldown::before {
 }
 
 // ===========================
-// No Results Message
+// No Results
 // ===========================
 
 .no-results {
@@ -483,79 +334,24 @@ skill-cooldown::before {
     padding: 40px 20px;
     font-size: 1.1em;
     opacity: 0.7;
-
-    &.hidden {
-        display: none;
-    }
 }
 
 // ===========================
-// Custom HTML Tags (styled via CSS)
+// Custom HTML Tags
 // ===========================
 
-// Layer 1: Colors (damage types + skill name references)
-fire, pyro, pyrokinetic   { color: $color-fire; }
-air, aerotheurge          { color: $color-air; }
-earth, geo, geomancer     { color: $color-earth; }
-water, hydro, hydrosophist { color: $color-water; }
-poison, geo-poison        { color: $color-poison; }
-necro, necromancer        { color: $color-necromancer; }
-warfare                   { color: $color-warfare; }
-huntsman                  { color: $color-huntsman; }
-scoundrel                 { color: $color-scoundrel; }
-poly, polymorph           { color: $color-polymorph; }
-physical                  { color: #adb5bd; }
-piercing                  { color: #9b1d20; }
-magical                   { color: #9775fa; }
-heal                      { color: #51cf66; }
-
-// Layer 2: Underline (statuses + clouds + skill references)
-status, cloud,
-pyro, pyrokinetic,
-aerotheurge,
-geo, geomancer, geo-poison,
-hydro, hydrosophist,
-necro, necromancer,
-warfare, huntsman, scoundrel,
-poly, polymorph {
+pyro, geo, hydro, necro, warfare, huntsman, scoundrel, poly {
     text-decoration: underline dotted;
-}
-
-// Layer 3: Bold (skill references only)
-pyro, pyrokinetic,
-aerotheurge,
-geo, geomancer,
-hydro, hydrosophist,
-necro, necromancer,
-warfare, huntsman, scoundrel,
-poly, polymorph {
     font-weight: 600;
 }
 
-// Layer 4: Italics (statuses + clouds + abilities)
-status, cloud, ability {
+// Statuses & clouds — underlined, italic
+status, cloud {
+    text-decoration: underline dotted;
     font-style: italic;
 }
 
-// ===========================
-// Responsive Design
-// ===========================
-
-// Mobile
-@media (width <= 768px) {
-    .filter-groups {
-        flex-direction: column;
-        gap: 15px;
-        align-items: stretch;
-    }
-
-    .tree-filter-btn {
-        padding: 8px 14px;
-        font-size: 0.85em;
-    }
-
-    .container {
-        position: relative;
-        z-index: 1;
-    }
+// Abilities — italic only
+ability {
+    font-style: italic;
 }
