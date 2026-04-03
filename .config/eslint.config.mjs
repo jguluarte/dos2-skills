@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import svelte from "eslint-plugin-svelte";
 import stylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
 
@@ -13,6 +14,7 @@ export default [
         ],
     },
     js.configs.recommended,
+    ...svelte.configs["flat/recommended"],
     {
         plugins: {
             "@stylistic": stylistic,
@@ -208,7 +210,7 @@ export default [
             "@stylistic/no-extra-semi": "error",
             "@stylistic/no-floating-decimal": "error",
             "@stylistic/function-call-argument-newline": [
-                "error", "never",
+                "error", "consistent",
             ],
             "@stylistic/comma-style": ["error", "last"],
             "@stylistic/dot-location": ["error", "property"],
@@ -252,6 +254,25 @@ export default [
         },
         rules: {
             "max-nested-callbacks": ["error", 5],
+        },
+    },
+    {
+        files: ["**/*.svelte"],
+        languageOptions: {
+            globals: {
+                ...globals.browser,
+            },
+        },
+        rules: {
+            "prefer-const": "off",
+            "no-unused-vars": ["error", {
+                varsIgnorePattern: "^_",
+                argsIgnorePattern: "^_",
+            }],
+            "no-return-assign": "off",
+            "no-unused-expressions": "off",
+            "svelte/no-at-html-tags": "off",
+            "svelte/require-each-key": "off",
         },
     },
     {
