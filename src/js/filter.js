@@ -1,5 +1,3 @@
-import { SUMMONING } from '@constants';
-
 export function defaultSort(skills) {
     return [...skills].sort((a, b) => {
         const aCross = a.secondaryTree ? 1 : 0;
@@ -15,37 +13,8 @@ export function defaultSort(skills) {
     });
 }
 
-export function filterSkills(skills, primary, filters = new Set()) {
-    if ( filterless(primary, filters) ) return skills;
-
-    let results = primary
-        ? reduceBy(skills, primary)
-        : skills;
-
-    results = reduceBy(results, ...filters);
-    return summoningFilter(results, primary, ...filters).sort((a, b) => {
-        return Number(!!a.secondaryTree) - Number(!!b.secondaryTree);
-    });
-}
-
 function filterless(primary, filters) {
     return !(primary || filters?.size);
-}
-
-function reduceBy(skills, ...filters) {
-    if (filters?.length) {
-        return skills.filter(
-            (s) => s.trees.some( (t) => filters.includes(t) )
-        );
-    }
-
-    return skills;
-}
-
-function summoningFilter(skills, ...filters) {
-    return filters.includes(SUMMONING)
-        ? skills
-        : skills.filter( (s) => !s.has(SUMMONING) );
 }
 
 export function summarize(primary, filters = []) {

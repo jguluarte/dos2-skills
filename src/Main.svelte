@@ -7,45 +7,52 @@
     } from '@js/filter.js';
     // import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
-    import SkillCard from './components/SkillCard.svelte';
+    import SkillCard from '@components/SkillCard.svelte';
 
     // ////////////////
     // EVERYTHING BELOW IS FOR SURE IN USE
     // ////////////////
 
-    import { Filter } from '@js/settings.svelte.js';
-
+    import { Settings } from '@js/settings.svelte.js';
     import Heading from './components/Heading.svelte';
-    import SettingsPanel from './components/Settings.svelte';
 
-    const filter = new Filter();
+    import { PrimaryFilter, AnyFilter, SummoningFilter } from '@js/strategy.js';
 
-    const filteredSkills = defaultSort(
+    const settings = new Settings();
+
+    const allSkills = defaultSort(
         jsyaml.load(skillsYaml).map(Skill.fromYAML)
     );
 
-    let open = $state(false);
-    const toggle = () => open = !open;
+    const strategies = [
+        new SummoningFilter(settings.filter),
+        new PrimaryFilter(settings.filter),
+        new AnyFilter(settings.filter),
+    ];
+
+    let filteredSkills = $derived(strategies.reduce(
+        (skills, strategy) => strategy.apply(skills), allSkills
+    ));
+
+    $effect(() => {
+        filteredSkills;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
 </script>
 
-<action-bar>
-    <Heading onclick={toggle} {filter}/>
-    <SettingsPanel bind:open {filter} />
-</action-bar>
-
-<overlay class:open role="presentation" onclick={toggle}></overlay>
+<Heading {settings} />
 
 <div class="container">
-    <div id="skills-container">
+
+    {#if filteredSkills.length > 0}
         {#each filteredSkills as skill (skill.name)}
             <SkillCard {skill} />
         {/each}
-    </div>
-
-    {#if filteredSkills.length === 0}
+    {:else}
         <div class="no-results">
             No skills found matching your filters.
         </div>
     {/if}
+
 </div>

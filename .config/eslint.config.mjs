@@ -210,7 +210,7 @@ export default [
             "@stylistic/no-extra-semi": "error",
             "@stylistic/no-floating-decimal": "error",
             "@stylistic/function-call-argument-newline": [
-                "error", "never",
+                "error", "consistent",
             ],
             "@stylistic/comma-style": ["error", "last"],
             "@stylistic/dot-location": ["error", "property"],

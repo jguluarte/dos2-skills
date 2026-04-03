@@ -1,16 +1,34 @@
 <script>
-    let { filter, onclick: click } = $props();
+    import SettingsPanel from '@components/Settings.svelte';
+    import { summarize } from '@js/filter.js';
 
-    function onclick(e) {
+    let { settings } = $props();
+
+    let open = $state(false);
+    const toggle = () => open = !open;
+    const reset  = () => settings.filter.clear();
+
+    let disabled = $derived(!settings.filter.isActive());
+
+    function openSettings(e) {
         if (e.target.closest('button.reset')) return;
-        click();
+        toggle();
     }
 
-    let disabled = $derived(!filter.isActive());
+    // FIXME: I want to redo this summarization text
+    let summary = $derived(
+        summarize(settings.filter.primary, settings.filter.any)
+    );
 </script>
 
-<header role="button" tabindex="0" onclick={onclick}>
-    <icon>⚙</icon>
-    <filter-summary>summary will go here</filter-summary>
-    <button class="reset" {disabled} onclick={filter.clear}>Reset</button>
-</header>
+<overlay class:open role="presentation" onclick={toggle}></overlay>
+
+<action-bar>
+    <header role="button" tabindex="0" onclick={openSettings}>
+        <icon>⚙</icon>
+        <filter-summary>{summary}</filter-summary>
+        <button class="reset" {disabled} onclick={reset}>Reset</button>
+    </header>
+
+    <SettingsPanel {open} {settings} />
+</action-bar>

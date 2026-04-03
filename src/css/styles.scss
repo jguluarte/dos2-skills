@@ -104,6 +104,8 @@ action-bar, .filter-bar {
 
 header, .filter-header {
     display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
@@ -157,10 +159,15 @@ button.reset, .clear-btn {
     flex-shrink: 0;
     white-space: nowrap;
 
-    &:hover { background: rgb(255 255 255 / 25%); }
-    &:active { transform: scale(0.95); }
-    &:disabled { opacity: 0.3; pointer-events: none; cursor: default; }
     &.hidden { display: none; }
+    &:active { transform: scale(0.95); }
+    &:hover { background: rgb(255 255 255 / 25%); }
+
+    &:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 // Filter Content

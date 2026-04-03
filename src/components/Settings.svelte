@@ -1,14 +1,11 @@
 <script>
-    import PrimaryFilterPanel from '@components/settings/PrimaryFilter.svelte';
     import AnyFilterPanel from '@components/settings/AnyFilter.svelte';
+    import PrimaryFilterPanel from '@components/settings/PrimaryFilter.svelte';
 
-    let { open, filter } = $props();
-
+    let { open, settings } = $props();
 </script>
 
 <settings class:open>
-
-    <PrimaryFilterPanel {filter} />
-    <AnyFilterPanel {filter} />
-
+    <PrimaryFilterPanel filter={settings.filter} />
+    <AnyFilterPanel filter={settings.filter} />
 </settings>

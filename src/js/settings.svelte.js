@@ -24,4 +24,16 @@ export class Filter {
     isActive = () => {
         return this.primary || !!this.any.size;
     };
+
+    has = (tree) => {
+        return [this.primary, ...this.any].includes(tree);
+    };
+}
+
+export class Settings {
+    filter = new Filter();
+
+    clear = () => {
+        this.filter.clear();
+    };
 }
