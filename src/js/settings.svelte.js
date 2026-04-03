@@ -32,8 +32,4 @@ export class Filter {
 
 export class Settings {
     filter = new Filter();
-
-    clear = () => {
-        this.filter.clear();
-    };
 }

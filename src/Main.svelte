@@ -1,20 +1,13 @@
 <script>
     import jsyaml from 'js-yaml';
-    import { Skill } from '@js/skill/skill.js';
-    import {
-        defaultSort,
-        // filterSkills,
-    } from '@js/filter.js';
-    // import * as urlState from '@js/url-state.js';
     import skillsYaml from '@data/skills.yaml?raw';
-    import SkillCard from '@components/SkillCard.svelte';
 
-    // ////////////////
-    // EVERYTHING BELOW IS FOR SURE IN USE
-    // ////////////////
-
+    import { Skill } from '@js/skill/skill.js';
+    import { defaultSort } from '@js/filter.js';
     import { Settings } from '@js/settings.svelte.js';
+
     import Heading from './components/Heading.svelte';
+    import SkillCard from '@components/SkillCard.svelte';
 
     import { PrimaryFilter, AnyFilter, SummoningFilter } from '@js/strategy.js';
 
@@ -34,9 +27,11 @@
         (skills, strategy) => strategy.apply(skills), allSkills
     ));
 
+    let firstTime = true;
     $effect(() => {
         filteredSkills;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (!firstTime) window.scrollTo({ top: 0, behavior: 'smooth' });
+        firstTime = false;
     });
 
 </script>
