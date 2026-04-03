@@ -24,7 +24,7 @@
 <overlay class:open role="presentation" onclick={toggle}></overlay>
 
 <action-bar>
-    <header role="button" tabindex="0" onclick={openSettings}>
+    <header role="button" onclick={openSettings}>
         <icon>⚙</icon>
         <filter-summary>{summary}</filter-summary>
         <button class="reset" {disabled} onclick={reset}>Reset</button>
