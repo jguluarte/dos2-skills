@@ -24,11 +24,12 @@ $color-magical:  #9775fa;
 $color-heal:     #51cf66;
 
 // UI colors
+$white:          #fff;
+$black:          #000;
 $bg-primary:     #111628;
 $bg-secondary:   #1a1f35;
 $text-primary:   #e9ecef;
 $text-secondary: #aaa;
-$bg-overlay:     rgb(15 20 35 / 95%);
 
 // Damage types — color only
 fire, pyro   { color: $color-fire; }
@@ -63,6 +64,7 @@ $tree-colors: (
 @each $tree, $color in $tree-colors {
     skill-card[data-primary-tree="#{$tree}"] {
         color:           $color;
+
         --primary-color: #{$color};
     }
     skill-card[data-secondary-tree="#{$tree}"] {

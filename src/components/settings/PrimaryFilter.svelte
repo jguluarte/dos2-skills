@@ -1,6 +1,6 @@
 <script>
     import { ALL_TREES as trees } from '@constants';
-    import TreeFilterPanel from '@components/settings/TreeFilterPanel.svelte';
+    import TreeFilterPanel from '@components/settings/_treePanel.svelte';
 
     let { filter } = $props();
 
@@ -9,7 +9,6 @@
     }
 
     const isActive = (tree) => filter.primary === tree;
-
 </script>
 
 <TreeFilterPanel {trees} {onclick} {isActive}>

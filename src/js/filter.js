@@ -17,7 +17,7 @@ function filterless(primary, filters) {
     return !(primary || filters?.size);
 }
 
-export function summarize(primary, filters = []) {
+export function summarize({ primary, any: filters }) {
     if ( filterless(primary, filters) ) {
         return 'Showing all skills, tap to filter';
     }

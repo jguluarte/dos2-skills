@@ -1,9 +1,9 @@
 <script>
-    let { title, trees, isActive, onclick } = $props();
+    let { title, trees, isActive, onclick, disabled = false } = $props();
 </script>
 
 {#snippet button(tree, active)}
-    <button class="tree" class:active onclick={() => onclick(tree)}>
+    <button class:active {disabled} onclick={() => onclick(tree)}>
         {tree}
     </button>
 {/snippet}

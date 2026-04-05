@@ -9,7 +9,10 @@
     import Heading from './components/Heading.svelte';
     import SkillCard from '@components/SkillCard.svelte';
 
-    import { PrimaryFilter, AnyFilter, SummoningFilter } from '@js/strategy.js';
+    import {
+        PrimaryFilter, AnyFilter, SummoningFilter, SingleClassFilter,
+        SourceFilter,
+    } from '@js/strategy.js';
 
     const settings = new Settings();
 
@@ -17,11 +20,12 @@
         jsyaml.load(skillsYaml).map(Skill.fromYAML)
     );
 
-    const strategies = [
-        new SummoningFilter(settings.filter),
-        new PrimaryFilter(settings.filter),
-        new AnyFilter(settings.filter),
+    const filters = [
+        SummoningFilter, PrimaryFilter, AnyFilter, SingleClassFilter,
+        SourceFilter,
     ];
+
+    const strategies = filters.map( (f) => new f(settings.filter) );
 
     let filteredSkills = $derived(strategies.reduce(
         (skills, strategy) => strategy.apply(skills), allSkills
@@ -36,7 +40,7 @@
 
 </script>
 
-<Heading {settings} />
+<Heading filter={settings.filter} />
 
 <div class="container">
 

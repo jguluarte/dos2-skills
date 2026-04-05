@@ -51,3 +51,9 @@ export const VALID_SKILL_COMBINATION = {
 
 export const SP_MAX = 3;
 export const AP_MAX = 4;
+
+export const TRI_STATE = Object.freeze({
+    YES: "Yes",
+    NO: "No",
+    ONLY: "Only",
+});

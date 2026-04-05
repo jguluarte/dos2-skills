@@ -71,25 +71,30 @@ describe('sorting', () => {
 
 describe('summarize', () => {
     it('no filters', () => {
-        const result = summarize(null, null);
+        const result = summarize({ primary: null, any: null });
         expect(result).toBe('Showing all skills, tap to filter');
     });
 
     it('primary only', () => {
-        const result = summarize(PYROKINETIC, null);
+        const result = summarize({
+            primary: PYROKINETIC, any: null,
+        });
         expect(result).toBe(`Showing all ${PYROKINETIC} skills`);
     });
 
     it('primary + one filter', () => {
-        const result = summarize(PYROKINETIC, set(WARFARE));
+        const result = summarize({
+            primary: PYROKINETIC, any: set(WARFARE),
+        });
         expect(result)
             .toBe(`Showing all ${PYROKINETIC} skills, with ${WARFARE}`);
     });
 
     it('primary + two filters', () => {
-        const result = summarize(
-            PYROKINETIC, set(WARFARE, NECROMANCER)
-        );
+        const result = summarize({
+            primary: PYROKINETIC,
+            any: set(WARFARE, NECROMANCER),
+        });
         expect(result).toBe(
             `Showing all ${PYROKINETIC} skills,`
             + ` with ${WARFARE} or ${NECROMANCER}`
@@ -97,12 +102,17 @@ describe('summarize', () => {
     });
 
     it('one filter, no primary', () => {
-        const result = summarize(null, set(WARFARE));
+        const result = summarize({
+            primary: null, any: set(WARFARE),
+        });
         expect(result).toBe(`Showing all ${WARFARE} skills`);
     });
 
     it('multiple filters, no primary', () => {
-        const result = summarize(null, set(WARFARE, NECROMANCER));
+        const result = summarize({
+            primary: null,
+            any: set(WARFARE, NECROMANCER),
+        });
         expect(result)
             .toBe(`Showing skills with ${WARFARE} or ${NECROMANCER}`);
     });

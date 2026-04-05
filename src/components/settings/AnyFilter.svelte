@@ -1,6 +1,6 @@
 <script>
-    import { ALL_TREES, VALID_SKILL_COMBINATION } from '@constants';
-    import TreeFilterPanel from '@components/settings/TreeFilterPanel.svelte';
+    import { ALL_TREES, VALID_SKILL_COMBINATION, TRI_STATE } from '@constants';
+    import TreeFilterPanel from '@components/settings/_treePanel.svelte';
 
     let { filter } = $props();
 
@@ -28,10 +28,17 @@
         }
     });
 
+    let hidden = $derived(filter.singleClass === TRI_STATE.ONLY);
+    $effect.pre(() => {
+        if (filter.singleClass === TRI_STATE.ONLY) filter.any.clear();
+    });
+
 </script>
 
-<TreeFilterPanel {trees} {onclick} {isActive}>
-    {#snippet title()}
-        Filter for <hint>(just need to match one of the following)</hint>
-    {/snippet}
-</TreeFilterPanel>
+{#if !hidden}
+    <TreeFilterPanel {trees} {onclick} {isActive}>
+        {#snippet title()}
+            Filter for <hint>(just need to match one of the following)</hint>
+        {/snippet}
+    </TreeFilterPanel>
+{/if}
