@@ -2,10 +2,17 @@
     import AnyFilterPanel from '@components/settings/AnyFilter.svelte';
     import PrimaryFilterPanel from '@components/settings/PrimaryFilter.svelte';
 
-    let { open, settings } = $props();
+    import Config from '@components/settings/_configPanel.svelte';
+
+    let { open, filter } = $props();
 </script>
 
 <settings class:open>
-    <PrimaryFilterPanel filter={settings.filter} />
-    <AnyFilterPanel filter={settings.filter} />
+    <multi-panel>
+        <Config {filter} key="singleClass" label="Show single class skills?" />
+        <Config {filter} key="source"      label="Show Source skills?" />
+    </multi-panel>
+
+    <PrimaryFilterPanel {filter} />
+    <AnyFilterPanel {filter} />
 </settings>

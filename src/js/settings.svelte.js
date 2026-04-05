@@ -6,15 +6,21 @@ export class Filter {
     primary = $state(null);
     any = new SvelteSet();
 
+    singleClass = $state(null);
+    source = $state(null);
+
     constructor() {
-        const { primary, filters } = urlState.load();
-        this.primary = primary;
-        this.any = new SvelteSet(filters);
+        const fromURL = urlState.load();
+
+        this.primary = fromURL.primary;
+        this.singleClass = fromURL.singleClass;
+        this.source = fromURL.source;
+        this.any = new SvelteSet(fromURL.any);
 
         $effect(this.save);
     }
 
-    save = () => urlState.save(this.primary, this.any);
+    save = () => urlState.save(this);
 
     clear = () => {
         this.primary = null;

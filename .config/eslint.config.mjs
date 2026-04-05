@@ -219,9 +219,7 @@ export default [
             "@stylistic/nonblock-statement-body-position": [
                 "error", "beside",
             ],
-            "@stylistic/no-confusing-arrow": ["error", {
-                allowParens: true,
-            }],
+            "@stylistic/no-confusing-arrow": "off",
             "@stylistic/no-mixed-operators": ["error", {
                 allowSamePrecedence: true,
             }],

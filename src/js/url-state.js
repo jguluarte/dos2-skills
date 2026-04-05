@@ -1,32 +1,55 @@
-import { ALL_TREES } from '@constants';
+import { ALL_TREES, TRI_STATE } from '@constants';
+import {
+    encodeQueryParams,
+    decodeQueryParams,
+    searchStringToObject,
+    objectToSearchString,
+} from 'serialize-query-params';
 
-const ANY = 'f';
-const PRIMARY = 'p';
+const isTree = (t) => ALL_TREES.includes(t);
 
-export function load(search = window.location.search) {
-    const params = new URLSearchParams(search);
-    const p = params.get(PRIMARY);
-    const f = params.get(ANY);
+const TreeSet = {
+    encode: (set) => set?.size ? [...set].sort() : undefined,
+    decode: (vals) => new Set( [vals].flat().filter(isTree) ),
+};
+
+function ConstrainedBy(array, _default = null) {
+    const allowed = (val) => array.includes(val);
     return {
-        primary: p && ALL_TREES.includes(p) ? p : null,
-        filters: new Set(
-            f ? f.split(',').filter((t) => ALL_TREES.includes(t)) : []
-        ),
+        encode: (val) => allowed(val) ? val : undefined,
+        decode: (val) => allowed(val) ? val : _default,
     };
 }
 
-export function save(primary, filters) {
-    const url = serialize(primary, filters) || window.location.pathname;
+function FromEnum(obj, key = "YES") {
+    return ConstrainedBy(Object.values(obj), obj[key]);
+}
+
+const paramConfig = {
+    primary: ConstrainedBy(ALL_TREES),
+    any: TreeSet,
+
+    source: FromEnum(TRI_STATE),
+    singleClass: FromEnum(TRI_STATE),
+};
+
+export function load(search = window.location.search) {
+    return decodeQueryParams( paramConfig, searchStringToObject(search) );
+}
+
+export function save(filter) {
+    const url = serialize(filter) || window.location.pathname;
     window.history.replaceState({}, '', url);
 }
 
-export function serialize(primary, filters) {
-    const parts = [];
-    if (primary) parts.push(`${PRIMARY}=${primary}`);
+export function serialize(filter) {
+    const encoded = encodeParams(paramConfig, filter);
+    const str = objectToSearchString(encoded);
+    return str ? `?${str}` : '';
+}
 
-    if (filters?.size > 0) {
-        parts.push(`${ANY}=${[...filters].sort().join(',')}`);
-    }
-
-    return parts.length ? `?${parts.join('&')}` : '';
+function encodeParams(config, params) {
+    return encodeQueryParams(config, Object.fromEntries(
+        Object.keys(config).map((k) => [k, params[k]])
+    ));
 }
