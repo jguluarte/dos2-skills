@@ -19,6 +19,7 @@ html {
     background-color: $bg-secondary;
     background-image: $bg-gradient;
     background-attachment: fixed;
+    scrollbar-gutter: stable;
 }
 
 $font-family:
@@ -74,12 +75,16 @@ action-bar {
     background: rgba(#0f1423, 0.95);
     box-shadow: 0 2px 10px rgba($black, 0.5);
     border-bottom: 1px solid rgba($white, 0.15);
+
+    header, panel, multi-panel {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
 header {
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
@@ -199,9 +204,84 @@ settings {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
+    }
+
+    sort-summary {
+        display: flex;
+        flex-wrap: wrap;
+        cursor: pointer;
+    }
+
+    sort-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px 4px 14px;
+        font-size: 0.7em;
+        font-weight: 600;
+        color: $white;
+        position: relative;
+
+        background: var(--seg-color);
+
+        &:nth-child(1) { --seg-color: #{mix($color-water, $bg-primary, 21%)}; }
+        &:nth-child(2) { --seg-color: #{mix($color-summoning, $bg-primary, 21%)}; }
+        &:nth-child(3) { --seg-color: #{mix($color-huntsman, $bg-primary, 21%)}; }
+        &:nth-child(4) { --seg-color: #{mix($color-fire, $bg-primary, 21%)}; }
+
+        &:first-child {
+            border-radius: 4px 0 0 4px;
+            padding-left: 8px;
+        }
+
+        &:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        &:not(:first-child) {
+            padding-left: 16px;
+        }
+
+        &:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 0;
+            border-style: solid;
+            border-width: 12px 0 12px 8px;
+            border-color: transparent;
+            border-left-color: var(--seg-color);
+            z-index: 1;
+        }
+    }
+
+    sort-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        button {
+            width: 100%;
+            border: 1px solid rgba($white, 0.2);
+            border-radius: 8px;
+            background: transparent;
+            color: rgba($white, 0.4);
+            text-align: center;
+            animation: jiggle 0.15s ease-in-out infinite alternate;
+
+            &:nth-child(even) {
+                animation-direction: alternate-reverse;
+            }
+
+            &.active {
+                color: $white;
+                background: rgba($white, 0.15);
+            }
+        }
+    }
+
+    @keyframes jiggle {
+        from { transform: rotate(-1deg); }
+        to { transform: rotate(1deg); }
     }
 
     multi-panel {

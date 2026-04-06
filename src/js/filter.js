@@ -17,6 +17,7 @@ function filterless(primary, filters) {
     return !(primary || filters?.size);
 }
 
+// FIXME: this needs to find a new home soon...
 export function summarize({ primary, any: filters }) {
     if ( filterless(primary, filters) ) {
         return 'Showing all skills, tap to filter';
