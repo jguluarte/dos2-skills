@@ -28,21 +28,19 @@ function filter(overrides = {}) {
 
 // ── fixtures ───────────────────────────────────────────
 
-const inv = { investment: 1 };
-
 const pyroSingle = makeSkill('Haste', {
-    primary_tree: PYROKINETIC, ...inv,
+    primary_tree: PYROKINETIC,
 });
 const pyroCross = makeSkill('Bleed Fire', {
     primary_tree: PYROKINETIC,
-    secondary_tree: NECROMANCER, ...inv,
+    secondary_tree: NECROMANCER,
 });
 const warfareSingle = makeSkill('Battering Ram', {
-    primary_tree: WARFARE, ...inv,
+    primary_tree: WARFARE,
 });
 const aeroHuntsman = makeSkill('Erratic Wisp', {
     primary_tree: AEROTHEURGE,
-    secondary_tree: HUNTSMAN, ...inv,
+    secondary_tree: HUNTSMAN,
 });
 
 // ── Investment ─────────────────────────────────────────
@@ -88,10 +86,10 @@ describe('Name', () => {
 
     it('returns 0 for equal names', () => {
         const a = makeSkill('Same', {
-            primary_tree: PYROKINETIC, ...inv,
+            primary_tree: PYROKINETIC,
         });
         const b = makeSkill('Same', {
-            primary_tree: WARFARE, ...inv,
+            primary_tree: WARFARE,
         });
         const sorter = new Name(filter());
 

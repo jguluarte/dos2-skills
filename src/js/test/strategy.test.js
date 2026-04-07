@@ -24,27 +24,25 @@ function filter(overrides = {}) {
 
 // ── fixtures ───────────────────────────────────────────
 
-const inv = { investment: 1 };
-
 const pyroSingle = makeSkill('Haste', {
-    primary_tree: PYROKINETIC, ...inv,
+    primary_tree: PYROKINETIC,
 });
 const pyroCross = makeSkill('Bleed Fire', {
     primary_tree: PYROKINETIC,
-    secondary_tree: NECROMANCER, ...inv,
+    secondary_tree: NECROMANCER,
 });
 const warfareSingle = makeSkill('Battering Ram', {
-    primary_tree: WARFARE, ...inv,
+    primary_tree: WARFARE,
 });
 const summonSingle = makeSkill('Conjure', {
-    primary_tree: SUMMONING, ...inv,
+    primary_tree: SUMMONING,
 });
 
 const source = makeSkill('Source Skill', {
-    primary_tree: PYROKINETIC, ...inv, sp_cost: 1,
+    primary_tree: PYROKINETIC, sp_cost: 1,
 });
 const noSource = makeSkill('No Source', {
-    primary_tree: PYROKINETIC, ...inv, sp_cost: 0,
+    primary_tree: PYROKINETIC, sp_cost: 0,
 });
 
 // ── PrimaryFilter ──────────────────────────────────────
