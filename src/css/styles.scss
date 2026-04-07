@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'colors' as *;
 
 // ===========================
@@ -212,7 +213,7 @@ settings {
         flex-wrap: wrap;
         justify-content: center;
         row-gap: 4px;
-        padding: 6px;
+        padding: 4px 2px;
 
         &.jiggling sort-item {
             animation: jiggle 0.15s ease-in-out infinite alternate;
@@ -231,24 +232,21 @@ settings {
         font-weight: 600;
         color: $white;
         position: relative;
-
         background: var(--seg-color);
         cursor: grab;
-
 
         &.inactive {
             opacity: 0.35;
         }
 
-        &:nth-child(5n+1) { --seg-color: #{mix(#e74c3c, $bg-primary, 33%)}; }
-        &:nth-child(5n+2) { --seg-color: #{mix(#e67e22, $bg-primary, 33%)}; }
-        &:nth-child(5n+3) { --seg-color: #{mix(#2ecc71, $bg-primary, 33%)}; }
-        &:nth-child(5n+4) { --seg-color: #{mix(#3498db, $bg-primary, 33%)}; }
-        &:nth-child(5n+5) { --seg-color: #{mix(#9b59b6, $bg-primary, 33%)}; }
+        &:nth-child(5n+1) { --seg-color: #{color.mix(#e74c3c, $bg-primary, 33%)}; }
+        &:nth-child(5n+2) { --seg-color: #{color.mix(#e67e22, $bg-primary, 33%)}; }
+        &:nth-child(5n+3) { --seg-color: #{color.mix(#2ecc71, $bg-primary, 33%)}; }
+        &:nth-child(5n+4) { --seg-color: #{color.mix(#3498db, $bg-primary, 33%)}; }
+        &:nth-child(5n+5) { --seg-color: #{color.mix(#9b59b6, $bg-primary, 33%)}; }
 
         padding-left: 1.5em;
         padding-right: 1.5em;
-
         clip-path: polygon(
             0 0, calc(100% - 10px) 0, 100% 50%,
             calc(100% - 10px) 100%, 0 100%

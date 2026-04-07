@@ -19,9 +19,14 @@
     );
 
     function loadItems() {
-        const stored = JSON.parse(
-            localStorage.getItem(STORAGE_KEY) ?? 'null'
-        );
+        let stored;
+        try {
+            stored = JSON.parse(
+                localStorage.getItem(STORAGE_KEY) ?? 'null'
+            );
+        } catch {
+            stored = null;
+        }
         if (!stored) {
             return DEFAULT_SORT.map(
                 (Cls) => makeItem(Cls)
@@ -85,7 +90,7 @@
 </script>
 
 <panel>
-    <span><hint>Sort order</hint></span>
+    <span><hint>Sort order — tap to disable, drag to reorder</hint></span>
     <sort-summary
         class:jiggling
         use:dndzone={{
