@@ -25,17 +25,23 @@
     const strategies = filters.map( (f) => new f(settings.filter) );
 
     let filteredSkills = $derived(
-        [...strategies.reduce(
-            (skills, strategy) => strategy.apply(skills), allSkills
-        )].sort((a, b) =>
-            settings.filter.sorting
-                .map((fn) => fn(a, b)).find((r) => !!r) ?? 0
+        strategies.reduce(
+            (skills, strategy) => strategy.apply(skills),
+            allSkills
+        )
+    );
+
+    let sortedSkills = $derived(
+        [...filteredSkills].sort((a, b) =>
+            settings.filter.sorting.map(
+                (fn) => fn(a, b)
+            ).find((r) => !!r) ?? 0
         )
     );
 
     let firstTime = true;
     $effect(() => {
-        filteredSkills;
+        sortedSkills;
         if (!firstTime) window.scrollTo({ top: 0, behavior: 'smooth' });
         firstTime = false;
     });
@@ -46,8 +52,8 @@
 
 <div class="container">
 
-    {#if filteredSkills.length > 0}
-        {#each filteredSkills as skill (skill.name)}
+    {#if sortedSkills.length > 0}
+        {#each sortedSkills as skill (skill.name)}
             <SkillCard {skill} />
         {/each}
     {:else}
