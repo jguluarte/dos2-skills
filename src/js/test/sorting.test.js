@@ -337,3 +337,182 @@ describe('DEFAULT_SORT', () => {
             ]);
     });
 });
+
+// ── Sort chain (map/find pattern from Main.svelte) ────
+
+describe('sort chain integration', () => {
+    function chainSort(skills, sorting) {
+        return [...skills].sort((a, b) =>
+            sorting.map((fn) => fn(a, b))
+                .find((r) => !!r) ?? 0
+        );
+    }
+
+    it('chains multiple sort functions', () => {
+        const a = makeSkill('Alpha', {
+            primary_tree: PYROKINETIC, investment: 2,
+        });
+        const b = makeSkill('Beta', {
+            primary_tree: PYROKINETIC, investment: 1,
+        });
+        const c = makeSkill('Charlie', {
+            primary_tree: AEROTHEURGE, investment: 1,
+        });
+
+        const f = filter();
+        const sorting = [
+            new SearchMatch(f).sort,
+            new Investment(f).sort,
+            new Name(f).sort,
+        ];
+
+        const result = chainSort([a, b, c], sorting);
+
+        // Aerotheurge < Pyrokinetic, so c first
+        // then investment: b(1) < a(2)
+        expect(result.map((s) => s.name))
+            .toStrictEqual(['Charlie', 'Beta', 'Alpha']);
+    });
+
+    it('falls back to later sort when earlier returns'
+        + ' 0', () => {
+        const a = makeSkill('Zeta', {
+            primary_tree: PYROKINETIC, investment: 1,
+        });
+        const b = makeSkill('Alpha', {
+            primary_tree: PYROKINETIC, investment: 1,
+        });
+
+        const f = filter();
+        const sorting = [
+            new SearchMatch(f).sort,
+            new Investment(f).sort,
+            new Name(f).sort,
+        ];
+
+        const result = chainSort([a, b], sorting);
+
+        // Same tree, same investment -> falls to Name
+        expect(result.map((s) => s.name))
+            .toStrictEqual(['Alpha', 'Zeta']);
+    });
+
+    it('returns 0 when all sort functions return 0', () => {
+        const a = makeSkill('Same', {
+            primary_tree: PYROKINETIC, investment: 1,
+            ap_cost: 2, sp_cost: 0,
+        });
+        const b = makeSkill('Same', {
+            primary_tree: PYROKINETIC, investment: 1,
+            ap_cost: 2, sp_cost: 0,
+        });
+
+        const f = filter();
+        const sorting = DEFAULT_SORT.map(
+            (Cls) => new Cls(f).sort
+        );
+
+        const result = sorting.map(
+            (fn) => fn(a, b)
+        ).find((r) => !!r) ?? 0;
+
+        expect(result).toBe(0);
+    });
+
+    it('preserves original order with empty sorting'
+        + ' array', () => {
+        const a = makeSkill('Zeta', {
+            primary_tree: PYROKINETIC, investment: 3,
+        });
+        const b = makeSkill('Alpha', {
+            primary_tree: AEROTHEURGE, investment: 1,
+        });
+
+        const result = chainSort([a, b], []);
+
+        // No sort functions -> find returns undefined
+        // ?? 0 -> stable, original order preserved
+        expect(result.map((s) => s.name))
+            .toStrictEqual(['Zeta', 'Alpha']);
+    });
+
+    it('sorts a realistic set of skills with default'
+        + ' sort order', () => {
+        const pyro1 = makeSkill('Fireball', {
+            primary_tree: PYROKINETIC, investment: 2,
+            ap_cost: 2, sp_cost: 0,
+        });
+        const pyro2 = makeSkill('Haste', {
+            primary_tree: PYROKINETIC, investment: 1,
+            ap_cost: 1, sp_cost: 0,
+        });
+        const pyroNecro = makeSkill('Bleed Fire', {
+            primary_tree: PYROKINETIC,
+            secondary_tree: NECROMANCER,
+            investment: 2, ap_cost: 2, sp_cost: 0,
+        });
+        const aeroHunt = makeSkill('Erratic Wisp', {
+            primary_tree: AEROTHEURGE,
+            secondary_tree: HUNTSMAN,
+            investment: 1, ap_cost: 1, sp_cost: 0,
+        });
+
+        const f = filter();
+        const sorting = DEFAULT_SORT.map(
+            (Cls) => new Cls(f).sort
+        );
+
+        const result = chainSort(
+            [pyro1, pyroNecro, aeroHunt, pyro2],
+            sorting
+        );
+
+        // SearchMatch (primary tree):
+        //   Aerotheurge < Pyrokinetic
+        // Among Pyro skills, Investment:
+        //   pyro2(1) < pyro1(2), pyroNecro(2)
+        // SingleClass: pyro1(single, 0) < pyroNecro(dual, 1)
+        expect(result.map((s) => s.name))
+            .toStrictEqual([
+                'Erratic Wisp', 'Haste',
+                'Fireball', 'Bleed Fire',
+            ]);
+    });
+
+    it('sort chain respects active filter context', () => {
+        const pyroNecro = makeSkill('Bleed Fire', {
+            primary_tree: PYROKINETIC,
+            secondary_tree: NECROMANCER,
+            investment: 1, ap_cost: 2, sp_cost: 0,
+        });
+        const aeroNecro = makeSkill('Grasp of the Starved', {
+            primary_tree: AEROTHEURGE,
+            secondary_tree: NECROMANCER,
+            investment: 1, ap_cost: 1, sp_cost: 0,
+        });
+
+        const f = filter({
+            primary: NECROMANCER,
+            any: set(PYROKINETIC),
+        });
+        const sorting = [
+            new SearchMatch(f).sort,
+            new SecondaryTree(f).sort,
+            new Name(f).sort,
+        ];
+
+        const result = chainSort(
+            [pyroNecro, aeroNecro], sorting
+        );
+
+        // SearchMatch: both match Necromancer -> 0
+        // SecondaryTree (sortOtherTree):
+        //   pyroNecro other = Pyrokinetic
+        //   aeroNecro other = Aerotheurge
+        //   Aerotheurge < Pyrokinetic
+        expect(result.map((s) => s.name))
+            .toStrictEqual([
+                'Grasp of the Starved', 'Bleed Fire',
+            ]);
+    });
+});
