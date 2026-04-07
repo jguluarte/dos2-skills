@@ -306,16 +306,15 @@ settings {
     multi-panel {
         display: flex;
         flex-wrap: wrap;
-        transform: scale(0.85);
-        transform-origin: top left;
+        font-size: 0.85em;
 
         @media (width <= 768px) {
-            gap: 1em;
+            gap: 0.5em;
             justify-content: space-evenly;
         }
 
         @media (width > 768px) {
-            gap: 2em;
+            gap: 1em;
             justify-content: flex-start;
         }
 
@@ -323,6 +322,19 @@ settings {
             width: auto;
             margin: 0;
             align-items: center;
+            gap: 4px;
+        }
+
+        button {
+            padding: 4px 10px;
+        }
+
+        sort-item {
+            padding: 4px 1em;
+        }
+
+        hint {
+            font-size: 0.7em;
         }
     }
 }
