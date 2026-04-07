@@ -5,7 +5,7 @@ import {
     AEROTHEURGE,
 } from '@constants';
 import {
-    Investment, Name, SearchMatch,
+    Investment, Name, SearchMatch, APCost, SPCost,
     SecondaryTree, SingleClass, DEFAULT_SORT,
 } from '@js/sorting.js';
 
@@ -165,6 +165,96 @@ describe('SearchMatch', () => {
 
         expect(sorter.treeFor(pyroCross))
             .toBe(NECROMANCER);
+    });
+
+    it('sorts by primary tree when no filter', () => {
+        const sorter = new SearchMatch(filter());
+
+        // Pyrokinetic > Aerotheurge alphabetically
+        expect(sorter.sort(pyroSingle, aeroHuntsman))
+            .toBeGreaterThan(0);
+        expect(sorter.sort(aeroHuntsman, pyroSingle))
+            .toBeLessThan(0);
+    });
+
+    it('sorts by matching search term when filter'
+        + ' active', () => {
+        const sorter = new SearchMatch(filter({
+            primary: WARFARE,
+            any: set(NECROMANCER),
+        }));
+
+        // pyroCross matches Necromancer
+        // warfareSingle matches Warfare
+        // Necromancer < Warfare alphabetically
+        expect(sorter.sort(pyroCross, warfareSingle))
+            .toBeLessThan(0);
+    });
+});
+
+// ── APCost ────────────────────────────────────────────
+
+describe('APCost', () => {
+    it('sorts by AP cost ascending', () => {
+        const low = makeSkill('Cheap', {
+            primary_tree: PYROKINETIC,
+            investment: 1, ap_cost: 1,
+        });
+        const high = makeSkill('Expensive', {
+            primary_tree: PYROKINETIC,
+            investment: 1, ap_cost: 3,
+        });
+        const sorter = new APCost(filter());
+
+        expect(sorter.sort(low, high)).toBeLessThan(0);
+        expect(sorter.sort(high, low)).toBeGreaterThan(0);
+    });
+
+    it('returns 0 for equal AP cost', () => {
+        const a = makeSkill('A', {
+            primary_tree: PYROKINETIC,
+            investment: 1, ap_cost: 2,
+        });
+        const b = makeSkill('B', {
+            primary_tree: PYROKINETIC,
+            investment: 1, ap_cost: 2,
+        });
+        const sorter = new APCost(filter());
+
+        expect(sorter.sort(a, b)).toBe(0);
+    });
+});
+
+// ── SPCost ────────────────────────────────────────────
+
+describe('SPCost', () => {
+    it('sorts by SP cost ascending', () => {
+        const low = makeSkill('Cheap', {
+            primary_tree: PYROKINETIC,
+            investment: 1, sp_cost: 0,
+        });
+        const high = makeSkill('Expensive', {
+            primary_tree: PYROKINETIC,
+            investment: 1, sp_cost: 3,
+        });
+        const sorter = new SPCost(filter());
+
+        expect(sorter.sort(low, high)).toBeLessThan(0);
+        expect(sorter.sort(high, low)).toBeGreaterThan(0);
+    });
+
+    it('returns 0 for equal SP cost', () => {
+        const a = makeSkill('A', {
+            primary_tree: PYROKINETIC,
+            investment: 1, sp_cost: 1,
+        });
+        const b = makeSkill('B', {
+            primary_tree: PYROKINETIC,
+            investment: 1, sp_cost: 1,
+        });
+        const sorter = new SPCost(filter());
+
+        expect(sorter.sort(a, b)).toBe(0);
     });
 });
 
