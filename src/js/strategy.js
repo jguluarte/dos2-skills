@@ -25,10 +25,18 @@ export class PrimaryFilter extends FilterStrategy {
 export class AnyFilter extends FilterStrategy {
     shouldApply = () => !!this.filter.any.size;
     execute = (skills) => skills.filter(
-        (s) => this.single(s) || s.trees.some((t) => this.filter.any.has(t))
+        (s) => this.predicate.some((p) => p(s))
     );
 
-    single = (s) => this.filter.singleClass === YES && !s.secondaryTree;
+    predicate = [
+        (s) => this.hasSingleTreeOverride() && !s.secondaryTree,
+        (s) => s.trees.some((t) => this.filter.any.has(t)),
+    ];
+
+    hasSingleTreeOverride = () => !!(
+        this.filter.singleClass === YES
+        && this.filter.primary
+    );
 }
 
 export class SummoningFilter extends FilterStrategy {

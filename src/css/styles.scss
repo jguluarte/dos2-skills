@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'colors' as *;
 
 // ===========================
@@ -19,6 +20,7 @@ html {
     background-color: $bg-secondary;
     background-image: $bg-gradient;
     background-attachment: fixed;
+    scrollbar-gutter: stable;
 }
 
 $font-family:
@@ -48,14 +50,15 @@ body {
 
 overlay {
     display: none;
-    position: absolute;
+    position: fixed;
     inset: 0;
-    min-height: 100vh;
     background: rgba(#0a0e1a, 0.5);
     backdrop-filter: blur(4px);
     z-index: 5;
 
     @media (hover: none) and (pointer: coarse) {
+        position: absolute;
+        min-height: 100vh;
         min-height: -webkit-fill-available;
         bottom: -100vh;
         padding-bottom: calc(100vh);
@@ -74,12 +77,16 @@ action-bar {
     background: rgba(#0f1423, 0.95);
     box-shadow: 0 2px 10px rgba($black, 0.5);
     border-bottom: 1px solid rgba($white, 0.15);
+
+    header, panel, multi-panel {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
 header {
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
@@ -199,9 +206,101 @@ settings {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
+    }
+
+    sort-summary {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 4px;
+        padding: 4px;
+
+        &.jiggling sort-item {
+            animation: jiggle 0.15s ease-in-out infinite alternate;
+
+            &:nth-child(even) {
+                animation-direction: alternate-reverse;
+            }
+        }
+    }
+
+    sort-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 20px 6px 14px;
+        font-size: 0.75em;
+        font-weight: 600;
+        color: $white;
+        position: relative;
+        background: var(--seg-color);
+        cursor: grab;
+
+        &.inactive {
+            opacity: 0.35;
+        }
+
+        &:nth-child(5n+1) { --seg-color: #{color.mix($seg-red, $bg-primary, 33%)}; }
+        &:nth-child(5n+2) { --seg-color: #{color.mix($seg-orange, $bg-primary, 33%)}; }
+        &:nth-child(5n+3) { --seg-color: #{color.mix($seg-green, $bg-primary, 33%)}; }
+        &:nth-child(5n+4) { --seg-color: #{color.mix($seg-blue, $bg-primary, 33%)}; }
+        &:nth-child(5n+5) { --seg-color: #{color.mix($seg-purple, $bg-primary, 33%)}; }
+
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        clip-path: polygon(
+            0 0, calc(100% - 10px) 0, 100% 50%,
+            calc(100% - 10px) 100%, 0 100%
+        );
+
+        &:first-child {
+            clip-path: none;
+            padding-left: 1.1em;
+            padding-right: 10px;
+            margin-right: 10px;
+            border-radius: 6px 0 0 6px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: -10px;
+                top: 0;
+                width: 10px;
+                height: 100%;
+                background: var(--seg-color);
+                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                z-index: 1;
+            }
+        }
+
+        &:not(:first-child) {
+            clip-path: polygon(
+                0 0, calc(100% - 10px) 0, 100% 50%,
+                calc(100% - 10px) 100%, 0 100%, 10px 50%
+            );
+        }
+
+        &:last-child {
+            clip-path: none;
+            border-radius: 0 1em 1em 0;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 10px;
+                height: 100%;
+                background: rgba(#141928, 0.98);
+                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                z-index: 1;
+            }
+        }
+
+    }
+
+    @keyframes jiggle {
+        from { transform: rotate(-1deg); }
+        to { transform: rotate(1deg); }
     }
 
     multi-panel {
