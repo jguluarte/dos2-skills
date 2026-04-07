@@ -244,7 +244,9 @@ settings {
         &:nth-child(5n+4) { --seg-color: #{mix(#3498db, $bg-primary, 33%)}; }
         &:nth-child(5n+5) { --seg-color: #{mix(#9b59b6, $bg-primary, 33%)}; }
 
-        padding-right: 18px;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+
         clip-path: polygon(
             0 0, calc(100% - 10px) 0, 100% 50%,
             calc(100% - 10px) 100%, 0 100%
@@ -271,11 +273,27 @@ settings {
         }
 
         &:not(:first-child) {
-            padding-left: 16px;
             clip-path: polygon(
                 0 0, calc(100% - 10px) 0, 100% 50%,
                 calc(100% - 10px) 100%, 0 100%, 10px 50%
             );
+        }
+
+        &:last-child {
+            clip-path: none;
+            border-radius: 0 1em 1em 0;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 10px;
+                height: 100%;
+                background: rgba(#141928, 0.98);
+                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                z-index: 1;
+            }
         }
 
     }
