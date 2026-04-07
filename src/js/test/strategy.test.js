@@ -24,27 +24,25 @@ function filter(overrides = {}) {
 
 // ── fixtures ───────────────────────────────────────────
 
-const inv = { investment: 1 };
-
 const pyroSingle = makeSkill('Haste', {
-    primary_tree: PYROKINETIC, ...inv,
+    primary_tree: PYROKINETIC,
 });
 const pyroCross = makeSkill('Bleed Fire', {
     primary_tree: PYROKINETIC,
-    secondary_tree: NECROMANCER, ...inv,
+    secondary_tree: NECROMANCER,
 });
 const warfareSingle = makeSkill('Battering Ram', {
-    primary_tree: WARFARE, ...inv,
+    primary_tree: WARFARE,
 });
 const summonSingle = makeSkill('Conjure', {
-    primary_tree: SUMMONING, ...inv,
+    primary_tree: SUMMONING,
 });
 
 const source = makeSkill('Source Skill', {
-    primary_tree: PYROKINETIC, ...inv, sp_cost: 1,
+    primary_tree: PYROKINETIC, sp_cost: 1,
 });
 const noSource = makeSkill('No Source', {
-    primary_tree: PYROKINETIC, ...inv, sp_cost: 0,
+    primary_tree: PYROKINETIC, sp_cost: 0,
 });
 
 // ── PrimaryFilter ──────────────────────────────────────
@@ -95,14 +93,25 @@ describe('AnyFilter', () => {
             .toStrictEqual([pyroCross]);
     });
 
-    it('includes single-class skills when singleClass is YES', () => {
+    it('includes single-class when YES and primary set', () => {
         const f = new AnyFilter(filter({
+            primary: PYROKINETIC,
             any: set(NECROMANCER),
             singleClass: YES,
         }));
 
         expect(f.apply([pyroSingle, pyroCross]))
             .toStrictEqual([pyroSingle, pyroCross]);
+    });
+
+    it('excludes single-class when singleClass is YES but no primary', () => {
+        const f = new AnyFilter(filter({
+            any: set(NECROMANCER),
+            singleClass: YES,
+        }));
+
+        expect(f.apply([pyroSingle, pyroCross]))
+            .toStrictEqual([pyroCross]);
     });
 
     it('excludes single-class skills when singleClass is not YES', () => {
@@ -113,6 +122,77 @@ describe('AnyFilter', () => {
 
         expect(f.apply([pyroSingle, pyroCross]))
             .toStrictEqual([pyroCross]);
+    });
+
+    describe('hasSingleTreeOverride', () => {
+        it('false when singleClass is NO', () => {
+            const f = new AnyFilter(filter({
+                primary: PYROKINETIC,
+                any: set(NECROMANCER),
+                singleClass: NO,
+            }));
+
+            expect(f.apply([pyroSingle, pyroCross]))
+                .toStrictEqual([pyroCross]);
+        });
+
+        it('false when singleClass is ONLY', () => {
+            const f = new AnyFilter(filter({
+                primary: PYROKINETIC,
+                any: set(NECROMANCER),
+                singleClass: ONLY,
+            }));
+
+            // pyroSingle has no secondary tree, but
+            // ONLY !== YES so override is false.
+            // It doesn't match any tree (Necromancer)
+            // either, so it's excluded.
+            expect(f.apply([pyroSingle, pyroCross]))
+                .toStrictEqual([pyroCross]);
+        });
+
+        it('false when singleClass is YES but no'
+            + ' primary', () => {
+            const f = new AnyFilter(filter({
+                any: set(NECROMANCER),
+                singleClass: YES,
+            }));
+
+            // YES but primary is null -> no override
+            expect(f.apply([pyroSingle, pyroCross]))
+                .toStrictEqual([pyroCross]);
+        });
+
+        it('true only when both YES and primary', () => {
+            const f = new AnyFilter(filter({
+                primary: PYROKINETIC,
+                any: set(NECROMANCER),
+                singleClass: YES,
+            }));
+
+            // Override active: single-class skills
+            // pass regardless of any match
+            expect(f.apply([pyroSingle, pyroCross]))
+                .toStrictEqual([pyroSingle, pyroCross]);
+        });
+
+        it('override includes unrelated single-class'
+            + ' skills', () => {
+            const f = new AnyFilter(filter({
+                primary: PYROKINETIC,
+                any: set(NECROMANCER),
+                singleClass: YES,
+            }));
+
+            // warfareSingle doesn't match Pyro or
+            // Necro, but has no secondary tree so
+            // override lets it through
+            expect(f.apply([
+                warfareSingle, pyroSingle, pyroCross,
+            ])).toStrictEqual([
+                warfareSingle, pyroSingle, pyroCross,
+            ]);
+        });
     });
 });
 
