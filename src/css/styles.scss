@@ -239,11 +239,11 @@ settings {
             opacity: 0.35;
         }
 
-        &:nth-child(5n+1) { --seg-color: #{color.mix(#e74c3c, $bg-primary, 33%)}; }
-        &:nth-child(5n+2) { --seg-color: #{color.mix(#e67e22, $bg-primary, 33%)}; }
-        &:nth-child(5n+3) { --seg-color: #{color.mix(#2ecc71, $bg-primary, 33%)}; }
-        &:nth-child(5n+4) { --seg-color: #{color.mix(#3498db, $bg-primary, 33%)}; }
-        &:nth-child(5n+5) { --seg-color: #{color.mix(#9b59b6, $bg-primary, 33%)}; }
+        &:nth-child(5n+1) { --seg-color: #{color.mix($seg-red, $bg-primary, 33%)}; }
+        &:nth-child(5n+2) { --seg-color: #{color.mix($seg-orange, $bg-primary, 33%)}; }
+        &:nth-child(5n+3) { --seg-color: #{color.mix($seg-green, $bg-primary, 33%)}; }
+        &:nth-child(5n+4) { --seg-color: #{color.mix($seg-blue, $bg-primary, 33%)}; }
+        &:nth-child(5n+5) { --seg-color: #{color.mix($seg-purple, $bg-primary, 33%)}; }
 
         padding-left: 1.5em;
         padding-right: 1.5em;
@@ -310,10 +310,6 @@ settings {
         @media (width <= 768px) {
             gap: 1em;
             justify-content: space-evenly;
-
-            panel:last-child {
-                width: 100%;
-            }
         }
 
         @media (width > 768px) {
