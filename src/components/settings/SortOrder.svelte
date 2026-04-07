@@ -27,7 +27,7 @@
         } catch {
             stored = null;
         }
-        if (!stored) {
+        if (!Array.isArray(stored)) {
             return DEFAULT_SORT.map(
                 (Cls) => makeItem(Cls)
             );

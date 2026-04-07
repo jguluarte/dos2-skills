@@ -329,8 +329,8 @@ describe('DEFAULT_SORT', () => {
     it('is in correct order', () => {
         expect(DEFAULT_SORT.map((c) => c.label))
             .toStrictEqual([
-                'Primary Class', 'Class Level',
-                'Single Class', 'Other Class', 'Name',
+                'Primary Class', 'Investment',
+                'Single Class', 'Secondary Class', 'Name',
                 'AP Cost', 'SP Cost',
             ]);
     });

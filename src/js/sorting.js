@@ -5,7 +5,7 @@ class Sortable {
 }
 
 export class Investment extends Sortable {
-    static label = "Class Level";
+    static label = "Investment";
     sort = (a, b) => a.investment - b.investment;
 }
 
@@ -18,10 +18,10 @@ export class SearchMatch extends Sortable {
     static label = "Primary Class";
 
     sort = (a, b) => {
-        const aSearchIdentity = this.treeFor(a);
-        const bSearchIdentity = this.treeFor(b);
+        const aTree = this.treeFor(a) ?? '';
+        const bTree = this.treeFor(b) ?? '';
 
-        return aSearchIdentity.localeCompare(bSearchIdentity);
+        return aTree.localeCompare(bTree);
     };
 
     treeFor = (skill) => {
@@ -40,7 +40,7 @@ export class SearchMatch extends Sortable {
 }
 
 export class SecondaryTree extends Sortable {
-    static label = "Other Class";
+    static label = "Secondary Class";
     sort = (a, b) => {
         return this.filter.isActive()
             ? this.sortOtherTree(a, b)
