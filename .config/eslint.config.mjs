@@ -49,9 +49,6 @@ export default [
             "no-unmodified-loop-condition": "error",
             "no-unreachable-loop": "error",
             "require-atomic-updates": "error",
-            "no-use-before-define": ["error", {
-                functions: false,
-            }],
 
             // === Code Quality ===
             "curly": ["error", "multi-line"],

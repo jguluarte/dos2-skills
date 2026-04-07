@@ -49,14 +49,15 @@ body {
 
 overlay {
     display: none;
-    position: absolute;
+    position: fixed;
     inset: 0;
-    min-height: 100vh;
     background: rgba(#0a0e1a, 0.5);
     backdrop-filter: blur(4px);
     z-index: 5;
 
     @media (hover: none) and (pointer: coarse) {
+        position: absolute;
+        min-height: 100vh;
         min-height: -webkit-fill-available;
         bottom: -100vh;
         padding-bottom: calc(100vh);
@@ -209,8 +210,9 @@ settings {
     sort-summary {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         cursor: pointer;
-        padding-right: 8px;
+        row-gap: 4px;
     }
 
     sort-item {
@@ -224,34 +226,28 @@ settings {
 
         background: var(--seg-color);
 
-        &:nth-child(1) { --seg-color: #{mix($color-water, $bg-primary, 21%)}; }
-        &:nth-child(2) { --seg-color: #{mix($color-summoning, $bg-primary, 21%)}; }
-        &:nth-child(3) { --seg-color: #{mix($color-huntsman, $bg-primary, 21%)}; }
-        &:nth-child(4) { --seg-color: #{mix($color-fire, $bg-primary, 21%)}; }
+        &:nth-child(5n+1) { --seg-color: #{mix(#e74c3c, $bg-primary, 33%)}; }
+        &:nth-child(5n+2) { --seg-color: #{mix(#e67e22, $bg-primary, 33%)}; }
+        &:nth-child(5n+3) { --seg-color: #{mix(#2ecc71, $bg-primary, 33%)}; }
+        &:nth-child(5n+4) { --seg-color: #{mix(#3498db, $bg-primary, 33%)}; }
+        &:nth-child(5n+5) { --seg-color: #{mix(#9b59b6, $bg-primary, 33%)}; }
+
+        padding-right: 18px;
+        clip-path: polygon(
+            0 0, calc(100% - 8px) 0, 100% 50%,
+            calc(100% - 8px) 100%, 0 100%
+        );
 
         &:first-child {
-            border-radius: 4px 0 0 4px;
             padding-left: 8px;
-        }
-
-        &:last-child {
-            border-radius: 0 4px 4px 0;
         }
 
         &:not(:first-child) {
             padding-left: 16px;
-        }
-
-        &:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -8px;
-            top: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 8px;
-            border-color: transparent;
-            border-left-color: var(--seg-color);
-            z-index: 1;
+            clip-path: polygon(
+                0 0, calc(100% - 8px) 0, 100% 50%,
+                calc(100% - 8px) 100%, 0 100%, 8px 50%
+            );
         }
     }
 
@@ -288,7 +284,6 @@ settings {
     multi-panel {
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-end;
 
         @media (width <= 768px) {
             gap: 1em;

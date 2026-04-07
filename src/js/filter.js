@@ -5,9 +5,9 @@ export function defaultSort(skills) {
 
         return (
             a.primaryTree.localeCompare(b.primaryTree)
+            || a.investment - b.investment
             || aCross - bCross
             || (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '')
-            || a.investment - b.investment
             || a.name.localeCompare(b.name)
         );
     });

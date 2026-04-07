@@ -1,11 +1,22 @@
 <script>
     import { dndzone } from 'svelte-dnd-action';
+    import {
+        SearchMatch, Investment, SecondaryTree, IsDual, Name,
+    } from '@js/sorting.js';
+
+    let { filter } = $props();
+
+    function sortable(Cls, active = true) {
+        const s = new Cls(filter);
+        return { id: Cls.name, sortable: s, active };
+    }
 
     let items = $state([
-        { id: 'primaryTree',   label: 'Primary Tree',   active: true },
-        { id: 'crossClass',    label: 'Cross-Class',    active: true },
-        { id: 'secondaryTree', label: 'Secondary Tree', active: false },
-        { id: 'investment',    label: 'Investment',     active: true },
+        sortable(SearchMatch),
+        sortable(Investment),
+        sortable(IsDual),
+        sortable(SecondaryTree),
+        sortable(Name),
     ]);
 
     let editing = $state(false);
@@ -37,7 +48,7 @@
     {#if !editing}
         <sort-summary role="button" {onclick}>
             {#each items.filter((i) => i.active) as item (item.id)}
-                <sort-item>{item.label}</sort-item>
+                <sort-item>{item.sortable.label}</sort-item>
             {/each}
         </sort-summary>
     {:else}
@@ -50,7 +61,7 @@
                     class:active={item.active}
                     onclick={() => activate(item)}
                 >
-                    {item.label}
+                    {item.sortable.label}
                 </button>
             {/each}
         </sort-list>
