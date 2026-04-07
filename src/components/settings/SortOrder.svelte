@@ -1,7 +1,7 @@
 <script>
     import { dndzone } from 'svelte-dnd-action';
     import {
-        SearchMatch, Investment, SecondaryTree, IsDual, Name,
+        SearchMatch, Investment, SecondaryTree, SingleClass, Name,
     } from '@js/sorting.js';
 
     let { filter } = $props();
@@ -14,7 +14,7 @@
     let items = $state([
         sortable(SearchMatch),
         sortable(Investment),
-        sortable(IsDual),
+        sortable(SingleClass),
         sortable(SecondaryTree),
         sortable(Name),
     ]);
@@ -36,6 +36,14 @@
         item.active = !item.active;
         triggerJiggle();
     }
+
+    function syncSorting() {
+        filter.sorting = items
+            .filter((i) => i.active)
+            .map((i) => i.sortable.sort);
+    }
+
+    $effect(syncSorting);
 </script>
 
 <panel>

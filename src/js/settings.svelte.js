@@ -9,6 +9,8 @@ export class Filter {
     singleClass = $state(null);
     source = $state(null);
 
+    sorting = $state([]);
+
     constructor() {
         const fromURL = urlState.load();
 

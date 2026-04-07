@@ -3,7 +3,6 @@
     import skillsYaml from '@data/skills.yaml?raw';
 
     import { Skill } from '@js/skill/skill.js';
-    import { defaultSort } from '@js/filter.js';
     import { Settings } from '@js/settings.svelte.js';
 
     import Heading from './components/Heading.svelte';
@@ -16,9 +15,7 @@
 
     const settings = new Settings();
 
-    const allSkills = defaultSort(
-        jsyaml.load(skillsYaml).map(Skill.fromYAML)
-    );
+    const allSkills = jsyaml.load(skillsYaml).map(Skill.fromYAML);
 
     const filters = [
         SummoningFilter, PrimaryFilter, AnyFilter, SingleClassFilter,
@@ -27,9 +24,14 @@
 
     const strategies = filters.map( (f) => new f(settings.filter) );
 
-    let filteredSkills = $derived(strategies.reduce(
-        (skills, strategy) => strategy.apply(skills), allSkills
-    ));
+    let filteredSkills = $derived(
+        [...strategies.reduce(
+            (skills, strategy) => strategy.apply(skills), allSkills
+        )].sort((a, b) =>
+            settings.filter.sorting
+                .map((fn) => fn(a, b)).find((r) => !!r) ?? 0
+        )
+    );
 
     let firstTime = true;
     $effect(() => {

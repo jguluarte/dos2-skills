@@ -2,8 +2,6 @@ class Sortable {
     constructor(filter) {
         this.filter = filter;
     }
-
-    shouldSkip = () => false;
 }
 
 export class Investment extends Sortable {
@@ -63,12 +61,17 @@ export class SecondaryTree extends Sortable {
     };
 
     noFilter = (a, b) => {
-        return (a.secondaryTree ?? '').localeCompare(b.secondaryTree ?? '');
+        const aTree = a.secondaryTree ?? '';
+        const bTree = b.secondaryTree ?? '';
+
+        if (aTree && !bTree) return -1;
+        if (!aTree && bTree) return 1;
+        return aTree.localeCompare(bTree);
     };
 }
 
-export class IsDual extends Sortable {
-    label = "Is Dual-Class";
+export class SingleClass extends Sortable {
+    label = "Single Class";
     sort = (a, b) => {
         const aDual = a.secondaryTree ? 1 : 0;
         const bDual = b.secondaryTree ? 1 : 0;
@@ -76,37 +79,3 @@ export class IsDual extends Sortable {
         return aDual - bDual;
     };
 }
-
-/*
-
-# All skills
-- primaryTree
-- investment
-- isDual
-- secondaryTree
-- name
-
-# With Primary (has(tree))
-- investment
-- isDual
-- "otherTree"
-- name
-
-# With multiple in `any`
-- Search Match
-- investment
-- isDual
-- "otherTree"
-- name
-
-I think "secondaryTree" === "otherTree"
-
-It is the "other" when there are no search terms. And when there are, then its
-whatever the non-matching || secondaryTree (in the event both trees are in the
-search query).
-
-I __might__ be able to reuse `SearchMatch` for `primaryTree` when no other
-filters are applied. maybe? not sure if it is appropriate or not. the shouldSkip
-idea might work....but might be clunky.
-
-*/
