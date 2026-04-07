@@ -6,18 +6,41 @@
 
     let { filter } = $props();
 
-    function sortable(Cls, active = true) {
-        const s = new Cls(filter);
-        return { id: Cls.name, sortable: s, active };
+    const STORAGE_KEY = 'sortOrder';
+
+    const allOptions = {
+        SearchMatch, Investment, SingleClass, SecondaryTree, Name,
+    };
+
+    const defaults = [
+        'SearchMatch', 'Investment', 'SingleClass',
+        'SecondaryTree', 'Name',
+    ];
+
+    function sortable(id, active = true) {
+        return { id, sortable: new allOptions[id](filter), active };
     }
 
-    let items = $state([
-        sortable(SearchMatch),
-        sortable(Investment),
-        sortable(SingleClass),
-        sortable(SecondaryTree),
-        sortable(Name),
-    ]);
+    function loadItems() {
+        const stored = JSON.parse(
+            localStorage.getItem(STORAGE_KEY) ?? 'null'
+        );
+        if (!stored) return defaults.map((id) => sortable(id));
+
+        const known = new Set(Object.keys(allOptions));
+        const result = stored
+            .filter((s) => known.has(s.id))
+            .map((s) => sortable(s.id, s.active));
+
+        // append any new options not in stored
+        const seen = new Set(result.map((r) => r.id));
+        for (const id of defaults) {
+            if (!seen.has(id)) result.push(sortable(id, false));
+        }
+        return result;
+    }
+
+    let items = $state(loadItems());
 
     function handleSort(e) {
         items = e.detail.items;
@@ -41,6 +64,10 @@
         filter.sorting = items
             .filter((i) => i.active)
             .map((i) => i.sortable.sort);
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(
+            items.map(({ id, active }) => ({ id, active }))
+        ));
     }
 
     $effect(syncSorting);
