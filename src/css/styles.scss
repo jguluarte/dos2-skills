@@ -213,7 +213,7 @@ settings {
         flex-wrap: wrap;
         justify-content: center;
         row-gap: 4px;
-        padding: 4px 2px;
+        padding: 4px;
 
         &.jiggling sort-item {
             animation: jiggle 0.15s ease-in-out infinite alternate;
@@ -254,27 +254,10 @@ settings {
 
         &:first-child {
             clip-path: none;
-            padding-left: 1.7em;
+            padding-left: 1.1em;
             padding-right: 10px;
             margin-right: 10px;
             border-radius: 6px 0 0 6px;
-
-            &::before {
-                content: '⠿';
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 1.1em;
-                display: flex;
-                align-items: center;
-                justify-content: left;
-                opacity: 0.3;
-                font-size: 2.5em;
-                line-height: 1;
-                overflow: hidden;
-                border-radius: 6px 0 0 6px;
-            }
 
             &::after {
                 content: '';
@@ -298,8 +281,7 @@ settings {
 
         &:last-child {
             clip-path: none;
-            padding-right: 1.7em;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 1em 1em 0;
 
             &::before {
                 content: '';
@@ -311,23 +293,6 @@ settings {
                 background: rgba(#141928, 0.98);
                 clip-path: polygon(0 0, 100% 50%, 0 100%);
                 z-index: 1;
-            }
-
-            &::after {
-                content: '⠿';
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 1.1em;
-                display: flex;
-                align-items: center;
-                justify-content: right;
-                opacity: 0.3;
-                font-size: 2.5em;
-                line-height: 1;
-                overflow: hidden;
-                border-radius: 0 6px 6px 0;
             }
         }
 
@@ -345,6 +310,10 @@ settings {
         @media (width <= 768px) {
             gap: 1em;
             justify-content: space-evenly;
+
+            panel:last-child {
+                width: 100%;
+            }
         }
 
         @media (width > 768px) {
