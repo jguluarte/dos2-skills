@@ -306,6 +306,8 @@ settings {
     multi-panel {
         display: flex;
         flex-wrap: wrap;
+        transform: scale(0.85);
+        transform-origin: top left;
 
         @media (width <= 768px) {
             gap: 1em;
