@@ -88,7 +88,15 @@
     <span><hint>Sort order</hint></span>
     <sort-summary
         class:jiggling
-        use:dndzone={{ items, flipDurationMs: 150 }}
+        use:dndzone={{
+            items,
+            flipDurationMs: 150,
+            dropTargetStyle: {
+                outline: '2px dashed rgba(255,255,255,0.3)',
+                'border-radius': '8px',
+                background: 'rgba(255,255,255,0.06)',
+            },
+        }}
         onconsider={(e) => { handleSort(e); triggerJiggle(); }}
         onfinalize={handleSort}
     >
