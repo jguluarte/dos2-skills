@@ -42,7 +42,7 @@
 
 </script>
 
-<Heading {settings} filter={settings.filter} />
+<Heading filter={settings.filter} />
 
 <div class="container">
 

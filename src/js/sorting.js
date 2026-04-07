@@ -28,18 +28,18 @@ export class SearchMatch extends Sortable {
         return aSearchIdentity.localeCompare(bSearchIdentity);
     };
 
-    treeFor = (s) => {
-        if (!this.filter.isActive()) return s.primaryTree;
+    treeFor = (skill) => {
+        if (!this.filter.isActive()) return skill.primaryTree;
 
-        const searchTerms = [this.filter.primary, ...this.filter.any ];
+        const searchTerms = [this.filter.primary, ...this.filter.any];
 
-        // use the primary if it matches
-        if ( searchTerms.includes(s.primaryTree) ) {
-            return s.primaryTree;
+        if (searchTerms.includes(skill.primaryTree)) {
+            return skill.primaryTree;
         }
 
-        // Otherwise find the first alphabetical matching tree
-        return searchTerms.sort().find( (t) => t && s.has(t) );
+        return searchTerms.toSorted().find(
+            (term) => term && skill.has(term)
+        );
     };
 }
 
@@ -52,10 +52,10 @@ export class SecondaryTree extends Sortable {
     };
 
     sortOtherTree = (a, b) => {
-        const otherTree = (t) => t !== this.filter.primary;
+        const isOther = (tree) => tree !== this.filter.primary;
 
-        const aTree = a.trees.find(otherTree) ?? a.secondaryTree ?? '';
-        const bTree = b.trees.find(otherTree) ?? b.secondaryTree ?? '';
+        const aTree = a.trees.find(isOther) ?? a.secondaryTree ?? '';
+        const bTree = b.trees.find(isOther) ?? b.secondaryTree ?? '';
 
         return aTree.localeCompare(bTree);
     };
@@ -79,3 +79,7 @@ export class SingleClass extends Sortable {
         return aDual - bDual;
     };
 }
+
+export const DEFAULT_SORT = [
+    SearchMatch, Investment, SingleClass, SecondaryTree, Name,
+];

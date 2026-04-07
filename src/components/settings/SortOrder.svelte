@@ -1,21 +1,16 @@
 <script>
     import { dndzone } from 'svelte-dnd-action';
-    import {
-        SearchMatch, Investment, SecondaryTree, SingleClass, Name,
-    } from '@js/sorting.js';
+    import { DEFAULT_SORT } from '@js/sorting.js';
 
     let { filter } = $props();
 
     const STORAGE_KEY = 'sortOrder';
 
-    const allOptions = {
-        SearchMatch, Investment, SingleClass, SecondaryTree, Name,
-    };
+    const allOptions = Object.fromEntries(
+        DEFAULT_SORT.map((Cls) => [Cls.name, Cls])
+    );
 
-    const defaults = [
-        'SearchMatch', 'Investment', 'SingleClass',
-        'SecondaryTree', 'Name',
-    ];
+    const defaults = DEFAULT_SORT.map((Cls) => Cls.name);
 
     function sortable(id, active = true) {
         return { id, sortable: new allOptions[id](filter), active };
@@ -54,6 +49,8 @@
         clearTimeout(jiggleTimer);
         jiggleTimer = setTimeout(() => jiggling = false, 2000);
     }
+
+    $effect(() => () => clearTimeout(jiggleTimer));
 
     function toggle(item) {
         item.active = !item.active;

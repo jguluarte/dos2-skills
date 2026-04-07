@@ -225,8 +225,8 @@ settings {
     sort-item {
         display: inline-flex;
         align-items: center;
-        padding: 4px 10px 4px 14px;
-        font-size: 0.7em;
+        padding: 6px 20px 6px 14px;
+        font-size: 0.75em;
         font-weight: 600;
         color: $white;
         position: relative;
@@ -246,21 +246,38 @@ settings {
 
         padding-right: 18px;
         clip-path: polygon(
-            0 0, calc(100% - 8px) 0, 100% 50%,
-            calc(100% - 8px) 100%, 0 100%
+            0 0, calc(100% - 10px) 0, 100% 50%,
+            calc(100% - 10px) 100%, 0 100%
         );
 
         &:first-child {
-            padding-left: 8px;
+            clip-path: none;
+            padding-left: 0.75em;
+            padding-right: 10px;
+            margin-right: 10px;
+            border-radius: 6px 0 0 6px;
+
+            &::after {
+                content: '';
+                position: absolute;
+                right: -10px;
+                top: 0;
+                width: 10px;
+                height: 100%;
+                background: var(--seg-color);
+                clip-path: polygon(0 0, 100% 50%, 0 100%);
+                z-index: 1;
+            }
         }
 
         &:not(:first-child) {
             padding-left: 16px;
             clip-path: polygon(
-                0 0, calc(100% - 8px) 0, 100% 50%,
-                calc(100% - 8px) 100%, 0 100%, 8px 50%
+                0 0, calc(100% - 10px) 0, 100% 50%,
+                calc(100% - 10px) 100%, 0 100%, 10px 50%
             );
         }
+
     }
 
     @keyframes jiggle {

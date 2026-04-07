@@ -95,14 +95,25 @@ describe('AnyFilter', () => {
             .toStrictEqual([pyroCross]);
     });
 
-    it('includes single-class skills when singleClass is YES', () => {
+    it('includes single-class when YES and primary set', () => {
         const f = new AnyFilter(filter({
+            primary: PYROKINETIC,
             any: set(NECROMANCER),
             singleClass: YES,
         }));
 
         expect(f.apply([pyroSingle, pyroCross]))
             .toStrictEqual([pyroSingle, pyroCross]);
+    });
+
+    it('excludes single-class when singleClass is YES but no primary', () => {
+        const f = new AnyFilter(filter({
+            any: set(NECROMANCER),
+            singleClass: YES,
+        }));
+
+        expect(f.apply([pyroSingle, pyroCross]))
+            .toStrictEqual([pyroCross]);
     });
 
     it('excludes single-class skills when singleClass is not YES', () => {
