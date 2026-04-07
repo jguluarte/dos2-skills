@@ -234,6 +234,7 @@ settings {
         background: var(--seg-color);
         cursor: grab;
 
+
         &.inactive {
             opacity: 0.35;
         }
@@ -254,10 +255,27 @@ settings {
 
         &:first-child {
             clip-path: none;
-            padding-left: 1.1em;
+            padding-left: 1.7em;
             padding-right: 10px;
             margin-right: 10px;
             border-radius: 6px 0 0 6px;
+
+            &::before {
+                content: '⠿';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 1.1em;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                opacity: 0.3;
+                font-size: 2.5em;
+                line-height: 1;
+                overflow: hidden;
+                border-radius: 6px 0 0 6px;
+            }
 
             &::after {
                 content: '';

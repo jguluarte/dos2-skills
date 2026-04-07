@@ -5,21 +5,17 @@ class Sortable {
 }
 
 export class Investment extends Sortable {
-    label = "Investment";
+    static label = "Class Level";
     sort = (a, b) => a.investment - b.investment;
 }
 
 export class Name extends Sortable {
-    label = "Name";
+    static label = "Name";
     sort = (a, b) => a.name.localeCompare(b.name);
 }
 
 export class SearchMatch extends Sortable {
-    get label() {
-        return this.filter.isActive()
-            ? "Search Match"
-            : "Primary Tree";
-    }
+    static label = "Primary Class";
 
     sort = (a, b) => {
         const aSearchIdentity = this.treeFor(a);
@@ -44,7 +40,7 @@ export class SearchMatch extends Sortable {
 }
 
 export class SecondaryTree extends Sortable {
-    label = "Secondary Tree";
+    static label = "Other Class";
     sort = (a, b) => {
         return this.filter.isActive()
             ? this.sortOtherTree(a, b)
@@ -70,8 +66,18 @@ export class SecondaryTree extends Sortable {
     };
 }
 
+export class APCost extends Sortable {
+    static label = "AP Cost";
+    sort = (a, b) => a.apCost - b.apCost;
+}
+
+export class SPCost extends Sortable {
+    static label = "SP Cost";
+    sort = (a, b) => a.spCost - b.spCost;
+}
+
 export class SingleClass extends Sortable {
-    label = "Single Class";
+    static label = "Single Class";
     sort = (a, b) => {
         const aDual = a.secondaryTree ? 1 : 0;
         const bDual = b.secondaryTree ? 1 : 0;
@@ -82,4 +88,5 @@ export class SingleClass extends Sortable {
 
 export const DEFAULT_SORT = [
     SearchMatch, Investment, SingleClass, SecondaryTree, Name,
+    APCost, SPCost,
 ];

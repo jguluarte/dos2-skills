@@ -92,6 +92,10 @@ git walk
 
 Shows one commit at a time with visual separators.
 
+## Sorting
+
+`src/js/sorting.js` defines `Sortable` subclasses (Name, Investment, SearchMatch, etc.) for multi-key sort. `src/components/settings/SortOrder.svelte` exposes drag-and-drop reordering and toggle via `svelte-dnd-action`, persisted to localStorage.
+
 ## Agent Workflow Notes
 
 - **User prefers to review diffs manually in shell** - don't show long diffs unless asked

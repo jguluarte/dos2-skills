@@ -29,14 +29,13 @@ export class AnyFilter extends FilterStrategy {
     );
 
     predicate = [
-        (s) => this.single(s),
+        (s) => this.hasSingleTreeOverride() && !s.secondaryTree,
         (s) => s.trees.some((t) => this.filter.any.has(t)),
     ];
 
-    single = (s) => !!(
+    hasSingleTreeOverride = () => !!(
         this.filter.singleClass === YES
         && this.filter.primary
-        && !s.secondaryTree
     );
 }
 

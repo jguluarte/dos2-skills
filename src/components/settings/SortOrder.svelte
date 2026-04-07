@@ -6,31 +6,43 @@
 
     const STORAGE_KEY = 'sortOrder';
 
-    const allOptions = Object.fromEntries(
-        DEFAULT_SORT.map((Cls) => [Cls.name, Cls])
-    );
-
-    const defaults = DEFAULT_SORT.map((Cls) => Cls.name);
-
-    function sortable(id, active = true) {
-        return { id, sortable: new allOptions[id](filter), active };
+    function makeItem(Cls, active = true) {
+        return {
+            id: Cls.label,
+            sortable: new Cls(filter),
+            active,
+        };
     }
+
+    const labelToClass = Object.fromEntries(
+        DEFAULT_SORT.map((Cls) => [Cls.label, Cls])
+    );
 
     function loadItems() {
         const stored = JSON.parse(
             localStorage.getItem(STORAGE_KEY) ?? 'null'
         );
-        if (!stored) return defaults.map((id) => sortable(id));
+        if (!stored) {
+            return DEFAULT_SORT.map(
+                (Cls) => makeItem(Cls)
+            );
+        }
 
-        const known = new Set(Object.keys(allOptions));
+        const known = new Set(Object.keys(labelToClass));
         const result = stored
             .filter((s) => known.has(s.id))
-            .map((s) => sortable(s.id, s.active));
+            .map((s) => makeItem(
+                labelToClass[s.id], s.active
+            ));
 
         // append any new options not in stored
         const seen = new Set(result.map((r) => r.id));
-        for (const id of defaults) {
-            if (!seen.has(id)) result.push(sortable(id, false));
+        for (const [label, Cls] of Object.entries(
+            labelToClass
+        )) {
+            if (!seen.has(label)) {
+                result.push(makeItem(Cls, false));
+            }
         }
         return result;
     }
@@ -42,14 +54,16 @@
     }
 
     let jiggling = $state(false);
-    let jiggleTimer;
+    let jiggleTimer = $state(null);
 
     function triggerJiggle() {
         jiggling = true;
-        clearTimeout(jiggleTimer);
-        jiggleTimer = setTimeout(() => jiggling = false, 2000);
+        jiggleTimer = setTimeout(
+            () => jiggling = false, 2000
+        );
     }
 
+    // teardown: clear pending jiggle timer
     $effect(() => () => clearTimeout(jiggleTimer));
 
     function toggle(item) {
@@ -83,7 +97,7 @@
                 class:inactive={!item.active}
                 onclick={() => toggle(item)}
             >
-                {item.sortable.label}
+                {item.id}
             </sort-item>
         {/each}
     </sort-summary>
