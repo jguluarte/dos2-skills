@@ -211,8 +211,15 @@ settings {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        cursor: pointer;
         row-gap: 4px;
+
+        &.jiggling sort-item {
+            animation: jiggle 0.15s ease-in-out infinite alternate;
+
+            &:nth-child(even) {
+                animation-direction: alternate-reverse;
+            }
+        }
     }
 
     sort-item {
@@ -225,6 +232,11 @@ settings {
         position: relative;
 
         background: var(--seg-color);
+        cursor: grab;
+
+        &.inactive {
+            opacity: 0.35;
+        }
 
         &:nth-child(5n+1) { --seg-color: #{mix(#e74c3c, $bg-primary, 33%)}; }
         &:nth-child(5n+2) { --seg-color: #{mix(#e67e22, $bg-primary, 33%)}; }
@@ -248,31 +260,6 @@ settings {
                 0 0, calc(100% - 8px) 0, 100% 50%,
                 calc(100% - 8px) 100%, 0 100%, 8px 50%
             );
-        }
-    }
-
-    sort-list {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-
-        button {
-            width: 100%;
-            border: 1px solid rgba($white, 0.2);
-            border-radius: 8px;
-            background: transparent;
-            color: rgba($white, 0.4);
-            text-align: center;
-            animation: jiggle 0.15s ease-in-out infinite alternate;
-
-            &:nth-child(even) {
-                animation-direction: alternate-reverse;
-            }
-
-            &.active {
-                color: $white;
-                background: rgba($white, 0.15);
-            }
         }
     }
 

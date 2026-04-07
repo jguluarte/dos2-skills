@@ -19,51 +19,40 @@
         sortable(Name),
     ]);
 
-    let editing = $state(false);
-
-    function activate(item) {
-        item.active = !item.active;
-    }
-
     function handleSort(e) {
         items = e.detail.items;
     }
 
-    const onclick = () => editing = !editing;
+    let jiggling = $state(false);
+    let jiggleTimer;
+
+    function triggerJiggle() {
+        jiggling = true;
+        clearTimeout(jiggleTimer);
+        jiggleTimer = setTimeout(() => jiggling = false, 2000);
+    }
+
+    function toggle(item) {
+        item.active = !item.active;
+        triggerJiggle();
+    }
 </script>
 
 <panel>
-    <span>
-        <hint>
-            {#if !editing}
-                Sort order
-            {:else}
-                <button class="segmented" {onclick}>
-                    Done Sorting
-                </button>
-            {/if}
-        </hint>
-    </span>
-
-    {#if !editing}
-        <sort-summary role="button" {onclick}>
-            {#each items.filter((i) => i.active) as item (item.id)}
-                <sort-item>{item.sortable.label}</sort-item>
-            {/each}
-        </sort-summary>
-    {:else}
-        <sort-list use:dndzone={{ items, flipDurationMs: 150 }}
-            onconsider={handleSort}
-            onfinalize={handleSort}
-        >
-            {#each items as item (item.id)}
-                <button
-                    class:active={item.active}
-                    onclick={() => activate(item)}
-                >
-                    {item.sortable.label}
-                </button>
-            {/each}
-        </sort-list>
-    {/if}
+    <span><hint>Sort order</hint></span>
+    <sort-summary
+        class:jiggling
+        use:dndzone={{ items, flipDurationMs: 150 }}
+        onconsider={(e) => { handleSort(e); triggerJiggle(); }}
+        onfinalize={handleSort}
+    >
+        {#each items as item (item.id)}
+            <sort-item
+                class:inactive={!item.active}
+                onclick={() => toggle(item)}
+            >
+                {item.sortable.label}
+            </sort-item>
+        {/each}
+    </sort-summary>
 </panel>
