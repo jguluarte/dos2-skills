@@ -59,6 +59,9 @@
     {:else}
         <div class="no-results">
             No skills found matching your filters.
+            <div class="easter-egg" data-drag-race="if-you-cant-love-yourself-how-in-the-hell-you-gonna-love-anybody-else">
+                <small>But remember: if you can't summon yourself, how in the hell you gonna summon anybody else?</small>
+            </div>
         </div>
     {/if}
 

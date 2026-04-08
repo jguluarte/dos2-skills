@@ -3,6 +3,9 @@ function filterless(primary, filters) {
 }
 
 export function summarize({ primary, any: filters }) {
+    // RuPaul's Drag Race wisdom applied to divinity: "We're all born naked,
+    // and the rest is drag" — and in DOS2, we're all born skill-less and the
+    // rest is polymorph. Now sashay away from that filter if you don't need it.
     if ( filterless(primary, filters) ) {
         return 'Showing all skills, tap to filter';
     }
