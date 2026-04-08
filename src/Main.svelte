@@ -57,8 +57,12 @@
             <SkillCard {skill} />
         {/each}
     {:else}
+        <!-- The queen has been eliminated. She must sashay away. -->
         <div class="no-results">
-            No skills found matching your filters.
+            No skills found. Your filters are <em>not</em> reading &ldquo;books&rdquo; &mdash;
+            they are reading <em>blank pages</em>.
+            <br><br>
+            <small>Sashay away.</small>
         </div>
     {/if}
 
