@@ -39,6 +39,29 @@
         )
     );
 
+    // If you can't love your skill build, how in the hell
+    // are you gonna love somebody else's?
+    const emptyQuips = [
+        "No skills found. Sashay away.",
+        "Your filters said: I'd like to keep it on, please. " +
+            "The skill list said: Sashay away.",
+        "Condolences. You have been Purged of all results.",
+        "No skills on the main stage tonight. " +
+            "Adjust your filters and don't f*ck it up.",
+        "This build has no Source Points and no charisma. " +
+            "I'm sorry my dear, you are up for elimination.",
+    ];
+
+    let emptyQuip = $derived(
+        emptyQuips[
+            Math.abs(
+                [...JSON.stringify(
+                    { p: settings.filter.primary, a: [...(settings.filter.any ?? [])] }
+                )].reduce((h, c) => h + c.charCodeAt(0), 0)
+            ) % emptyQuips.length
+        ]
+    );
+
     let firstTime = true;
     $effect(() => {
         sortedSkills;
@@ -58,7 +81,7 @@
         {/each}
     {:else}
         <div class="no-results">
-            No skills found matching your filters.
+            {emptyQuip}
         </div>
     {/if}
 
