@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // Element colors (shared between damage types and skill trees)
 $color-fire:   #f60;
 $color-air:    #66d9ff;
@@ -24,13 +26,6 @@ $color-magical:  #9775fa;
 $color-heal:     #51cf66;
 $color-light-blue: #add8e6;
 
-// Powerline segment colors (rainbow sequence)
-$seg-red:        #e74c3c;
-$seg-orange:     #e67e22;
-$seg-green:      #2ecc71;
-$seg-blue:       #3498db;
-$seg-purple:     #9b59b6;
-
 // Resource cost colors
 $color-ap:       #2ecc71;
 $color-sp:       #3498db;
@@ -45,6 +40,13 @@ $bg-settings:    #161b2a;
 $bg-secondary:   #1a1f35;
 $text-primary:   #e9ecef;
 $text-secondary: #aaa;
+
+// Powerline segment colors (mixed with bg-primary for muted tones)
+$seg-red:        color.mix(#e74c3c, $bg-primary, 33%);
+$seg-orange:     color.mix(#e67e22, $bg-primary, 33%);
+$seg-green:      color.mix(#2ecc71, $bg-primary, 33%);
+$seg-blue:       color.mix(#3498db, $bg-primary, 33%);
+$seg-purple:     color.mix(#9b59b6, $bg-primary, 33%);
 
 // Damage types — color only
 fire, pyro   { color: $color-fire; }

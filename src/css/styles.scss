@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use 'colors' as *;
 
 // ===========================
@@ -239,13 +238,11 @@ settings {
             opacity: 0.35;
         }
 
-        // This `color.mix` should happen in the colors file.
-        // We only use these colors here...so mix it there.
-        &:nth-child(5n+1) { --seg-color: #{color.mix($seg-red, $bg-primary, 33%)}; }
-        &:nth-child(5n+2) { --seg-color: #{color.mix($seg-orange, $bg-primary, 33%)}; }
-        &:nth-child(5n+3) { --seg-color: #{color.mix($seg-green, $bg-primary, 33%)}; }
-        &:nth-child(5n+4) { --seg-color: #{color.mix($seg-blue, $bg-primary, 33%)}; }
-        &:nth-child(5n+5) { --seg-color: #{color.mix($seg-purple, $bg-primary, 33%)}; }
+        &:nth-child(5n+1) { --seg-color: #{$seg-red}; }
+        &:nth-child(5n+2) { --seg-color: #{$seg-orange}; }
+        &:nth-child(5n+3) { --seg-color: #{$seg-green}; }
+        &:nth-child(5n+4) { --seg-color: #{$seg-blue}; }
+        &:nth-child(5n+5) { --seg-color: #{$seg-purple}; }
 
 
         &:first-child:not(:last-child) {
