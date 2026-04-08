@@ -227,7 +227,7 @@ settings {
     sort-item {
         display: inline-flex;
         align-items: center;
-        padding: 6px 20px 6px 14px;
+        padding: 6px 1.5em 6px 1.5em;
         font-size: 0.75em;
         font-weight: 600;
         color: $white;
@@ -239,25 +239,20 @@ settings {
             opacity: 0.35;
         }
 
+        // This `color.mix` should happen in the colors file.
+        // We only use these colors here...so mix it there.
         &:nth-child(5n+1) { --seg-color: #{color.mix($seg-red, $bg-primary, 33%)}; }
         &:nth-child(5n+2) { --seg-color: #{color.mix($seg-orange, $bg-primary, 33%)}; }
         &:nth-child(5n+3) { --seg-color: #{color.mix($seg-green, $bg-primary, 33%)}; }
         &:nth-child(5n+4) { --seg-color: #{color.mix($seg-blue, $bg-primary, 33%)}; }
         &:nth-child(5n+5) { --seg-color: #{color.mix($seg-purple, $bg-primary, 33%)}; }
 
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-        clip-path: polygon(
-            0 0, calc(100% - 10px) 0, 100% 50%,
-            calc(100% - 10px) 100%, 0 100%
-        );
 
-        &:first-child {
-            clip-path: none;
+        &:first-child:not(:last-child) {
             padding-left: 1.1em;
             padding-right: 10px;
             margin-right: 10px;
-            border-radius: 6px 0 0 6px;
+            border-radius: 6px 0px 0px 6px;
 
             &::after {
                 content: '';
@@ -272,16 +267,15 @@ settings {
             }
         }
 
-        &:not(:first-child) {
+        &:not(:first-child):not(:last-child) {
             clip-path: polygon(
                 0 0, calc(100% - 10px) 0, 100% 50%,
                 calc(100% - 10px) 100%, 0 100%, 10px 50%
             );
         }
 
-        &:last-child {
-            clip-path: none;
-            border-radius: 0 1em 1em 0;
+        &:last-child:not(:first-child) {
+            border-radius: 0px 1em 1em 0px;
 
             &::before {
                 content: '';
