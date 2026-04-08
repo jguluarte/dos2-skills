@@ -402,7 +402,7 @@ ap-icon {
     display: inline-block;
     width: 8px;
     height: 8px;
-    background: #2ecc71;
+    background: $color-ap;
     border-radius: 50%;
 }
 
@@ -410,7 +410,7 @@ source-icon {
     display: inline-block;
     width: 8px;
     height: 8px;
-    background: #3498db;
+    background: $color-sp;
     transform: rotate(45deg);
 }
 
@@ -420,7 +420,7 @@ skill-effect {
     line-height: 1.4;
     margin-bottom: 8px;
     opacity: 0.9;
-    color: rgba(#add8e6, 0.95);
+    color: rgba($color-light-blue, 0.95);
 }
 
 skill-requirements {
