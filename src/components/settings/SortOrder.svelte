@@ -89,6 +89,12 @@
     $effect(syncSorting);
 </script>
 
+{#snippet dragItem(item)}
+    <sort-item class:inactive={!item.active} onclick={() => toggle(item)}>
+        {item.id}
+    </sort-item>
+{/snippet}
+
 <panel>
     <span><hint>Sort order — tap to disable, drag to reorder</hint></span>
     <sort-summary
@@ -96,22 +102,14 @@
         use:dndzone={{
             items,
             flipDurationMs: 150,
-            dropTargetStyle: {
-                outline: '2px dashed rgba(255,255,255,0.3)',
-                'border-radius': '8px',
-                background: 'rgba(255,255,255,0.06)',
-            },
+            dropTargetStyle: {},
+            dropTargetClasses: ['drop-target'],
         }}
         onconsider={(e) => { handleSort(e); triggerJiggle(); }}
         onfinalize={handleSort}
     >
         {#each items as item (item.id)}
-            <sort-item
-                class:inactive={!item.active}
-                onclick={() => toggle(item)}
-            >
-                {item.id}
-            </sort-item>
+            {@render dragItem(item)}
         {/each}
     </sort-summary>
 </panel>
