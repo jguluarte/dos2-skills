@@ -2497,6 +2497,18 @@
     Change Incarnate's element to cursed blood, unlocking <necro>Mosquito
     Swarm</necro> and <necro>Grasp of the Starved</necro>.
 
+- name: Cursed Oil Infusion
+  primary_tree: Summoning
+  secondary_tree: Geomancer
+  investment: 2
+  ap_cost: 1
+  sp_cost: 2
+  range: 13m
+  cooldown: 3
+  effect: >
+    Change Incarnate's element to cursed oil, unlocking <geo>Fossil
+    Strike</geo> and <geo>Dust Blast</geo>.
+
 - name: Dust Blast
   primary_tree: Geomancer
   secondary_tree: Huntsman
