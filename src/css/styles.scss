@@ -487,3 +487,29 @@ status, cloud {
 ability {
     font-style: italic;
 }
+
+// ===========================
+// Sashay Easter Egg
+// ===========================
+// Type "sashay" to werk the runway
+
+.container.runway skill-card {
+    animation: sashay 1.5s ease-in-out;
+}
+
+@keyframes sashay {
+    0%   { transform: translateX(0) rotate(0); }
+    15%  { transform: translateX(12px) rotate(1.5deg); }
+    30%  { transform: translateX(-10px) rotate(-1.2deg); }
+    45%  { transform: translateX(8px) rotate(1deg); }
+    60%  { transform: translateX(-6px) rotate(-0.8deg); }
+    75%  { transform: translateX(3px) rotate(0.4deg); }
+    100% { transform: translateX(0) rotate(0); }
+}
+
+// stagger each card's entrance down the runway
+@for $i from 1 through 30 {
+    .container.runway skill-card:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.04}s;
+    }
+}
