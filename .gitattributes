@@ -1,6 +1,6 @@
 # Generated files - exclude from git diff
-devbox.lock -diff
-package-lock.json -diff
+devbox.lock -diff linguist-generated=true
+package-lock.json -diff linguist-generated=true
 
 # Syntax highlighting
 *.svelte linguist-language=HTML
